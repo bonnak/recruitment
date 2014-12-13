@@ -30,7 +30,8 @@ class CreateEmployerAgencyTable extends Migration {
 			$table->string('contact_person_number')->nullable();
 			$table->string('contact_person_email')->nullable();
 			$table->string('map_latitude')->nullable();
-			$table->string('map_longitude')->nullable();			
+			$table->string('map_longitude')->nullable();
+			$table->timestamps();
 			
 			$table->primary('id');
 		});

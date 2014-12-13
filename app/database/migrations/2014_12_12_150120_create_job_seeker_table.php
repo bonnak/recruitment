@@ -23,6 +23,7 @@ class CreateJobSeekerTable extends Migration {
 			$table->text('address');
 			$table->char('nationality', 3);
 			$table->string('phone_number', 20);
+			$table->string('email');
 			$table->integer('desired_industry');
 			$table->integer('desired_function');
 			$table->integer('desired_location');
@@ -30,12 +31,13 @@ class CreateJobSeekerTable extends Migration {
 			$table->integer('desired_position');
 			$table->string('current_job_title');
 			$table->datetime('available_date');
+			$table->timestamps();
 			
 			$table->primary('id');
 		});
 		
 		Schema::create('job_seekers_internal', function($table){
-				$table->integer('id');
+				$table->increments('id');
 				$table->string('surname');
 				$table->string('name');
 				$table->char('sex', 1);
@@ -45,6 +47,7 @@ class CreateJobSeekerTable extends Migration {
 				$table->text('address');
 				$table->char('nationality', 3);
 				$table->string('phone_number', 20);
+				$table->string('email');
 				$table->integer('desired_industry');
 				$table->integer('desired_function');
 				$table->integer('desired_location');
@@ -52,8 +55,7 @@ class CreateJobSeekerTable extends Migration {
 				$table->integer('desired_position');
 				$table->string('current_job_title');
 				$table->datetime('available_date');
-					
-				$table->primary('id');
+				$table->timestamps();
 			});
 	}
 
