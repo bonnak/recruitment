@@ -14,7 +14,7 @@
 Route::get('/', 'MainController@index');
 
 Route::group(['prefix' => 'admin'], function (){
-	Route::get('/', 'AdminController@index');
+	Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
 	
 	Route::get('cv', ['as' => 'admin.cv.index', 'uses' => 'AdminController@openCV']);
 	Route::get('cv-create', ['as' => 'admin.cv.create', 'uses' => 'AdminController@openCVCreate']);
