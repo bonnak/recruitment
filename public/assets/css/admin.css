@@ -1,0 +1,64 @@
+@CHARSET "UTF-8";
+
+.wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+}
+
+.header {
+	width: 100%;
+	height: 50px;
+	background: rgba(255, 255, 255, .97);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .25);
+}
+
+.header .column {
+	float: left;
+}
+
+.header .logo {
+	width: 20%;
+	height: 100%;
+	text-align: center;
+}
+
+.header .logo img {
+	width: 60px;
+	margin-top: 1px;
+}
+
+.header .menu {
+	width: 60%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.header .menu .navbar {
+	margin: 0;
+}
+
+.header .menu .navbar-unstyle {
+	background-image: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: none;
+}
+
+.header .user {
+	width: 20%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-right: 40px;s
+}
+
+.inner-wrapper {
+	
+}
