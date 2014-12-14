@@ -18,44 +18,46 @@ class CreateJobSeekerTable extends Migration {
 			$table->string('name');
 			$table->char('sex', 1);
 			$table->date('date_of_birth');
-			$table->string('place_of_birth', 500);
 			$table->tinyInteger('marital_status');
-			$table->text('address');
 			$table->char('nationality', 3);
 			$table->string('phone_number', 20);
 			$table->string('email');
-			$table->integer('desired_industry');
-			$table->integer('desired_function');
-			$table->integer('desired_location');
-			$table->integer('desired_salary');
-			$table->integer('desired_position');
-			$table->string('current_job_title');
-			$table->datetime('available_date');
+			$table->string('residence');
+			$table->text('address')->nullable();
+			$table->integer('desired_industry')->nullable();
+			$table->integer('desired_function')->nullable();
+			$table->integer('desired_location')->nullable();
+			$table->integer('desired_salary')->nullable();
+			$table->integer('desired_position')->nullable();
+			$table->string('current_job_title')->nullable();
+			$table->datetime('available_date')->nullable();
 			$table->timestamps();
 			
 			$table->primary('id');
 		});
 		
-		Schema::create('job_seekers_internal', function($table){
-				$table->increments('id');
-				$table->string('surname');
-				$table->string('name');
-				$table->char('sex', 1);
-				$table->date('date_of_birth');
-				$table->string('place_of_birth', 500);
-				$table->tinyInteger('marital_status');
-				$table->text('address');
-				$table->char('nationality', 3);
-				$table->string('phone_number', 20);
-				$table->string('email');
-				$table->integer('desired_industry');
-				$table->integer('desired_function');
-				$table->integer('desired_location');
-				$table->integer('desired_salary');
-				$table->integer('desired_position');
-				$table->string('current_job_title');
-				$table->datetime('available_date');
-				$table->timestamps();
+		Schema::create('cv', function($table){
+				$table->integer('id');
+			$table->string('surname');
+			$table->string('name');
+			$table->char('sex', 1);
+			$table->date('date_of_birth');
+			$table->tinyInteger('marital_status');
+			$table->char('nationality', 3);
+			$table->string('phone_number', 20);
+			$table->string('email');
+			$table->string('residence');
+			$table->text('address')->nullable();
+			$table->integer('desired_industry')->nullable();
+			$table->integer('desired_function')->nullable();
+			$table->integer('desired_location')->nullable();
+			$table->integer('desired_salary')->nullable();
+			$table->integer('desired_position')->nullable();
+			$table->string('current_job_title')->nullable();
+			$table->datetime('available_date');
+			$table->timestamps();
+			
+			$table->primary('id');
 			});
 	}
 
@@ -67,7 +69,7 @@ class CreateJobSeekerTable extends Migration {
 	public function down()
 	{
 		Schema::drop('job_seekers');
-		Schema::drop('job_seekers_internal');
+		Schema::drop('cv');
 	}
 
 }
