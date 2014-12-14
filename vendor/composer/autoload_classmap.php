@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AdminController' => $baseDir . '/app/controllers/AdminController.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
     'Boris\\CLIOptionsHandler' => $vendorDir . '/d11wtq/boris/lib/Boris/CLIOptionsHandler.php',
@@ -28,6 +29,7 @@ return array(
     'ClassPreloader\\Parser\\DirVisitor' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/DirVisitor.php',
     'ClassPreloader\\Parser\\FileVisitor' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/FileVisitor.php',
     'ClassPreloader\\Parser\\NodeTraverser' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
+    'CreateDesireTable' => $baseDir . '/app/database/migrations/2014_12_14_154014_create_desire_table.php',
     'CreateEmployerAgencyTable' => $baseDir . '/app/database/migrations/2014_12_12_152403_create_employer_agency_table.php',
     'CreateJobSeekerTable' => $baseDir . '/app/database/migrations/2014_12_12_150120_create_job_seeker_table.php',
     'CreateUserTable' => $baseDir . '/app/database/migrations/2014_12_12_141215_create_user_table.php',

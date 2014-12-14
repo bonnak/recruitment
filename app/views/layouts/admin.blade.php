@@ -33,7 +33,7 @@
 					role="navigation">
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">Create CV</a></li>
+						<li><a href="{{URL::route('admin.cv.index')}}">CV</a></li>
 						<li><a href="#">Job Seeker</a></li>
 						<li><a href="#">Employer</a></li>
 						<li><a href="#">Agency</a></li>
@@ -53,7 +53,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="inner-wrapper">@yield('dashboard')</div>
+		<div class="inner-wrapper">
+			@yield('cv')
+		</div>
 	</div>
 </body>
 </html>
