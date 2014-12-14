@@ -32,7 +32,7 @@
 				<div class="navbar navbar-default  navbar-static-top navbar-unstyle"
 					role="navigation">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
+						<li class="active"><a href="{{URL::route('admin.home')}}">Home</a></li>
 						<li><a href="{{URL::route('admin.cv.index')}}">CV</a></li>
 						<li><a href="#">Job Seeker</a></li>
 						<li><a href="#">Employer</a></li>
@@ -54,6 +54,7 @@
 			</div>
 		</div>
 		<div class="inner-wrapper">
+			@yield('home')
 			@yield('cv')
 		</div>
 	</div>

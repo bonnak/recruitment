@@ -64,28 +64,26 @@
 	width: 70%;
 	min-height: 500px;
 	margin: 20px auto;
-	/* 	background-color: #fff; */
-	/* 	border-radius: 5px; */
-	/* 	border: 1px solid #ddd; */
-	overflow: hidden;
 }
 
-.inner-wrapper #search-back {
-	position: absolute;
+.inner-wrapper #dashboard{	
+	position: relative;
 	width: 100%;
 	min-height: 500px;
-	background-color: orange;
-	top: 0;
-	left: -15px;
+	background-color: #fff;
+	border-radius: 5px;
+	border: 1px solid #ddd;
 }
 
-.inner-wrapper #search {
-	position: absolute;
-	width: 100%;
-	padding: 0 20px;
-	top: 0;
-	left: -15px;
+ .inner-wrapper #dashboard #industry li{
+	display: flex; 
+	align-items: center; 
+	margin: 3px 0;
 }
+
+ .inner-wrapper #dashboard #industry li a.btn{
+ 	padding: 1px 6px;
+ }
 
 .inner-wrapper .input-elements {
 	margin: 15px 0;
