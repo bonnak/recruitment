@@ -19,3 +19,7 @@ Route::group(['prefix' => 'admin'], function (){
 	Route::get('cv', ['as' => 'admin.cv.index', 'uses' => 'AdminController@openCV']);
 	Route::get('cv-create', ['as' => 'admin.cv.create', 'uses' => 'AdminController@openCVCreate']);
 });
+
+Route::group(['prefix' => 'api'], function (){
+	Route::resource('industry', 'IndustryController');
+});
