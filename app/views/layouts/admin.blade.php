@@ -21,7 +21,7 @@
 <!--  <script src="{{asset('assets/js/jquery.mobile.min.js')}}"></script> -->
 <script src="{{asset('bootstrap-3.3.1/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/angular-1_3_x.min.js')}}"></script>
-<script src="{{asset('assets/js/admin/industry.js')}}"></script>
+<script src="{{asset('assets/js/admin/desire-app.js')}}"></script>
 </head>
 <body>
 	<div class="wrapper">

@@ -70,9 +70,6 @@
 	position: relative;
 	width: 100%;
 	min-height: 500px;
-	background-color: #fff;
-	border-radius: 5px;
-	border: 1px solid #ddd;
 }
 
  .inner-wrapper #dashboard #industry li{
@@ -124,8 +121,8 @@
 	margin: 0;
 }
 
-.inner-wrapper #create-cv #cv-bottom-bar hr{	
-	margin-top: 20px;
+hr.seperation{	
+	margin-top: 10px;
 	margin-bottom: 10px;
 	border: 0;
 	border-top: 1px solid #BBB9AC;

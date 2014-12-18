@@ -1,6 +1,6 @@
 @extends('layouts.admin') @section('cv')
 <div id="create-cv">
-	<form action="">
+	<form method="post" action="{{URL::route('admin.cv.create.store')}}">
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="panel panel-default" id="basic-info">
@@ -60,6 +60,25 @@
 						</div>
 						<div class="row input-elements">
 							<div class="col-sm-3 label-title">
+<<<<<<< HEAD
+=======
+								<label>Nationality</label>
+							</div>
+							<div class="col-sm-9">
+								<select class="form-control" id="nationality" name="nationality">
+									<option value="">Select ...</option>
+									<option value="0">Cambodian</option>
+									<option value="1">Thai</option>
+									<option value="2">Vietnamese</option>
+									<option value="3">Japanese</option>
+									<option value="4">Korea</option>
+									<option value="5">American</option>
+								</select>
+							</div>
+						</div>
+						<div class="row input-elements">
+							<div class="col-sm-3 label-title">
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 								<label>Location Of Residence</label>
 							</div>
 							<div class="col-sm-9">
@@ -70,7 +89,11 @@
 									<option value="2">Prey Veng</option>
 									<option value="3">Kampong Chhnang</option>
 									<option value="4">Kampong Cham</option>
+<<<<<<< HEAD
 									<option value="K5">Kampot</option>
+=======
+									<option value="5">Kampot</option>
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 								</select>
 							</div>
 						</div>
@@ -82,13 +105,38 @@
 								<textarea class="form-control" id="address" name="address"></textarea>
 							</div>
 						</div>
+<<<<<<< HEAD
+=======
+						<div class="row input-elements">
+							<div class="col-sm-3 label-title">
+								<label>Phone</label>
+							</div>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="phone_number"
+									name="phone_number">
+							</div>
+						</div>
+						<div class="row input-elements">
+							<div class="col-sm-3 label-title">
+								<label>Email</label>
+							</div>
+							<div class="col-sm-9">
+								<input type="email" class="form-control" id="email"
+									name="email">
+							</div>
+						</div>						
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
+<<<<<<< HEAD
 						<h3 class="panel-title">Job Desire</h3>
+=======
+						<h3 class="panel-title">Expectation</h3>
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 					</div>
 					<div class="panel-body">
 						<div class="row input-elements">
@@ -159,7 +207,11 @@
 									<option value="2">Prey Veng</option>
 									<option value="3">Kampong Chhnang</option>
 									<option value="4">Kampong Cham</option>
+<<<<<<< HEAD
 									<option value="K5">Kampot</option>
+=======
+									<option value="8">Kampot</option>
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 								</select>
 							</div>
 						</div>
@@ -180,6 +232,7 @@
 								</select>
 							</div>
 						</div>
+<<<<<<< HEAD
 					</div>
 				</div>
 
@@ -189,6 +242,21 @@
 						<h3 class="panel-title">Others</h3>
 					</div>
 					<div class="panel-body">
+=======
+						<div class="row input-elements">
+							<div class="col-sm-3 label-title">
+								<label>Position</label>
+							</div>
+							<div class="col-sm-9">
+								<select class="form-control" id="desired_position"
+									name="desired_position">
+									<option value="">Select ...</option>
+									<option value="0">Manager</option>
+									<option value="1">Staff</option>
+								</select>
+							</div>
+						</div>
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 						<div class="row input-elements">
 							<div class="col-sm-4 label-title">
 								<label>Available Date</label>
@@ -209,18 +277,34 @@
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
 			</div>
 		</div>
 		<div class="row" id="cv-bottom-bar">
 			<hr>
+=======
+
+			</div>
+		</div>
+		<div class="row" id="cv-bottom-bar">
+			<hr class="seperation">
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 			<div>
 				<a href="{{URL::route('admin.cv.index')}}"><span class="glyphicon glyphicon-chevron-left" style="margin-right: 5px; font-size: 12px;"></span>View CV</a>
 				<button type="submit" class="btn btn-success"
 					style="width: 74px; float: right;">Create</button>
+<<<<<<< HEAD
 				<button type="submit" class="btn btn-warning"
 					style="width: 74px; float: right; margin-right: 10px">New</button>
 			</div>
 		</div>
+=======
+				<button type="button" class="btn btn-warning"
+					style="width: 74px; float: right; margin-right: 10px">New</button>
+			</div>
+		</div>
+		{{Form::token()}}
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 	</form>
 </div>
 @endsection

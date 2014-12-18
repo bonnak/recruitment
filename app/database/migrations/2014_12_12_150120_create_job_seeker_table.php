@@ -37,7 +37,7 @@ class CreateJobSeekerTable extends Migration {
 		});
 		
 		Schema::create('cv', function($table){
-				$table->integer('id');
+			$table->increments('id');
 			$table->string('surname');
 			$table->string('name');
 			$table->char('sex', 1);
@@ -56,9 +56,7 @@ class CreateJobSeekerTable extends Migration {
 			$table->string('current_job_title')->nullable();
 			$table->datetime('available_date');
 			$table->timestamps();
-			
-			$table->primary('id');
-			});
+		});
 	}
 
 	/**
