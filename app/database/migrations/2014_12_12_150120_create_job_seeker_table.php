@@ -12,7 +12,7 @@ class CreateJobSeekerTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('job_seekers', function($table){
+		Schema::create('candidate', function($table){
 			$table->integer('id');
 			$table->string('surname');
 			$table->string('name');
@@ -66,7 +66,7 @@ class CreateJobSeekerTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('job_seekers');
+		Schema::drop('candidate');
 		Schema::drop('cv');
 	}
 
