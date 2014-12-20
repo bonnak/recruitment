@@ -4,7 +4,13 @@ class MainController extends BaseController
 {
 	public function index()
 	{
-		return View::make('main');
+		$industries = Industry::get();
+		$functions = Func::get();
+		
+		return View::make('main')->with([
+				'industries' 	=> $industries,
+				'functions'		=> $functions
+		]);
 	}
 
 }
