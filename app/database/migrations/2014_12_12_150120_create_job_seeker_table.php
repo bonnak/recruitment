@@ -56,7 +56,7 @@ class CreateJobSeekerTable extends Migration {
 			$table->string('current_job_title')->nullable();
 			$table->datetime('available_date');
 			$table->integer('created_user');
-			$table->integer('updated_user');
+			//$table->integer('updated_user');
 			$table->timestamps();
 		});
 	}
