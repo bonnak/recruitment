@@ -46,7 +46,9 @@ class CVTableSeeder extends Seeder {
 			'desired_salary' => 3, 
 			'desired_position' => 9, 
 			'current_job_title' => 'Web Developer', 
-			'available_date' => date('Y-m-d',strtotime('12/20/2014'))
+			'available_date' => date('Y-m-d',strtotime('12/20/2014')),
+			'created_user'  => 1,
+			'updated_user' => 1
 		] );
 		
 		CV::create ( [ 
@@ -66,7 +68,9 @@ class CVTableSeeder extends Seeder {
 			'desired_salary' => 3, 
 			'desired_position' => 9, 
 			'current_job_title' => 'Web Developer', 
-			'available_date' => date('Y-m-d',strtotime('12/20/2014'))
+			'available_date' => date('Y-m-d',strtotime('12/20/2014')),
+			'created_user'  => 1,
+			'updated_user' => 1
 		] );	
 	}
 }
