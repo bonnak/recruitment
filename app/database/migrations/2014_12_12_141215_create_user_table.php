@@ -16,9 +16,11 @@ class CreateUserTable extends Migration {
 		Schema::create('users', function($table){
 			$table->increments('id');
 			$table->string('user_name');
-			$table->string('password');
+			$table->string('password')->nullable();
 			$table->string('email');
-			$table->integer('user_type');
+			$table->tinyInteger('activated')->default(0);
+			$table->integer('role')->nullable();
+			$table->integer('user_type')->nullable();
 			$table->string('remember_token')->nullable();			
 			$table->timestamps();
 		});
