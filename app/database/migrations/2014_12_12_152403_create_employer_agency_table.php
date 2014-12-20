@@ -12,7 +12,7 @@ class CreateEmployerAgencyTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('employer', function($table){
+		Schema::create('employers', function($table){
 			$table->integer('id');
 			$table->string('company_name');
 			$table->string('phone');
@@ -44,7 +44,7 @@ class CreateEmployerAgencyTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('employer');
+		Schema::drop('employers');
 	}
 
 }
