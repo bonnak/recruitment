@@ -73,6 +73,12 @@ class CreateJobSeekerTable extends Migration {
 			$table->string('name');
 			$table->integer('level');
 		});
+		
+		Schema::create('apply_list', function ($table){
+			$table->integer('candidate_id');
+			$table->integer('job_id');
+			$table->datetime('apply_date');
+		});
 	}
 
 	/**
@@ -86,6 +92,7 @@ class CreateJobSeekerTable extends Migration {
 		Schema::drop('cv');
 		Schema::drop('accessment_score');
 		Schema::drop('skill');
+		Schema::drop('apply_list');
 	}
 
 }
