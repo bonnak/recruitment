@@ -6,10 +6,12 @@ class MainController extends BaseController
 	{
 		$industries = Industry::get();
 		$functions = Func::get();
+		$locations = Location::get();
 		
 		return View::make('main')->with([
 				'industries' 	=> $industries,
-				'functions'		=> $functions
+				'functions'		=> $functions,
+				'locations'		=> $locations
 		]);
 	}
 
