@@ -9,26 +9,26 @@ class CreateDesireTable extends Migration {
 	 * @return void
 	 */
 	public function up() {
-		Schema::create ( 'industry', function ($table) {
+		Schema::create ( 'industries', function ($table) {
 			$table->increments ( 'id' );
 			$table->string ( 'name', 500 );
 			$table->timestamps ();
 		} );
 		
-		Schema::create ( 'function', function ($table) {
+		Schema::create ( 'functions', function ($table) {
 			$table->increments ( 'id' );
 			$table->string ( 'name', 500 );
 			$table->timestamps ();
 		} );
 		
-		Schema::create ( 'location', function ($table) {
+		Schema::create ( 'locations', function ($table) {
 			$table->increments ( 'id' );
 			$table->string ( 'name', 500 );
 			$table->string ( 'type', 3 )->nullable ();
 			$table->timestamps ();
 		} );
 		
-		Schema::create ( 'salary', function ($table) {
+		Schema::create ( 'salaries', function ($table) {
 			$table->increments ( 'id' );
 			$table->string ( 'range', 500 );
 			$table->timestamps ();
@@ -41,12 +41,12 @@ class CreateDesireTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop ( 'industry' );
+		Schema::drop ( 'industries' );
 		
-		Schema::drop ( 'function' );
+		Schema::drop ( 'functions' );
 		
-		Schema::drop ( 'location' );
+		Schema::drop ( 'locations' );
 		
-		Schema::drop ( 'salary' );
+		Schema::drop ( 'salaries' );
 	}
 }
