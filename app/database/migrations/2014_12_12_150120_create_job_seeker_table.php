@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateJobSeekerTable extends Migration {
 
@@ -59,6 +60,13 @@ class CreateJobSeekerTable extends Migration {
 			$table->integer('updated_user');
 			$table->timestamps();
 		});
+		
+		Schema::create('accessment_score', function ($table){
+			$table->integer('candidate_id');
+			$table->integer('experience');
+			$table->integer('attitude');
+			$table->integer('language');
+		});
 	}
 
 	/**
@@ -70,6 +78,7 @@ class CreateJobSeekerTable extends Migration {
 	{
 		Schema::drop('candidates');
 		Schema::drop('cv');
+		Schema::drop('accessment_score');
 	}
 
 }
