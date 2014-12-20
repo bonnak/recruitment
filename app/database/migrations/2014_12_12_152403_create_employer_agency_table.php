@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class CreateEmployerAgencyTable extends Migration {
 
@@ -35,6 +36,42 @@ class CreateEmployerAgencyTable extends Migration {
 			
 			$table->primary('id');
 		});
+		
+		Schema::create('job_posts', function($table){
+			$table->increments('id');
+			$table->text('title');
+			$table->text('description');
+			$table->integer('employer');
+			$table->string('salary');
+			$table->integer('gender');
+			$table->integer('hiring');
+			$table->integer('level');
+			$table->integer('year_exp');
+			$table->string('age')->nullable();
+			$table->integer('term');
+			$table->integer('function');
+			$table->integer('industry');
+			$table->integer('qualification');
+			$table->datetime('publish_date');
+			$table->datetime('closing_date');
+			$table->integer('status')->default(0);
+			$table->timestamps();
+		});
+		
+		Schema::create('req_languages', function($table){
+			$table->integer('job_id');
+			$table->integer('lang');
+			$table->integer('condition')->default(0);
+			
+			$table->primary(['job_id', 'lang']);
+		});
+		
+		Schema::create('req_locations', function ($table){
+			$table->integer('job_id');
+			$table->integer('location');
+			
+			$table->primary(['job_id', 'location']);
+		});
 	}
 
 	/**
@@ -45,6 +82,9 @@ class CreateEmployerAgencyTable extends Migration {
 	public function down()
 	{
 		Schema::drop('employers');
+		Schema::drop('job_posts');
+		Schema::drop('req_languages');
+		Schema::drop('req_locations');
 	}
 
 }
