@@ -60,9 +60,9 @@ class CreateEducationExperienceLanguageAccessment extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('education');
-		Schema::drop('experience');
-		Schema::drop('language');
+		Schema::dropIfExists('education');
+		Schema::dropIfExists('experience');
+		Schema::dropIfExists('language');
 	}
 
 }

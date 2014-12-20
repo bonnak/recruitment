@@ -82,10 +82,10 @@ class CreateEmployerAgencyTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('employers');
-		Schema::drop('job_posts');
-		Schema::drop('req_languages');
-		Schema::drop('req_locations');
+		Schema::dropIfExists('employers');
+		Schema::dropIfExists('job_posts');
+		Schema::dropIfExists('req_languages');
+		Schema::dropIfExists('req_locations');
 	}
 
 }

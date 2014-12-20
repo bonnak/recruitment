@@ -41,12 +41,9 @@ class CreateDesireTable extends Migration {
 	 * @return void
 	 */
 	public function down() {
-		Schema::drop ( 'industries' );
-		
-		Schema::drop ( 'functions' );
-		
-		Schema::drop ( 'locations' );
-		
-		Schema::drop ( 'salaries' );
+		Schema::dropIfExists ( 'industries' );		
+		Schema::dropIfExists ( 'functions' );		
+		Schema::dropIfExists ( 'locations' );		
+		Schema::dropIfExists ( 'salaries' );
 	}
 }

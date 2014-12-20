@@ -88,11 +88,11 @@ class CreateJobSeekerTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('candidates');
-		Schema::drop('cv');
-		Schema::drop('accessment_score');
-		Schema::drop('skill');
-		Schema::drop('apply_list');
+		Schema::dropIfExists('candidates');
+		Schema::dropIfExists('cv');
+		Schema::dropIfExists('accessment_score');
+		Schema::dropIfExists('skill');
+		Schema::dropIfExists('apply_list');
 	}
 
 }
