@@ -60,6 +60,8 @@
 						</div>
 						<div class="row input-elements">
 							<div class="col-sm-3 label-title">
+<<<<<<< HEAD
+=======
 								<label>Nationality</label>
 							</div>
 							<div class="col-sm-9">
@@ -76,6 +78,7 @@
 						</div>
 						<div class="row input-elements">
 							<div class="col-sm-3 label-title">
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 								<label>Location Of Residence</label>
 							</div>
 							<div class="col-sm-9">
@@ -86,7 +89,11 @@
 									<option value="2">Prey Veng</option>
 									<option value="3">Kampong Chhnang</option>
 									<option value="4">Kampong Cham</option>
+<<<<<<< HEAD
+									<option value="K5">Kampot</option>
+=======
 									<option value="5">Kampot</option>
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 								</select>
 							</div>
 						</div>
@@ -98,6 +105,8 @@
 								<textarea class="form-control" id="address" name="address"></textarea>
 							</div>
 						</div>
+<<<<<<< HEAD
+=======
 						<div class="row input-elements">
 							<div class="col-sm-3 label-title">
 								<label>Phone</label>
@@ -115,14 +124,19 @@
 								<input type="email" class="form-control" id="email"
 									name="email">
 							</div>
-						</div>					
+						</div>						
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 					</div>
 				</div>
 			</div>
 			<div class="col-sm-6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
+<<<<<<< HEAD
+						<h3 class="panel-title">Job Desire</h3>
+=======
 						<h3 class="panel-title">Expectation</h3>
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 					</div>
 					<div class="panel-body">
 						<div class="row input-elements">
@@ -193,7 +207,11 @@
 									<option value="2">Prey Veng</option>
 									<option value="3">Kampong Chhnang</option>
 									<option value="4">Kampong Cham</option>
+<<<<<<< HEAD
+									<option value="K5">Kampot</option>
+=======
 									<option value="8">Kampot</option>
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 								</select>
 							</div>
 						</div>
@@ -214,6 +232,17 @@
 								</select>
 							</div>
 						</div>
+<<<<<<< HEAD
+					</div>
+				</div>
+
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Others</h3>
+					</div>
+					<div class="panel-body">
+=======
 						<div class="row input-elements">
 							<div class="col-sm-3 label-title">
 								<label>Position</label>
@@ -227,6 +256,7 @@
 								</select>
 							</div>
 						</div>
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 						<div class="row input-elements">
 							<div class="col-sm-4 label-title">
 								<label>Available Date</label>
@@ -247,19 +277,34 @@
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
+			</div>
+		</div>
+		<div class="row" id="cv-bottom-bar">
+			<hr>
+=======
+
 			</div>
 		</div>
 		<div class="row" id="cv-bottom-bar">
 			<hr class="seperation">
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 			<div>
 				<a href="{{URL::route('admin.cv.index')}}"><span class="glyphicon glyphicon-chevron-left" style="margin-right: 5px; font-size: 12px;"></span>View CV</a>
 				<button type="submit" class="btn btn-success"
 					style="width: 74px; float: right;">Create</button>
+<<<<<<< HEAD
+				<button type="submit" class="btn btn-warning"
+					style="width: 74px; float: right; margin-right: 10px">New</button>
+			</div>
+		</div>
+=======
 				<button type="button" class="btn btn-warning"
 					style="width: 74px; float: right; margin-right: 10px">New</button>
 			</div>
 		</div>
 		{{Form::token()}}
+>>>>>>> f2d28572b0311f67a7c60dd1f481a17db58cc672
 	</form>
 </div>
 @endsection
