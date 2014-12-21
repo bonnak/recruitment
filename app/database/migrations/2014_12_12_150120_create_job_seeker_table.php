@@ -21,7 +21,7 @@ class CreateJobSeekerTable extends Migration {
 				$table->char ( 'nationality', 3 );
 				$table->string ( 'phone_number', 20 );
 				$table->string ( 'email' );
-				$table->string ( 'residence' );
+				$table->integer ( 'residence' );
 				$table->text ( 'address' )->nullable ();
 				$table->integer ( 'desired_industry' )->nullable ();
 				$table->integer ( 'desired_function' )->nullable ();
@@ -67,7 +67,11 @@ class CreateJobSeekerTable extends Migration {
 				$table->integer ( 'candidate_id' );
 				$table->integer ( 'experience' );
 				$table->integer ( 'attitude' );
+				$table->integer ( 'appearance' );
 				$table->integer ( 'language' );
+				$table->integer ( 'skill' );
+				$table->integer ( 'reason_introduce' )->nullable();
+				$table->integer ( 'memo' )->nullable();
 			} );
 		}
 		

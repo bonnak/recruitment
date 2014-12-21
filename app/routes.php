@@ -12,6 +12,8 @@
 */
 
 Route::get('/', 'MainController@index');
+Route::get('/user/candidate', ['as' => 'user.candidate', 'uses' => 'MainController@openJobSeeker']);
+Route::get('/user/candidate/create', ['as' => 'user.candidate.create', 'uses' => 'MainController@getCVCreate']);
 
 Route::group(['prefix' => 'admin'], function (){
 	Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);

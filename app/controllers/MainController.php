@@ -16,5 +16,15 @@ class MainController extends BaseController
 				'salaries'		=> $salaries
 		]);
 	}
+	
+	public function openJobSeeker()
+	{
+		return View::make('candidate');
+	}
+	
+	public function getCVCreate()
+	{
+		return View::make('candidate');
+	}
 
 }
