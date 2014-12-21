@@ -278,7 +278,7 @@
 .left-side-bar {
 	width: 19%;
 	background-color: #fff;
-	border: 1px solid #F7CC22;
+	border: 1px solid #DBC97E;
 	border-radius: 3px;	
 	margin-right: 7px;
 }
@@ -287,8 +287,10 @@
 	font-size: 12px;
 	font-weight: 700;
 	padding: 10px 15px;
-	background-color: #F7CC22;
 	text-transform: uppercase;
+	border-top: 1px solid #DBC97E;
+	border-bottom: 1px solid #DBC97E;
+	color: #AD8B00;
 }
 .left-side-bar ul li ul{
 	margin-left: 30px;

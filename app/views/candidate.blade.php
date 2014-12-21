@@ -1,12 +1,12 @@
 @extends('layouts.default')
 
 @section('candidate')
-	<div class="col-md-2 side-bar-menu">
+	<div class="col-md-2 left-side-bar">
 		<ul class="list-unstyled">
 			<li><a href="{{URL::route('user.candidate')}}">Dashboard</a></li>
 		</ul>
 		<ul class="list-unstyled">
-			<li><strong>CV and Cover Letters</strong>
+			<li><span class="title">CV and Cover Letters</span>
 				<ul class="list-unstyled">
 					<li role="presentation"><a href="{{URL::route('user.candidate.create')}}">Create a CV</a></li>
 					<li role="presentation"><a href="#industry">My CV</a></li>
@@ -16,7 +16,7 @@
 			</li>
 		</ul>
 		<ul class="list-unstyled">
-			<li><strong>Jobs</strong>
+			<li><span class="title">Jobs</span>
 				<ul class="list-unstyled">
 					<li role="presentation"><a href="#category">Recommended jobs</a></li>
 					<li role="presentation"><a href="#industry">Job alerts</a></li>
@@ -26,7 +26,7 @@
 			</li>
 		</ul>
 		<ul class="list-unstyled">
-			<li><strong>Account Settings</strong>
+			<li><span class="title">Account Settings</span>
 				<ul class="list-unstyled">
 					<li role="presentation"><a href="#category">My profile</a></li>
 					<li role="presentation"><a href="#industry">Change email</a></li>
@@ -36,7 +36,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="col-md-7 side-bar-menu">
+	<div class="col-md-7 middle-wrapper">
 		@if(Route::currentRouteName() === 'user.candidate')
 		hi
 		@elseif(Route::currentRouteName() === 'user.candidate.create')
@@ -343,5 +343,5 @@
 			</div>				
 		@endif
 	</div>
-	<div class="col-md-3 side-bar-menu"></div>
+	<div class="col-md-3 right-side-bar"></div>
 @endsection
