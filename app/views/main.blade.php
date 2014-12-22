@@ -3,7 +3,7 @@
 @section('main')
 		<div class="col-md-2 left-side-bar">
 			<ul class="list-unstyled">
-				<li><span class="title">Browse jobs</span>
+				<li><h3 class="title">Browse jobs</h3>
 					<ul class="list-unstyled">
 						<li role="presentation" class="active"><a href="#category">Categories</a></li>
 						<li role="presentation"><a href="#industry">Industries</a></li>
@@ -12,7 +12,7 @@
 					</ul></li>
 			</ul>
 			<ul class="list-unstyled">
-				<li><span class="title">Job seekers</span>
+				<li><h3 class="title">Job seekers</h3>
 					<ul class="list-unstyled">
 						<li><a href="">Create a Resume</a></li>
 						<li><a href="">Search & Apply for a Job</a></li>
@@ -22,7 +22,7 @@
 					</ul></li>
 			</ul>
 			<ul class="list-unstyled">
-				<li><span class="title">Employers</span>
+				<li><h3 class="title">Employers</h3>
 					<ul class="list-unstyled">
 						<li><a href="">View CV</a></li>
 						<li><a href="">Post job</a></li>
@@ -31,7 +31,7 @@
 					</ul></li>
 			</ul>
 			<ul class="list-unstyled">
-				<li><span class="title">Career Guide</span>
+				<li><h3 class="title">Career Guide</h3>
 					<ul class="list-unstyled">
 						<li><a href="">Post a Job</a></li>
 						<li><a href="">CV Search</a></li>
@@ -40,7 +40,7 @@
 					</ul></li>
 			</ul>
 			<ul class="list-unstyled">
-				<li><span class="title">Feature</span>
+				<li><h3 class="title">Feature</h3>
 					<ul class="list-unstyled">
 						<li><a href="">Companies</a></li>
 						<li><a href="">Agencies</a></li>
@@ -140,7 +140,7 @@
 							<div class="job-post">
 								<ul class="list-unstyled">
 									<li><a href="" class="job-title"><h3>Courier
-												(បុគ្គលិកផ្នែកបញ្ជូនសំបុត្រ និងទំនិញ)</h3></a>
+												(ដវដ្ដក្កដវកចលវចលវចល)</h3></a>
 										<div class="employer">
 											<small>Inter Smart Cambodia Co.,Ltd</small>
 										</div>
@@ -190,7 +190,7 @@
 							<div class="job-post">
 								<ul class="list-unstyled">
 									<li><a href="" class="job-title"><h3>Courier
-												(បុគ្គលិកផ្នែកបញ្ជូនសំបុត្រ និងទំនិញ)</h3></a>
+												(áž”áž»áž‚áŸ’áž‚áž›áž·áž€áž•áŸ’áž“áŸ‚áž€áž”áž‰áŸ’áž‡áž¼áž“ážŸáŸ†áž”áž»áž�áŸ’ážš áž“áž·áž„áž‘áŸ†áž“áž·áž‰)</h3></a>
 										<div class="employer">
 											<small>Inter Smart Cambodia Co.,Ltd</small>
 										</div>
@@ -240,7 +240,7 @@
 							<div class="job-post">
 								<ul class="list-unstyled">
 									<li><a href="" class="job-title"><h3>Courier
-												(បុគ្គលិកផ្នែកបញ្ជូនសំបុត្រ និងទំនិញ)</h3></a>
+												(áž”áž»áž‚áŸ’áž‚áž›áž·áž€áž•áŸ’áž“áŸ‚áž€áž”áž‰áŸ’áž‡áž¼áž“ážŸáŸ†áž”áž»áž�áŸ’ážš áž“áž·áž„áž‘áŸ†áž“áž·áž‰)</h3></a>
 										<div class="employer">
 											<small>Inter Smart Cambodia Co.,Ltd</small>
 										</div>
@@ -313,7 +313,7 @@
 							</div>
 							<div class="panel-body">
 								<ul class="list-group list-group-unstyle">
-									<li class="list-group-item"><a href="">业务经理 </a></li>
+									<li class="list-group-item"><a href="">ä¸šåŠ¡ç»�ç�† </a></li>
 									<li class="list-group-item"><a href="">SOCIAL COMPLIANCE
 											AUDITOR</a></li>
 									<li class="list-group-item"><a href="">Agronomist</a></li>

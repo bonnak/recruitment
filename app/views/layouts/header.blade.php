@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="pane1">
 		<a href="" class="company-logo"><img alt=""
 			src="http://localhost:8000/assets/images/company-logo.png"></a>
@@ -7,16 +7,23 @@
 		<div class="input-group" id="keyword-search">
 			<input type="search" id="search-keyword"
 				class="form-control search-field" name="search-keyword"
-				placeholder="Keyword for job title, company name ... etc"> <span
+				placeholder="Search Jobs"> <span
 				class="input-group-btn">
-				<button type="submit" id="btn-search" class="btn">Search</button>
+				<button type="submit" id="btn-search" class="btn"><span class="glyphicon glyphicon-search"></span></button>
 			</span>
 		</div>
 	</div>
-	<div class="pane3">
-		<div class="member-login-area">
-			<a href="">Login</a><span class="separator">|</span>
-			<a href="">Register</a>
+	<div class="pane3">					
+		<div id="follow" class="clearfix">
+			<ul>
+				<li><a target="_blank" class="fb"></a></li>
+				<li><a target="_blank" class="tw"></a></li>
+				<li><a target="_blank" class="gplus"></a></li>
+			</ul>
+		</div>
+		<div id="contact"  class="clearfix">
+			Call us <span id="phone">(855)77894772</span>
+			 or <span id="email">email@aitie.com</span>
 		</div>
 	</div>
 </div>

@@ -11,14 +11,6 @@
 			</div>	
 		</div>
 		<div class="col-md-4">
-			<div id="follow">
-				<span>Keep intouch with us </span>
-					<ul>
-						<li><a target="_blank" class="fb"></a></li>
-						<li><a target="_blank" class="tw"></a></li>
-						<li><a target="_blank" class="gplus"></a></li>
-					</ul>
-				</div>
 		</div>
 	</div>
 	<div>
