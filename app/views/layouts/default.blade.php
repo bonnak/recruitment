@@ -28,7 +28,6 @@
 	<div class="top-fixed-bar-back"></div>
 	@include('layouts.body')
 	<div class="footer-container-back">
-		<hr id="line-break-footer">
 		@include('layouts.footer')
 	</div>
 </body>

@@ -341,6 +341,11 @@ input#search-keyword{
 	color: #d73d32;
 	padding: 4px 10px !important;
 }
+#copyright{
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
 .separator {
 	margin: 0 5px;
