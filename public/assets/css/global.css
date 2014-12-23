@@ -390,6 +390,7 @@ input#search-keyword{
 	color: #000;
 	padding: 10px 0;
 	padding-left: 25px;
+	text-decoration: none;
 }
 .left-side-bar a:hover {
 	color: #E4B111;
