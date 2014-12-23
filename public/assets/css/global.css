@@ -409,6 +409,7 @@ input#search-keyword{
 
 .job-post {
 	padding: 20px;
+	padding-bottom: 5px;
 }
 
 .job-post:hover {
@@ -428,8 +429,11 @@ input#search-keyword{
 .job-post a.job-title h3 {
 	display: inline-block;
 	margin-top: 0;
-	margin-bottom: 13px;
-	color: #38413B;
+	margin-bottom: 22px;
+	color: #28be68;
+}
+.job-post a.job-title h3:hover{	
+	text-decoration: underline;
 }
 
 .job-post .job-status {
