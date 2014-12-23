@@ -116,24 +116,26 @@
 						</div>
 					</div>
 					<div class="content-wrapper">
-						<div class="view-name">
-							<strong>Recent job posts >></strong>
+						<div class="view-name title-bar">
+							<strong>Job Posts</strong>
 						</div>
 						<div class="job-posts">
 							<div class="job-post">
 								<ul class="list-unstyled">
 									<li><a href="" class="job-title"><h3>Quotation and Project
 												Study</h3></a>
-										<div class="employer">
-											<small>Inter Smart Cambodia Co.,Ltd</small>
+										<div class="clearfix">
+											<div class="employer">
+												<img src="{{asset('assets/images/company-logos/1.png')}}"><br>
+												<small>Inter Smart Cambodia Co.,Ltd</small>
+											</div>
+											<div>
+												<small class="closing-date"><i class="glyphicon glyphicon-remove"></i>12/September/2014</small><br>
+												<small class="location"><i class="glyphicon glyphicon-map-marker"></i>Phnom Penh</small><br>
+												<small class="salary"><i class="glyphicon glyphicon-usd"></i>Negotiable</small>
+											</div>
 										</div>
-										<div>
-											<small>Closing date: <span class="closing-date">12/September/2014</span></small><span
-												class="separator">|</span> <small>Location: <span
-												class="location">Phnom Penh</span></small><span
-												class="separator">|</span> <small>Salary: <span
-												class="salary">Negotiable</span></small>
-										</div></li>
+									</li>
 								</ul>
 							</div>
 							<hr class="post-seperator">
@@ -279,7 +281,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">
+							<div class="panel-heading title-bar">
 								<h3 class="panel-title">Premium Jobs</h3>
 							</div>
 							<div class="panel-body">
@@ -308,7 +310,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">
+							<div class="panel-heading title-bar">
 								<h3 class="panel-title">Urgent Jobs</h3>
 							</div>
 							<div class="panel-body">
