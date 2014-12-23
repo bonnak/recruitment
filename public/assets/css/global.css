@@ -369,7 +369,7 @@ input#search-keyword{
 }
 .left-side-bar ul li .title{
 	display: block;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 700;
 	padding: 14px 0 3px 0;
 	margin: 0;
@@ -387,6 +387,7 @@ input#search-keyword{
 }
 .left-side-bar a {
 	display: block;
+	font-size: 13px;
 	color: #000;
 	padding: 10px 0;
 	padding-left: 25px;
