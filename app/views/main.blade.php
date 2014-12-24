@@ -258,6 +258,13 @@
 			</div>
 		</div>
 		<div class="col-md-3 right-side-bar">
+			@if(Auth::guest())
+				<div id="login-box">
+					<label>Username<input type="text" id="login-username" name="login-username"></label>
+					<label>Password<input type="password" id="login-pwd" name="login-pwd"></label>
+					<input type="submit" value="Login">
+				</div>
+			@endif
 			<div id="premium-job">
 				<div class="row">
 					<div class="col-md-12">
