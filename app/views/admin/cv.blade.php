@@ -2,7 +2,7 @@
 
 @section('cv')
 <div id="cv">
-	<div class="row">
+	<div class="row">
 			<div>
 				<a href="{{URL::route('admin.cv.create')}}" class="btn btn-default">Create CV</a>
 			</div>			
@@ -61,7 +61,7 @@
     				@endforeach
     			</tbody>
   				</table>
-  			</div
+  			</div>
 			</div>
 		</div>
 	</div>

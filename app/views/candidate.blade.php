@@ -3,35 +3,35 @@
 @section('candidate')
 	<div class="col-md-2 left-side-bar">
 		<ul class="list-unstyled">
-			<li><a href="{{URL::route('user.candidate')}}">Dashboard</a></li>
+			<li><h3 class="title"><a href="{{URL::route('user.candidate')}}">Dashboard</a></h3></li>
 		</ul>
 		<ul class="list-unstyled">
-			<li><span class="title">CV and Cover Letters</span>
+			<li><h3 class="title">CV and Cover Letters</h3>
 				<ul class="list-unstyled">
-					<li role="presentation"><a href="{{URL::route('user.candidate.create')}}">Create a CV</a></li>
-					<li role="presentation"><a href="#industry">My CV</a></li>
-					<li role="presentation"><a href="#location">Create a cover letter</a></li>
-					<li role="presentation"><a href="#salary">My cover letter</a></li>
+					<li role="presentation"><a href="{{URL::route('user.candidate.create')}}">Create a CV</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#industry">My CV</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#location">Create a cover letter</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#salary">My cover letter</a><hr class="menu-seperator"></li>
 				</ul>
 			</li>
 		</ul>
 		<ul class="list-unstyled">
-			<li><span class="title">Jobs</span>
+			<li><h3 class="title">Jobs</h3>
 				<ul class="list-unstyled">
-					<li role="presentation"><a href="#category">Recommended jobs</a></li>
-					<li role="presentation"><a href="#industry">Job alerts</a></li>
-					<li role="presentation"><a href="#location">Saved jobs</a></li>
-					<li role="presentation"><a href="#salary">Apply list</a></li>
+					<li role="presentation"><a href="#category">Recommended jobs</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#industry">Job alerts</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#location">Saved jobs</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#salary">Apply list</a><hr class="menu-seperator"></li>
 				</ul>
 			</li>
 		</ul>
 		<ul class="list-unstyled">
-			<li><span class="title">Account Settings</span>
+			<li><h3 class="title">Account Settings</h3>
 				<ul class="list-unstyled">
-					<li role="presentation"><a href="#category">My profile</a></li>
-					<li role="presentation"><a href="#industry">Change email</a></li>
-					<li role="presentation"><a href="#location">Change password</a></li>
-					<li role="presentation"><a href="#location">logout</a></li>
+					<li role="presentation"><a href="#category">My profile</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#industry">Change email</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#location">Change password</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="#location">logout</a><hr class="menu-seperator"></li>
 				</ul>
 			</li>
 		</ul>

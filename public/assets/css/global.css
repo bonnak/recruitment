@@ -374,6 +374,14 @@ input#search-keyword{
 	padding: 14px 0 3px 0;
 	margin: 0;
 	text-transform: uppercase;
+	color: #2A2A2A;
+}
+.left-side-bar ul li .title a{
+	color: #2A2A2A;
+}
+.left-side-bar ul li .title a:hover{
+	color: #E4B111;
+	text-decoration: none;
 }
 .left-side-bar ul li ul{
 	margin-left: 0;
@@ -385,7 +393,7 @@ input#search-keyword{
 	background: -web-kit-linear-gradient(rgb(255, 255, 255) 0%, rgb(246, 246, 246) 47%, rgb(237, 237, 237) 100%);
 	background: linear-gradient(rgb(255, 255, 255) 0%, rgb(246, 246, 246) 47%, rgb(237, 237, 237) 100%);
 }
-.left-side-bar a {
+.left-side-bar li ul li a {
 	display: block;
 	font-size: 13px;
 	color: #000;
