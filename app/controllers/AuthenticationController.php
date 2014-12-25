@@ -22,12 +22,17 @@ class AuthenticationController extends BaseController{
 			return Redirect::route('admin.login')->withErrors($validator);
 		}else
 		{
-			$auth=Auth::attempt(['user_name'=> $username, 'password'=> $password]);
+			$auth=Auth::attempt([
+				'user_name'=> $username, 
+				'password'=> $password,
+				'user_type' => null
+			]);
+
 			if($auth)
 			{
 				return Redirect::route('admin.home')->with('global', 'You are now logged in!');
 			}else{
-				return Redirect::back()->with('global', 'Your username or password combination was incorrect.')->withInput();
+				return Redirect::back()->with('global', 'Username or password was incorrect.')->withInput();
 			}
 		}
 	}
