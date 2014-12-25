@@ -15,7 +15,7 @@ Route::get('/', 'MainController@index');
 Route::get('/user/candidate', ['as' => 'user.candidate', 'uses' => 'MainController@openJobSeeker']);
 Route::get('/user/candidate/create', ['as' => 'user.candidate.create', 'uses' => 'MainController@getCVCreate']);
 
-Route::group(['prefix' => 'admin'], function (){
+Route::group(['prefix' => 'admin', 'before' => 'auth'], function (){
 	Route::get('/', ['as' => 'admin.home', 'uses' => 'AdminController@index']);
 	
 	Route::get('cv', ['as' => 'admin.cv.index', 'uses' => 'AdminController@openCV']);	
@@ -25,4 +25,12 @@ Route::group(['prefix' => 'admin'], function (){
 
 Route::group(['prefix' => 'api'], function (){
 	Route::resource('industry', 'IndustryController');
+});
+
+Route::get('admin/register', ['as' => 'admin.register', 'uses' => 'AuthenticationController@adminRegister']);
+Route::get('admin/login', ['as' => 'admin.login', 'uses' => 'AuthenticationController@adminLogin']);
+Route::group(['before' => 'csrf'], function(){
+	Route::post('admin/register', ['as' => 'admin.register.post', 'uses' => 'AuthenticationController@adminRegisterPost']);
+	Route::post('admin/login', ['as' => 'admin.login.post', 'uses' => 'AuthenticationController@adminLoginPost']);
+	Route::post('admin/logout', ['as' => 'admin.logout.post', 'uses' => 'AuthenticationController@adminLogoutPost']);
 });
