@@ -34,7 +34,8 @@
 				<div class="navbar navbar-default  navbar-static-top navbar-unstyle"
 					role="navigation">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="{{URL::route('admin.home')}}">Home</a></li>
+						<li><a href="{{URL::route('admin.home')}}">Dashboard</a></li>
+						<li><a href="#">Criteria</a></li>
 						<li><a href="{{URL::route('admin.cv.index')}}">CV</a></li>
 						<li><a href="#">Job Seeker</a></li>
 						<li><a href="#">Employer</a></li>
@@ -55,7 +56,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="inner-wrapper">@yield('home') @yield('cv')</div>
+		<div class="inner-wrapper">
+			@yield('home') 
+			@yield('cv')
+		</div>
 	</div>
 </body>
 	<script src="{{asset('assets/js/admin/admin.js')}}"></script>

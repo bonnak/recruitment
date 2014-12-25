@@ -1,7 +1,7 @@
 @extends('layouts.admin') 
 
 @section('home')
-<div class="row" id="dashboard" ng-app="DesireApp">
+<!-- <div class="row" id="dashboard" ng-app="DesireApp">
 	<div class="col-sm-6">
 		<div class="panel panel-default" id="industry" 	ng-controller="IndustryController">
 			<div class="panel-heading">
@@ -32,5 +32,5 @@
 	</div>
 	<div class="col-sm-6">
 	</div>
-</div>
+</div> -->
 @endsection
