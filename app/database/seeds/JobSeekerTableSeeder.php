@@ -7,16 +7,7 @@ class JobSeekerTableSeeder extends Seeder {
 	 * @return void
 	 */
 	public function run() {
-		DB::table ( 'users' )->truncate ();
 		DB::table ( 'candidates' )->truncate ();
-		
-		User::create([
-			'user_name'		=> 'candidate1',
-			'password' 		=> Hash::make('12345678'),
-			'email'			=> 'candidate1@gmail.com',
-			'activated' 	=> 0,
-			'user_type' 	=> 2
-		]);
 		
 		Candidate::create([
 			'id'				=> 1,
