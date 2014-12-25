@@ -27,14 +27,13 @@
 	<div class="wrapper">
 		<div class="header clearfix">
 			<div class="column logo">
-				<a href="" class="company-logo"><img alt=""
-					src="http://localhost:8000/assets/images/company-logo.png"></a>
+				<a href="{{URL::route('admin.home')}}" class="company-logo"><img alt=""
+					src="{{asset('assets/images/company-logo.png')}}"></a>
 			</div>
 			<div class="column menu">
 				<div class="navbar navbar-default  navbar-static-top navbar-unstyle"
 					role="navigation">
 					<ul class="nav navbar-nav">
-						<li><a href="{{URL::route('admin.home')}}">Dashboard</a></li>
 						<li><a href="#">Criteria</a></li>
 						<li><a href="{{URL::route('admin.cv.index')}}">CV</a></li>
 						<li><a href="#">Job Seeker</a></li>
@@ -47,11 +46,11 @@
 				<div class="dropdown">
 					<button class="btn btn-default dropdown-toggle" type="button"
 						id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-						User <span class="caret"></span>
+						{{Auth::user()->user_name}} <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right" role="menu">
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Logout</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1" href="{{URL::route('admin.logout.post')}}">Logout</a></li>
 					</ul>
 				</div>
 			</div>
