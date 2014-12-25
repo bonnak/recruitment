@@ -44,9 +44,9 @@ class AuthenticationController extends BaseController{
 
 	public function adminRegisterPost()
 	{
-		$vali = Validator::make(Input::all(), User::$rules);
+		$validator = Validator::make(Input::all(), User::$rules);
 
-		if($vali->passes()){
+		if($$validator->passes()){
 			$user = new User;
 			$user->user_name = Input::get('user_name');
 			$user->password = Hash::make(Input::get('password'));

@@ -29,8 +29,8 @@ Route::group(['prefix' => 'api'], function (){
 
 Route::get('admin/register', ['as' => 'admin.register', 'uses' => 'AuthenticationController@adminRegister']);
 Route::get('admin/login', ['as' => 'admin.login', 'uses' => 'AuthenticationController@adminLogin']);
+Route::get('admin/logout', ['as' => 'admin.logout.post', 'uses' => 'AuthenticationController@adminLogoutPost']);
 Route::group(['before' => 'csrf'], function(){
 	Route::post('admin/register', ['as' => 'admin.register.post', 'uses' => 'AuthenticationController@adminRegisterPost']);
-	Route::post('admin/login', ['as' => 'admin.login.post', 'uses' => 'AuthenticationController@adminLoginPost']);
-	Route::post('admin/logout', ['as' => 'admin.logout.post', 'uses' => 'AuthenticationController@adminLogoutPost']);
+	Route::post('admin/login', ['as' => 'admin.login.post', 'uses' => 'AuthenticationController@adminLoginPost']);	
 });
