@@ -102,7 +102,7 @@ class AuthenticationController extends BaseController{
 						break;
 						
 					case 2: // Employee
-						return Redirect::route('user.candidate')->with('global', 'You are now logged in!');
+						return Redirect::route('home')->with('global', 'You are now logged in!');
 						break;
 				}
 			}
@@ -111,5 +111,22 @@ class AuthenticationController extends BaseController{
 				return Redirect::back()->with('global', 'Username or password was incorrect.')->withInput();
 			}
 		}
+	}
+	
+	public function getUserlogout()
+	{
+		Auth::logout();
+		
+		return Redirect::to('/');
+	}
+	
+	public function getUserRegister()
+	{
+		if(!Auth::guest())
+		{
+			return Redirect::to('/');
+		}
+		
+		return View::make('register');
 	}
 }

@@ -3,12 +3,12 @@
 @section('candidate')
 	<div class="col-md-2 left-side-bar">
 		<ul class="list-unstyled">
-			<li><h3 class="title"><a href="{{URL::route('user.candidate')}}">Dashboard</a></h3></li>
+			<li><h3 class="title"><a href="{{URL::route('home')}}">Dashboard</a></h3></li>
 		</ul>
 		<ul class="list-unstyled">
 			<li><h3 class="title">CV and Cover Letters</h3>
 				<ul class="list-unstyled">
-					<li role="presentation"><a href="{{URL::route('user.candidate.create')}}">Create a CV</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="{{URL::route('candidate.cv.create')}}">Create a CV</a><hr class="menu-seperator"></li>
 					<li role="presentation"><a href="#industry">My CV</a><hr class="menu-seperator"></li>
 					<li role="presentation"><a href="#location">Create a cover letter</a><hr class="menu-seperator"></li>
 					<li role="presentation"><a href="#salary">My cover letter</a><hr class="menu-seperator"></li>
@@ -31,15 +31,15 @@
 					<li role="presentation"><a href="#category">My profile</a><hr class="menu-seperator"></li>
 					<li role="presentation"><a href="#industry">Change email</a><hr class="menu-seperator"></li>
 					<li role="presentation"><a href="#location">Change password</a><hr class="menu-seperator"></li>
-					<li role="presentation"><a href="#location">logout</a><hr class="menu-seperator"></li>
+					<li role="presentation"><a href="{{URL::route('user.logout')}}">logout</a><hr class="menu-seperator"></li>
 				</ul>
 			</li>
 		</ul>
 	</div>
 	<div class="col-md-7 middle-wrapper">
-		@if(Route::currentRouteName() === 'user.candidate')
+		@if(Route::currentRouteName() === 'candidate')
 		hi
-		@elseif(Route::currentRouteName() === 'user.candidate.create')
+		@elseif(Route::currentRouteName() === 'candidate.cv.create')
 			<div id="cv-create">				
 				<div>
 					<h4>Basic Information</h4>

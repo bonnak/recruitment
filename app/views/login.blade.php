@@ -61,7 +61,7 @@
 					{{Form::token()}}
 				</form>
 			</div>
-			<div class="col-sm-6">
+		<div class="col-sm-6">
 			<div class="logo">
 				<img alt="" src="{{asset('assets/images/company-logo.png')}}">
 			</div>
@@ -75,7 +75,7 @@
 		</div>
 		<div class="row">
 			<div class="col-sm-12">
-				<span>Not yet a member? <a href="">Register a new account</a></span>
+				<span>Not yet a member? <a href="{{URL::route('user.register')}}">Register a new account</a></span>
 			</div>
 		</div>
 	</div>	
