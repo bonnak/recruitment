@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<div class="pane1">
-		<a href="" class="company-logo"><img alt=""
+		<a href="{{URL::to('/')}}" class="company-logo"><img alt=""
 			src="http://localhost:8000/assets/images/company-logo.png"></a>
 	</div>
 	<div class="pane2">
