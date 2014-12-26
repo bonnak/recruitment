@@ -560,3 +560,33 @@ hr#line-break-footer {
 .panel-body{
 	padding: 0;
 }
+#login-box{
+	width: 900px;
+	margin: 0 auto;
+}
+#login-box .box-body{
+	padding: 20px;
+	background-color: #fff;
+	border: 1px solid #E5E5E5;
+}
+#login-box .box-body label{
+	font-weight: 100;
+}
+#login-box .box-body a{
+	color: #28be68;
+}
+#login-box .box-body .form-group{
+	margin-bottom: 10px;
+}
+#login-box .box-body .logo{	
+	text-align: center;
+}
+#login-box .box-body .logo img{
+	width: 160px;
+}
+#login-box .box-body .description{
+	text-align: center;
+}
+#login-box .box-body .description h2{
+	color: #E4B111
+}

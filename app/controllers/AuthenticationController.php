@@ -66,4 +66,50 @@ class AuthenticationController extends BaseController{
 		Auth::logout();
 		return Redirect::route('admin.login');
 	}
+	
+	public function getUserLogin()
+	{
+		return View::make('login');
+	}
+	
+	public function postUserLogin()
+	{
+		$username = Input::get('user_name');
+		$password = Input::get('password');
+		
+		$validator = Validator::make(Input::all(), [
+				'user_name' => 'required|min:2',
+				'password' => 'required|min:4|max:12'
+				]);
+		
+		if($validator->fails())
+		{
+			return Redirect::route('user.login')->withErrors($validator);
+		}
+		else
+		{
+			$auth=Auth::attempt([
+				'user_name'=> $username,
+				'password'=> $password,
+				'role' => null
+			]);
+		
+			if($auth)
+			{
+				switch (Auth::user()->user_type)
+				{
+					case 1: // Employer
+						break;
+						
+					case 2: // Employee
+						return Redirect::route('user.candidate')->with('global', 'You are now logged in!');
+						break;
+				}
+			}
+			else
+			{
+				return Redirect::back()->with('global', 'Username or password was incorrect.')->withInput();
+			}
+		}
+	}
 }

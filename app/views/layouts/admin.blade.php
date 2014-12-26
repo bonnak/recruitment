@@ -49,7 +49,6 @@
 						{{Auth::user()->user_name}} <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-right" role="menu">
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Profile</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1" href="{{URL::route('admin.logout.post')}}">Logout</a></li>
 					</ul>
 				</div>

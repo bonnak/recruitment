@@ -33,7 +33,7 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
+Route::filter('auth-admin', function()
 {
 	if (Auth::guest())
 	{
@@ -48,11 +48,33 @@ Route::filter('auth', function()
 	}
 });
 
+Route::filter('auth', function()
+{
+	if (Auth::guest())
+	{	
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::guest('user.login');
+		}
+	}
+	else 
+	{
+		if(Auth::user()->role !== null)
+		{
+			return Redirect::guest('user.login');
+		}
+	}
+});
 
 Route::filter('auth.basic', function()
 {
 	return Auth::basic();
 });
+
 
 /*
 |--------------------------------------------------------------------------
