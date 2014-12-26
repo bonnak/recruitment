@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', 'MainController@index');
+Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
+Route::get('register', ['as' => 'user.register', 'uses' => 'AuthenticationController@getUserRegister']);
 Route::get('login', ['as' => 'user.login', 'uses' => 'AuthenticationController@getUserLogin']);
 Route::group(['before' => 'auth'], function (){
-	Route::get('/user/candidate', ['as' => 'user.candidate', 'uses' => 'MainController@openJobSeeker']);
-	Route::get('/user/candidate/create', ['as' => 'user.candidate.create', 'uses' => 'MainController@getCVCreate']);
+	Route::get('/user/candidate', ['as' => 'candidate', 'uses' => 'MainController@openMemberHome']);
+	Route::get('/user/candidate/create', ['as' => 'candidate.cv.create', 'uses' => 'MainController@getCVCreate']);
+	
+	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);
 });
 
 Route::group(['prefix' => 'admin', 'before' => 'auth-admin'], function (){
