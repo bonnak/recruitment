@@ -585,8 +585,16 @@ hr#line-break-footer {
 	width: 160px;
 }
 #login-box .box-body .description{
+	width: 273px;
+	margin: 0 auto;
 	text-align: center;
 }
-#login-box .box-body .description h2{
+#login-box .box-body .description h3{
 	color: #E4B111
+}
+#login-box .box-body .error{
+	border-left: 3px solid #dca7a7;
+	padding-left: 13px;
+	margin-top: 6px;
+	color: #dca7a7;
 }

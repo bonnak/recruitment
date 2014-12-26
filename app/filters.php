@@ -58,14 +58,14 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('user.login');
+			return Redirect::guest('login');
 		}
 	}
 	else 
 	{
 		if(Auth::user()->role !== null)
 		{
-			return Redirect::guest('user.login');
+			return Redirect::guest('login');
 		}
 	}
 });

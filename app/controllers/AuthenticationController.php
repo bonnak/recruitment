@@ -78,8 +78,8 @@ class AuthenticationController extends BaseController{
 		$password = Input::get('password');
 		
 		$validator = Validator::make(Input::all(), [
-				'user_name' => 'required|min:2',
-				'password' => 'required|min:4|max:12'
+				'user_name' => 'required',
+				'password' => 'required'
 				]);
 		
 		if($validator->fails())
