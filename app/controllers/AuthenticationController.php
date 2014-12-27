@@ -88,13 +88,19 @@ class AuthenticationController extends BaseController{
 		}
 		else
 		{
-			$auth=Auth::attempt([
+			$auth_username = Auth::attempt([
 				'user_name'=> $username,
 				'password'=> $password,
 				'role' => null
 			]);
+			
+			$auth_email = Auth::attempt([
+				'email'=> $username,
+				'password'=> $password,
+				'role' => null
+			]);
 		
-			if($auth)
+			if($auth_username || $auth_email)
 			{
 				switch (Auth::user()->user_type)
 				{
@@ -117,7 +123,7 @@ class AuthenticationController extends BaseController{
 	{
 		Auth::logout();
 		
-		return Redirect::to('/');
+		return Redirect::route('user.login');
 	}
 	
 	public function getUserRegister()
