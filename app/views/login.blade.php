@@ -20,7 +20,7 @@
 					<div class="form-group">
 					    <label for="login-username" class="col-sm-4 control-label">User name / Email</label>
 					    <div class="col-sm-8">
-					      <input type="text" class="form-control input-sm" id="login-username" name="user_name" >
+					      <input type="text" class="form-control" id="login-username" name="user_name" >
 					      	@if($errors->has())
 								<div class="error">								
 									{{$errors->first('user_name', ':message')}}
@@ -31,7 +31,7 @@
 					<div class="form-group">
 					    <label for="login-pwd" class="col-sm-4 control-label">Password</label>
 					    <div class="col-sm-8">
-					      <input type="password" class="form-control input-sm" id="login-pwd" name="password">
+					      <input type="password" class="form-control" id="login-pwd" name="password">
 					      	@if($errors->has())
 								<div class="error">								
 									{{$errors->first('password', ':message')}}
