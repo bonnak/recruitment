@@ -23,9 +23,10 @@ class AuthenticationController extends BaseController{
 		}else
 		{
 			$auth=Auth::attempt([
-				'user_name'=> $username, 
-				'password'=> $password,
-				'user_type' => null
+				'user_name'	=> $username, 
+				'password'	=> $password,
+				'user_type' => null,
+				'activated'	=> 1
 			]);
 
 			if($auth)
@@ -89,15 +90,17 @@ class AuthenticationController extends BaseController{
 		else
 		{
 			$auth_username = Auth::attempt([
-				'user_name'=> $username,
-				'password'=> $password,
-				'role' => null
+				'user_name'	=> $username,
+				'password'	=> $password,
+				'role' 		=> null,
+				'activated'	=> 1
 			]);
 			
 			$auth_email = Auth::attempt([
-				'email'=> $username,
-				'password'=> $password,
-				'role' => null
+				'email'		=> $username,
+				'password'	=> $password,
+				'role' 		=> null,
+				'activated'	=> 1
 			]);
 		
 			if($auth_username || $auth_email)
@@ -128,7 +131,7 @@ class AuthenticationController extends BaseController{
 	
 	public function getUserRegister()
 	{
-		if(!Auth::guest())
+		if(!Auth::guest() || Auth::user()->role === null)
 		{
 			return Redirect::to('/');
 		}
