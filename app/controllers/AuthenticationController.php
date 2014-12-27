@@ -114,7 +114,7 @@ class AuthenticationController extends BaseController{
 			}
 			else
 			{
-				return Redirect::back()->with('global', 'Username or password was incorrect.')->withInput();
+				return Redirect::route('user.login')->with('global', 'Username or password was incorrect.')->withInput();
 			}
 		}
 	}

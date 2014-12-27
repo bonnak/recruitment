@@ -4,12 +4,12 @@
 		<div class="col-md-2 left-side-bar">		
 			@if(Auth::guest() || Auth::user()->user_type === null)
 				<div id="login-box-small">
-					<form action="" method="post">
+					<form action="{{URL::route('user.login.post')}}" method="post">
 						<div class="form-group">
-							<input type="text" id="login-username" class="form-control input-sm" name="login-username" placeholder="User name / Email">
+							<input type="text" id="login-username" class="form-control input-sm" name="user_name" placeholder="User name / Email">
 						</div>
 						<div class="form-group">
-							<input type="password" id="login-pwd" class="form-control input-sm" name="login-pwd" placeholder="Password">
+							<input type="password" id="login-pwd" class="form-control input-sm" name="password" placeholder="Password">
 						</div>
 						<div class="checkbox">
 							<label><input type="checkbox" name="chk-remember"> Remember me</label>
@@ -21,8 +21,9 @@
 							<input type="submit" class="btn btn-default"value="Login">
 						</div>
 						<div>
-							<small>Not yet a memeber? <a href="">Register</a></small>
+							<small>Not yet a memeber? <a href="{{URL::route('user.register')}}">Register</a></small>
 						</div>
+						{{Form::token()}}
 					</form>
 				</div>
 			@endif
