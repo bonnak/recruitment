@@ -131,7 +131,7 @@ class AuthenticationController extends BaseController{
 	
 	public function getUserRegister()
 	{
-		if(!Auth::guest() || Auth::user()->role === null)
+		if(!Auth::guest())
 		{
 			return Redirect::to('/');
 		}
