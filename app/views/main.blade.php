@@ -1,7 +1,31 @@
 @extends('layouts.default')
 
 @section('main')
-		<div class="col-md-2 left-side-bar">
+		<div class="col-md-2 left-side-bar">		
+			@if(Auth::guest() || Auth::user()->user_type === null)
+				<div id="login-box-small">
+					<form action="" method="post">
+						<div class="form-group">
+							<input type="text" id="login-username" class="form-control input-sm" name="login-username" placeholder="User name / Email">
+						</div>
+						<div class="form-group">
+							<input type="password" id="login-pwd" class="form-control input-sm" name="login-pwd" placeholder="Password">
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="chk-remember"> Remember me</label>
+						</div>
+						<div class="form-group">
+							<a href="">Forgot password</a>
+						</div>		
+						<div class="form-group">				
+							<input type="submit" class="btn btn-default"value="Login">
+						</div>
+						<div>
+							<small>Not yet a memeber? <a href="">Register</a></small>
+						</div>
+					</form>
+				</div>
+			@endif
 			<ul class="list-unstyled">
 				<li><h3 class="title">Browse jobs</h3>
 					<ul class="list-unstyled">
@@ -258,13 +282,6 @@
 			</div>
 		</div>
 		<div class="col-md-3 right-side-bar">
-			@if(Auth::guest())
-				<div id="login-box">
-					<label>Username<input type="text" id="login-username" name="login-username"></label>
-					<label>Password<input type="password" id="login-pwd" name="login-pwd"></label>
-					<input type="submit" value="Login">
-				</div>
-			@endif
 			<div id="premium-job">
 				<div class="row">
 					<div class="col-md-12">

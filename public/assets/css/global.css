@@ -598,3 +598,17 @@ hr#line-break-footer {
 	margin-top: 6px;
 	color: #dca7a7;
 }
+#login-box-small{
+	padding: 20px;
+	background: -webkit-linear-gradient(rgb(237, 237, 237) 0%, rgb(237, 237, 237) 47%, rgb(237, 237, 237) 100%);
+	background: -moz-linear-gradient(rgb(237, 237, 237) 0%, rgb(237, 237, 237) 47%, rgb(237, 237, 237) 100%);
+	background: -o-linear-gradient(rgb(237, 237, 237) 0%, rgb(237, 237, 237) 47%, rgb(237, 237, 237) 100%);
+	background: linear-gradient(rgb(237, 237, 237) 0%, rgb(237, 237, 237) 47%, rgb(237, 237, 237) 100%);
+	border: 1px solid #D7D7D7;
+}
+#login-box-small a{
+	color: #28be68;
+}
+#login-box-small input[type='submit']{
+	width: 100%;
+}

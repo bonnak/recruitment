@@ -9,7 +9,7 @@ class MainController extends BaseController
 		$locations = Location::get();
 		$salaries = Salary::get();
 		
-		if(!Auth::guest())
+		if(!Auth::guest() && Auth::user()->role === null)
 		{
 			switch (Auth::user()->user_type)
 			{
