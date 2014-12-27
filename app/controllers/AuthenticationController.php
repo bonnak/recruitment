@@ -78,9 +78,9 @@ class AuthenticationController extends BaseController{
 		$password = Input::get('password');
 		
 		$validator = Validator::make(Input::all(), [
-				'user_name' => 'required',
-				'password' => 'required'
-				]);
+			'user_name' => 'required',
+			'password' => 'required'
+		]);
 		
 		if($validator->fails())
 		{
@@ -134,5 +134,67 @@ class AuthenticationController extends BaseController{
 		}
 		
 		return View::make('register');
+	}
+	
+	public function postUserRegister()
+	{
+		$username = Input::get('user_name');
+		$email = Input::get('email');
+		$password = Input::get('password');
+		
+		$validator = Validator::make(Input::all(), [
+			'user_name' 		=> 'required',
+			'email'				=> 'required|email',
+			'password' 			=> 'required|alpha_num|between:4,12',
+			'password-confirm' 	=> 'required|same:password',
+			'user_type'			=> 'required'
+		]);
+		
+		// Check input validation.
+		if($validator->fails())
+		{
+			return Redirect::route('user.register')
+						->withErrors($validator)
+						->withInput();
+		}
+		else
+		{
+			// Check if username or email is already taken.
+			$username_exist = User::hasUserName($username);
+			$email_exist = User::hasEmail($email);
+			
+			if($username_exist && $email_exist)
+			{
+				return Redirect::route('user.register')
+								->with([
+											'username_exist' 	=> 'This username has been taken',
+											'email_exist'		=> 'This email has been taken'
+										])
+								->withInput();
+			}
+			elseif ($username_exist)
+			{
+				return Redirect::route('user.register')
+								->with(['username_exist' => 'This username has been taken'])
+								->withInput();
+			}
+			elseif ($email_exist)
+			{
+				return Redirect::route('user.register')
+								->with(['email_exist' => 'This email has been taken'])
+								->withInput();
+			}
+				
+			// Create a new user.
+			$user = new User;
+			$user->user_name = Input::get('user_name');
+			$user->password = Hash::make(Input::get('password'));
+			$user->email = Input::get('email');
+			$user->user_type = Input::get('user_type');
+			$user->save();
+			
+			return Redirect::route('user.login')
+							->with('activation_message', 'Thank for registering with us. Please activate your account.');
+		}
 	}
 }

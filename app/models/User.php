@@ -28,5 +28,23 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'password'		=> 'required|alpha_num|between:4,12|confirmed',
 		'email'			=> 'required|email'
 	);
+	
+	public static function hasUserName($user_name)
+	{
+		$user_exist = DB::table('users')
+						->select(DB::raw('COUNT(*) as `ex`'))
+						->where('user_name', '=', $user_name)
+						->first();
+		return (bool) $user_exist->ex;
+	}
+	
+	public static function hasEmail($email)
+	{
+		$email_exist = DB::table('users')
+						->select(DB::raw('COUNT(*) as `ex`'))
+						->where('email', '=', $email)
+						->first();
+		return (bool) $email_exist->ex;
+	}
 
 }

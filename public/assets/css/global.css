@@ -560,39 +560,49 @@ hr#line-break-footer {
 .panel-body{
 	padding: 0;
 }
-#login-box{
+#login-box,
+#register-box{
 	width: 900px;
 	margin: 0 auto;
 }
-#login-box .box-body{
+#login-box .box-body,
+#register-box .box-body{
 	padding: 20px;
 	background-color: #fff;
 	border: 1px solid #E5E5E5;
 }
-#login-box .box-body label{
+#login-box .box-body label,
+#register-box .box-body label{
 	font-weight: 100;
 }
-#login-box .box-body a{
+#login-box .box-body a,
+#register-box .box-body a{
 	color: #28be68;
 }
-#login-box .box-body .form-group{
+#login-box .box-body .form-group,
+#register-box .box-body .form-group{
 	margin-bottom: 10px;
 }
-#login-box .box-body .logo{	
+#login-box .box-body .logo,	
+#register-box .box-body .logo{	
 	text-align: center;
 }
-#login-box .box-body .logo img{
+#login-box .box-body .logo img,
+#register-box .box-body .logo img{
 	width: 160px;
 }
-#login-box .box-body .description{
+#login-box .box-body .description,
+#register-box .box-body .description{
 	width: 273px;
 	margin: 0 auto;
 	text-align: center;
 }
-#login-box .box-body .description h3{
+#login-box .box-body .description h3,
+#register-box .box-body .description h3{
 	color: #E4B111
 }
-#login-box .box-body .error{
+#login-box .box-body .error,
+#register-box .box-body .error{
 	border-left: 3px solid #dca7a7;
 	padding-left: 13px;
 	margin-top: 6px;
@@ -612,4 +622,21 @@ hr#line-break-footer {
 #login-box-small input[type='submit']{
 	width: 100%;
 	outline: none;
+}
+.category-pane-title{
+	display: flex;
+	align-items: baseline;
+	margin: 37px 0 20px 0;
+}
+.category-pane-title h3{
+	font-size: 18px;
+	font-weight: 700;
+	flex: 1 18%;
+	color: #E4B111;
+	margin: 0;
+}
+.category-pane-title hr{
+	flex: 2;
+	margin: 0;
+	border-bottom: 3px solid #E4B111;
 }

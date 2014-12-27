@@ -40,4 +40,5 @@ Route::group(['before' => 'csrf'], function(){
 	Route::post('admin/register', ['as' => 'admin.register.post', 'uses' => 'AuthenticationController@adminRegisterPost']);
 	Route::post('admin/login', ['as' => 'admin.login.post', 'uses' => 'AuthenticationController@adminLoginPost']);	
 	Route::post('login', ['as' => 'user.login.post', 'uses' => 'AuthenticationController@postUserLogin']);
+	Route::post('register', ['as' => 'user.register.post', 'uses' => 'AuthenticationController@postUserRegister']);
 });

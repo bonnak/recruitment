@@ -11,6 +11,11 @@
 	<div class="row box-body">
 		<div class="row">
 			<div class="col-sm-6">	
+				@if(Session::get('activation_message'))
+					<div class="alert alert-success" style="text-align: center;">
+						{{Session::get('activation_message')}}
+					</div>
+				@endif
 				@if(Session::get('global'))
 					<div class="alert alert-danger" style="text-align: center;">
 						{{Session::get('global')}}
