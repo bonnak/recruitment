@@ -611,4 +611,5 @@ hr#line-break-footer {
 }
 #login-box-small input[type='submit']{
 	width: 100%;
+	outline: none;
 }
