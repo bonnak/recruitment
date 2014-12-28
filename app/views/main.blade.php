@@ -27,50 +27,23 @@
 					</form>
 				</div>
 			@endif
-			<ul class="list-unstyled">
-				<li><h3 class="title">Browse jobs</h3>
+			<div>
+				@foreach($main_menu as $menu => $url)
 					<ul class="list-unstyled">
-						<li role="presentation" class="active"><a href="#category">Categories</a><hr class="menu-seperator"></li>
-						<li role="presentation"><a href="#industry">Industries</a><hr class="menu-seperator"></li>
-						<li role="presentation"><a href="#location">Locations</a><hr class="menu-seperator"></li>
-						<li role="presentation"><a href="#salary">Salaries</a><hr class="menu-seperator"></li>
-					</ul></li>
-			</ul>
-			<ul class="list-unstyled">
-				<li><h3 class="title">Job seekers</h3>
-					<ul class="list-unstyled">
-						<li><a href="">Create a Resume</a><hr class="menu-seperator"></li>
-						<li><a href="">Search & Apply for a Job</a><hr class="menu-seperator"></li>
-						<li><a href="">Job Alerts</a><hr class="menu-seperator"></li>
-						<li><a href="">Saved Jobs</a><hr class="menu-seperator"></li>
-						<li><a href="">Recommended Jobs</a><hr class="menu-seperator"></li>
-					</ul></li>
-			</ul>
-			<ul class="list-unstyled">
-				<li><h3 class="title">Employers</h3>
-					<ul class="list-unstyled">
-						<li><a href="">View CV</a><hr class="menu-seperator"></li>
-						<li><a href="">Post job</a><hr class="menu-seperator"></li>
-						<li><a href="">Manage job</a><hr class="menu-seperator"></li>
-						<li><a href="">Payment Methods</a><hr class="menu-seperator"></li>
-					</ul></li>
-			</ul>
-			<ul class="list-unstyled">
-				<li><h3 class="title">Career Guide</h3>
-					<ul class="list-unstyled">
-						<li><a href="">Post a Job</a><hr class="menu-seperator"></li>
-						<li><a href="">CV Search</a><hr class="menu-seperator"></li>
-						<li><a href="">Purchase Service Packages</a><hr class="menu-seperator"></li>
-						<li><a href="">Manage Jobs</a><hr class="menu-seperator"></li>
-					</ul></li>
-			</ul>
-			<ul class="list-unstyled">
-				<li><h3 class="title">Feature</h3>
-					<ul class="list-unstyled">
-						<li><a href="">Companies</a><hr class="menu-seperator"></li>
-						<li><a href="">Agencies</a><hr class="menu-seperator"></li>
-					</ul></li>
-			</ul>
+					@if(is_array($url))
+						<li><h3 class="title">{{$menu}}</h3>
+							<ul class="list-unstyled">
+							@foreach($url as $menu => $url)
+								<li><a href="{{$url}}">{{$menu}}</a><hr class="menu-seperator"></li>
+							@endforeach
+							</ul>
+						</li>
+					@else
+						<li><h3 class="title"><a href="{{$url}}">{{$menu}}</a></h3></li>
+					@endif
+					</ul>
+				@endforeach
+			</div>
 		</div>
 		<div class="col-md-7 middle-wrapper">
 			<div class="row">
