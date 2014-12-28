@@ -60,36 +60,8 @@ class CreateJobSeekerTable extends Migration {
 				$table->integer ( 'updated_user' );
 				$table->timestamps ();
 			} );
-		}
+		}		
 		
-		if (! Schema::hasTable ( 'accessment_score' )) {
-			Schema::create ( 'accessment_score', function ($table) {
-				$table->integer ( 'candidate_id' );
-				$table->integer ( 'experience' );
-				$table->integer ( 'attitude' );
-				$table->integer ( 'appearance' );
-				$table->integer ( 'language' );
-				$table->integer ( 'skill' );
-				$table->integer ( 'reason_introduce' )->nullable();
-				$table->integer ( 'memo' )->nullable();
-			} );
-		}
-		
-		if (! Schema::hasTable ( 'skill' )) {
-			Schema::create ( 'skill', function ($table) {
-				$table->integer ( 'candidate_id' );
-				$table->string ( 'name' );
-				$table->integer ( 'level' );
-			} );
-		}
-		
-		if (! Schema::hasTable ( 'apply_list' )) {
-			Schema::create ( 'apply_list', function ($table) {
-				$table->integer ( 'candidate_id' );
-				$table->integer ( 'job_id' );
-				$table->datetime ( 'apply_date' );
-			} );
-		}
 	}
 	
 	/**
@@ -100,8 +72,5 @@ class CreateJobSeekerTable extends Migration {
 	public function down() {
 		Schema::dropIfExists ( 'candidates' );
 		Schema::dropIfExists ( 'cv' );
-		Schema::dropIfExists ( 'accessment_score' );
-		Schema::dropIfExists ( 'skill' );
-		Schema::dropIfExists ( 'apply_list' );
 	}
 }
