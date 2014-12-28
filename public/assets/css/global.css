@@ -274,11 +274,12 @@ input#search-keyword{
 
 #follow{	
 	margin-top: 11px;
+	margin-left: 30px;
 }
 #contact{
-	color: #fff;	
-	margin-top: 20px;
-	margin-left: 156px;
+	color: #fff;
+	margin-top: 9px;
+	margin-left: 10px;
 }
 
 #follow,
