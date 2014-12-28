@@ -117,7 +117,7 @@
 						<div class="view-name title-bar">
 							<strong>Job Posts</strong>
 						</div>
-						<div class="job-posts">
+						<div id="job-posts" class="box-body">
 							<div class="job-post">
 								<ul class="list-unstyled">
 									<li><a href="" class="job-title"><h3>Quotation and Project

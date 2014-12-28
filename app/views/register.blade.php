@@ -98,9 +98,9 @@
 				<img alt="" src="{{asset('assets/images/company-logo.png')}}">
 			</div>
 			<div class="description">
-				<h3>Welcome to Aitie Agency</h3>
+				<h3>Welcome to Aities HR</h3>
 				<p>
-					The trusted agency that privide best quality services.
+					Right time, right people, right job.
 				</p>
 			</div>
 		</div>

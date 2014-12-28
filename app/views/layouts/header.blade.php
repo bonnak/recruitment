@@ -22,8 +22,8 @@
 			</ul>
 		</div>
 		<div id="contact"  class="clearfix">
-			Call us <span id="phone">(855)77894772</span>
-			 or <span id="email">email@aitie.com</span>
+			Call us <span id="phone">(855)235023888 / (855)92555965</span>
+			 or <span id="email">info@aitiesgroup.com</span>
 		</div>
 	</div>
 </div>

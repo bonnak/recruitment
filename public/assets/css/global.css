@@ -410,9 +410,14 @@ input#search-keyword{
 	border-bottom: 1px solid #fff;
 }
 
-.job-posts {
+.box-body {
+	padding: 20px;
 	background-color: #fff;
 	border: 1px solid #E5E5E5;
+}
+
+#job-posts.box-body{
+	padding: 0;
 }
 
 .job-post {
@@ -522,14 +527,6 @@ hr#line-break-footer {
 .gplus:before {
 	content: "\f0d5";
 }
-
-#cv-create{
-	border-radius: 5px;
-	border-left: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	background-color: #fff;
-}
 .label-title {
 	text-align: right;
 }
@@ -631,9 +628,9 @@ hr#line-break-footer {
 .category-pane-title h3{
 	font-size: 18px;
 	font-weight: 700;
-	flex: 1 18%;
 	color: #E4B111;
 	margin: 0;
+	margin-right: 7px;
 }
 .category-pane-title hr{
 	flex: 2;

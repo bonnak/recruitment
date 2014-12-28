@@ -1,14 +1,22 @@
 <?php
 
+use Symfony\Component\Security\Core\User\User;
 class MainController extends BaseController 
 {
+	protected $industries;
+	protected $functions;
+	protected $locations;
+	protected $salaries;
+	
+	public function __construct()
+	{
+		$this->industries = Industry::get();
+		$this->functions = Func::get();
+		$this->locations = Location::get();
+		$this->salaries = Salary::get();
+	}
 	public function index()
 	{		
-		$industries = Industry::get();
-		$functions = Func::get();
-		$locations = Location::get();
-		$salaries = Salary::get();
-		
 		if(!Auth::guest() && Auth::user()->role === null)
 		{
 			switch (Auth::user()->user_type)
@@ -74,10 +82,10 @@ class MainController extends BaseController
 		}
 		
 		return View::make('main')->with([
-				'industries' 	=> $industries,
-				'functions'		=> $functions,
-				'locations'		=> $locations,
-				'salaries'		=> $salaries,
+				'industries' 	=> $this->industries,
+				'functions'		=> $this->functions,
+				'locations'		=> $this->locations,
+				'salaries'		=> $this->salaries,
 				'main_menu'			=> $menu
 		]);
 	}
@@ -97,7 +105,52 @@ class MainController extends BaseController
 	
 	public function getCVCreate()
 	{
-		return View::make('candidate');
+		return View::make('candidate-create')->with([
+				'industries' 	=> $this->industries,
+				'functions'		=> $this->functions,
+				'locations'		=> $this->locations,
+				'salaries'		=> $this->salaries
+		]);
+	}
+	
+	public function postCVCreate()
+	{	
+		$validator = Validator::make(Input::all(), Candidate::$rules);
+		
+		if($validator->fails())
+		{
+			echo '<pre>', print_r($validator), '</pre>';
+			//return Redirect::back()->withErrors($validator);
+		}
+		else 
+		{
+			
+			$candidate = new Candidate();
+			
+			$candidate->id					= Auth::user()->id;
+			$candidate->surname 			= htmlentities(Input::get('surname'));
+			$candidate->name 				= htmlentities(Input::get('name'));
+			$candidate->sex 				= htmlentities(Input::get('sex'));
+			$candidate->date_of_birth 		= date('Y-m-d', strtotime(htmlentities(Input::get('date_of_birth'))));
+			$candidate->marital_status		= htmlentities(Input::get('marital-status'));
+			$candidate->nationality 		= htmlentities(Input::get('nationality'));
+			$candidate->phone_number 		= htmlentities(Input::get('phone_number'));
+			$candidate->email 				= htmlentities(Input::get('email'));
+			$candidate->residence 			= htmlentities(Input::get('residence'));
+			$candidate->address 			= htmlentities(Input::get('address'));
+			$candidate->desired_industry 	= htmlentities(Input::get('desired_industry'));
+			$candidate->desired_function 	= htmlentities(Input::get('desired_function'));
+			$candidate->desired_location 	= htmlentities(Input::get('desired_location'));
+			$candidate->desired_salary 	= htmlentities(Input::get('desired_salary'));
+			$candidate->desired_position 	= htmlentities(Input::get('desired_position'));
+			$candidate->available_date 	= date('Y-m-d', strtotime(htmlentities(Input::get('available_date'))));
+			
+			if($candidate->save())
+			{
+				return 'Sucessfull create CV.';
+			}
+			
+		}
 	}
 
 }
