@@ -13,17 +13,23 @@
 			</span>
 		</div>
 	</div>
-	<div class="pane3">					
+	<div class="pane3">	
+		<div id="contact"  class="clearfix">
+			<div class="row" style="width: 273px;">
+				<div class="col-sm-4" style="padding: 0; width: 55px;">Call us</div>
+				<div id="phone" class="col-sm-8" style="padding: 0;">(855)235023888 / 92555965</div>
+			</div>
+			<div class="row" style="width: 273px;">
+				<div class="col-sm-4" style="padding: 0; width: 55px;">Email</div>
+				<div id="email" class="col-sm-8" style="padding: 0;">info@aitiesgroup.com</div>
+			</div>
+		</div>				
 		<div id="follow" class="clearfix">
 			<ul>
 				<li><a target="_blank" class="fb"></a></li>
 				<li><a target="_blank" class="tw"></a></li>
 				<li><a target="_blank" class="gplus"></a></li>
 			</ul>
-		</div>
-		<div id="contact"  class="clearfix">
-			Call us <span id="phone">(855)235023888 / (855)92555965</span>
-			 or <span id="email">info@aitiesgroup.com</span>
 		</div>
 	</div>
 </div>
