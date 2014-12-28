@@ -17,6 +17,7 @@ Route::get('login', ['as' => 'user.login', 'uses' => 'AuthenticationController@g
 Route::group(['before' => 'auth'], function (){
 	Route::get('/user/candidate', ['as' => 'candidate', 'uses' => 'MainController@openMemberHome']);
 	Route::get('/user/candidate/create', ['as' => 'candidate.cv.create', 'uses' => 'MainController@getCVCreate']);
+	Route::post('/user/candidate/create', ['as' => 'candidate.cv.create.post', 'uses' => 'MainController@postCVCreate']);
 	
 	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);
 });
