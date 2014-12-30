@@ -23,6 +23,7 @@
 		<div>
 			<div class="view-name title-bar">
 				<strong>Basic Information</strong>
+				<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 			</div>
 			<div class="box-body">
 				<div style="width: 70%; margin-left: 30px;">
@@ -144,6 +145,7 @@
 		<div style="margin-top: 20px;">
 			<div class="view-name title-bar">
 				<strong>Education Background</strong>
+				<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 			</div>
 			<div class="box-body">
 			<div style="width: 70%; margin-left: 30px;">
@@ -210,6 +212,7 @@
 		<div style="margin-top: 20px;">
 			<div class="view-name title-bar">
 				<strong>Work Experience</strong>
+				<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 			</div>
 			<div class="box-body">
 			<div style="width: 70%; margin-left: 30px;">
@@ -286,6 +289,7 @@
 		<div style="margin-top: 20px;">
 			<div class="view-name title-bar">
 				<strong>Skills</strong>
+				<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 			</div>
 			<div class="box-body">
 				<div style="width: 70%; margin-left: 30px;">
@@ -318,6 +322,7 @@
 		<div style="margin-top: 20px;">
 			<div class="view-name title-bar">
 				<strong>Languages</strong>
+				<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 			</div>
 			<div class="box-body">
 				<div style="width: 70%; margin-left: 30px;">
@@ -352,6 +357,7 @@
 		<div style="margin-top: 20px;">
 			<div class="view-name title-bar">
 				<strong>Expectation</strong>
+				<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 			</div>
 			<div class="box-body">
 				<div style="width: 70%; margin-left: 30px;">

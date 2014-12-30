@@ -30,5 +30,6 @@
 	<div class="footer-container-back">
 		@include('layouts.footer')
 	</div>
+	<script src="{{asset('assets/js/global.js')}}"></script>
 </body>
 </html>
