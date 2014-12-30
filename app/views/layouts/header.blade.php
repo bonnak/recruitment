@@ -15,12 +15,12 @@
 	</div>
 	<div class="pane3">	
 		<div id="contact"  class="clearfix">
-			<div class="row" style="width: 273px;">
-				<div class="col-sm-4" style="padding: 0; width: 55px;">Call us</div>
+			<div class="row" style="width: 273px; display: flex; align-items: center;">
+				<div class="col-sm-4 glyphicon glyphicon-earphone" style="padding: 0; width: 30px;"></div>
 				<div id="phone" class="col-sm-8" style="padding: 0;">(855)235023888 / 92555965</div>
 			</div>
-			<div class="row" style="width: 273px;">
-				<div class="col-sm-4" style="padding: 0; width: 55px;">Email</div>
+			<div class="row" style="width: 273px; display: flex; align-items: center;">
+				<div class="col-sm-4 glyphicon glyphicon-send" style="padding: 0; width: 30px;"></div>
 				<div id="email" class="col-sm-8" style="padding: 0;">info@aitiesgroup.com</div>
 			</div>
 		</div>				
