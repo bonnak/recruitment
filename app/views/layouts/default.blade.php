@@ -17,7 +17,7 @@
 
 <!-- JS -->
 <script src="{{asset('assets/js/jquery-2.1.1.min.js')}}"></script>
-<!--  <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script> -->
+ <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
 <!--  <script src="{{asset('assets/js/jquery.mobile.min.js')}}"></script> -->
 <script src="{{asset('bootstrap-3.3.1/js/bootstrap.min.js')}}"></script>
 </head>

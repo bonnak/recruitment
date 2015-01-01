@@ -480,9 +480,9 @@ input#search-keyword{
 	color: #fff;
 	text-transform: uppercase;
 	padding: 10px;
-	background-color: #E4B111;
+	background-color: #616161;
 	text-shadow: 0 0 1px rgba(126, 99, 31, 0.5);
-	border-bottom: 1px solid #E47911;
+	border-bottom: 3px solid #E47911;
 	-webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
 	-moz-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
 	box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
@@ -534,10 +534,15 @@ hr#line-break-footer {
 	font-weight: 100;
 }
 .input-elements{
-	margin: 5px 0;
+	margin: 7px 0;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+.input-elements input,
+.input-elements select,
+.input-elements textarea{
+	background-color: #FEFFEC;
 }
 .panel-title {
 	text-transform: uppercase;
@@ -636,4 +641,47 @@ hr#line-break-footer {
 	flex: 2;
 	margin: 0;
 	border-bottom: 3px solid #E4B111;
+}
+#cv .box{
+	margin-top: 0;
+}
+#cv-create{
+	background-color: #fff; 
+	border: 1px solid #E5E5E5;
+}
+#cv-create .box-body {
+	border: none;
+}
+#cv-create .box-body .inner-wrapper .label-title{
+	width: 135px;
+	padding: 0;
+}
+#cv-create .box-body .inner-wrapper{
+	margin-left: 30px;
+} 
+#cv-create .box-body .inner-wrapper input[type='text'],
+#cv-create .box-body .inner-wrapper input[type='email'],
+#cv-create .box-body .inner-wrapper input[type='date'],
+#cv-create .box-body .inner-wrapper select{
+	width: 245px;
+}
+#cv-create .box-body .inner-wrapper .sl-year{
+	width: 80px;
+}
+#cv-create .box-body .inner-wrapper .sl-month{
+	width: 114px;
+}
+#cv-create .box-body .inner-wrapper .sl-location{
+	width: 164px;
+}
+#cv-create .box-body .inner-wrapper .sl-salary{
+	width: 164px;
+}
+#cv-create .box-body .inner-wrapper .input-elements{
+	justify-content: flex-start;
+}
+#cv-create .box-footer{
+	padding-top: 20px; 
+	padding-bottom: 20px;
+	text-align: center;
 }

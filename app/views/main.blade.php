@@ -28,21 +28,7 @@
 				</div>
 			@endif
 			<div>
-				@foreach($main_menu as $menu => $url)
-					<ul class="list-unstyled">
-					@if(is_array($url))
-						<li><h3 class="title">{{$menu}}</h3>
-							<ul class="list-unstyled">
-							@foreach($url as $menu => $url)
-								<li><a href="{{$url}}">{{$menu}}</a><hr class="menu-seperator"></li>
-							@endforeach
-							</ul>
-						</li>
-					@else
-						<li><h3 class="title"><a href="{{$url}}">{{$menu}}</a></h3></li>
-					@endif
-					</ul>
-				@endforeach
+				@include('menu.menu')
 			</div>
 		</div>
 		<div class="col-md-7 middle-wrapper">

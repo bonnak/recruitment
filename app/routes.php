@@ -15,9 +15,11 @@ Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
 Route::get('register', ['as' => 'user.register', 'uses' => 'AuthenticationController@getUserRegister']);
 Route::get('login', ['as' => 'user.login', 'uses' => 'AuthenticationController@getUserLogin']);
 Route::group(['before' => 'auth'], function (){
-	Route::get('/user/candidate', ['as' => 'candidate', 'uses' => 'MainController@openMemberHome']);
-	Route::get('/user/candidate/create', ['as' => 'candidate.cv.create', 'uses' => 'MainController@getCVCreate']);
-	Route::post('/user/candidate/create', ['as' => 'candidate.cv.create.post', 'uses' => 'MainController@postCVCreate']);
+	Route::get('/user/candidate', ['as' => 'candidate', 'uses' => 'CandidateController@index']);
+	Route::get('/user/candidate/profile', ['as' => 'candidate.cv.profile', 'uses' => 'CandidateController@getProfile']);
+	Route::post('/user/candidate/profile', ['as' => 'candidate.cv.profile.post', 'uses' => 'CandidateController@postProfile']);
+	Route::get('/user/candidate/create', ['as' => 'candidate.cv.create', 'uses' => 'CandidateController@getCVCreate']);
+	Route::post('/user/candidate/create', ['as' => 'candidate.cv.create.post', 'uses' => 'CandidateController@postCVCreate']);
 	
 	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);
 });
