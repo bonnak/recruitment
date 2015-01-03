@@ -10,13 +10,13 @@ class JobSeekerTableSeeder extends Seeder {
 		DB::table ( 'candidates' )->truncate ();
 		
 		Candidate::create([
-			'id'				=> 1,
+			'id'				=> 2,
 			'surname'			=> 'Cole',
 			'name'				=> 'Neang',
 			'sex'				=> 'M',
 			'date_of_birth'		=> '1986-11-27',
-			'marital_status'	=> 0,
-			'nationality'		=> 'CAM',
+			'marital_status'	=> 1,
+			'nationality'		=> 1,
 			'phone_number'		=> '012000888',
 			'email'				=> 'candidate1@gmail.com',
 			'residence'			=> 1,

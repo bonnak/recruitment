@@ -411,6 +411,7 @@ input#search-keyword{
 }
 
 .box-body {
+	position: relative;
 	padding: 20px;
 	background-color: #fff;
 	border: 1px solid #E5E5E5;
@@ -574,11 +575,13 @@ hr#line-break-footer {
 	border: 1px solid #E5E5E5;
 }
 #login-box .box-body label,
-#register-box .box-body label{
+#register-box .box-body label,
+#profile .box-body label{
 	font-weight: 100;
 }
 #login-box .box-body a,
-#register-box .box-body a{
+#register-box .box-body a,
+#profile a{
 	color: #28be68;
 }
 #login-box .box-body .form-group,
@@ -604,7 +607,9 @@ hr#line-break-footer {
 	color: #E4B111
 }
 #login-box .box-body .error,
-#register-box .box-body .error{
+#register-box .box-body .error,
+#cv-create .box-body .error,
+#profile .box-body .error{
 	border-left: 3px solid #dca7a7;
 	padding-left: 13px;
 	margin-top: 6px;
@@ -649,9 +654,6 @@ hr#line-break-footer {
 	background-color: #fff; 
 	border: 1px solid #E5E5E5;
 }
-#cv-create .box-body {
-	border: none;
-}
 #cv-create .box-body .inner-wrapper .label-title{
 	width: 135px;
 	padding: 0;
@@ -659,10 +661,16 @@ hr#line-break-footer {
 #cv-create .box-body .inner-wrapper{
 	margin-left: 30px;
 } 
-#cv-create .box-body .inner-wrapper input[type='text'],
-#cv-create .box-body .inner-wrapper input[type='email'],
-#cv-create .box-body .inner-wrapper input[type='date'],
-#cv-create .box-body .inner-wrapper select{
+#cv-create .box-body input[type='text'],
+#cv-create .box-body input[type='email'],
+#cv-create .box-body input[type='date'],
+#cv-create .box-body select,
+#cv-create .box-body textarea,
+#profile .box-body input[type='text'],
+#profile .box-body input[type='email'],
+#profile .box-body input[type='date'],
+#profile .box-body select,
+#profile .box-body textarea{
 	width: 245px;
 }
 #cv-create .box-body .inner-wrapper .sl-year{
@@ -677,11 +685,25 @@ hr#line-break-footer {
 #cv-create .box-body .inner-wrapper .sl-salary{
 	width: 164px;
 }
-#cv-create .box-body .inner-wrapper .input-elements{
-	justify-content: flex-start;
-}
-#cv-create .box-footer{
+#cv-create .box-footer,
+#profile .box-footer{
 	padding-top: 20px; 
 	padding-bottom: 20px;
 	text-align: center;
+}
+#profile .box .box-body .data{
+	display: block;
+	background-color: #FFFCBD;
+	padding: 5px 10px;
+	width: 243px;
+	border-radius: 3px;
+}
+.box > .row{
+	margin-left: 0;
+	margin-right: 0;
+}
+#profile .profile-pic:hover div{
+	display: block !important;
+	background-color: rgba(0,0,0,.6);
+	border-radius: 2px;
 }

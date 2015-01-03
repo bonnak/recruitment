@@ -443,8 +443,8 @@
 						</div>
 						<div class="col-sm-8">
 							<select class="sl-location form-control input-sm" id="location" name="desired_location">
-								<option value="">---Select---</option> @foreach($locations as
-								$location)
+								<option value="">---Select---</option> 
+								@foreach($locations as $location)
 								<option value="{{$location->id}}">{{$location->name}}</option>
 								@endforeach
 							</select>
