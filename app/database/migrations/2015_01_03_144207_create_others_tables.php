@@ -16,6 +16,15 @@ class CreateOthersTables extends Migration {
 		Schema::create('marital', function ($table){
 			$table->tinyInteger('id');
 			$table->string('status');
+			$table->string('status_kh');
+			
+			$table->primary('id');
+		});
+		
+		Schema::create('gender', function ($table){
+			$table->char('id', 1);
+			$table->string('sex');
+			$table->string('sex_kh');
 			
 			$table->primary('id');
 		});
@@ -29,6 +38,7 @@ class CreateOthersTables extends Migration {
 	public function down()
 	{
 		Schema::drop('marital');
+		Schema::drop('gender');
 	}
 
 }

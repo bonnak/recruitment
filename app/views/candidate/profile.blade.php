@@ -68,7 +68,7 @@
 				<div class="form-group">
 				    <label for="surname" class="col-sm-4 control-label">Sex</label>
 				    <div class="col-sm-5">
-				      <span class="data"><strong>{{Lang::get("local.gender.{$candidate->sex}")}}</strong></span>							
+				      <span class="data"><strong>{{$candidate->sex}}</strong></span>							
 					</div>
 				</div>
 				<div class="form-group">
@@ -80,7 +80,7 @@
 				<div class="form-group">
 				    <label for="marital_status" class="col-sm-4 control-label">Marital Status</label>
 				    <div class="col-sm-5">
-					     <span class="data"><strong>{{Trans("local.marital.{$candidate->marital_status}")}}</strong></span>							
+					     <span class="data"><strong>{{$candidate->marital_status}}</strong></span>							
 					</div>
 				</div>
 				<div class="form-group">
