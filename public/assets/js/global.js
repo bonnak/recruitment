@@ -7,4 +7,14 @@ $(document).on('ready', function(){
 		$(this).toggleClass('glyphicon-chevron-up');
 		$(box_body).toggleClass('hide');
 	});
+	
+	// Switch between show and edit profile.
+	$('#btn-profile-edit').on('click', function(){
+		var profile = $(this).parents('#profile'),
+			show_profile = $(profile).children('#show-profile'),
+			edit_profile = $(profile).children('#edit-profile');
+		
+		$(show_profile).addClass('hide');
+		$(edit_profile).removeClass('hide');
+	});
 });
