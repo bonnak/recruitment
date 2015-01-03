@@ -1,0 +1,7 @@
+<div class="container body">	
+	<div class="row">
+		<?php echo $__env->yieldContent('login'); ?>
+		<?php echo $__env->yieldContent('main'); ?>
+		<?php echo $__env->yieldContent('candidate'); ?>
+	</div>
+</div>

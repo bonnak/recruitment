@@ -39,21 +39,10 @@ class CandidateController extends BaseController
 
 	public function getProfile()
 	{
-		$candidate = Candidate::select(DB::raw(
-									"surname,
-									name,
-									sex,
-									date_of_birth,
-									marital_status,
-									nationality,
-									phone_number,
-									residence,
-									address"
-								))
-								->where('id', '=', $this->candidate_id)
-								->first();
-
-		return View::make ( 'candidate.profile' )->with('candidate', $candidate);
+		if($candidate = Candidate::getProfile($this->candidate_id))
+		{
+			return View::make ( 'candidate.profile' )->with('candidate', $candidate);
+		}
 	}
 	
 	public function postProfile()
