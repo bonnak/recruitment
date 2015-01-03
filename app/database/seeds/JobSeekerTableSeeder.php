@@ -15,7 +15,7 @@ class JobSeekerTableSeeder extends Seeder {
 			'name'				=> 'Neang',
 			'sex'				=> 'M',
 			'date_of_birth'		=> '1986-11-27',
-			'marital_status'	=> 1,
+			'marital_status'	=> 'S',
 			'nationality'		=> 1,
 			'phone_number'		=> '012000888',
 			'email'				=> 'candidate1@gmail.com',

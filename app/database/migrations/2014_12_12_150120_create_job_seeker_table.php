@@ -17,7 +17,7 @@ class CreateJobSeekerTable extends Migration {
 				$table->string ( 'name' );
 				$table->char ( 'sex', 1 );
 				$table->date ( 'date_of_birth' );
-				$table->tinyInteger ( 'marital_status' );
+				$table->string ( 'marital_status', 3 );
 				$table->char ( 'nationality', 3 );
 				$table->string ( 'phone_number', 20 );
 				$table->string ( 'email' );
