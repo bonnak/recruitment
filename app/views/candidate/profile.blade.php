@@ -32,13 +32,13 @@
 				<div class="form-horizontal">
 					<div class="form-group">
 					    <label for="" class="col-sm-4 control-label">User name</label>
-					    <div class="col-sm-5">
+					    <div class="col-sm-8">
 					      <span class="data"><strong>{{Auth::user()->user_name}}</strong></span>						
 						</div>
 					</div>
 					<div class="form-group">
 					    <label for="" class="col-sm-4 control-label">Email</label>
-					    <div class="col-sm-5">
+					    <div class="col-sm-8">
 					      <span class="data"><strong>{{Auth::user()->email}}</strong></span>						
 						</div>
 					</div>
@@ -55,55 +55,55 @@
 			<form method="post" action="{{URL::route('candidate.cv.profile.post')}}" class="form-horizontal">
 				<div class="form-group">
 				    <label for="surname" class="col-sm-4 control-label">Surname</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 				      <span class="data"><strong>{{$candidate->surname}}</strong></span>			      							
 					</div>
 				</div>
 				<div class="form-group">
 				    <label for="name" class="col-sm-4 control-label">Given name</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 				      <span class="data"><strong>{{$candidate->name}}</strong></span>					
 					</div>
 				</div>
 				<div class="form-group">
 				    <label for="surname" class="col-sm-4 control-label">Sex</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 				      <span class="data"><strong>{{$candidate->sex}}</strong></span>							
 					</div>
 				</div>
 				<div class="form-group">
 				    <label for="date_of_birth" class="col-sm-4 control-label">Date Of Birth</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 				       <span class="data"><strong>{{\Carbon\Carbon::createFromFormat('Y-m-d', $candidate->date_of_birth)->format('Y-F-d')}}</strong></span>					
 					</div>
 				</div>
 				<div class="form-group">
 				    <label for="marital_status" class="col-sm-4 control-label">Marital Status</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 					     <span class="data"><strong>{{$candidate->marital_status}}</strong></span>							
 					</div>
 				</div>
 				<div class="form-group">
 				    <label for="nationality" class="col-sm-4 control-label">Nationality</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 				        <span class="data"><strong>{{$candidate->nationality}}</strong></span>						
 					</div>
 				</div>		
 				<div class="form-group">
 				    <label for="residence" class="col-sm-4 control-label">Province / City</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 				        <span class="data"><strong>{{$candidate->residence}}</strong></span>							
 					</div>
 				</div>	
 				<div class="form-group">
 				    <label for="address" class="col-sm-4 control-label">Address</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 				    	<span class="data"><strong>{{$candidate->address}}</strong></span>							
 					</div>
 				</div>
 				<div class="form-group">
 				    <label for="phone_number" class="col-sm-4 control-label">Phone</label>
-				    <div class="col-sm-5">
+				    <div class="col-sm-8">
 				    	<span class="data"><strong>{{$candidate->phone_number}}</strong></span>
 				    </div>
 				</div>
