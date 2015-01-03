@@ -693,9 +693,9 @@ hr#line-break-footer {
 }
 #profile .box .box-body .data{
 	display: block;
-	background-color: #FFFCBD;
+/* 	background-color: #FFFCBD; */
 	padding: 5px 10px;
-	width: 243px;
+/* 	width: 243px; */
 	border-radius: 3px;
 }
 .box > .row{
