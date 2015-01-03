@@ -40,15 +40,15 @@ class CandidateController extends BaseController
 	public function getProfile()
 	{
 		$candidate = Candidate::select(DB::raw(
-									'surname',
-									'name',
-									'sex',
-									'date_of_birth',
-									'marital_status',
-									'nationality',
-									'phone_number',
-									'residence',
-									'address'
+									"surname,
+									name,
+									sex,
+									date_of_birth,
+									marital_status,
+									nationality,
+									phone_number,
+									residence,
+									address"
 								))
 								->where('id', '=', $this->candidate_id)
 								->first();
