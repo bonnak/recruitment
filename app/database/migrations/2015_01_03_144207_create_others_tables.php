@@ -14,7 +14,7 @@ class CreateOthersTables extends Migration {
 	public function up()
 	{
 		Schema::create('marital', function ($table){
-			$table->tinyInteger('id');
+			$table->string('id', 2);
 			$table->string('status');
 			$table->string('status_kh');
 			

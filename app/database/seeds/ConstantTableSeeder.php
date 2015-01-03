@@ -10,9 +10,9 @@ class ConstantTableSeeder extends Seeder {
 		// Seed table Marital.
 		DB::table ( 'marital' )->truncate ();		
 		DB::table ( 'marital' )->insert([
-			['id' => 1, 'status' => 'Single', 'status_kh'	=>	'នៅលីវ'],
-			['id' => 2, 'status' => 'Married', 'status_kh'	=>	'រៀបការ'],
-			['id' => 3, 'status' => 'Divorced', 'status_kh'	=>	'លែងលះ'],
+			['id' => 'S', 'status' => 'Single', 'status_kh'	=>	'នៅលីវ'],
+			['id' => 'M', 'status' => 'Married', 'status_kh'	=>	'រៀបការ'],
+			['id' => 'D', 'status' => 'Divorced', 'status_kh'	=>	'លែងលះ'],
 		]);
 	}
 }
