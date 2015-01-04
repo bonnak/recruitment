@@ -5,10 +5,7 @@ class Candidate extends Eloquent
 	protected $table = 'candidates';
 	
 	public static function getProfile($id)
-	{
-		$locale = App::getLocale();
-		
-		
+	{	
 		$profile = DB::table('candidates AS c')
 				->select(DB::raw(
 					"surname,

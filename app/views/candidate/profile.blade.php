@@ -21,7 +21,7 @@
 	</div>
 </div>
 <div id="profile" class="col-md-7 middle-wrapper">
-	<div id="show-profile">
+	<div id="show-profile" class="{{isset($candidate->is_new_candidate) ? 'hide' : ''}}">
 		@if(Session::get('profile'))
 			<div id="alert" class="alert alert-success" style="text-align: center;">
 				{{Session::get('profile')}}
@@ -90,7 +90,7 @@
 				<div class="form-group">
 				    <label for="date_of_birth" class="col-sm-4 control-label">Date Of Birth</label>
 				    <div class="col-sm-7">
-				       <span class="data"><strong>{{\Carbon\Carbon::createFromFormat('Y-m-d', $candidate->date_of_birth)->format('Y-F-d')}}</strong></span>					
+				       <span class="data"><strong>{{!empty($candidate->date_of_birth) ? \Carbon\Carbon::createFromFormat('Y-m-d', $candidate->date_of_birth)->format('Y-F-d') : '' }}</strong></span>					
 					</div>
 				</div>
 				<div class="form-group">
@@ -139,7 +139,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="edit-profile" class="hide">		
+	<div id="edit-profile" class="{{!isset($candidate->is_new_candidate) ? 'hide' : ''}}">		
 		<div class="box">
 			<div class="row">
 				<div class="view-name title-bar">

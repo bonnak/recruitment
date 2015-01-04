@@ -39,10 +39,27 @@ class CandidateController extends BaseController
 
 	public function getProfile()
 	{
-		if($candidate = Candidate::getProfile($this->candidate_id))
+		if(!$candidate = Candidate::getProfile($this->candidate_id))
 		{
-			return View::make ( 'candidate.profile' )->with('candidate', $candidate);
+			$candidate = [
+				'surname' 			=> '',
+				'name' 				=> '',
+				'sex' 				=> 'Unknown',
+				'date_of_birth' 	=> '',
+				'marital_id' 		=> 'Unknown',
+				'nationality_id'	=> '',
+				'nationality' 		=> '',
+				'phone_number' 		=> '',
+				'residence_id'		=> '',
+				'residence' 		=> '',
+				'address' 			=> '',
+				'is_new_candidate'		=> true
+			];
+			
+			$candidate = json_decode(json_encode($candidate));
 		}
+		
+		return View::make ( 'candidate.profile' )->with('candidate', $candidate);
 	}
 	
 	public function postProfile()

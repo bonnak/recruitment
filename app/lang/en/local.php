@@ -2,14 +2,16 @@
 
 return [
 	'gender'	=>	[
-		'M'	=>	'Male',
-		'F'	=>	'Female'
+		'M'			=>	'Male',
+		'F'			=>	'Female',
+		'Unknown'	=>	''
 	]
 	,
 	'marital'	=>	[
-		'S'	=>	'Single',
-		'M'	=>	'Married',
-		'D'	=>	'Divorced'
+		'S'			=>	'Single',
+		'M'			=>	'Married',
+		'D'			=>	'Divorced',
+		'Unknown'	=>	''
 	]
 	
 ];
