@@ -11,8 +11,8 @@ $(document).on('ready', function(){
 	// Switch between show and edit profile.
 	$('#btn-profile-edit').on('click', function(){
 		var profile = $(this).parents('#profile'),
-			show_profile = $(profile).children('#show-profile'),
-			edit_profile = $(profile).children('#edit-profile');
+			show_profile = $(profile).find('#show-profile'),
+			edit_profile = $(profile).find('#edit-profile');
 		
 		$(show_profile).addClass('hide');
 		$(edit_profile).removeClass('hide');
