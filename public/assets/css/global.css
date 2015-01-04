@@ -552,7 +552,7 @@ hr#line-break-footer {
 .input-elements input,
 .input-elements select,
 .input-elements textarea{
-	background-color: #FEFFEC;
+/* 	background-color: #FEFFEC; */
 }
 .panel-title {
 	text-transform: uppercase;
@@ -659,9 +659,8 @@ hr#line-break-footer {
 #cv .box{
 	margin-top: 0;
 }
-#cv-create{
-	background-color: #fff; 
-	border: 1px solid #E5E5E5;
+.outter-box{
+	background-color: #fff;	 
 }
 #cv-create .box-body .inner-wrapper .label-title{
 	width: 135px;
