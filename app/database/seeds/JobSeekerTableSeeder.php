@@ -21,13 +21,6 @@ class JobSeekerTableSeeder extends Seeder {
 			'email'				=> 'candidate1@gmail.com',
 			'residence_id'			=> 1,
 			'address'			=> '#59, st456, Tuol Tumpoung, Chamkar Morn',
-			'desired_industry'	=> 1,
-			'desired_function'	=> 1,
-			'desired_location'	=> 1,
-			'desired_salary'	=> 1,
-			'desired_position'	=> 1,
-			'current_job_title'	=> 'Web Developer',
-			'available_date'	=> '2014-01-01'
 		]);
 	}
 }
