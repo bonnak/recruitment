@@ -3,10 +3,37 @@
 class CV extends Eloquent 
 {
 	protected $table = 'cv';
-	protected $fillable = [
-			'surname', 'name', 'sex', 'date_of_birth', 'marital_status', 
-			'nationality', 'phone_number', 'email', 'residence', 'address', 
-			'desired_industry', 'desired_function', 'desired_location', 'desired_salary', 
-			'desired_position', 'current_job_title', 'available_date', 'created_at', 'updated_at'
-	];
+	
+	public static function getCVList($candidate_id)
+	{
+		$cv_list = DB::table('cv')
+					->select(
+						'id',
+						'title',
+						'searchable',
+						'updated_at'
+					)
+					->where('candidate_id', '=', $candidate_id)
+					->get();
+		
+		return $cv_list;
+	}
+	
+	public static function getCVDetail($cv_id)
+	{
+		$cv = DB::table('cv')
+				->select(DB::raw(
+					"id,
+					title,
+					searchable,
+					desired_industry,
+					desired_function,
+					desired_location,
+					desired_salary"
+				))
+				->where('id', '=', $cv_id)
+				->first();
+		
+		return $cv;
+	}
 }

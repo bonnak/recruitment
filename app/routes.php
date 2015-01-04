@@ -18,8 +18,11 @@ Route::group(['before' => 'auth'], function (){
 	Route::get('/user/candidate', ['as' => 'candidate', 'uses' => 'CandidateController@index']);
 	Route::get('/user/candidate/profile', ['as' => 'candidate.cv.profile', 'uses' => 'CandidateController@getProfile']);
 	Route::post('/user/candidate/profile', ['as' => 'candidate.cv.profile.post', 'uses' => 'CandidateController@postProfile']);
-	Route::get('/user/candidate/create', ['as' => 'candidate.cv.create', 'uses' => 'CandidateController@getCVCreate']);
-	Route::post('/user/candidate/create', ['as' => 'candidate.cv.create.post', 'uses' => 'CandidateController@postCVCreate']);
+	Route::get('/user/candidate/cv', ['as' => 'candidate.cvs', 'uses' => 'CandidateController@getCVs']);
+	Route::get('/user/candidate/cv/create', ['as' => 'candidate.cv.create', 'uses' => 'CandidateController@getCVCreate']);
+	Route::post('/user/candidate/cv/create', ['as' => 'candidate.cv.create.post', 'uses' => 'CandidateController@postCVCreate']);
+	Route::get('/user/candidate/cv/edit/{id}', ['as' => 'candidate.cv.create.edit', 'uses' => 'CandidateController@getCVEdit']);
+	Route::post('/user/candidate/cv/edit/{id}', ['as' => 'candidate.cv.create.edit.post', 'uses' => 'CandidateController@postCVEdit']);
 	
 	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);
 });

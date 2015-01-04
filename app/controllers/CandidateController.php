@@ -3,6 +3,8 @@
 class CandidateController extends BaseController 
 {
 	protected $candidate_id;
+	protected $candidate;
+	protected $cv;
 	protected $industries;
 	protected $functions;
 	protected $locations;
@@ -31,15 +33,8 @@ class CandidateController extends BaseController
 			'desired_location'			=> 'required',
 			'desired_salary'			=> 'required',
 		);
-	}
-
-	public function index() {
-		return View::make ( 'candidate' );
-	}
-
-	public function getProfile()
-	{
-		if(!$candidate = Candidate::getProfile($this->candidate_id))
+		
+		if(!$this->candidate = Candidate::getProfile($this->candidate_id))
 		{
 			$candidate = [
 				'surname' 			=> '',
@@ -55,11 +50,18 @@ class CandidateController extends BaseController
 				'address' 			=> '',
 				'is_new_candidate'		=> true
 			];
-			
-			$candidate = json_decode(json_encode($candidate));
-		}
 		
-		return View::make ( 'candidate.profile' )->with('candidate', $candidate);
+			$this->candidate = json_decode(json_encode($candidate));
+		}
+	}
+
+	public function index() {
+		return View::make ( 'candidate' );
+	}
+
+	public function getProfile()
+	{					
+		return View::make ( 'candidate.profile' )->with('candidate', $this->candidate);
 	}
 	
 	public function postProfile()
@@ -88,8 +90,7 @@ class CandidateController extends BaseController
 			{
 				$candidate = new Candidate ();
 			}		
-					
-			$candidate->id = $this->candidate_id;
+			
 			$candidate->surname = htmlentities ( Input::get ( 'surname' ) );
 			$candidate->name = htmlentities ( Input::get ( 'name' ) );
 			$candidate->sex = htmlentities ( Input::get ( 'sex' ) );
@@ -108,23 +109,15 @@ class CandidateController extends BaseController
 	}
 
 	public function getCVCreate() {
-		return View::make ( 'candidate-create' )->with ( [ 
-				'industries' => $this->industries,
-				'functions' => $this->functions,
-				'locations' => $this->locations,
-				'salaries' => $this->salaries
-		] );
+		return View::make ( 'candidate.candidate-create' )->with('candidate', $this->candidate);
 	}
 
 	public function postCVCreate() {
 		$validator = Validator::make ( Input::all (), $this->rules );
 		
 		if ($validator->fails ()) {
-			echo '<pre>', print_r ( $validator ), '</pre>';
-			// return Redirect::back()->withErrors($validator);
+			return Redirect::back()->withErrors($validator);
 		} else {
-			
-			$candidate = new Candidate ();
 			
 			$candidate->id = Auth::user ()->id;
 			$candidate->surname = htmlentities ( Input::get ( 'surname' ) );
@@ -148,5 +141,22 @@ class CandidateController extends BaseController
 				return 'Sucessfull create CV.';
 			}
 		}
+	}
+	
+	public function getCVEdit($cv_id)
+	{
+		$cv =  CV::getCVDetail($cv_id);
+		
+		return View::make('candidate.cv-edit')->with([
+				'candidate'	=>	$this->candidate,
+				'cv'		=>	$cv
+		]);
+	}
+	
+	public function getCVs()
+	{
+		$cvs = CV::getCVList($this->candidate_id);
+		
+		return View::make('candidate.cvs')->with('cvs', $cvs);
 	}
 }

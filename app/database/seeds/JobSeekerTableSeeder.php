@@ -18,7 +18,7 @@ class JobSeekerTableSeeder extends Seeder {
 			'marital_id'	=> 'S',
 			'nationality_id'		=> 1,
 			'phone_number'		=> '012000888',
-			'email'				=> 'candidate1@gmail.com',
+			'email'				=> 'employee1@mail.com',
 			'residence_id'			=> 1,
 			'address'			=> '#59, st456, Tuol Tumpoung, Chamkar Morn',
 		]);
