@@ -29,7 +29,6 @@ class SalaryTableSeeder extends Seeder {
 			'max'	=> 500
 		]);
 		Salary::create([
-			'min'	=> 100,
 			'max'	=> 300
 		]);
 	}

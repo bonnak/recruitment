@@ -37,7 +37,7 @@ class CreateDesireTable extends Migration {
 		if (! Schema::hasTable ( 'salaries' )) {
 			Schema::create ( 'salaries', function ($table) {
 				$table->increments ( 'id' );
-				$table->integer ( 'min');
+				$table->integer ( 'min')->nullable();
 				$table->integer ( 'max')->nullable();
 				$table->timestamps ();
 			} );
