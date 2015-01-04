@@ -24,27 +24,7 @@ return [
 		['name' => 'November', 'num' => 11],
 		['name' => 'December', 'num' => 12],
 	]
-
-	,
-
-
-	'industries'	=> Industry::get()
-
-	,
-
-
-	'functions'		=> Func::get ()
-
-	,
-
-
-	'locations'		=> Location::get ()
-
-	,
-
-
-	'salaries'		=> Salary::get ()
-	
+		
 	,
 
 	'default'	=> [
@@ -75,7 +55,7 @@ return [
 			'Dashboard' => '#',
 			'CV and Cover Letters' => [ 
 					'Create a CV' => URL::route ( 'candidate.cv.create' ),
-					'My CV' => '#',
+					'My CV' => URL::route('candidate.cvs'),
 					'Create a Cover Letter' => '#',
 					'My Cover Letter' => '#' 
 			],
