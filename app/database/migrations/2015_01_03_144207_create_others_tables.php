@@ -20,6 +20,13 @@ class CreateOthersTables extends Migration {
 			
 			$table->primary('id');
 		});
+		
+		Schema::create('gender', function($table){
+			$table->char('id', 1);
+			$table->string('sex');
+			
+			$table->primary('id');
+		});
 	}
 
 	/**
@@ -30,6 +37,7 @@ class CreateOthersTables extends Migration {
 	public function down()
 	{
 		Schema::drop('marital');
+		Schema::drop('gender');
 	}
 
 }

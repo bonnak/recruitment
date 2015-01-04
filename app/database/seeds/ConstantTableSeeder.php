@@ -14,5 +14,13 @@ class ConstantTableSeeder extends Seeder {
 			['id' => 'M', 'status' => 'Married', 'status_kh'	=>	'រៀបការ'],
 			['id' => 'D', 'status' => 'Divorced', 'status_kh'	=>	'លែងលះ'],
 		]);
+		
+		
+		// Seed table Gender
+		DB::table ( 'gender' )->truncate ();
+		DB::table ( 'gender' )->insert([
+			['id' => 'M', 'sex' => 'Male'],
+			['id' => 'F', 'sex' => 'Female'],
+		]);
 	}
 }
