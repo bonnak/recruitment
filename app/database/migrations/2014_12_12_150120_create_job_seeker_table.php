@@ -17,11 +17,11 @@ class CreateJobSeekerTable extends Migration {
 				$table->string ( 'name' );
 				$table->char ( 'sex', 1 );
 				$table->date ( 'date_of_birth' );
-				$table->string ( 'marital_status', 3 );
-				$table->char ( 'nationality', 3 );
+				$table->string ( 'marital_id', 3 );
+				$table->char ( 'nationality_id', 3 );
 				$table->string ( 'phone_number', 20 );
 				$table->string ( 'email' );
-				$table->integer ( 'residence' );
+				$table->integer ( 'residence_id' );
 				$table->text ( 'address' )->nullable ();
 				$table->integer ( 'desired_industry' )->nullable ();
 				$table->integer ( 'desired_function' )->nullable ();
