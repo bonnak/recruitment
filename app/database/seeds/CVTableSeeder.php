@@ -12,6 +12,7 @@ class CVTableSeeder extends Seeder {
 		CV::create ( [ 
 			'candidate_id'		=> 2,
 			'title'				=> 'CV 1',
+			'searchable'		=> 1,
 			'desired_industry' => 3, 
 			'desired_function' => 5, 
 			'desired_location' => 3, 
@@ -23,6 +24,7 @@ class CVTableSeeder extends Seeder {
 		CV::create ( [ 
 			'candidate_id'		=> 2,
 			'title'				=> 'CV 2',
+			'searchable'		=> 0,
 			'desired_industry' => 2, 
 			'desired_function' => 5, 
 			'desired_location' => 3, 
@@ -34,6 +36,7 @@ class CVTableSeeder extends Seeder {
 		CV::create ( [ 
 			'candidate_id'		=> 2,
 			'title'				=> 'CV 3',
+			'searchable'		=> 1,
 			'desired_industry' => 3, 
 			'desired_function' => 5, 
 			'desired_location' => 3, 

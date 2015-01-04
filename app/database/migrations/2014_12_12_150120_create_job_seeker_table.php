@@ -34,7 +34,7 @@ class CreateJobSeekerTable extends Migration {
 				$table->increments ( 'id' );
 				$table->integer('candidate_id');
 				$table->string('title');
-				$table->tinyInteger('searchable');
+				$table->tinyInteger('searchable')->default(1);
 				$table->integer ( 'desired_industry' )->nullable ();
 				$table->integer ( 'desired_function' )->nullable ();
 				$table->integer ( 'desired_location' )->nullable ();
