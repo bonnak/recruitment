@@ -65,18 +65,22 @@ class CandidateController extends BaseController
 		if ($validator->fails ()) {
 			return Redirect::back()->withErrors($validator)
 									->withInput();
-		} else {			
-			$candidate = new Candidate ();		
+		} else {		
+			
+			if(!$candidate = Candidate::find($this->candidate_id))
+			{
+				$candidate = new Candidate ();
+			}		
 					
-			$candidate->id = Auth::user ()->id;
+			$candidate->id = $this->candidate_id;
 			$candidate->surname = htmlentities ( Input::get ( 'surname' ) );
 			$candidate->name = htmlentities ( Input::get ( 'name' ) );
 			$candidate->sex = htmlentities ( Input::get ( 'sex' ) );
 			$candidate->date_of_birth = date ( 'Y-m-d', strtotime ( htmlentities ( Input::get ( 'date_of_birth' ) ) ) );
-			$candidate->marital_status = htmlentities ( Input::get ( 'marital-status' ) );
-			$candidate->nationality = htmlentities ( Input::get ( 'nationality' ) );
+			$candidate->marital_id = htmlentities ( Input::get ( 'marital_status' ) );
+			$candidate->nationality_id = htmlentities ( Input::get ( 'nationality' ) );
 			$candidate->phone_number = htmlentities ( Input::get ( 'phone_number' ) );
-			$candidate->residence = htmlentities ( Input::get ( 'residence' ) );
+			$candidate->residence_id = htmlentities ( Input::get ( 'residence' ) );
 			$candidate->address = htmlentities ( Input::get ( 'address' ) );
 			$candidate->email = Auth::user()->email;
 			
