@@ -18,6 +18,7 @@ class CVTableSeeder extends Seeder {
 			'desired_location' => 3, 
 			'desired_salary' => 3, 
 			'desired_position' => 9,  
+			'job_term' => 1,  
 			'available_date' => date('Y-m-d',strtotime('12/20/2014'))
 		] );	
 		
@@ -30,6 +31,7 @@ class CVTableSeeder extends Seeder {
 			'desired_location' => 3, 
 			'desired_salary' => 3, 
 			'desired_position' => 9, 
+			'job_term' => 2,
 			'available_date' => date('Y-m-d',strtotime('12/20/2014')),
 		] );
 		
@@ -42,6 +44,7 @@ class CVTableSeeder extends Seeder {
 			'desired_location' => 3, 
 			'desired_salary' => 3, 
 			'desired_position' => 9, 
+			'job_term' => 3,
 			'available_date' => date('Y-m-d',strtotime('12/20/2014')),
 		] );	
 	}
