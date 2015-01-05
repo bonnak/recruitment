@@ -29,7 +29,8 @@ class CV extends Eloquent
 					desired_industry,
 					desired_function,
 					desired_location,
-					desired_salary"
+					desired_salary,
+					job_term"
 				))
 				->where('id', '=', $cv_id)
 				->first();

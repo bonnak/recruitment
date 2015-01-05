@@ -17,4 +17,11 @@ class Constants extends Eloquent
 					->orderBy('id', 'desc')
 					->get();
 	}
+	
+	public static function getJobTerm()
+	{
+		return  \DB::table('job_term')
+					->select('*')
+					->get();
+	}
 }
