@@ -40,7 +40,7 @@ class CreateJobSeekerTable extends Migration {
 				$table->integer ( 'desired_location' )->nullable ();
 				$table->integer ( 'desired_salary' )->nullable ();
 				$table->integer ( 'desired_position' )->nullable ();
-				$table->datetime ( 'available_date' );
+				$table->datetime ( 'available_date' )->nullable ();
 				$table->timestamps ();
 			} );
 		}		
