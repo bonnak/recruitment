@@ -22,5 +22,13 @@ class ConstantTableSeeder extends Seeder {
 			['id' => 'M', 'sex' => 'Male'],
 			['id' => 'F', 'sex' => 'Female'],
 		]);
+		
+		// Seed table Job Term.
+		DB::table('job-term')->truncate();
+		DB::table('job-term')->insert([
+			['id' => 1, 'term' => 'Full Time'],
+			['id' => 2, 'term' => 'Part Time'],
+			['id' => 3, 'term' => 'Intership'],
+		]);
 	}
 }

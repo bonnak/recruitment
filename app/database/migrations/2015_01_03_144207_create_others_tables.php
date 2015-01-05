@@ -27,6 +27,13 @@ class CreateOthersTables extends Migration {
 			
 			$table->primary('id');
 		});
+		
+		Schema::create('job-term', function ($table){
+			$table->tinyInteger('id');
+			$table->string('term');
+			
+			$table->primary('id');
+		});
 	}
 
 	/**
@@ -38,6 +45,7 @@ class CreateOthersTables extends Migration {
 	{
 		Schema::drop('marital');
 		Schema::drop('gender');
+		Schema::drop('job-term');
 	}
 
 }
