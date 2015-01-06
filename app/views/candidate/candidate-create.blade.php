@@ -7,7 +7,7 @@
 <div id="cv-create" class="col-md-7 middle-wrapper">
 	<div class="outter-box">
 		<form method="post" action="{{URL::route('candidate.cv.create.post')}}">
-			<div>
+			<div class="box">
 				<div class="view-name title-bar">
 					<strong>CV</strong>
 					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
@@ -360,7 +360,7 @@
 				</div>
 			</div>
 			<div class="box">
-				<div class="view-name title-bar">
+				<div class="view-name title-bar" style="border-bottom: none;">
 					<strong>Expectation</strong>
 					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 				</div>
@@ -418,12 +418,12 @@
 								</select>
 							</div>
 						</div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-default" style="width: 100px;"><i class="fa fa-floppy-o"></i> Save</button>
-							<button type="button" class="btn btn-default" style="width: 100px;"><i class="fa fa-newspaper-o"></i> Preview</button>
-						</div>
 					</div>
 				</div>
+			</div>
+			<div class="box-footer">
+				<button type="submit" class="btn btn-default" style="width: 100px;"><i class="fa fa-floppy-o"></i> Save</button>
+				<button type="button" class="btn btn-default" style="width: 100px;"><i class="fa fa-newspaper-o"></i> Preview</button>
 			</div>			
 		</form>
 	</div>

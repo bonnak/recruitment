@@ -4,10 +4,10 @@
 		@include('menu.menu')
 	</div>
 </div>
-<div id="cv-create" class="col-md-7 middle-wrapper">
+<div id="cv-edit" class="col-md-7 middle-wrapper">
 	<div class="outter-box">
 		<form method="post" action="{{URL::route('candidate.cv.create.post')}}">
-			<div>
+			<div class="box">
 				<div class="view-name title-bar">
 					<strong>CV</strong>
 					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
@@ -365,7 +365,7 @@
 					<strong>Expectation</strong>
 					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 				</div>
-				<div class="box-body">
+				<div class="box-body" style="border-bottom: none;">
 					<div class="inner-wrapper">
 						<div class="row input-elements">
 							<div class="col-sm-4 label-title">
@@ -412,19 +412,32 @@
 							</div>
 							<div class="col-sm-8">
 								<select class="sl-salary form-control input-sm" id="salary" name="desired_salary">
-									<option value="">---Select---</option> 
+									<option value="">---Select---</option>  
 									@foreach(\Salary::getSalaries() as $salary)
 										<option value="{{$salary->id}}" {{$cv->desired_salary == $salary->id ? 'selected' : '' }}>{{$salary->min}} ~ {{$salary->max}}</option>
 									@endforeach
 								</select>
 							</div>
 						</div>
-						<div class="box-footer">
-							<button type="submit" class="btn btn-default" style="width: 100px;"><i class="fa fa-floppy-o"></i> Save</button>
-							<button type="button" class="btn btn-default" style="width: 100px;"><i class="fa fa-newspaper-o"></i> Preview</button>
-						</div>
+						<div class="row input-elements">
+							<div class="col-sm-4 label-title">
+								<label>Job Term</label>
+							</div>
+							<div class="col-sm-8">
+								<select class="sl-salary form-control input-sm" id="job-term" name="job-term">
+									<option value="">---Select---</option>
+									@foreach(\Constants::getJobTerm() as $job_term)
+										<option value="{{$job_term->id}}" {{$cv->job_term == $job_term->id ? 'selected' : '' }}>{{$job_term->term}}</option>
+									@endforeach
+								</select>
+							</div>
+						</div>						
 					</div>
 				</div>
+			</div>				
+			<div class="box-footer">
+				<button type="submit" class="btn btn-default" style="width: 100px;"><i class="fa fa-floppy-o"></i> Save</button>
+				<button type="button" class="btn btn-default" style="width: 100px;"><i class="fa fa-newspaper-o"></i> Preview</button>
 			</div>			
 		</form>
 	</div>
