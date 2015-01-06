@@ -618,6 +618,7 @@ hr#line-break-footer {
 #login-box .box-body .error,
 #register-box .box-body .error,
 #cv-create .box-body .error,
+#cv-edit .box-body .error,
 #profile .box-body .error{
 	border-left: 3px solid #dca7a7;
 	padding-left: 13px;
@@ -662,11 +663,13 @@ hr#line-break-footer {
 .outter-box{
 	background-color: #fff;	 
 }
-#cv-create .box-body .inner-wrapper .label-title{
+#cv-create .box-body .inner-wrapper .label-title,
+#cv-edit .box-body .inner-wrapper .label-title{
 	width: 135px;
 	padding: 0;
 }
-#cv-create .box-body .inner-wrapper{
+#cv-create .box-body .inner-wrapper,
+#cv-edit .box-body .inner-wrapper{
 	margin-left: 30px;
 } 
 #cv-create .box-body input[type='text'],
@@ -674,6 +677,11 @@ hr#line-break-footer {
 #cv-create .box-body input[type='date'],
 #cv-create .box-body select,
 #cv-create .box-body textarea,
+#cv-edit .box-body input[type='text'],
+#cv-edit .box-body input[type='email'],
+#cv-edit .box-body input[type='date'],
+#cv-edit .box-body select,
+#cv-edit .box-body textarea,
 #profile .box-body input[type='text'],
 #profile .box-body input[type='email'],
 #profile .box-body input[type='date'],
@@ -681,23 +689,30 @@ hr#line-break-footer {
 #profile .box-body textarea{
 	width: 245px;
 }
-#cv-create .box-body .inner-wrapper .sl-year{
+#cv-create .box-body .inner-wrapper .sl-year,
+#cv-edit .box-body .inner-wrapper .sl-year{
 	width: 80px;
 }
-#cv-create .box-body .inner-wrapper .sl-month{
+#cv-create .box-body .inner-wrapper .sl-month,
+#cv-edit .box-body .inner-wrapper .sl-month{
 	width: 114px;
 }
-#cv-create .box-body .inner-wrapper .sl-location{
+#cv-create .box-body .inner-wrapper .sl-location,
+#cv-edit .box-body .inner-wrapper .sl-location{
 	width: 164px;
 }
-#cv-create .box-body .inner-wrapper .sl-salary{
+#cv-create .box-body .inner-wrapper .sl-salary,
+#cv-edit .box-body .inner-wrapper .sl-salary{
 	width: 164px;
 }
 #cv-create .box-footer,
+#cv-edit .box-footer,
 #profile .box-footer{
 	padding-top: 20px; 
 	padding-bottom: 20px;
 	text-align: center;
+	border: 1px solid #E5E5E5;
+	border-top: none;
 }
 #profile .box .box-body .data{
 	display: block;
