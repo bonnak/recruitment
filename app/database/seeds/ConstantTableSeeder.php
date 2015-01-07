@@ -50,9 +50,11 @@ class ConstantTableSeeder extends Seeder {
 		// Seed table Level.
 		DB::table('levels')->truncate();
 		DB::table('levels')->insert([
-		['id' => 1, 'description' => 'Studying'],
-		['id' => 3, 'description' => 'Finished'],
-		['id' => 4, 'description' => 'Leave'],
+		['id' => 1, 'description' => 'Poor'],
+		['id' => 3, 'description' => 'Fair'],
+		['id' => 4, 'description' => 'Good'],
+		['id' => 5, 'description' => 'Very Good'],
+		['id' => 6, 'description' => 'Excellent'],
 		]);
 	}
 }
