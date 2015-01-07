@@ -24,4 +24,25 @@ class Constants extends Eloquent
 					->select('*')
 					->get();
 	}
+	
+	public static function getDegrees()
+	{
+		return \DB::table('degree')
+					->select('*')
+					->get();
+	}
+	
+	public static function getSchoolingSituations()
+	{
+		return \DB::table('sch_situation')
+					->select('*')
+					->get();
+	}
+	
+	public static function getLevels()
+	{
+		return \DB::table('levels')
+					->select('*')
+					->get();
+	}
 }
