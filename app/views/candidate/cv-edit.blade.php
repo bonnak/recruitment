@@ -158,9 +158,9 @@
 							<div class="col-sm-8">
 								<select class="form-control input-sm" id="degree" name="degree">
 									<option value="">--Select--</option>
-									<option value="">Bachelor</option>
-									<option value="">Master</option>
-									<option value="">PhD</option>
+									@foreach(\Constants::getDegrees() as $degree)
+									<option value="{{$degree->id}}">{{$degree->description}}</option>
+									@endforeach
 								</select>
 							</div>
 						</div>
@@ -171,9 +171,9 @@
 							<div class="col-sm-8">
 								<select class="form-control input-sm" id="situation" name="situation">
 									<option value="">--Select--</option>
-									<option value="">Leave</option>
-									<option value="">Studying</option>
-									<option value="">Finish</option>
+									@foreach(\Constants::getSchoolingSituations() as $situation)
+									<option value="{{$situation->id}}">{{$situation->description}}</option>
+									@endforeach
 								</select>
 							</div>
 						</div>
@@ -314,11 +314,9 @@
 							<div class="col-sm-8">
 								<select class="form-control input-sm" id="skill-level" name="skill-level" style="width: 115px;">
 									<option value="">---Select---</option>
-									<option value="0">Poor</option>
-									<option value="1">Fair</option>
-									<option value="2">Good</option>
-									<option value="3">Very Good</option>
-									<option value="4">Excellent</option>
+									@foreach(\Constants::getLevels() as $level)
+									<option value="{{$level->id}}">{{$level->description}}</option>
+									@endforeach
 								</select>
 							</div>
 						</div>
