@@ -34,6 +34,27 @@ class CreateOthersTables extends Migration {
 			
 			$table->primary('id');
 		});
+		
+		Schema::create('degree', function ($table){
+			$table->tinyInteger('id');
+			$table->string('description');
+			
+			$table->primary('id');
+		});
+		
+		Schema::create('sch_situation', function ($table){
+			$table->tinyInteger('id');
+			$table->string('description');
+				
+			$table->primary('id');
+		});
+		
+		Schema::create('levels', function ($table){
+			$table->tinyInteger('id');
+			$table->string('description');
+			
+			$table->primary('id');
+		});
 	}
 
 	/**
@@ -46,6 +67,9 @@ class CreateOthersTables extends Migration {
 		Schema::drop('marital');
 		Schema::drop('gender');
 		Schema::drop('job_term');
+		Schema::drop('degree');
+		Schema::drop('sch_situation');
+		Schema::drop('levels');
 	}
 
 }

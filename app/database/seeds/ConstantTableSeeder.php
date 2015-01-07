@@ -30,5 +30,29 @@ class ConstantTableSeeder extends Seeder {
 			['id' => 2, 'term' => 'Part Time'],
 			['id' => 3, 'term' => 'Internship'],
 		]);
+		
+		// Seed table Degree.
+		DB::table('degree')->truncate();
+		DB::table('degree')->insert([
+			['id' => 1, 'description' => 'Bachelor'],
+			['id' => 2, 'description' => 'Master'],
+			['id' => 3, 'description' => 'PhD'],
+		]);
+		
+		// Seed table Schooling Situation.
+		DB::table('sch_situation')->truncate();
+		DB::table('sch_situation')->insert([
+			['id' => 1, 'description' => 'Studying'],
+			['id' => 3, 'description' => 'Finished'],
+			['id' => 4, 'description' => 'Leave'],
+		]);
+		
+		// Seed table Level.
+		DB::table('levels')->truncate();
+		DB::table('levels')->insert([
+		['id' => 1, 'description' => 'Studying'],
+		['id' => 3, 'description' => 'Finished'],
+		['id' => 4, 'description' => 'Leave'],
+		]);
 	}
 }
