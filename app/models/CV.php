@@ -21,8 +21,7 @@ class CV extends Eloquent
 	
 	public static function getCVDetail($cv_id)
 	{
-		$cv = DB::table('cv')
-				->select(DB::raw(
+		$cv = CV::select(DB::raw(
 					"id,
 					title,
 					searchable,
@@ -36,5 +35,28 @@ class CV extends Eloquent
 				->first();
 		
 		return $cv;
+	}
+	
+
+
+	public function workExperience()
+	{
+		//return $this->hasMany('CandidateExperience', 'cv_id', 'id')->get();
+		return \CandidateExperience::select(DB::raw(
+										"id,
+										company_name,
+										(SELECT name FROM industries WHERE id = candidate_experiences.industry_id LIMIT 1) industry,
+										(SELECT name FROM functions WHERE id = candidate_experiences.function_id LIMIT 1) function,
+										(SELECT name FROM locations WHERE id = candidate_experiences.location_id LIMIT 1) location,
+										industry_id,
+										function_id,
+										location_id,
+										job_title,
+										from_date,
+										to_date,
+										to_date"						
+									))
+									->where('cv_id', '=', $this->id)
+									->get();
 	}
 }
