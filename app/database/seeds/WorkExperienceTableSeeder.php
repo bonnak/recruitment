@@ -7,39 +7,48 @@ class WorkExperienceTableSeeder extends Seeder {
 	 * @return void
 	 */
 	public function run() {
-		// Seed table Marital.
 		DB::table ( 'candidate_experiences' )->truncate ();	
 			
 		DB::table ( 'candidate_experiences' )->insert([
 			'cv_id' => 1 ,
 			'company_name'=> 'Camintel' ,
-			'industry'=> 1 ,
-			'function'=> 3 ,
-			'location'=> 5 ,
-			'job_title'=> 'Technichian' ,
-			'from_year'=> 1990 ,
-			'from_month'=> 2 ,
-			'to_year'=> 2000 ,
-			'to_month'=> 1 ,
+			'industry_id'=> 1 ,
+			'function_id'=> 3 ,
+			'location_id'=> 5 ,
+			'job_title'=> 'Technician' ,
+			'from_date'=> '1990-01-01' ,
+			'to_date'=> '2000-01-01' ,
 			'period'=> 10 ,
 			'job_description'=> 'Solar installation' ,
 			'leaving_reason'=> 'Seek new experience' ,
 		]);
 		
 		DB::table ( 'candidate_experiences' )->insert([
-		'cv_id' => 1 ,
-		'company_name'=> 'Metfone' ,
-		'industry'=> 3 ,
-		'function'=> 1 ,
-		'location'=> 1 ,
-		'job_title'=> 'BCCS' ,
-		'from_year'=> 1990 ,
-		'from_month'=> 2 ,
-		'to_year'=> 2000 ,
-		'to_month'=> 1 ,
-		'period'=> 10 ,
-		'job_description'=> 'Customer care' ,
-		'leaving_reason'=> 'Seek new experience' ,
+			'cv_id' => 1 ,
+			'company_name'=> 'Camintel' ,
+			'industry_id'=> 1 ,
+			'function_id'=> 3 ,
+			'location_id'=> 5 ,
+			'job_title'=> 'Designer' ,
+			'from_date'=> '1990-01-01' ,
+			'to_date'=> '2000-01-01' ,
+			'period'=> 10 ,
+			'job_description'=> 'Interior design' ,
+			'leaving_reason'=> 'Seek new experience' ,
+		]);
+		
+		DB::table ( 'candidate_experiences' )->insert([
+			'cv_id' => 1 ,
+			'company_name'=> 'Metfone' ,
+			'industry_id'=> 3 ,
+			'function_id'=> 1 ,
+			'location_id'=> 1 ,
+			'job_title'=> 'BCCS' ,
+			'from_date'=> '1990-01-01' ,
+			'to_date'=> '2000-01-01' ,
+			'period'=> 10 ,
+			'job_description'=> 'Customer care' ,
+			'leaving_reason'=> 'Seek new experience' ,
 		]);
 	}
 }
