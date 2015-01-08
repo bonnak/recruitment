@@ -147,10 +147,33 @@ class CandidateController extends BaseController
 	{
 		$cv =  CV::getCVDetail($cv_id);
 		
+		$ex = $cv->workExperience();
+		
+		
+		$candidate = json_decode(json_encode($this->candidate), true);		
+		$candidate['cv'] = json_decode(json_encode($cv), true);
+		$candidate['cv']['work_experiences'] = json_decode(json_encode($ex), true);
+		$candidate = json_decode(json_encode($candidate));
+		
+// 		echo '<pre>', print_r($candidate), '</pre>';
+// 		return;
+		
 		return View::make('candidate.cv-edit')->with([
-				'candidate'	=>	$this->candidate,
-				'cv'		=>	$cv
+				'candidate'	=>	$candidate
 		]);
+	}
+	
+	public function postCVEdit($cv_id)
+	{
+		foreach (\Input::get('work_experience_id') as $id)
+		{
+			$work_experience = \CandidateExperience::where('id', '=', $id)
+													->whereAnd('cv_id', '=', $cv_id)
+													->first();
+			
+			$work_experience->industry_id = 4;
+			$work_experience->save();
+		}
 	}
 	
 	public function getCVs()
