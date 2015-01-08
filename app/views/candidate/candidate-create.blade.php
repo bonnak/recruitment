@@ -132,9 +132,9 @@
 					<strong>Education Background</strong>
 					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 				</div>
-				<div class="box-body">
-				<div class="inner-wrapper">
-					<div class="row input-elements">
+				<div class="box-body">					
+					<div class="inner-wrapper">
+						<div class="row input-elements">
 							<div class="col-sm-4 label-title">
 								<label>Institute</label>
 							</div>

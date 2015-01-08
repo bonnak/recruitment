@@ -4,9 +4,9 @@
 		@include('menu.menu')
 	</div>
 </div>
-<div id="cv-edit" class="col-md-7 middle-wrapper">
+<div id="cv-edit" class="col-md-9">
 	<div class="outter-box">
-		<form method="post" action="{{URL::route('candidate.cv.create.post')}}">
+		<form method="post" action="{{URL::route('candidate.cv.create.edit.post', ['id' => $candidate->cv->id])}}">
 			<div class="box">
 				<div class="view-name title-bar">
 					<strong>CV</strong>
@@ -20,7 +20,7 @@
 							</div>
 							<div class="col-sm-8">
 								<input type="text" class="form-control input-sm" id="cv-name"
-									name="cv-name" value="{{$cv->title}}">
+									name="cv-name" value="{{$candidate->cv->title}}">
 							</div>
 						</div>
 						<div class="row input-elements" style="display: flex; align-items: baseline;">
@@ -29,8 +29,8 @@
 							</div>
 							<div class="col-sm-8">
 								<div class="radio input-element">
-									<label><input type="radio" id="cv-privacy" name="cv-privacy" value="1" {{$cv->searchable == 1 ? 'checked' : '' }}>Everyone</label>&nbsp;&nbsp;&nbsp;
-									<label><input type="radio" id="cv-privacy" name="cv-privacy" value="0" {{$cv->searchable == 0 ? 'checked' : '' }}>Only you</label>
+									<label><input type="radio" id="cv-privacy" name="cv-privacy" value="1" {{$candidate->cv->searchable == 1 ? 'checked' : '' }}>Everyone</label>&nbsp;&nbsp;&nbsp;
+									<label><input type="radio" id="cv-privacy" name="cv-privacy" value="0" {{$candidate->cv->searchable == 0 ? 'checked' : '' }}>Only you</label>
 								</div>
 							</div>
 						</div>					
@@ -133,76 +133,7 @@
 					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 				</div>
 				<div class="box-body">
-				<div class="inner-wrapper">
-					<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Institute</label>
-							</div>
-							<div class="col-sm-8">
-								<input type="text" class="form-control input-sm" id="institute"
-									name="institute">
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Major</label>
-							</div>
-							<div class="col-sm-8">
-								<input type="text" class="form-control input-sm" id="major" name="major">
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Degree</label>
-							</div>
-							<div class="col-sm-8">
-								<select class="form-control input-sm" id="degree" name="degree">
-									<option value="">--Select--</option>
-									@foreach(\Constants::getDegrees() as $degree)
-									<option value="{{$degree->id}}">{{$degree->description}}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Situation</label>
-							</div>
-							<div class="col-sm-8">
-								<select class="form-control input-sm" id="situation" name="situation">
-									<option value="">--Select--</option>
-									@foreach(\Constants::getSchoolingSituations() as $situation)
-									<option value="{{$situation->id}}">{{$situation->description}}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Graduation</label>
-							</div>
-							<div class="col-sm-8">
-								<div class="form-inline">
-									<select class="sl-year form-control input-sm"
-										id="graduation-year" name="graduation-year">
-										<option value=""></option>
-										@foreach(Config::get('setup.years') as $year)
-											<option>{{$year}}</option>
-										@endforeach
-									</select>&nbsp;<span>Year</span>
-									&nbsp;&nbsp;&nbsp;
-									<select
-										class="sl-month form-control input-sm" id="graduation-month"
-										name="graduation-month">
-										<option value=""></option>
-										@foreach(Config::get('setup.months') as $month)
-											<option value="{{$month['num']}}">{{$month['name']}}</option>
-										@endforeach
-									</select>&nbsp;<span>Month</span>
-								</div>
-							</div>
-						</div>
-					</div>
+										
 				</div>
 			</div>
 			<div class="box">
@@ -211,76 +142,105 @@
 					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 				</div>
 				<div class="box-body">
-				<div class="inner-wrapper">
-					<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Job title</label>
+					<div>
+						<table class="table table-bordered">
+						  <thead>
+						  	<tr>
+						  		<th>Job title</th>
+						  		<th>Company</th>
+						  		<th>Industry</th>
+						  		<th>Location</th>
+						  		<th>Duration</th>
+						  	</tr>
+						  </thead>
+						  <tbody>
+						  	@foreach($candidate->cv->work_experiences as $work_experience)	
+						  	<tr>						  					  		
+						  		<td>
+						  			<span>{{$work_experience->job_title}}</span>
+						  			<input type="hidden" id="job_title" name="job_title[]" value="{{$work_experience->job_title}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$work_experience->company_name}}</span>
+						  			<input type="hidden" id="company" name="company[]" value="{{$work_experience->company_name}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$work_experience->industry}}</span>
+						  			<input type="hidden" id="ex_industry" name="ex_industry[]" value="{{$work_experience->industry_id}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$work_experience->location}}</span>
+						  			<input type="hidden" id="ex_location" name="ex_location[]" value="{{$work_experience->location_id}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$work_experience->from_date}} To {{$work_experience->to_date}}</span>
+						  			<input type="hidden" id="durartion" name="experience_from_date[]" value="{{$work_experience->from_date}}">
+						  			<input type="hidden" id="durartion" name="experience_to_date[]" value="{{$work_experience->to_date}}">
+						  		</td>						  					  		
+						  	</tr>
+						  	<input type="hidden" name="work_experience_id[]" value="{{$work_experience->id}}">
+						  	@endforeach	
+						  </tbody>
+						</table>
+					</div>
+					<div class="add_edit">
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="job-title" class="col-sm-4 control-label">Job title</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control input-sm input-margin" id="job-title" name="job-title">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="company" class="col-sm-4 control-label">Company</label>
+									<div class="col-sm-8">
+										<input type="text" class="form-control input-sm" id="company" name="company">
+									</div>
+								</div>							
 							</div>
-							<div class="col-sm-8">
-								<input type="text" class="form-control input-sm" id="job-title"
-									name="job-title">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="ex-industry" class="col-sm-4 control-label">Industry</label>
+									<div class="col-sm-8">
+										<select class="form-control input-sm input-margin" id="ex-industry" name="ex-industry">
+											<option value="">---Select---</option> 
+											@foreach(\Industry::getIndustries() as $industry)
+												<option value="{{$industry->id}}">{{$industry->name}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="ex-location" class="col-sm-4 control-label">Location</label>
+									<div class="col-sm-8">
+										<select class="sl-location form-control input-sm" id="ex-location" name="ex-location">
+											<option value="">---Select---</option> 
+											@foreach(\Location::getProvinces_Cities() as $location)
+											<option value="{{$location->id}}">{{$location->name}}</option>
+											@endforeach
+										</select>
+									</div>
+								</div>
 							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Company</label>
-							</div>
-							<div class="col-sm-8">
-								<input type="text" class="form-control input-sm" id="company"
-									name="company">
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Industry</label>
-							</div>
-							<div class="col-sm-8">
-								<select class="form-control input-sm" id="ex-industry" name="ex-industry">
-									<option value="">---Select---</option> 
-									@foreach(\Industry::getIndustries() as $industry)
-										<option value="{{$industry->id}}">{{$industry->name}}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Location</label>
-							</div>
-							<div class="col-sm-8">
-								<select class="sl-location form-control input-sm" id="ex-location" name="ex-location">
-									<option value="">---Select---</option> 
-									@foreach(\Location::getProvinces_Cities() as $location)
-									<option value="{{$location->id}}">{{$location->name}}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>From</label>
-							</div>
-							<div class="col-sm-8">
-								<div class="form-inline">
-									<select class="sl-year form-control input-sm"
-										id="graduation-year" name="graduation-year">
-										<option value=""></option>
-										@foreach(Config::get('setup.years') as $year)
-											<option>{{$year}}</option>
-										@endforeach
-									</select>&nbsp;<span>Year</span>
-									&nbsp;&nbsp;&nbsp;
-									<select
-										class="sl-month form-control input-sm" id="graduation-month"
-										name="graduation-month">
-										<option value=""></option>
-										@foreach(Config::get('setup.months') as $month)
-											<option value="{{$month['num']}}">{{$month['name']}}</option>
-										@endforeach
-									</select>&nbsp;<span>Month</span>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label for="ex-from-date" class="col-sm-4 control-label">From</label>
+									<div class="col-sm-8">
+										<input type="date" class="form-control input-sm input-margin" id="ex-from-date" name="ex-from-date">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="ex-to-date" class="col-sm-4 control-label">To</label>
+									<div class="col-sm-8">
+										<input type="date" class="form-control input-sm" id="ex-to-date" name="ex-to-date">
+									</div>
 								</div>
 							</div>
 						</div>
+						<div style="margin-top: 21px; text-align: right;">
+							<a href="javascript:onclick" class="btn">Add</a>
+						</div>						
 					</div>
 				</div>
 			</div>
@@ -373,7 +333,7 @@
 								<select class="form-control input-sm" id="function" name="desired_function">
 									<option value="">---Select---</option> 
 									@foreach(\Func::getFunctions() as $function)
-									<option value="{{$function->id}}" {{$cv->desired_function == $function->id ? 'selected' : '' }}>{{$function->name}}</option>
+									<option value="{{$function->id}}" {{$candidate->cv->desired_function == $function->id ? 'selected' : '' }}>{{$function->name}}</option>
 									@endforeach
 								</select>
 							</div>
@@ -386,7 +346,7 @@
 								<select class="form-control input-sm" id="industry" name="desired_industry">
 									<option value="">---Select---</option> 
 									@foreach(\Industry::getIndustries() as $industry)
-									<option value="{{$industry->id}}" {{$cv->desired_industry == $industry->id ? 'selected' : '' }}>{{$industry->name}}</option>
+									<option value="{{$industry->id}}" {{$candidate->cv->desired_industry == $industry->id ? 'selected' : '' }}>{{$industry->name}}</option>
 									@endforeach
 								</select>
 							</div>
@@ -399,7 +359,7 @@
 								<select class="sl-location form-control input-sm" id="location" name="desired_location">
 									<option value="">---Select---</option> 
 									@foreach(\Location::getProvinces_Cities() as $location)
-									<option value="{{$location->id}}" {{$cv->desired_location == $location->id ? 'selected' : '' }}>{{$location->name}}</option>
+									<option value="{{$location->id}}" {{$candidate->cv->desired_location == $location->id ? 'selected' : '' }}>{{$location->name}}</option>
 									@endforeach
 								</select>
 							</div>
@@ -412,7 +372,7 @@
 								<select class="sl-salary form-control input-sm" id="salary" name="desired_salary">
 									<option value="">---Select---</option>  
 									@foreach(\Salary::getSalaries() as $salary)
-										<option value="{{$salary->id}}" {{$cv->desired_salary == $salary->id ? 'selected' : '' }}>{{$salary->min}} ~ {{$salary->max}}</option>
+										<option value="{{$salary->id}}" {{$candidate->cv->desired_salary == $salary->id ? 'selected' : '' }}>{{$salary->min}} ~ {{$salary->max}}</option>
 									@endforeach
 								</select>
 							</div>
@@ -425,7 +385,7 @@
 								<select class="sl-salary form-control input-sm" id="job-term" name="job-term">
 									<option value="">---Select---</option>
 									@foreach(\Constants::getJobTerm() as $job_term)
-										<option value="{{$job_term->id}}" {{$cv->job_term == $job_term->id ? 'selected' : '' }}>{{$job_term->term}}</option>
+										<option value="{{$job_term->id}}" {{$candidate->cv->job_term == $job_term->id ? 'selected' : '' }}>{{$job_term->term}}</option>
 									@endforeach
 								</select>
 							</div>
