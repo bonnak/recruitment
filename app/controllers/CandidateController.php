@@ -145,13 +145,14 @@ class CandidateController extends BaseController
 	
 	public function getCVEdit($cv_id)
 	{
-		$cv =  CV::getCVDetail($cv_id);
-		
-		$ex = $cv->workExperience();
+		$cv =  CV::getCVDetail($cv_id);		
+		$edu = $cv->education();
+		$ex = $cv->workExperience();	
 		
 		
 		$candidate = json_decode(json_encode($this->candidate), true);		
 		$candidate['cv'] = json_decode(json_encode($cv), true);
+		$candidate['cv']['education'] = json_decode(json_encode($edu), true);
 		$candidate['cv']['work_experiences'] = json_decode(json_encode($ex), true);
 		$candidate = json_decode(json_encode($candidate));
 		
