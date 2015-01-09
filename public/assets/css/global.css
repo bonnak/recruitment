@@ -729,18 +729,3 @@ hr#line-break-footer {
 	background-color: rgba(0,0,0,.6);
 	border-radius: 2px;
 }
-.add_edit{
-    padding: 17px;
-    border: 1px solid #ccc;
-    background-color: #F5F5F5;
-}
-.add_edit .col-sm-4{
-	padding: 0;
-}
-.add_edit .col-sm-4 .input-margin{
-	margin-bottom: 5px;
-}
-.add_edit .control-label{
-	padding-top: 5px;
-	text-align: right;
-}
