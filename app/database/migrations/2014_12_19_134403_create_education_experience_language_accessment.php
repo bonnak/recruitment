@@ -19,10 +19,9 @@ class CreateEducationExperienceLanguageAccessment extends Migration {
 				$table->integer('cv_id');
 				$table->string('institute');
 				$table->string('major');
-				$table->string('degree');
-				$table->string('situation');
-				$table->integer('graduation_year');
-				$table->integer('graduation_month');
+				$table->integer('degree');
+				$table->integer('situation');
+				$table->date('graduation_date')->nullable();
 				$table->timestamps();
 			});
 		}
