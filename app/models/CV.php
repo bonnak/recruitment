@@ -53,8 +53,23 @@ class CV extends Eloquent
 										location_id,
 										job_title,
 										from_date,
-										to_date,
 										to_date"						
+									))
+									->where('cv_id', '=', $this->id)
+									->get();
+	}
+	
+	public function education()
+	{
+		return \CandidateEducation::select(DB::raw(
+										"id,
+										institute,
+										major,
+										(SELECT description FROM degree WHERE id = candidate_education.degree_id LIMIT 1) degree,
+										(SELECT description FROM sch_situation WHERE id = candidate_education.situation_id LIMIT 1) situation,
+										degree_id,
+										situation_id,
+										graduation_date"
 									))
 									->where('cv_id', '=', $this->id)
 									->get();
