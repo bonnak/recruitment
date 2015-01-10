@@ -147,13 +147,17 @@ class CandidateController extends BaseController
 	{
 		$cv =  CV::getCVDetail($cv_id);		
 		$edu = $cv->education();
-		$ex = $cv->workExperience();	
+		$experiences = $cv->workExperience();
+		$skills = $cv->skills();
+		$languages = $cv->languages();	
 		
 		
 		$candidate = json_decode(json_encode($this->candidate), true);		
 		$candidate['cv'] = json_decode(json_encode($cv), true);
 		$candidate['cv']['education'] = json_decode(json_encode($edu), true);
-		$candidate['cv']['work_experiences'] = json_decode(json_encode($ex), true);
+		$candidate['cv']['work_experiences'] = json_decode(json_encode($experiences), true);
+		$candidate['cv']['skills'] = json_decode(json_encode($skills), true);
+		$candidate['cv']['languages'] = json_decode(json_encode($languages), true);
 		$candidate = json_decode(json_encode($candidate));
 		
 // 		echo '<pre>', print_r($candidate), '</pre>';
