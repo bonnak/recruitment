@@ -74,4 +74,33 @@ class CV extends Eloquent
 									->where('cv_id', '=', $this->id)
 									->get();
 	}
+	
+	public function skills()
+	{
+		return \CandidateSkill::select(DB::raw(
+								"id,
+								name,
+								level_id,
+								(SELECT description FROM levels WHERE id = candidate_skills.level_id LIMIT 1) level,
+								y_experience"
+							))
+							->where('cv_id', '=', $this->id)
+							->get();
+	}
+	
+	public function languages()
+	{
+		return \CandidateLanguage::select(DB::raw(
+										"id,
+										language,
+										(SELECT description FROM levels WHERE id = candidate_languages.speaking_id LIMIT 1) speaking,
+										(SELECT description FROM levels WHERE id = candidate_languages.writing_id LIMIT 1) writing,
+										(SELECT description FROM levels WHERE id = candidate_languages.reading_id LIMIT 1) reading,
+										speaking_id,
+										writing_id,
+										reading_id"
+								))
+								->where('cv_id', '=', $this->id)
+								->get();
+	}
 }
