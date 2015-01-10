@@ -51,9 +51,9 @@ class CreateEducationExperienceLanguageAccessment extends Migration {
 				$table->increments('id');
 				$table->integer('cv_id');
 				$table->string('language');
-				$table->tinyInteger('speaking');
-				$table->tinyInteger('writing');
-				$table->tinyInteger('reading');
+				$table->tinyInteger('speaking_id');
+				$table->tinyInteger('writing_id');
+				$table->tinyInteger('reading_id');
 				$table->timestamps();
 			});
 		}

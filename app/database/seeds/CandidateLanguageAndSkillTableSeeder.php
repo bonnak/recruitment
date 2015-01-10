@@ -14,25 +14,25 @@ class CandidateLanguageAndSkillTableSeeder extends Seeder {
 		DB::table ( 'candidate_languages' )->insert([
 			'cv_id'				=> 1,
 			'language'			=> 'English',
-			'speaking'			=> 3,
-			'writing'			=> 2,
-			'reading'			=> 3			
+			'speaking_id'			=> 3,
+			'writing_id'			=> 2,
+			'reading_id'			=> 3			
 		]);
 		
 		DB::table ( 'candidate_languages' )->insert([
 			'cv_id'				=> 1,
 			'language'			=> 'Korean',
-			'speaking'			=> 2,
-			'writing'			=> 1,
-			'reading'			=> 3			
+			'speaking_id'			=> 2,
+			'writing_id'			=> 1,
+			'reading_id'			=> 3			
 		]);
 		
 		DB::table ( 'candidate_languages' )->insert([
 			'cv_id'				=> 1,
 			'language'			=> 'French',
-			'speaking'			=> 1,
-			'writing'			=> 3,
-			'reading'			=> 2
+			'speaking_id'			=> 1,
+			'writing_id'			=> 3,
+			'reading_id'			=> 2
 		]);
 		
 		// Seeding table candidate skill.
