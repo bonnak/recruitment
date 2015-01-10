@@ -77,7 +77,7 @@ class CreateEducationExperienceLanguageAccessment extends Migration {
 				$table->increments('id');
 				$table->integer('cv_id');
 				$table->string ( 'name' );
-				$table->integer ( 'level' );
+				$table->integer ( 'level_id' );
 				$table->integer ( 'y_experience' )->nullable();
 				$table->timestamps();
 			} );
