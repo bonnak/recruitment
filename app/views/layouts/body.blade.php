@@ -4,4 +4,5 @@
 		@yield('main')
 		@yield('candidate')
 	</div>
+	<script src="{{asset('assets/js/function.js')}}"></script>
 </div>
