@@ -169,7 +169,7 @@
 						  			<input type="hidden" id="graduation-year" name="graduation-year[]" value="{{$education->graduation_date}}">
 						  		</td>
 						  		<td  style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a><br>
+						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a>
 						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-remove"></i></a>
 						  			<input type="hidden" name="work_experience_id[]" value="{{$education->id}}">
 						  		</td>						  					  		
@@ -249,7 +249,7 @@
 						  			<input type="hidden" id="durartion" name="experience_to_date[]" value="{{$work_experience->to_date}}">
 						  		</td>
 						  		<td  style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a><br>
+						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a>
 						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-remove"></i></a>
 						  			<input type="hidden" name="work_experience_id[]" value="{{$work_experience->id}}">
 						  		</td>						  					  		
@@ -289,76 +289,128 @@
 			</div>
 			<div class="box">
 				<div class="view-name title-bar">
-					<strong>Skills</strong>
+					<strong>Skills & Languages</strong>
 					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
 				</div>
 				<div class="box-body">
-					<div class="inner-wrapper">
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Skill</label>
-							</div>
-							<div class="col-sm-8">
-								<input type="text" class="form-control input-sm" id="skill" name="skill">
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Year of experience</label>
-							</div>
-							<div class="col-sm-8">
-								<input type="text" class="form-control input-sm" id="year-experience" name="year-experience" style="width: 54px;">
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Level</label>
-							</div>
-							<div class="col-sm-8">
-								<select class="form-control input-sm" id="skill-level" name="skill-level" style="width: 115px;">
-									<option value="">---Select---</option>
-									@foreach(\Constants::getLevels() as $level)
-									<option value="{{$level->id}}">{{$level->description}}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="box">
-				<div class="view-name title-bar">
-					<strong>Languages</strong>
-					<a href="javascript:onclick" class="btn-min-max glyphicon glyphicon-chevron-up" style="color: #fff; float: right; text-decoration: none;"></a>
-				</div>
-				<div class="box-body">
-					<div class="inner-wrapper">
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Language</label>
-							</div>
-							<div class="col-sm-8">
-								<input type="text" class="form-control input-sm" id="language"
-									name="language">
-							</div>
-						</div>
-						<div class="row input-elements">
-							<div class="col-sm-4 label-title">
-								<label>Level</label>
-							</div>
-							<div class="col-sm-8">
-								<select class="form-control input-sm" id="language-level"
-									name="language-level" style="width: 115px;">
-									<option value="">---Select---</option>
-									<option value="0">Poor</option>
-									<option value="1">Fair</option>
-									<option value="2">Good</option>
-									<option value="3">Very Good</option>
-									<option value="4">Excellent</option>
-								</select>
-							</div>
-						</div>
-					</div>
+					<div class="clearfix">
+						<table class="table table-bordered" style="width: 48%; float: left;">
+						  <thead>
+						  	<tr>
+						  		<th style="width: 30%; text-align: center;">Skill</th>
+						  		<th style="width: 30%; text-align: center;">Level</th>
+						  		<th style="width: 30%; text-align: center;">Experience(y)</th>
+						  		<th style="width: 10px; text-align: center;">Action</th>
+						  	</tr>
+						  </thead>
+						  <tbody>
+						  	@foreach($candidate->cv->skills as $skill)	
+						  	<tr>						  					  		
+						  		<td>
+						  			<span>{{$skill->name}}</span>
+						  			<input type="hidden"  id="skill" name="skill[]" value="{{$skill->name}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$skill->level}}</span>
+						  			<input type="hidden" id="skill-level" name="skill-level[]" value="{{$skill->level_id}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$skill->y_experience}}</span>
+						  			<input type="hidden" id="year-experience" name="year-experience[]" value="{{$skill->y_experience}}">
+						  		</td>
+						  		<td  style="text-align: center; vertical-align: middle;">
+						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a>
+						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-remove"></i></a>
+						  			<input type="hidden" name="work_experience_id[]" value="{{$education->id}}">
+						  		</td>						  					  		
+						  	</tr>						  	
+						  	@endforeach	
+						  	<tr>
+						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" name="institute_new" placeholder="Name"></td>
+						  		<td>
+									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+										<option value="">---Level---</option> 
+										@foreach(\Constants::getLevels() as $level)
+											<option value="{{$level->id}}">{{$level->description}}</option>
+										@endforeach
+									</select>
+								</td>
+						  		<td><input type="text" class="form-control input-sm" id="major_new" name="major_new" placeholder="Year of experience"></td>
+						  		<td style="text-align: center; vertical-align: middle;">
+						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-plus"></i></a>
+						  		</td>
+						  	</tr>
+						  </tbody>
+						</table>
+						<table class="table table-bordered" style="width: 50%; float: right;">
+						  <thead>
+						  	<tr>
+						  		<th style="width: 60%; text-align: center;">Language</th>
+						  		<th style="width: 20%; text-align: center;">Writing</th>
+						  		<th style="width: 20%; text-align: center;">Reading</th>
+						  		<th style="width: 20%; text-align: center;">Speaking</th>
+						  		<th style="width: 10px; text-align: center;">Action</th>
+						  	</tr>
+						  </thead>
+						  <tbody>
+						  	@foreach($candidate->cv->languages as $language)	
+						  	<tr>						  					  		
+						  		<td>
+						  			<span>{{$language->language}}</span>
+						  			<input type="hidden" id="language" name="language[]" value="{{$language->language}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$language->writing}}</span>
+						  			<input type="hidden" id="language_writing" name="language_writing[]" value="{{$language->writing_id}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$language->reading}}</span>
+						  			<input type="hidden" id="language_reading" name="language_reading[]" value="{{$language->reading_id}}">
+						  		</td>
+						  		<td>
+						  			<span>{{$language->speaking}}</span>
+						  			<input type="hidden" id="language_speaking" name="language_speaking[]" value="{{$language->speaking_id}}">
+						  		</td>
+						  		<td  style="text-align: center; vertical-align: middle;">
+						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a>
+						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-remove"></i></a>
+						  			<input type="hidden" name="work_experience_id[]" value="{{$education->id}}">
+						  		</td>						  					  		
+						  	</tr>						  	
+						  	@endforeach	
+						  	<tr>
+						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" name="institute_new" placeholder="Language"></td>
+						  		<td>
+									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+										<option value="">---Degree---</option> 
+										@foreach(\Constants::getLevels() as $level)
+											<option value="{{$level->id}}">{{$level->description}}</option>
+										@endforeach
+									</select>
+								</td>
+						  		<td>
+									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+										<option value="">---Degree---</option> 
+										@foreach(\Constants::getLevels() as $level)
+											<option value="{{$level->id}}">{{$level->description}}</option>
+										@endforeach
+									</select>
+								</td>
+						  		<td>
+									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+										<option value="">---Degree---</option> 
+										@foreach(\Constants::getLevels() as $level)
+											<option value="{{$level->id}}">{{$level->description}}</option>
+										@endforeach
+									</select>
+								</td>
+						  		<td style="text-align: center; vertical-align: middle;">
+						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-plus"></i></a>
+						  		</td>
+						  	</tr>
+						  </tbody>
+						</table>
+					</div>			
 				</div>
 			</div>
 			<div class="box">
