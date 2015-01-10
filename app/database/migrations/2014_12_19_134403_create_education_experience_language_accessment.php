@@ -51,9 +51,9 @@ class CreateEducationExperienceLanguageAccessment extends Migration {
 				$table->increments('id');
 				$table->integer('cv_id');
 				$table->string('language');
-				$table->string('conversation');
-				$table->string('writing');
-				$table->string('reading');
+				$table->tinyInteger('speaking');
+				$table->tinyInteger('writing');
+				$table->tinyInteger('reading');
 				$table->timestamps();
 			});
 		}
@@ -68,15 +68,18 @@ class CreateEducationExperienceLanguageAccessment extends Migration {
 				$table->integer ( 'skill' )->nullable();
 				$table->integer ( 'reason_introduce' )->nullable();
 				$table->integer ( 'memo' )->nullable();
+				$table->timestamps();
 			} );
 		}
 		
 		if (! Schema::hasTable ( 'candidate_skills' )) {
-			Schema::create ( 'candidate_skill', function ($table) {
+			Schema::create ( 'candidate_skills', function ($table) {
 				$table->increments('id');
 				$table->integer('cv_id');
 				$table->string ( 'name' );
 				$table->integer ( 'level' );
+				$table->integer ( 'y_experience' )->nullable();
+				$table->timestamps();
 			} );
 		}
 		
@@ -85,6 +88,7 @@ class CreateEducationExperienceLanguageAccessment extends Migration {
 				$table->integer ( 'candidate_id' );
 				$table->integer ( 'job_id' );
 				$table->datetime ( 'apply_date' );
+				$table->timestamps();
 			} );
 		}
 	}
