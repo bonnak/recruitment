@@ -43,8 +43,15 @@ $(document).on('ready', function(){
 		  				'<a href="javascript:onclick" class="btn_delete" onclick="delete_row(this)"><i class="glyphicon glyphicon-remove"></i></a></td>' +
 		  		  '</tr>'
 		  		
-		
+		// Append a new row to table.
 		$(table).append(new_row);		
 		row_addnew.next().insertBefore(row_addnew);		
+		
+		// Clear controls.
+		$('#institute_new').val('');
+		$('#major_new').val('');
+		$('#degree_new').val(''),
+		$('#situation_new').val(''),
+		$('#graduation_year_new').val('');
 	});
 });
