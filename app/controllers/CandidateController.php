@@ -169,7 +169,23 @@ class CandidateController extends BaseController
 	}
 	
 	public function postCVEdit($cv_id)
-	{		
+	{			
+		
+		$this->postEducation($cv_id);
+		
+		
+		return \Redirect::back();
+	}
+	
+	public function getCVs()
+	{
+		$cvs = CV::getCVList($this->candidate_id);
+		
+		return View::make('candidate.cvs')->with('cvs', $cvs);
+	}
+	
+	private function postEducation($cv_id)
+	{	
 		// Edit education.
 		$edu_id = Input::get('education_id');
 		$institutes = Input::get('institute');
@@ -185,54 +201,44 @@ class CandidateController extends BaseController
 			if(in_array($db_edu->id, $edu_id))
 			{
 				$key = array_search($db_edu->id, $edu_id);
-				
+		
 				$db_edu->institute = $institutes[$key];
 				$db_edu->major = $majors[$key];
 				$db_edu->degree_id = $degrees[$key];
 				$db_edu->situation_id = $situations[$key];
 				$db_edu->graduation_date = (empty(trim($grad_year[$key])) ? null : $grad_year[$key] );
-				
+		
 				$db_edu->save();
 			}
-			else 
+			else
 			{
 				$db_edu->delete();
 			}
 		}
 		
-		return;
+		
 		// Insert new educations.
 		$new_institutes = Input::get('institute_new');
 		$new_majors = Input::get('major_new');
 		$new_degrees = Input::get('degree_new');
-		$new_situations = Input::get('situation_new');		
-		$new_grad_year = Input::get('graduation_year_new');		
+		$new_situations = Input::get('situation_new');
+		$new_grad_year = Input::get('graduation_year_new');
 		$total_new_edu = count($new_institutes);
-		
+				
 		for ($i=0; $i<$total_new_edu; $i++)
 		{
+			if(empty(trim($new_institutes))) continue;
+				
 			$new_edu = new \CandidateEducation();
-			
+				
 			$new_edu->cv_id = $cv_id;
 			$new_edu->institute = $new_institutes[$i];
 			$new_edu->major = $new_majors[$i];
 			$new_edu->degree_id = $new_degrees[$i];
 			$new_edu->situation_id = $new_situations[$i];
-			$new_edu->graduation_date = $new_grad_year[$i];
-			
+			$new_edu->graduation_date = (empty(trim($new_grad_year[$i])) ? null : $grad_year[$key] );
+				
 			$new_edu->save();
 		}
-		
-		
-		// Insert new experiences.
-		
-
-	}
-	
-	public function getCVs()
-	{
-		$cvs = CV::getCVList($this->candidate_id);
-		
-		return View::make('candidate.cvs')->with('cvs', $cvs);
 	}
 }
