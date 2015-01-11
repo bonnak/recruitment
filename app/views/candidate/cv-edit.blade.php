@@ -150,36 +150,36 @@
 						  	<tr>						  					  		
 						  		<td>
 						  			<span>{{$education->institute}}</span>
-						  			<input type="hidden" id="institute" name="institute[]" value="{{$education->institute}}">
+						  			<input type="text" id="institute" class="form-control input-small hide" name="institute[]" value="{{$education->institute}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$education->major}}</span>
-						  			<input type="hidden" id="major" name="major[]" value="{{$education->major}}">
+						  			<input type="text" id="major" class="form-control input-small hide" name="major[]" value="{{$education->major}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$education->degree}}</span>
-						  			<input type="hidden" id="degree" name="degree[]" value="{{$education->degree_id}}">
+						  			<input type="text" id="degree" class="form-control input-small hide" name="degree[]" value="{{$education->degree_id}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$education->situation}}</span>
-						  			<input type="hidden" id="situation" name="situation[]" value="{{$education->situation_id}}">
+						  			<input type="text" id="situation" class="form-control input-small hide" name="situation[]" value="{{$education->situation_id}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$education->graduation_date}}</span>
-						  			<input type="hidden" id="graduation-year" name="graduation-year[]" value="{{$education->graduation_date}}">
+						  			<input type="text" id="graduation_year" class="form-control input-small hide" name="graduation_year[]" value="{{$education->graduation_date}}">
 						  		</td>
-						  		<td  style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a>
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-remove"></i></a>
-						  			<input type="hidden" name="work_experience_id[]" value="{{$education->id}}">
+						  		<td class="td_action" style="text-align: center; vertical-align: middle;">
+						  			<a href="javascript:onclick" class="btn_edit" onclick="edit_row(this)"><i class="glyphicon glyphicon-pencil"></i></a>
+						  			<a href="javascript:onclick" class="btn_delete" onclick="delete_row(this)"><i class="glyphicon glyphicon-remove"></i></a>
+						  			<input type="hidden" name="education_id[]" value="{{$education->id}}">
 						  		</td>						  					  		
 						  	</tr>						  	
 						  	@endforeach	
-						  	<tr>
-						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" name="institute_new" placeholder="Institute"></td>
-						  		<td><input type="text" class="form-control input-sm" id="major_new" name="major_new" placeholder="Major"></td>
+						  	<tr class="tr_new">
+						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" placeholder="Institute"></td>
+						  		<td><input type="text" class="form-control input-sm" id="major_new" placeholder="Major"></td>
 						  		<td>
-									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+									<select class="form-control input-sm input-margin" id="degree_new">
 										<option value="">---Degree---</option> 
 										@foreach(\Constants::getDegrees() as $degree)
 											<option value="{{$degree->id}}">{{$degree->description}}</option>
@@ -187,7 +187,7 @@
 									</select>
 								</td>
 						  		<td>
-						  			<select class="sl-location form-control input-sm" id="situation_new" name="situation_new">
+						  			<select class="sl-location form-control input-sm" id="situation_new">
 										<option value="">---Situation---</option> 
 										@foreach(\Constants::getSchoolingSituations() as $situation)
 										<option value="{{$situation->id}}">{{$situation->description}}</option>
@@ -195,10 +195,10 @@
 									</select>
 						  		</td>
 						  		<td>
-										<input type="text" class="form-control input-sm" id="graduation-year_new" name="graduation-year_new"  placeholder="Graduation Date">
+										<input type="text" class="form-control input-sm" id="graduation_year_new" placeholder="Graduation Date">
 								</td>
 						  		<td style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-plus"></i></a>
+						  			<a href="javascript:onclick" class="btn_add"><i class="glyphicon glyphicon-plus"></i></a>
 						  		</td>
 						  	</tr>
 						  </tbody>
@@ -248,9 +248,9 @@
 						  			<input type="hidden" id="durartion" name="experience_from_date[]" value="{{$work_experience->from_date}}">
 						  			<input type="hidden" id="durartion" name="experience_to_date[]" value="{{$work_experience->to_date}}">
 						  		</td>
-						  		<td  style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a>
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-remove"></i></a>
+						  		<td class="td_action" style="text-align: center; vertical-align: middle;">
+						  			<a href="javascript:onclick" class="btn_edit"><i class="glyphicon glyphicon-pencil"></i></a>
+						  			<a href="javascript:onclick" class="btn_delete" onclick="delete_row(this)"><i class="glyphicon glyphicon-remove"></i></a>
 						  			<input type="hidden" name="work_experience_id[]" value="{{$work_experience->id}}">
 						  		</td>						  					  		
 						  	</tr>						  	
@@ -326,16 +326,16 @@
 						  	</tr>						  	
 						  	@endforeach	
 						  	<tr>
-						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" name="institute_new" placeholder="Name"></td>
+						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" placeholder="Name"></td>
 						  		<td>
-									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+									<select class="form-control input-sm input-margin" id="degree_new">
 										<option value="">---Level---</option> 
 										@foreach(\Constants::getLevels() as $level)
 											<option value="{{$level->id}}">{{$level->description}}</option>
 										@endforeach
 									</select>
 								</td>
-						  		<td><input type="text" class="form-control input-sm" id="major_new" name="major_new" placeholder="Year of experience"></td>
+						  		<td><input type="text" class="form-control input-sm" id="major_new" placeholder="Year of experience"></td>
 						  		<td style="text-align: center; vertical-align: middle;">
 						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-plus"></i></a>
 						  		</td>
@@ -379,9 +379,9 @@
 						  	</tr>						  	
 						  	@endforeach	
 						  	<tr>
-						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" name="institute_new" placeholder="Language"></td>
+						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" placeholder="Language"></td>
 						  		<td>
-									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+									<select class="form-control input-sm input-margin" id="degree_new" >
 										<option value="">---Degree---</option> 
 										@foreach(\Constants::getLevels() as $level)
 											<option value="{{$level->id}}">{{$level->description}}</option>
@@ -389,7 +389,7 @@
 									</select>
 								</td>
 						  		<td>
-									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+									<select class="form-control input-sm input-margin" id="degree_new" >
 										<option value="">---Degree---</option> 
 										@foreach(\Constants::getLevels() as $level)
 											<option value="{{$level->id}}">{{$level->description}}</option>
@@ -397,7 +397,7 @@
 									</select>
 								</td>
 						  		<td>
-									<select class="form-control input-sm input-margin" id="degree_new" name="degree_new">
+									<select class="form-control input-sm input-margin" id="degree_new" >
 										<option value="">---Degree---</option> 
 										@foreach(\Constants::getLevels() as $level)
 											<option value="{{$level->id}}">{{$level->description}}</option>
