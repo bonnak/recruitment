@@ -172,6 +172,7 @@ class CandidateController extends BaseController
 	{			
 		
 		$this->postEducation($cv_id);
+		$this->postWorkExperience($cv_id);
 		
 		
 		return \Redirect::back();
@@ -184,23 +185,84 @@ class CandidateController extends BaseController
 		return View::make('candidate.cvs')->with('cvs', $cvs);
 	}
 	
+	private function postWorkExperience($cv_id)
+	{
+		// Edit work experience.
+		$ex_ids = \Input::get('ex_id');
+		$ex_job_titles = \Input::get('ex_job_title');
+		$ex_company_names = \Input::get('ex_company_name');
+		$ex_industries = \Input::get('ex_industry');
+		$ex_locations = \Input::get('ex_location');
+		$ex_from_dates = \Input::get('ex_from_date');
+		$ex_to_dates = \Input::get('ex_to_date');
+		
+		$db_exs = \CandidateExperience::select('id')->where('cv_id', '=', $cv_id)->get();
+		
+		foreach($db_exs as $db_ex)
+		{
+			if(in_array($db_ex->id, $ex_ids))
+			{
+				$key = array_search($db_ex->id, $ex_ids);
+				
+				$db_ex->company_name = $ex_company_names[$key];				
+				$db_ex->job_title = $ex_job_titles[$key];				
+				$db_ex->industry_id = $ex_industries[$key];				
+				$db_ex->location_id = $ex_locations[$key];				
+				$db_ex->from_date = $ex_from_dates[$key];				
+				$db_ex->to_date = $ex_to_dates[$key];				
+				
+				$db_ex->save();
+			}
+			else 
+			{
+				$db_ex->delete();
+			}
+		}
+		
+		// Add new experience.
+		$new_ex_job_titles = \Input::get('ex_job_title_new');
+		$new_ex_company_names = \Input::get('ex_company_name_new');
+		$new_ex_industries = \Input::get('ex_industry_new');
+		$new_ex_locations = \Input::get('ex_location_new');
+		$new_ex_from_dates = \Input::get('ex_from_date_new');
+		$new_ex_to_dates = \Input::get('ex_to_date_new');
+		$total_new = count($new_ex_job_titles);
+		
+		for ($i=0; $i<$total_new; $i++)
+		{
+			if(empty(trim($new_ex_job_titles[$i]))) continue;
+			
+			$new_experience = new \CandidateExperience();
+			
+			$new_experience->cv_id = $cv_id;
+			$new_experience->company_name = $new_ex_company_names[$i];
+			$new_experience->job_title = $new_ex_job_titles[$i];
+			$new_experience->industry_id = $new_ex_industries[$i];
+			$new_experience->location_id = $new_ex_locations[$i];
+			$new_experience->from_date = $new_ex_from_dates[$i];
+			$new_experience->to_date = $new_ex_to_dates[$i];
+			
+			$new_experience->save();
+		}
+	}
+	
 	private function postEducation($cv_id)
 	{	
 		// Edit education.
-		$edu_id = Input::get('education_id');
-		$institutes = Input::get('institute');
-		$majors = Input::get('major');
-		$degrees = Input::get('degree');
-		$situations = Input::get('situation');
-		$grad_year = Input::get('graduation_year');
+		$edu_ids = \Input::get('education_id');
+		$institutes = \Input::get('institute');
+		$majors = \Input::get('major');
+		$degrees = \Input::get('degree');
+		$situations = \Input::get('situation');
+		$grad_year = \Input::get('graduation_year');
 		
 		$db_edus = \CandidateEducation::select('id')->where('cv_id', '=', $cv_id)->get();
 		
 		foreach($db_edus as $db_edu)
 		{
-			if(in_array($db_edu->id, $edu_id))
+			if(in_array($db_edu->id, $edu_ids))
 			{
-				$key = array_search($db_edu->id, $edu_id);
+				$key = array_search($db_edu->id, $edu_ids);
 		
 				$db_edu->institute = $institutes[$key];
 				$db_edu->major = $majors[$key];
@@ -218,16 +280,16 @@ class CandidateController extends BaseController
 		
 		
 		// Insert new educations.
-		$new_institutes = Input::get('institute_new');
-		$new_majors = Input::get('major_new');
-		$new_degrees = Input::get('degree_new');
-		$new_situations = Input::get('situation_new');
-		$new_grad_year = Input::get('graduation_year_new');
+		$new_institutes = \Input::get('institute_new');
+		$new_majors = \Input::get('major_new');
+		$new_degrees = \Input::get('degree_new');
+		$new_situations = \Input::get('situation_new');
+		$new_grad_year = \Input::get('graduation_year_new');
 		$total_new_edu = count($new_institutes);
 				
 		for ($i=0; $i<$total_new_edu; $i++)
 		{
-			if(empty(trim($new_institutes))) continue;
+			if(empty(trim($new_institutes[$i]))) continue;
 				
 			$new_edu = new \CandidateEducation();
 				

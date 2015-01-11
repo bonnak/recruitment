@@ -206,7 +206,7 @@
 										<input type="text" class="form-control input-sm" id="graduation_year_new" placeholder="Graduation Date">
 								</td>
 						  		<td style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick" class="btn_add"><i class="glyphicon glyphicon-plus"></i></a>
+						  			<a href="javascript:onclick" id="btn_add_edu"><i class="glyphicon glyphicon-plus"></i></a>
 						  		</td>
 						  	</tr>
 						  </tbody>
@@ -237,37 +237,45 @@
 						  	<tr>						  					  		
 						  		<td>
 						  			<span>{{$work_experience->job_title}}</span>
-						  			<input type="hidden" id="ex_job_title" name="ex_job_title[]" value="{{$work_experience->job_title}}">
+						  			<input type="text" id="ex_job_title" class="form-control input-small hide" name="ex_job_title[]" value="{{$work_experience->job_title}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$work_experience->company_name}}</span>
-						  			<input type="hidden" id="ex_company_name" name="ex_company_name[]" value="{{$work_experience->company_name}}">
+						  			<input type="text" id="ex_company_name" class="form-control input-small hide" name="ex_company_name[]" value="{{$work_experience->company_name}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$work_experience->industry}}</span>
-						  			<input type="hidden" id="ex_industry" name="ex_industry[]" value="{{$work_experience->industry_id}}">
+						  			<select id="ex_industry" class="form-control input-small hide" name="ex_industry[]" value="{{$work_experience->industry_id}}">
+						  			@foreach(\Industry::getIndustries() as $industry)
+										<option value="{{$industry->id}}">{{$industry->name}}</option>
+									@endforeach
+						  			</select>
 						  		</td>
 						  		<td>
 						  			<span>{{$work_experience->location}}</span>
-						  			<input type="hidden" id="ex_location" name="ex_location[]" value="{{$work_experience->location_id}}">
+						  			<select id="ex_location" class="form-control input-small hide" name="ex_location[]" value="{{$work_experience->location_id}}">
+						  			@foreach(\Location::getProvinces_Cities() as $location)
+										<option value="{{$location->id}}">{{$location->name}}</option>
+									@endforeach
+						  			</select>
 						  		</td>
 						  		<td>
 						  			<span>{{$work_experience->from_date}} To {{$work_experience->to_date}}</span>
-						  			<input type="hidden" id="durartion" name="ex_from_date[]" value="{{$work_experience->from_date}}">
-						  			<input type="hidden" id="durartion" name="ex_to_date[]" value="{{$work_experience->to_date}}">
+						  			<input type="text" id="durartion" class="form-control input-small hide" name="ex_from_date[]" value="{{$work_experience->from_date}}" style="width: 45%; float: left; margin-right: 9px;">
+						  			<input type="text" id="durartion" class="form-control input-small hide" name="ex_to_date[]" value="{{$work_experience->to_date}}" style="width: 45%; float: left;">
 						  		</td>
 						  		<td class="td_action" style="text-align: center; vertical-align: middle;">
 						  			<a href="javascript:onclick" class="btn_edit" onclick="edit_row(this)"><i class="glyphicon glyphicon-pencil"></i></a>
 						  			<a href="javascript:onclick" class="btn_delete" onclick="delete_row(this)"><i class="glyphicon glyphicon-remove"></i></a>
-						  			<input type="hidden" name="work_experience_id[]" value="{{$work_experience->id}}">
+						  			<input type="hidden" name="ex_id[]" value="{{$work_experience->id}}">
 						  		</td>						  					  		
 						  	</tr>						  	
 						  	@endforeach	
-						  	<tr>
-						  		<td><input type="text" class="form-control input-sm input-margin" id="job-title_new" name="job-title_new" placeholder="Job Title"></td>
-						  		<td><input type="text" class="form-control input-sm" id="company_new" name="company_new" placeholder="Company"></td>
+						  	<tr class="tr_new">
+						  		<td><input type="text" class="form-control input-sm input-margin" id="ex_job_title_new" placeholder="Job Title"></td>
+						  		<td><input type="text" class="form-control input-sm" id="ex_company_name_new" placeholder="Company"></td>
 						  		<td>
-									<select class="form-control input-sm input-margin" id="ex-industry_new" name="ex-industry_new">
+									<select class="form-control input-sm input-margin" id="ex_industry_new">
 										<option value="">---Industry---</option> 
 										@foreach(\Industry::getIndustries() as $industry)
 											<option value="{{$industry->id}}">{{$industry->name}}</option>
@@ -275,7 +283,7 @@
 									</select>
 								</td>
 						  		<td>
-						  			<select class="sl-location form-control input-sm" id="ex-location_new" name="ex-location_new">
+						  			<select class="sl-location form-control input-sm" id="ex_location_new">
 										<option value="">---Location---</option> 
 										@foreach(\Location::getProvinces_Cities() as $location)
 										<option value="{{$location->id}}">{{$location->name}}</option>
@@ -283,11 +291,11 @@
 									</select>
 						  		</td>
 						  		<td>
-										<input type="text" class="form-control input-sm" id="ex-from-date" name="ex-from-date" placeholder="From" style="width: 45%; float: left; margin-right: 9px;">
-										<input type="text" class="form-control input-sm" id="ex-from-date" name="ex-from-date" placeholder="To" style="width: 45%; float: left;">
+									<input type="text" class="form-control input-sm" id="ex_from_date_new" placeholder="From" style="width: 45%; float: left; margin-right: 9px;">
+									<input type="text" class="form-control input-sm" id="ex_to_date_new" placeholder="To" style="width: 45%; float: left;">
 								</td>
 						  		<td style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-plus"></i></a>
+						  			<a href="javascript:onclick" id="btn_add_ex"><i class="glyphicon glyphicon-plus"></i></a>
 						  		</td>
 						  	</tr>
 						  </tbody>
