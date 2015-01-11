@@ -9,4 +9,5 @@ var edit_row = function(self){
 	
 	$(row).find('span').toggleClass('hide');
 	$(row).find('input').toggleClass('hide');
+	$(row).find('select').toggleClass('hide');
 };

@@ -35,8 +35,8 @@ $(document).on('ready', function(){
 		new_row = '<tr>' +
 				  '<td><span>' + $(edu.institute).val() + '</span><input type="hidden" name="institute_new[]" value="' + $(edu.institute).val() + '"></td>' +
 				  '<td><span>' + $(edu.major).val() + '</span><input type="hidden" name="major_new[]" value="' + $(edu.major).val() + '"></td>' +
-				  '<td><span>' + $(edu.degree).text() + '</span><input type="hidden" name="degree_new[]" value="' + $(edu.degree).val() + '"></td>' +
-				  '<td><span>' + $(edu.situation).text() + '</span><input type="hidden" name="situation_new[]" value="' + $(edu.situation).val() + '"></td>' +
+				  '<td><span>' + ($(edu.degree).val() !== '' ? $(edu.degree).text() : '') + '</span><input type="hidden" name="degree_new[]" value="' + $(edu.degree).val() + '"></td>' +
+				  '<td><span>' + ($(edu.situation).val() !== '' ? $(edu.situation).text() : '') + '</span><input type="hidden" name="situation_new[]" value="' + $(edu.situation).val() + '"></td>' +
 				  '<td><span>' + $(edu.grad_year).val() + '</span><input type="hidden" name="graduation_year_new[]" value="' + $(edu.grad_year).val() + '"></td>' +
 				  '<td class="td_action" style="text-align: center; vertical-align: middle;">' +
 		  				'<a href="javascript:onclick" class="btn_edit"><i class="glyphicon glyphicon-pencil"></i></a>' +

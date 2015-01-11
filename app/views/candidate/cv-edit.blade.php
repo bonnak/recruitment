@@ -158,11 +158,19 @@
 						  		</td>
 						  		<td>
 						  			<span>{{$education->degree}}</span>
-						  			<input type="text" id="degree" class="form-control input-small hide" name="degree[]" value="{{$education->degree_id}}">
+						  			<select id="degree" class="form-control input-small hide" name="degree[]" value="{{$education->degree_id}}">
+						  			@foreach(\Constants::getDegrees() as $degree)
+						  				<option value="{{$degree->id}}">{{$degree->description}}</option>
+						  			@endforeach
+						  			</select>
 						  		</td>
 						  		<td>
 						  			<span>{{$education->situation}}</span>
-						  			<input type="text" id="situation" class="form-control input-small hide" name="situation[]" value="{{$education->situation_id}}">
+						  			<select type="text" id="situation" class="form-control input-small hide" name="situation[]" value="{{$education->situation_id}}">
+						  			@foreach(\Constants::getSchoolingSituations() as $situation)
+						  				<option value="{{$situation->id}}">{{$situation->description}}</option>
+						  			@endforeach
+						  			</select>
 						  		</td>
 						  		<td>
 						  			<span>{{$education->graduation_date}}</span>
@@ -229,11 +237,11 @@
 						  	<tr>						  					  		
 						  		<td>
 						  			<span>{{$work_experience->job_title}}</span>
-						  			<input type="hidden" id="job_title" name="job_title[]" value="{{$work_experience->job_title}}">
+						  			<input type="hidden" id="ex_job_title" name="ex_job_title[]" value="{{$work_experience->job_title}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$work_experience->company_name}}</span>
-						  			<input type="hidden" id="company" name="company[]" value="{{$work_experience->company_name}}">
+						  			<input type="hidden" id="ex_company_name" name="ex_company_name[]" value="{{$work_experience->company_name}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$work_experience->industry}}</span>
@@ -245,11 +253,11 @@
 						  		</td>
 						  		<td>
 						  			<span>{{$work_experience->from_date}} To {{$work_experience->to_date}}</span>
-						  			<input type="hidden" id="durartion" name="experience_from_date[]" value="{{$work_experience->from_date}}">
-						  			<input type="hidden" id="durartion" name="experience_to_date[]" value="{{$work_experience->to_date}}">
+						  			<input type="hidden" id="durartion" name="ex_from_date[]" value="{{$work_experience->from_date}}">
+						  			<input type="hidden" id="durartion" name="ex_to_date[]" value="{{$work_experience->to_date}}">
 						  		</td>
 						  		<td class="td_action" style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick" class="btn_edit"><i class="glyphicon glyphicon-pencil"></i></a>
+						  			<a href="javascript:onclick" class="btn_edit" onclick="edit_row(this)"><i class="glyphicon glyphicon-pencil"></i></a>
 						  			<a href="javascript:onclick" class="btn_delete" onclick="delete_row(this)"><i class="glyphicon glyphicon-remove"></i></a>
 						  			<input type="hidden" name="work_experience_id[]" value="{{$work_experience->id}}">
 						  		</td>						  					  		
