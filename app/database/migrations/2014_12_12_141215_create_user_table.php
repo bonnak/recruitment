@@ -19,6 +19,7 @@ class CreateUserTable extends Migration {
 				$table->tinyInteger ( 'activated' )->default ( 0 );
 				$table->integer ( 'role' )->nullable ();
 				$table->integer ( 'user_type' )->nullable ();
+				$table->integer ( 'term_condition' )->nullable ();
 				$table->string ( 'remember_token' )->nullable ();
 				$table->timestamps ();
 			} );

@@ -29,6 +29,8 @@ class ConstantTableSeeder extends Seeder {
 			['id' => 1, 'term' => 'Full Time'],
 			['id' => 2, 'term' => 'Part Time'],
 			['id' => 3, 'term' => 'Internship'],
+			['id' => 4, 'term' => 'Volunteer'],
+			['id' => 5, 'term' => 'Freelance'],
 		]);
 		
 		// Seed table Degree.

@@ -87,6 +87,28 @@
 					</div>		
 					 <div class="form-group">
 					    <div class="col-sm-offset-4 col-sm-12">
+					      <div>
+					      	<textarea rows="" cols="" class="form-control" style="width: 300px; height: 100px; margin-top: 30px;" disabled>
+					      	dfvkjkljklkjkl
+					      	dfgdv
+					      	fvfd
+					      	fdvdf
+					      	dfvdf
+					      	dfd
+					      	</textarea>
+					      </div>
+					      <div class="checkbox">
+      					  		<label><input type="checkbox" id="term_condition"  name="term_condition">I have read and agreement of term and condition.</label>
+						  </div>
+						  @if($errors->has())
+								<div class="error">								
+									{{$errors->first('term_condition', ':message')}}
+								</div>
+							@endif
+					    </div>
+					 </div>
+					 <div class="form-group">
+					    <div class="col-sm-offset-4 col-sm-12">
 					      <button type="submit" class="btn btn-default">Register</button>
 					    </div>
 					 </div>

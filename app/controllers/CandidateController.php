@@ -173,7 +173,7 @@ class CandidateController extends BaseController
 		
 		$this->postEducation($cv_id);
 		$this->postWorkExperience($cv_id);
-		
+		$this->postSkill($cv_id);		
 		
 		return \Redirect::back();
 	}
@@ -183,6 +183,36 @@ class CandidateController extends BaseController
 		$cvs = CV::getCVList($this->candidate_id);
 		
 		return View::make('candidate.cvs')->with('cvs', $cvs);
+	}
+	
+	private function postSkill($cv_id)
+	{
+		// Edit skill.
+		$skill_ids = \Input::get('skill_id');
+		$skill_name = \Input::get('skill_name');
+		$skill_level = \Input::get('skill_level');
+		$year_experience = \Input::get('year_experience');
+		
+		$db_skills = \CandidateSkill::select('id')->where('cv_id', '=', $cv_id)->get();
+		
+		foreach($db_skills as $db_skill)
+		{
+			if(in_array($db_skill->id, $skill_ids))
+			{
+				$key = array_search($db_skill->id, $skill_ids);
+		
+				$db_skill->name = $skill_name[$key];
+				$db_skill->level_id = $skill_level[$key];
+				$db_skill->y_experience = $year_experience[$key];
+		
+				$db_skill->save();
+			}
+			else
+			{
+				$db_skill->delete();
+			}
+		}
+		
 	}
 	
 	private function postWorkExperience($cv_id)

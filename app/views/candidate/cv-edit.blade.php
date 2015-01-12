@@ -324,36 +324,40 @@
 						  	<tr>						  					  		
 						  		<td>
 						  			<span>{{$skill->name}}</span>
-						  			<input type="hidden"  id="skill" name="skill[]" value="{{$skill->name}}">
+						  			<input type="text" class="form-control input-sm hide" id="skill_name" name="skill_name[]" value="{{$skill->name}}">
 						  		</td>
 						  		<td>
 						  			<span>{{$skill->level}}</span>
-						  			<input type="hidden" id="skill-level" name="skill-level[]" value="{{$skill->level_id}}">
+						  			<select class="form-control input-sm hide" id="skill_level" name="skill_level[]" value="{{$skill->level_id}}">
+										@foreach(\Constants::getLevels() as $level)
+											<option value="{{$level->id}}">{{$level->description}}</option>
+										@endforeach
+									</select>
 						  		</td>
 						  		<td>
 						  			<span>{{$skill->y_experience}}</span>
-						  			<input type="hidden" id="year-experience" name="year-experience[]" value="{{$skill->y_experience}}">
+						  			<input type="text" class="form-control input-sm hide" id="year_experience" name="year_experience[]" value="{{$skill->y_experience}}">
 						  		</td>
-						  		<td  style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-pencil"></i></a>
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-remove"></i></a>
-						  			<input type="hidden" name="work_experience_id[]" value="{{$education->id}}">
+						  		<td class="td_action" style="text-align: center; vertical-align: middle;">
+						  			<a href="javascript:onclick" onclick="edit_row(this)"><i class="glyphicon glyphicon-pencil"></i></a>
+						  			<a href="javascript:onclick" onclick="delete_row(this)"><i class="glyphicon glyphicon-remove"></i></a>
+						  			<input type="hidden" name="skill_id[]" value="{{$skill->id}}">
 						  		</td>						  					  		
 						  	</tr>						  	
 						  	@endforeach	
-						  	<tr>
-						  		<td><input type="text" class="form-control input-sm input-margin" id="institute_new" placeholder="Name"></td>
+						  	<tr class="tr_new">
+						  		<td><input type="text" class="form-control input-sm input-margin" id="skill_name_new" placeholder="Name"></td>
 						  		<td>
-									<select class="form-control input-sm input-margin" id="degree_new">
+									<select class="form-control input-sm input-margin" id="skill_level_new">
 										<option value="">---Level---</option> 
 										@foreach(\Constants::getLevels() as $level)
 											<option value="{{$level->id}}">{{$level->description}}</option>
 										@endforeach
 									</select>
 								</td>
-						  		<td><input type="text" class="form-control input-sm" id="major_new" placeholder="Year of experience"></td>
+						  		<td><input type="text" class="form-control input-sm" id="year_experience_new" placeholder="Year of experience"></td>
 						  		<td style="text-align: center; vertical-align: middle;">
-						  			<a href="javascript:onclick"><i class="glyphicon glyphicon-plus"></i></a>
+						  			<a href="javascript:onclick" id="btn_add_skill"><i class="glyphicon glyphicon-plus"></i></a>
 						  		</td>
 						  	</tr>
 						  </tbody>
