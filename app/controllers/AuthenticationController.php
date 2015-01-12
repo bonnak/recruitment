@@ -102,6 +102,7 @@ class AuthenticationController extends BaseController{
 				'role' 		=> null,
 				'activated'	=> 1
 			]);
+			
 		
 			if($auth_username || $auth_email)
 			{
@@ -117,6 +118,7 @@ class AuthenticationController extends BaseController{
 			}
 			else
 			{
+				
 				return Redirect::route('user.login')->with('global', 'Username or password was incorrect.')->withInput();
 			}
 		}
@@ -150,7 +152,8 @@ class AuthenticationController extends BaseController{
 			'email'				=> 'required|email',
 			'password' 			=> 'required|alpha_num|between:4,12',
 			'password-confirm' 	=> 'required|same:password',
-			'user_type'			=> 'required'
+			'user_type'			=> 'required',
+			'term_condition'	=> 'required'
 		]);
 		
 		// Check input validation.
@@ -194,6 +197,7 @@ class AuthenticationController extends BaseController{
 			$user->password = Hash::make(Input::get('password'));
 			$user->email = Input::get('email');
 			$user->user_type = Input::get('user_type');
+			$user->term_condition = Input::get('term_condition');
 			$user->save();
 			
 			return Redirect::route('user.login')

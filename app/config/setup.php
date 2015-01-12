@@ -35,12 +35,7 @@ return [
 					'Locations' => '#',
 					'Salary' => '#' 
 			],
-			'Career Guide' => [ 
-					'Post Jobs' => '#',
-					'CV Search' => '#',
-					'Purchase Service Packages' => '#',
-					'Manage Jobs' => '#' 
-			],
+			
 			'Feature' => [ 
 					'Companies' => '#',
 					'Agencies' => '#' 
@@ -66,10 +61,9 @@ return [
 					'Application History' => '#' 
 			],
 			'Career Guide' => [ 
-					'Post Jobs' => '#',
-					'CV Search' => '#',
-					'Purchase Service Packages' => '#',
-					'Manage Jobs' => '#' 
+					'How to write CV' => '#',
+					'How to write Cover letter' => '#',
+					'How to apply job' => '#' 
 			],
 			'Feature' => [ 
 					'Companies' => '#',
@@ -81,6 +75,42 @@ return [
 					'Change Password' => '#',
 					'Logout' => URL::route ( 'user.logout' ) 
 			] 
+		]
+	]
+	
+	,
+	
+	'employer'		=>	[
+		'menu'		=>	[
+			'Dashboard' => '#',
+			'CV and Cover Letters' => [
+				'Create a CV' => URL::route ( 'candidate.cv.create' ),
+				'My CV' => URL::route('candidate.cvs'),
+				'Create a Cover Letter' => '#',
+				'My Cover Letter' => '#'
+			],
+			'Jobs' => [
+				'Recommended Jobs' => '#',
+					'Job Alert' => '#',
+					'Saved Jobs' => '#',
+					'Application History' => '#'
+			],
+			'Recruitment' => [
+				'Post Jobs' => '#',
+				'CV Search' => '#',
+				'Purchase Service Packages' => '#',
+				'Manage Jobs' => '#'
+			],
+			'Feature' => [
+				'Companies' => '#',
+				'Agencies' => '#'
+			],
+			'Account Setting' => [
+				'My Profile' => URL::route('candidate.cv.profile'),
+				'Change Email' => '#',
+				'Change Password' => '#',
+				'Logout' => URL::route ( 'user.logout' )
+			]
 		]
 	]
 ];
