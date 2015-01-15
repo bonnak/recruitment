@@ -6,7 +6,7 @@
 	box-sizing: border-box;
 }
 body{	
-	background: #F2F2F2;
+	background: #E8E8E8;
 }
 .container {
 	padding: 0;
@@ -728,4 +728,108 @@ hr#line-break-footer {
 	display: block !important;
 	background-color: rgba(0,0,0,.6);
 	border-radius: 2px;
+}
+
+#cv-edit #profile-card{	
+	line-height: 2em;
+}
+
+#cv-edit #profile-card,
+#cv-edit #back-card{
+	font-size: 14px;
+	background-color: #fff;
+	width: 100%;
+	min-height: 300px;
+	margin-bottom: 10px;
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
+}
+
+#cv-edit #back-card{
+	position: relative;
+	margin-top: 18px;
+	padding-top: 1px;
+	padding-left: 30px;
+	padding-bottom: 20px;
+	padding-right: 20px;
+}
+
+#cv-edit #profile-card #profile-pic{
+	width: 220px;
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+#cv-edit #profile-card .prefix-cv-info,
+#cv-edit #back-card .prefix-cv-info{
+	color: #ccc;
+	margin-right: 17px;
+}
+
+#cv-edit #profile-card #contact-info{
+	padding: 10px 0 20px 30px;
+}
+
+#cv-edit #profile-card #contact-info .item{
+	margin-left: 30px;
+	min-width: 40%;
+}
+
+#cv-edit #back-card .part{
+	font-weight: 100;
+	color: #434649;
+}
+
+#cv-edit #back-card #experience .job-title,
+#cv-edit #back-card #edu .institute{
+	font-weight: 800;
+	color: #434649;
+}
+
+#cv-edit #back-card #experience .items,
+#cv-edit #back-card #edu .items,
+#cv-edit #back-card #skills .items,
+#cv-edit #back-card #languages .items{
+	margin-top: 24px;
+}
+
+#cv-edit #back-card #experience{
+	margin-top: 33px;
+}
+
+#cv-edit #back-card .btn-addnew{
+	color: #434649;
+	padding: 8px 10px 7px;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	background-color: #ECECEC;
+	filter:progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFECECEC', endColorstr='#FFE1E1E1');
+	background-image:-webkit-linear-gradient(top, #ececec 0%,#e1e1e1 100%);
+	background-image:-moz-linear-gradient(top, #ececec 0%,#e1e1e1 100%);
+	background-image:-o-linear-gradient(top, #ececec 0%,#e1e1e1 100%);
+	background-image:linear-gradient(top, #ececec 0%,#e1e1e1 100%);
+}
+
+#cv-edit #back-card .items-control{
+	text-align: right;
+	padding: 15px 0;
+}
+
+#cv-edit #back-card .round-box-wrapper{
+	padding: 8px 10px 7px;
+	border-left: 1px solid #CCC;
+	border-right: 1px solid #CCC;
+	border-bottom: 1px solid #CCC;
+	background-color: #ECECEC;
+	border-radius: 20px;
+}
+
+#cv-edit #back-card #skills .item{
+	float: left;
+	margin-right: 7px;
+}
+
+#cv-edit #back-card #languages .lang{
+	font-size: 18px;
+	color: #434649;
 }
