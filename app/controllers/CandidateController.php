@@ -32,7 +32,7 @@ class CandidateController extends BaseController
 			'desired_salary'			=> 'required',
 		);
 		
-		if(!$this->candidate = Candidate::getProfile($this->candidate_id))
+		if(!$this->candidate = \Candidate::getProfile($this->candidate_id))
 		{
 			$candidate = [
 				'surname' 			=> '',
@@ -148,7 +148,7 @@ class CandidateController extends BaseController
 		$experiences = $cv->workExperience();
 		$skills = $cv->skills();
 		$languages = $cv->languages();	
-		
+		$expectations = $cv->expectation();
 		
 		$candidate = json_decode(json_encode($this->candidate), true);		
 		$candidate['cv'] = json_decode(json_encode($cv), true);
@@ -156,6 +156,10 @@ class CandidateController extends BaseController
 		$candidate['cv']['work_experiences'] = json_decode(json_encode($experiences), true);
 		$candidate['cv']['skills'] = json_decode(json_encode($skills), true);
 		$candidate['cv']['languages'] = json_decode(json_encode($languages), true);
+		$candidate['cv']['expectation'] = $expectations;	
+
+		//dd($candidate['cv']['expectation']);
+		
 		$candidate = json_decode(json_encode($candidate));
 		
 		return View::make('candidate.cv-edit')->with([

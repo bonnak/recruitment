@@ -16,30 +16,27 @@
 						id="last-name">{{$candidate->name}}</span>
 				</h2>
 				<div>
-					<span class="prefix-cv-info">Born</span><span class="cv-info">{{!empty($candidate->date_of_birth)
-						? \Carbon\Carbon::createFromFormat('Y-m-d',
-						$candidate->date_of_birth)->format('Y-F-d') : ''}}</span>
+					<span class="prefix-cv-info">Born</span><span class="cv-info">{{!empty($candidate->date_of_birth) ? \Carbon\Carbon::createFromFormat('Y-m-d', $candidate->date_of_birth)->format('Y-F-d') : ''}}</span>
 				</div>
 				<div>
 					<span class="prefix-cv-info">Gender</span><span class="cv-info">{{Lang::get("local.gender.{$candidate->sex}")}}</span>
 				</div>
 				<div>
 					<span class="prefix-cv-info">Marital Status</span><span
-						class="cv-info">{{Lang::get("local.marital.{$candidate->marital_id}")}}</span>
+						class="cv-info">{{$candidate->marital_status}}</span>
 				</div>
 				<div>
 					<span class="prefix-cv-info">Nationality</span><span
 						class="cv-info">{{$candidate->nationality}}</span>
 				</div>
-			</div>
-		</div>
-		<div id="contact-info" class="clearfix">
-			<h4>Contact Info</h4>
-			<div class="item pull-left">
-				<span class="prefix-cv-info">Email</span><span class="cv-info">{{Auth::user()->email}}</span>
-			</div>
-			<div class="item pull-left">
-				<span class="prefix-cv-info">Phone</span><span class="cv-info">{{$candidate->phone_number}}</span>
+				<div>
+					<span class="prefix-cv-info">Phone</span><span
+						class="cv-info">{{$candidate->phone_number}}</span>
+				</div>
+				<div>
+					<span class="prefix-cv-info">Email</span><span
+						class="cv-info">{{$candidate->email}}</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -84,7 +81,7 @@
 						<span class="cv-info">{{$education->degree}}</span> in <span>{{$education->major}}</span>
 					</div>
 					<div>
-						<span class="cv-info">{{$education->from_year}}-{{$education->grad_year}}</span>
+						<span class="cv-info">{{$education->from_year}} - {{$education->grad_year}}</span>
 					</div>
 				</div>
 				@endforeach
@@ -133,40 +130,58 @@
 		<div>
 			<h3 class="part">Functions</h3>
 			<div>
-				<div class="items">
-					<span class="cv-info">{{$candidate->cv->desired_function}}</span>
+				<div class="items clearfix">
+					@foreach($candidate->cv->expectation->functions as $function)
+					<div class="item round-box-wrapper">
+						<span class="cv-info">{{$function->function}}</span>
+					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
 		<div>
 			<h3 class="part">Industries</h3>
 			<div>
-				<div class="items">
-					<span class="cv-info">{{$candidate->cv->desired_industry}}</span>
+				<div class="items clearfix">
+					@foreach($candidate->cv->expectation->industries as $industry)
+					<div class="item round-box-wrapper">
+						<span class="cv-info">{{$industry->industry}}</span>
+					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
 		<div>
 			<h3 class="part">Locations</h3>
 			<div>
-				<div class="items">
-					<span class="cv-info">{{$candidate->cv->desired_location}}</span>
+				<div class="items clearfix">
+					@foreach($candidate->cv->expectation->locations as $location)
+					<div class="item round-box-wrapper">
+						<span class="cv-info">{{$location->location_id}}</span>
+					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>
 		<div>
 			<h3 class="part">Salary</h3>
 			<div>
-				<div class="items">
-					<span class="cv-info">{{$candidate->cv->desired_salary}}</span>
+				<div class="items clearfix">
+					<div class="item round-box-wrapper">
+						<span class="cv-info">{{$candidate->cv->expectation->salary->min_salary}} - {{$candidate->cv->expectation->salary->max_salary}}</span>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div>
 			<h3 class="part">Terms</h3>
 			<div>
-				<div class="items">
-					<span class="cv-info">{{$candidate->cv->job_term}}</span>
+				<div class="items clearfix">
+					@foreach($candidate->cv->expectation->job_terms as $job_term)
+					<div class="item round-box-wrapper">
+						<span class="cv-info">{{$job_term->term}}</span>
+					</div>
+					@endforeach
 				</div>
 			</div>
 		</div>

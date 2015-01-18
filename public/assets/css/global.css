@@ -741,7 +741,7 @@ hr#line-break-footer {
 	font-size: 14px;
 	background-color: #fff;
 	width: 100%;
-	min-height: 300px;
+	min-height: 280px;
 	margin-bottom: 10px;
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
 }
@@ -769,10 +769,6 @@ hr#line-break-footer {
 #cv-edit #expectation-card .prefix-cv-info{
 	color: #8E8E8E;
 	margin-right: 17px;
-}
-
-#cv-edit #profile-card #contact-info{
-	padding: 10px 0 20px 30px;
 }
 
 #cv-edit #profile-card #contact-info .item{
@@ -821,7 +817,8 @@ hr#line-break-footer {
 	padding: 15px 0;
 }
 
-#cv-edit #back-card .round-box-wrapper{
+#cv-edit #back-card .round-box-wrapper,
+#cv-edit #expectation-card .round-box-wrapper{
 	padding: 8px 10px 7px;
 	border-left: 1px solid #CCC;
 	border-right: 1px solid #CCC;
@@ -830,9 +827,11 @@ hr#line-break-footer {
 	border-radius: 20px;
 }
 
-#cv-edit #back-card #skills .item{
+#cv-edit #back-card #skills .item,
+#cv-edit #expectation-card .item{
 	float: left;
 	margin-right: 7px;
+	margin-bottom: 5px;
 }
 
 #cv-edit #back-card #languages .lang{
