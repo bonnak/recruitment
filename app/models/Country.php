@@ -2,7 +2,7 @@
 
 class Country extends Eloquent 
 {
-	protected $table = 'countries';
+	protected $table = 'constant_countries';
 	public $timestamps = false;
 
 	public static function getNationalities()

@@ -25,11 +25,7 @@ class CV extends Eloquent
 					"id,
 					title,
 					searchable,
-					desired_industry,
-					desired_function,
-					desired_location,
-					desired_salary,
-					job_term"
+					available_datetime"
 				))
 				->where('id', '=', $cv_id)
 				->first();
@@ -41,66 +37,21 @@ class CV extends Eloquent
 
 	public function workExperience()
 	{
-		//return $this->hasMany('CandidateExperience', 'cv_id', 'id')->get();
-		return \CandidateExperience::select(DB::raw(
-										"id,
-										company_name,
-										(SELECT name FROM industries WHERE id = candidate_experiences.industry_id LIMIT 1) industry,
-										(SELECT name FROM functions WHERE id = candidate_experiences.function_id LIMIT 1) function,
-										(SELECT name FROM locations WHERE id = candidate_experiences.location_id LIMIT 1) location,
-										industry_id,
-										function_id,
-										location_id,
-										job_title,
-										from_date,
-										to_date"						
-									))
-									->where('cv_id', '=', $this->id)
-									->get();
+		return \CandidateExperience::getExperience($this->id);
 	}
 	
 	public function education()
 	{
-		return \CandidateEducation::select(DB::raw(
-										"id,
-										institute,
-										major,
-										(SELECT description FROM degree WHERE id = candidate_education.degree_id LIMIT 1) degree,
-										(SELECT description FROM sch_situation WHERE id = candidate_education.situation_id LIMIT 1) situation,
-										degree_id,
-										situation_id,
-										graduation_date"
-									))
-									->where('cv_id', '=', $this->id)
-									->get();
+		return \CandidateEducation::getEducation($this->id);
 	}
 	
 	public function skills()
 	{
-		return \CandidateSkill::select(DB::raw(
-								"id,
-								name,
-								level_id,
-								(SELECT description FROM levels WHERE id = candidate_skills.level_id LIMIT 1) level,
-								y_experience"
-							))
-							->where('cv_id', '=', $this->id)
-							->get();
+		return \CandidateSkill::getSkill($this->id);
 	}
 	
 	public function languages()
 	{
-		return \CandidateLanguage::select(DB::raw(
-										"id,
-										language,
-										(SELECT description FROM levels WHERE id = candidate_languages.speaking_id LIMIT 1) speaking,
-										(SELECT description FROM levels WHERE id = candidate_languages.writing_id LIMIT 1) writing,
-										(SELECT description FROM levels WHERE id = candidate_languages.reading_id LIMIT 1) reading,
-										speaking_id,
-										writing_id,
-										reading_id"
-								))
-								->where('cv_id', '=', $this->id)
-								->get();
+		return \CandidateLanguage::getLanguage($this->id);
 	}
 }

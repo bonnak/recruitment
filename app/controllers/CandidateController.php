@@ -8,15 +8,13 @@ class CandidateController extends BaseController
 	protected $industries;
 	protected $functions;
 	protected $locations;
-	protected $salaries;
 	protected $rules;
 
 	public function __construct() {
 		$this->candidate_id = Auth::user()->id;
 		$this->industries = Industry::get ();
 		$this->functions = Func::get ();
-		$this->locations = Location::get ();
-		$this->salaries = Salary::get ();	
+		$this->locations = Location::get ();	
 		
 		$this->rules = array(
 			'surname'					=> 'required',
@@ -159,9 +157,6 @@ class CandidateController extends BaseController
 		$candidate['cv']['skills'] = json_decode(json_encode($skills), true);
 		$candidate['cv']['languages'] = json_decode(json_encode($languages), true);
 		$candidate = json_decode(json_encode($candidate));
-		
-// 		echo '<pre>', print_r($candidate), '</pre>';
-// 		return;
 		
 		return View::make('candidate.cv-edit')->with([
 				'candidate'	=>	$candidate

@@ -25,7 +25,7 @@
 					<div class="form-group">
 					    <label for="login-username" class="col-sm-4 control-label">User name / Email</label>
 					    <div class="col-sm-8">
-					      <input type="text" class="form-control" id="login-username" name="user_name" >
+					      <input type="text" class="form-control" id="login-username" name="username" >
 					      	@if($errors->has())
 								<div class="error">								
 									{{$errors->first('user_name', ':message')}}

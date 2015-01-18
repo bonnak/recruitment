@@ -60,9 +60,9 @@
 						<span class="prefix-cv-info">Company</span><span class="cv-info">{{$work_experience->company_name}}</span>
 					</div>
 					<div>
-						<span class="prefix-cv-info">From</span><span class="cv-info">{{$work_experience->from_date}}</span><span
+						<span class="prefix-cv-info">From</span><span class="cv-info">{{$work_experience->from_month}}-{{$work_experience->from_year}}</span><span
 							class="prefix-cv-info" style="margin-left: 13px;">To</span><span
-							class="cv-info">{{$work_experience->to_date}}</span>
+							class="cv-info">{{$work_experience->to_month}}-{{$work_experience->to_year}}</span>
 					</div>
 					<div>
 						<span class="prefix-cv-info">Locate in</span><span class="cv-info">{{$work_experience->location}}</span>
@@ -84,7 +84,7 @@
 						<span class="cv-info">{{$education->degree}}</span> in <span>{{$education->major}}</span>
 					</div>
 					<div>
-						<span class="cv-info">{{$education->graduation_date}}</span>
+						<span class="cv-info">{{$education->from_year}}-{{$education->grad_year}}</span>
 					</div>
 				</div>
 				@endforeach
@@ -101,7 +101,7 @@
 					<div class="item round-box-wrapper">
 						<div>
 							<span class="cv-info">{{$skill->name}}</span>&nbsp;&nbsp;&nbsp;<span
-								class="text-muted">{{$skill->level}} ({{$skill->y_experience}}years)</span>
+								class="text-muted">{{$skill->level}} ({{$skill->year_experience}}years)</span>
 						</div>
 					</div>
 					@endforeach

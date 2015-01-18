@@ -33,7 +33,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		$user_exist = DB::table('users')
 						->select(DB::raw('COUNT(*) as `ex`'))
-						->where('user_name', '=', $user_name)
+						->where('username', '=', $user_name)
 						->first();
 		return (bool) $user_exist->ex;
 	}

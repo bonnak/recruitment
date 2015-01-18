@@ -2,7 +2,7 @@
 
 class Location extends Eloquent 
 {
-	protected $table = 'locations';
+	protected $table = 'constant_locations';
 	protected $fillable = ['name', 'type', 'created_at', 'updated_at'];
 	
 	public static function getProvinces_Cities()

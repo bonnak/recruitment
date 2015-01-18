@@ -6,6 +6,9 @@ class Candidate extends Eloquent
 	
 	public static function getProfile($id)
 	{	
+		$tbl_country = (new \Country)->getTable();
+		$tbl_location = (new \Location)->getTable();
+		
 		$profile = DB::table('candidates AS c')
 				->select(DB::raw(
 					"surname,
@@ -14,10 +17,10 @@ class Candidate extends Eloquent
 					date_of_birth,
 					marital_id,
 					nationality_id,
-					(SELECT nationality FROM countries WHERE id = c.nationality_id LIMIT 1) nationality,
+					(SELECT nationality FROM {$tbl_country} WHERE id = c.nationality_id LIMIT 1) nationality,
 					phone_number,
-					residence_id,
-					(SELECT name FROM locations WHERE id = c.residence_id LIMIT 1) residence,
+					city_province_id,
+					(SELECT name FROM {$tbl_location} WHERE id = c.city_province_id LIMIT 1) city_province,
 					address"
 				))
 				->where('id', '=', $id)

@@ -42,7 +42,6 @@
 										href="#category">Categories</a></li>
 									<li role="presentation" data-toggle="tab"><a href="#industry">Industries</a></li>
 									<li role="presentation" data-toggle="tab"><a href="#location">Locations</a></li>
-									<li role="presentation" data-toggle="tab"><a href="#salary">Salaries</a></li>
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active" id="category">
@@ -74,17 +73,6 @@
 													<span class="text">
 													<a href="https://camupjob.com/location-1-phnom-penh">{{$location->name}}</a>
 													</span> <span class="counter badge"><em>576</em></span>
-												</li>
-											@endforeach
-										</ul>
-									</div>
-									<div class="tab-pane" id="salary">
-										<ul>
-											@foreach($salaries as $salary)
-												<li>
-													<span class="text">
-													<a href="https://camupjob.com/salary-4000">${{$salary->min}} - {{!$salary->max ? 'Up' : '$' . $salary->max}}</a></span>
-													<span class="counter badge"><em>1</em></span>
 												</li>
 											@endforeach
 										</ul>

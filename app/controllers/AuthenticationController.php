@@ -75,11 +75,11 @@ class AuthenticationController extends BaseController{
 	
 	public function postUserLogin()
 	{
-		$username = Input::get('user_name');
+		$username = Input::get('username');
 		$password = Input::get('password');
 		
 		$validator = Validator::make(Input::all(), [
-			'user_name' => 'required',
+			'username' => 'required',
 			'password' => 'required'
 		]);
 		
@@ -90,7 +90,7 @@ class AuthenticationController extends BaseController{
 		else
 		{
 			$auth_username = Auth::attempt([
-				'user_name'	=> $username,
+				'username'	=> $username,
 				'password'	=> $password,
 				'role' 		=> null,
 				'activated'	=> 1
