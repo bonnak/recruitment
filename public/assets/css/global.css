@@ -735,7 +735,9 @@ hr#line-break-footer {
 }
 
 #cv-edit #profile-card,
-#cv-edit #back-card{
+#cv-edit #back-card,
+#cv-edit #expectation-card,
+#cv-edit #ref-card{
 	font-size: 14px;
 	background-color: #fff;
 	width: 100%;
@@ -744,13 +746,16 @@ hr#line-break-footer {
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
 }
 
-#cv-edit #back-card{
+#cv-edit #back-card,
+#cv-edit #expectation-card,
+#cv-edit #ref-card{
 	position: relative;
 	margin-top: 18px;
 	padding-top: 1px;
 	padding-left: 30px;
 	padding-bottom: 20px;
 	padding-right: 20px;
+	overflow: hidden;
 }
 
 #cv-edit #profile-card #profile-pic{
@@ -760,8 +765,9 @@ hr#line-break-footer {
 }
 
 #cv-edit #profile-card .prefix-cv-info,
-#cv-edit #back-card .prefix-cv-info{
-	color: #ccc;
+#cv-edit #back-card .prefix-cv-info,
+#cv-edit #expectation-card .prefix-cv-info{
+	color: #8E8E8E;
 	margin-right: 17px;
 }
 
@@ -830,6 +836,20 @@ hr#line-break-footer {
 }
 
 #cv-edit #back-card #languages .lang{
-	font-size: 18px;
+	font-size: 16px;
 	color: #434649;
+}
+
+#cv-edit #back-card .card-article,
+#cv-edit #expectation-card .card-article,
+#cv-edit #ref-card .card-article{
+	display: block;
+	font-size: 13px;
+	color: #fff;
+	background-color: #434649;
+	padding: 5px 0;
+	text-align: center;
+	margin-left: -50px;
+	margin-right: -50px;
+	margin-top: -1px;
 }
