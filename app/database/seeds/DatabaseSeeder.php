@@ -14,9 +14,6 @@ class DatabaseSeeder extends Seeder {
 		$this->call('ConstantTableSeeder');
 		$this->call('UserTableSeeder');
 		$this->call('CVTableSeeder');
-// 		$this->call('WorkExperienceTableSeeder');
-// 		$this->call('CandidateEducationTableSeeder');
-// 		$this->call('CandidateLanguageAndSkillTableSeeder');
 	}
 
 }
