@@ -3,7 +3,7 @@
 class CV extends Eloquent 
 {
 	protected $table = 'cv';
-	
+		
 	public static function getCVList($candidate_id)
 	{
 		$cv_list = DB::table('cv')
