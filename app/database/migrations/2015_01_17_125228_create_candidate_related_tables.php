@@ -18,7 +18,8 @@ class CreateCandidateRelatedTables extends Migration {
 			$table->bigInteger('candidate_id');
 			$table->string('title');
 			$table->tinyInteger('searchable')->default(1);
-			$table->text('reference')->nullable();
+			$table->longText('reference')->nullable();
+			$table->longText('summary')->nullable();
 			$table->datetime('available_datetime')->nullable();
 			$table->timestamps();
 		});

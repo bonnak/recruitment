@@ -25,6 +25,8 @@ class CV extends Eloquent
 					"id,
 					title,
 					searchable,
+					summary,
+					reference,
 					available_datetime"
 				))
 				->where('id', '=', $cv_id)
@@ -70,7 +72,10 @@ class CV extends Eloquent
 								 CASE WHEN min is null THEN 'Below' ELSE min END min_salary, 
 								 CASE WHEN max is null THEN 'Up' ELSE max END max_salary"
 						))->where('cv_id', '=', $this->id)->first();
-		$exp_locations = \DB::table('can_exp_locations as cl')->where('cv_id', '=', $this->id)->get();
+		$exp_locations = \DB::table('can_exp_locations as cl')->select(DB::raw(
+								"location_id,
+								(SELECT name FROM constant_locations WHERE id = cl.location_id LIMIT 1) location"
+						))->where('cv_id', '=', $this->id)->get();
 		$exp_job_terms = \DB::table('can_exp_job_terms as cjt')->select(DB::raw(
 								"*,
 								(SELECT term FROM constant_job_terms WHERE id = cjt.term_id LIMIT 1) term"
