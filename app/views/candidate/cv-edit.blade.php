@@ -68,21 +68,85 @@
 				<div>
 					@foreach($candidate->cv->work_experiences as $work_experience)
 					<div class="items">
-						<h4 class="job-title">{{$work_experience->job_title}}</h4>
-						<div>
-							<span class="prefix-cv-info">Company</span><span class="cv-info">{{$work_experience->company_name}}</span>
+						<h4 class="job-title">{{$work_experience->job_title}}</h4>						
+						<div class="content-show">
+							<div>
+								<span class="prefix-cv-info">Company</span><span class="cv-info">{{$work_experience->company_name}}</span>
+							</div>
+							<div>
+								<span class="prefix-cv-info">From</span><span class="cv-info">{{!empty($work_experience->from_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->from_month, 1, $work_experience->from_year)) : ''}}</span><span
+									class="prefix-cv-info" style="margin-left: 13px;">To</span><span
+									class="cv-info">{{!empty($work_experience->to_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->to_month, 1, $work_experience->to_year)) : 'Present'}}</span>
+							</div>
+							<div>
+								<span class="prefix-cv-info">Locate in</span><span class="cv-info">{{$work_experience->location}}</span>
+							</div>										
+							<div class="card-btn-group">							
+								<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
+								<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+							</div>
 						</div>
-						<div>
-							<span class="prefix-cv-info">From</span><span class="cv-info">{{!empty($work_experience->from_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->from_month, 1, $work_experience->from_year)) : ''}}</span><span
-								class="prefix-cv-info" style="margin-left: 13px;">To</span><span
-								class="cv-info">{{!empty($work_experience->to_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->to_month, 1, $work_experience->to_year)) : 'Present'}}</span>
-						</div>
-						<div>
-							<span class="prefix-cv-info">Locate in</span><span class="cv-info">{{$work_experience->location}}</span>
-						</div>										
-						<div class="card-btn-group">							
-							<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-							<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+						<div class="form-edit hide">
+							{{\Form::open(['route' => ['candidate.cv.edit.summary.put', $candidate->cv->id],  'method' => 'put', 'data-id' => $candidate->cv->id, 'class' => 'form-horizontal'])}}
+								<div class="form-group">
+									<label for="job-title" class="col-sm-3 control-label">Job Title</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="job-title" value="{{$work_experience->job_title}}">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="company-name" class="col-sm-3 control-label">Company name</label>
+								    <div class="col-sm-5">
+								      <input type="text" class="form-control" id="company-name" value="{{$work_experience->company_name}}">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="company-name" class="col-sm-3 control-label">Duration</label>
+								    <div class="col-sm-9">
+								      <div class="pull-left clearfix">
+								      	<select type="text" class="form-control pull-left" id="company-name" style="width: 120px;">
+								      		<option value="">---Month--</option>
+								      		<option value="1" {{$work_experience->from_month !== null ? 'selected' : ''}}>January</option>
+								      		<option value="2" {{$work_experience->from_month !== null ? 'selected' : ''}}>February</option>
+								      		<option value="3" {{$work_experience->from_month !== null ? 'selected' : ''}}>March</option>
+								      		<option value="4" {{$work_experience->from_month !== null ? 'selected' : ''}}>April</option>
+								      		<option value="5" {{$work_experience->from_month !== null ? 'selected' : ''}}>May</option>
+								      		<option value="6" {{$work_experience->from_month !== null ? 'selected' : ''}}>June</option>
+								      		<option value="7" {{$work_experience->from_month !== null ? 'selected' : ''}}>July</option>
+								      		<option value="8" {{$work_experience->from_month !== null ? 'selected' : ''}}>August</option>
+								      		<option value="9" {{$work_experience->from_month !== null ? 'selected' : ''}}>September</option>
+								      		<option value="10" {{$work_experience->from_month !== null ? 'selected' : ''}}>October</option>
+								      		<option value="11" {{$work_experience->from_month !== null ? 'selected' : ''}}>November</option>
+								      		<option value="12" {{$work_experience->from_month !== null ? 'selected' : ''}}>December</option>
+								      	</select>
+								      	<input type="text" class="form-control pull-left" id="company-name" value="{{$work_experience->from_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
+								      </div> 
+								      <div class="pull-left" style="padding-top: 6px; font-weight: 600;">&nbsp;&nbsp;To&nbsp;&nbsp;</div>
+								      <div class="pull-left clearfix">
+								      	<select type="text" class="form-control pull-left" id="company-name" style="width: 120px;">
+								      		<option value="">---Month--</option>
+								      		<option value="1" {{$work_experience->to_month !== null ? 'selected' : ''}}>January</option>
+								      		<option value="2" {{$work_experience->to_month !== null ? 'selected' : ''}}>February</option>
+								      		<option value="3" {{$work_experience->to_month !== null ? 'selected' : ''}}>March</option>
+								      		<option value="4" {{$work_experience->to_month !== null ? 'selected' : ''}}>April</option>
+								      		<option value="5" {{$work_experience->to_month !== null ? 'selected' : ''}}>May</option>
+								      		<option value="6" {{$work_experience->to_month !== null ? 'selected' : ''}}>June</option>
+								      		<option value="7" {{$work_experience->to_month !== null ? 'selected' : ''}}>July</option>
+								      		<option value="8" {{$work_experience->to_month !== null ? 'selected' : ''}}>August</option>
+								      		<option value="9" {{$work_experience->to_month !== null ? 'selected' : ''}}>September</option>
+								      		<option value="10" {{$work_experience->to_month !== null ? 'selected' : ''}}>October</option>
+								      		<option value="11" {{$work_experience->to_month !== null ? 'selected' : ''}}>November</option>
+								      		<option value="12" {{$work_experience->to_month !== null ? 'selected' : ''}}>December</option>
+								      	</select>
+								      	<input type="text" class="form-control pull-left" id="company-name" value="{{$work_experience->to_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
+								      </div>
+								    </div>
+								</div>
+								<div class="form-group opt-controls">
+							      <button type="button" class="btn btn-primary btn-save">Save</button>
+							      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
+							  </div>
+						  {{\Form::close()}}
 						</div>
 					</div>	
 					@endforeach

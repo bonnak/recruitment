@@ -7639,3 +7639,7 @@ Stack trace:
 #19 C:\wamp\www\recruitment\public\index.php(49): Illuminate\Foundation\Application->run()
 #20 C:\wamp\www\recruitment\server.php(19): require_once('C:\\wamp\\www\\rec...')
 #21 {main} [] []
+[2015-01-24 17:46:05] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'class' (T_CLASS), expecting ']'' in C:\wamp\www\recruitment\app\storage\views\e1064bcbd1b0f2a6a12daaf9cd0537de:92
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

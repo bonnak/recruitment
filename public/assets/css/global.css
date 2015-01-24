@@ -803,6 +803,7 @@ hr#line-break-footer {
 #cv-edit #expectation-card .part{
 	font-weight: 600;
 	color: #434649;
+	margin-top: 30px;
 }
 
 #cv-edit #back-card #experience .job-title,

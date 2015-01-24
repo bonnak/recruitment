@@ -3,9 +3,8 @@ $(document).on('ready', function(){
 	$('#cv-edit #summary .btn-edit-cv').on('click', function(e){
 		e.preventDefault();
 		
-		var summary = $(this).parents('#summary'),
-			content_show = $(summary).children('.content-show'),
-			form_edit = $(summary).children('.form-edit');
+		var content_show =  $(this).parents('.content-show'),
+			form_edit = $(content_show).siblings('.form-edit');
 		
 		$(content_show).addClass('hide');
 		$(form_edit).removeClass('hide');
@@ -48,6 +47,25 @@ $(document).on('ready', function(){
 			$(content_show).removeClass('hide');
 			$(form_edit).addClass('hide');
 		});	
+	});
+	
+	
+	
+	$('#cv-edit #experience .btn-edit-cv').on('click', function(e){
+		e.preventDefault();
+		
+		var content_show =  $(this).parents('.content-show'),
+			form_edit = $(content_show).siblings('.form-edit');
+				
+		$(content_show).addClass('hide');
+		$(form_edit).removeClass('hide');
+	});	
+	$('#cv-edit #experience .form-edit .btn-cancel').on('click', function(){
+		var form_edit =  $(this).parents('.form-edit'),
+			content_show = $(form_edit).siblings('.content-show');
+		
+		$(content_show).removeClass('hide');
+		$(form_edit).addClass('hide');
 	});
 	/********************/
 });
