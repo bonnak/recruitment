@@ -332,4 +332,21 @@ class CandidateController extends BaseController
 			$new_edu->save();
 		}
 	}
+	
+	public function postCVEditSummary($id)
+	{
+		
+		if($cv = \CV::find($id))
+		{
+			$cv->summary = htmlentities(\Input::get('summary'));
+			$cv->save();
+			
+			return ['summary' => \Input::get('summary')];
+		}
+		else 
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
+		}
+				
+	}
 }

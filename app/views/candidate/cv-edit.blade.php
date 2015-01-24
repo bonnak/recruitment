@@ -39,19 +39,27 @@
 				</div>
 			</div>
 		</div>
-		<div class="card-btn-group">
-			<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
-		</div>
 	</div>
 	<div id="back-card">
 		<span class="card-article">Backgound</span>
-		<div id="summary">
-			<div>
-				<h3 class="part">Summary</h3>
-				<p>{{$candidate->cv->summary}}</p>
+		<div id="summary">			
+			<h3 class="part">Summary</h3>
+			<div class="content-show clearfix">
+				<p>{{nl2br($candidate->cv->summary)}}</p>
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+				</div>
 			</div>
-			<div class="card-btn-group">
-				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+			<div class="form-edit hide">
+				{{\Form::open(['route' => ['candidate.cv.edit.summary.put', $candidate->cv->id],  'method' => 'put', 'data-id' => $candidate->cv->id])}}
+					<div class="form-group">
+						<textarea name="cv-summary">{{$candidate->cv->summary}}</textarea>
+					</div>
+					<div class="form-group opt-controls">
+				      <button type="button" class="btn btn-primary btn-save">Save</button>
+				      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
+				  </div>
+			  {{\Form::close()}}
 			</div>
 		</div>
 		<div id="experience">
@@ -71,13 +79,14 @@
 						</div>
 						<div>
 							<span class="prefix-cv-info">Locate in</span><span class="cv-info">{{$work_experience->location}}</span>
+						</div>										
+						<div class="card-btn-group">							
+							<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
 						</div>
-					</div>
+					</div>	
 					@endforeach
 				</div>
-			</div>
-			<div class="card-btn-group">
-				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
 			</div>
 		</div>
 		<div id="edu">
@@ -92,11 +101,12 @@
 					<div>
 						<span class="cv-info">{{$education->from_year}} - {{$education->grad_year}}</span>
 					</div>
+					<div class="card-btn-group">
+						<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
+						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					</div>
 				</div>
 				@endforeach
-			</div>
-			<div class="card-btn-group">
-				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
 			</div>
 		</div>
 		<div id="skills">
@@ -116,6 +126,7 @@
 				</div>
 			</div>
 			<div class="card-btn-group">
+				<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
 				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
 			</div>
 		</div>
@@ -134,6 +145,7 @@
 				</div>
 			</div>
 			<div class="card-btn-group">
+				<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
 				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
 			</div>
 		</div>
@@ -141,7 +153,7 @@
 	<div id="expectation-card">
 		<span class="card-article">Expectation</span>
 		<div>
-			<div>
+			<div class="items">
 				<h3 class="part">Functions</h3>
 				<div>
 					<div class="items clearfix">
@@ -152,8 +164,11 @@
 						@endforeach
 					</div>
 				</div>
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				</div>
 			</div>
-			<div>
+			<div class="items">
 				<h3 class="part">Industries</h3>
 				<div>
 					<div class="items clearfix">
@@ -164,8 +179,11 @@
 						@endforeach
 					</div>
 				</div>
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				</div>
 			</div>
-			<div>
+			<div class="items">
 				<h3 class="part">Locations</h3>
 				<div>
 					<div class="items clearfix">
@@ -176,8 +194,11 @@
 						@endforeach
 					</div>
 				</div>
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				</div>
 			</div>
-			<div>
+			<div class="items">
 				<h3 class="part">Salary</h3>
 				<div>
 					<div class="items clearfix">
@@ -186,8 +207,11 @@
 						</div>
 					</div>
 				</div>
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				</div>
 			</div>
-			<div>
+			<div class="items">
 				<h3 class="part">Terms</h3>
 				<div>
 					<div class="items clearfix">
@@ -198,16 +222,21 @@
 						@endforeach
 					</div>
 				</div>
-			</div>
-			<div class="card-btn-group">
-				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				</div>
 			</div>
 		</div>		
 	</div>
 	<div id="ref-card">
-		<span class="card-article">Reference</span>
-		<div>
-			<p>{{$candidate->cv->reference}}</p>
+		<div class="items">
+			<span class="card-article">Reference</span>
+			<div class="items">
+				<p>{{$candidate->cv->reference}}</p>			
+			</div>
+			<div class="card-btn-group">
+				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+			</div>
 		</div>
 	</div>
 </div>

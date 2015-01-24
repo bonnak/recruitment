@@ -23,6 +23,7 @@ Route::group(['before' => 'auth'], function (){
 	Route::post('/user/candidate/cv/create', ['as' => 'candidate.cv.create.post', 'uses' => 'CandidateController@postCVCreate']);
 	Route::get('/user/candidate/cv/edit/{id}', ['as' => 'candidate.cv.create.edit', 'uses' => 'CandidateController@getCVEdit']);
 	Route::post('/user/candidate/cv/edit/{id}', ['as' => 'candidate.cv.create.edit.post', 'uses' => 'CandidateController@postCVEdit']);
+	Route::put('/user/candidate/cv/edit/{id}/summary', ['as' => 'candidate.cv.edit.summary.put', 'uses' => 'CandidateController@postCVEditSummary']);
 	
 	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);
 });
@@ -48,3 +49,19 @@ Route::group(['before' => 'csrf'], function(){
 	Route::post('login', ['as' => 'user.login.post', 'uses' => 'AuthenticationController@postUserLogin']);
 	Route::post('register', ['as' => 'user.register.post', 'uses' => 'AuthenticationController@postUserRegister']);
 });
+
+// App::missing(function($exception)
+// {
+// 	//return Response::view('errors.missing', array(), 404);
+// 	return ['er' => '123'];
+// });
+
+// App::error(function(Exception $exception)
+// {
+// 	return [
+// 		'error' => [
+// 			'code' => $exception->getCode(),
+// 			'message' => $exception->getMessage(),
+// 		]
+// 	];
+// });
