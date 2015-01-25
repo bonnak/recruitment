@@ -24,6 +24,7 @@ class CandidateExperience extends Eloquent
 								industry_id,
 								function_id,
 								location_id,
+								job_description,
 								from_month,
 								from_year,
 								to_month,

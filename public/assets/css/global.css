@@ -952,18 +952,28 @@ hr#line-break-footer {
 	margin-bottom: 7px;
 }
 #cv-edit .form-edit .opt-controls{
+	margin-top: 15px;
 	text-align: right;
+}
+
+#cv-edit .form-edit textarea,
+#cv-edit .form-edit input,
+#cv-edit .form-edit select{	
+	border: 1px solid #ccc;
 }
 
 #cv-edit .form-edit textarea{
 	width: 100%;
 	min-height: 100px;
-	border: 1px solid #ccc;
 }
 
-#cv-edit .form-edit textarea:focus{
+#cv-edit .form-edit textarea:focus,
+#cv-edit .form-edit input:focus,
+#cv-edit .form-edit select:focus{
 	outline: none;
 	border-color: #999;
+	-webkit-box-shadow: none;
+	box-shadow: none;
 }
 
 #cv-edit .form-edit .btn{

@@ -51,11 +51,11 @@
 				</div>
 			</div>
 			<div class="form-edit hide">
-				{{\Form::open(['route' => ['candidate.cv.edit.summary.put', $candidate->cv->id],  'method' => 'put', 'data-id' => $candidate->cv->id])}}
+				{{\Form::open(['route' => ['candidate.cv.edit.summary.put', $candidate->cv->id],  'method' => 'put'])}}
 					<div class="form-group">
-						<textarea name="cv-summary">{{$candidate->cv->summary}}</textarea>
+					      <textarea class="form-control" id="ex-summary">{{$candidate->cv->summary}}</textarea>
 					</div>
-					<div class="form-group opt-controls">
+					<div class="opt-controls">
 				      <button type="button" class="btn btn-primary btn-save">Save</button>
 				      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
 				  </div>
@@ -67,19 +67,27 @@
 				<h3 class="part">Experience</h3>
 				<div>
 					@foreach($candidate->cv->work_experiences as $work_experience)
-					<div class="items">
-						<h4 class="job-title">{{$work_experience->job_title}}</h4>						
+					<div class="items">						
 						<div class="content-show">
+							<h4 id="span-job-title" class="job-title">{{$work_experience->job_title}}</h4>
 							<div>
-								<span class="prefix-cv-info">Company</span><span class="cv-info">{{$work_experience->company_name}}</span>
+								<span class="prefix-cv-info">Company</span><span id="span-company-name" class="cv-info">{{$work_experience->company_name}}</span>
 							</div>
 							<div>
-								<span class="prefix-cv-info">From</span><span class="cv-info">{{!empty($work_experience->from_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->from_month, 1, $work_experience->from_year)) : ''}}</span><span
-									class="prefix-cv-info" style="margin-left: 13px;">To</span><span
-									class="cv-info">{{!empty($work_experience->to_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->to_month, 1, $work_experience->to_year)) : 'Present'}}</span>
+								<span class="prefix-cv-info">From</span>
+								<span id="span-from-date" class="cv-info" data-date="{{!empty($work_experience->from_year) ? ($work_experience->from_month . '-' . $work_experience->from_year) : ''}}">
+									{{!empty($work_experience->from_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->from_month, 1, $work_experience->from_year)) : ''}}
+								</span>
+								<span class="prefix-cv-info" style="margin-left: 13px;">To</span>
+								<span id="span-to-date" class="cv-info" data-date="{{!empty($work_experience->to_year) ? ($work_experience->to_month . '-' . $work_experience->to_year) : ''}}">
+									{{!empty($work_experience->to_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->to_month, 1, $work_experience->to_year)) : 'Present'}}
+								</span>
 							</div>
 							<div>
 								<span class="prefix-cv-info">Locate in</span><span class="cv-info">{{$work_experience->location}}</span>
+							</div>										
+							<div>
+								<p id="span-job-description">{{$work_experience->job_description}}</p>
 							</div>										
 							<div class="card-btn-group">							
 								<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
@@ -87,62 +95,74 @@
 							</div>
 						</div>
 						<div class="form-edit hide">
-							{{\Form::open(['route' => ['candidate.cv.edit.summary.put', $candidate->cv->id],  'method' => 'put', 'data-id' => $candidate->cv->id, 'class' => 'form-horizontal'])}}
+							{{\Form::open(['route' => ['candidate.cv.edit.experience.put', $candidate->cv->id, $work_experience->id],  'method' => 'put', 'class' => 'form-horizontal'])}}
 								<div class="form-group">
-									<label for="job-title" class="col-sm-3 control-label">Job Title</label>
+									<label for="input-job-title" class="col-sm-3 control-label">Job Title</label>
 								    <div class="col-sm-8">
-								      <input type="text" class="form-control" id="job-title" value="{{$work_experience->job_title}}">
+								      <input type="text" class="form-control" id="input-job-title" value="{{$work_experience->job_title}}">
 								    </div>
 								</div>
 								<div class="form-group">
-									<label for="company-name" class="col-sm-3 control-label">Company name</label>
+									<label for="input-company-name" class="col-sm-3 control-label">Company name</label>
 								    <div class="col-sm-5">
-								      <input type="text" class="form-control" id="company-name" value="{{$work_experience->company_name}}">
+								      <input type="text" class="form-control" id="input-company-name" value="{{$work_experience->company_name}}">
 								    </div>
 								</div>
 								<div class="form-group">
-									<label for="company-name" class="col-sm-3 control-label">Duration</label>
+									<label class="col-sm-3 control-label">Duration</label>
 								    <div class="col-sm-9">
 								      <div class="pull-left clearfix">
-								      	<select type="text" class="form-control pull-left" id="company-name" style="width: 120px;">
+								      	<select type="text" class="form-control pull-left" id="ex-from-month" name="ex-from-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
-								      		<option value="1" {{$work_experience->from_month !== null ? 'selected' : ''}}>January</option>
-								      		<option value="2" {{$work_experience->from_month !== null ? 'selected' : ''}}>February</option>
-								      		<option value="3" {{$work_experience->from_month !== null ? 'selected' : ''}}>March</option>
-								      		<option value="4" {{$work_experience->from_month !== null ? 'selected' : ''}}>April</option>
-								      		<option value="5" {{$work_experience->from_month !== null ? 'selected' : ''}}>May</option>
-								      		<option value="6" {{$work_experience->from_month !== null ? 'selected' : ''}}>June</option>
-								      		<option value="7" {{$work_experience->from_month !== null ? 'selected' : ''}}>July</option>
-								      		<option value="8" {{$work_experience->from_month !== null ? 'selected' : ''}}>August</option>
-								      		<option value="9" {{$work_experience->from_month !== null ? 'selected' : ''}}>September</option>
-								      		<option value="10" {{$work_experience->from_month !== null ? 'selected' : ''}}>October</option>
-								      		<option value="11" {{$work_experience->from_month !== null ? 'selected' : ''}}>November</option>
-								      		<option value="12" {{$work_experience->from_month !== null ? 'selected' : ''}}>December</option>
+								      		<option value="1" {{$work_experience->from_month == 1 ? 'selected' : ''}}>January</option>
+								      		<option value="2" {{$work_experience->from_month == 2 ? 'selected' : ''}}>February</option>
+								      		<option value="3" {{$work_experience->from_month == 3 ? 'selected' : ''}}>March</option>
+								      		<option value="4" {{$work_experience->from_month == 4 ? 'selected' : ''}}>April</option>
+								      		<option value="5" {{$work_experience->from_month == 5 ? 'selected' : ''}}>May</option>
+								      		<option value="6" {{$work_experience->from_month == 6 ? 'selected' : ''}}>June</option>
+								      		<option value="7" {{$work_experience->from_month == 7 ? 'selected' : ''}}>July</option>
+								      		<option value="8" {{$work_experience->from_month == 8 ? 'selected' : ''}}>August</option>
+								      		<option value="9" {{$work_experience->from_month == 9 ? 'selected' : ''}}>September</option>
+								      		<option value="10" {{$work_experience->from_month == 10 ? 'selected' : ''}}>October</option>
+								      		<option value="11" {{$work_experience->from_month == 11 ? 'selected' : ''}}>November</option>
+								      		<option value="12" {{$work_experience->from_month == 12 ? 'selected' : ''}}>December</option>
 								      	</select>
-								      	<input type="text" class="form-control pull-left" id="company-name" value="{{$work_experience->from_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
+								      	<input type="text" class="form-control pull-left" id="ex-from-year" name="ex-from-year" value="{{$work_experience->from_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
 								      </div> 
 								      <div class="pull-left" style="padding-top: 6px; font-weight: 600;">&nbsp;&nbsp;To&nbsp;&nbsp;</div>
 								      <div class="pull-left clearfix">
-								      	<select type="text" class="form-control pull-left" id="company-name" style="width: 120px;">
+								      	<select type="text" class="form-control pull-left" id="ex-to-month" name="ex-to-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
-								      		<option value="1" {{$work_experience->to_month !== null ? 'selected' : ''}}>January</option>
-								      		<option value="2" {{$work_experience->to_month !== null ? 'selected' : ''}}>February</option>
-								      		<option value="3" {{$work_experience->to_month !== null ? 'selected' : ''}}>March</option>
-								      		<option value="4" {{$work_experience->to_month !== null ? 'selected' : ''}}>April</option>
-								      		<option value="5" {{$work_experience->to_month !== null ? 'selected' : ''}}>May</option>
-								      		<option value="6" {{$work_experience->to_month !== null ? 'selected' : ''}}>June</option>
-								      		<option value="7" {{$work_experience->to_month !== null ? 'selected' : ''}}>July</option>
-								      		<option value="8" {{$work_experience->to_month !== null ? 'selected' : ''}}>August</option>
-								      		<option value="9" {{$work_experience->to_month !== null ? 'selected' : ''}}>September</option>
-								      		<option value="10" {{$work_experience->to_month !== null ? 'selected' : ''}}>October</option>
-								      		<option value="11" {{$work_experience->to_month !== null ? 'selected' : ''}}>November</option>
-								      		<option value="12" {{$work_experience->to_month !== null ? 'selected' : ''}}>December</option>
+								      		<option value="1" {{$work_experience->to_month ==  1 ? 'selected' : ''}}>January</option>
+								      		<option value="2" {{$work_experience->to_month ==  2 ? 'selected' : ''}}>February</option>
+								      		<option value="3" {{$work_experience->to_month ==  3 ? 'selected' : ''}}>March</option>
+								      		<option value="4" {{$work_experience->to_month ==  4 ? 'selected' : ''}}>April</option>
+								      		<option value="5" {{$work_experience->to_month ==  5 ? 'selected' : ''}}>May</option>
+								      		<option value="6" {{$work_experience->to_month ==  6 ? 'selected' : ''}}>June</option>
+								      		<option value="7" {{$work_experience->to_month ==  7 ? 'selected' : ''}}>July</option>
+								      		<option value="8" {{$work_experience->to_month ==  8 ? 'selected' : ''}}>August</option>
+								      		<option value="9" {{$work_experience->to_month ==  9 ? 'selected' : ''}}>September</option>
+								      		<option value="10" {{$work_experience->to_month ==  10 ? 'selected' : ''}}>October</option>
+								      		<option value="11" {{$work_experience->to_month ==  11 ? 'selected' : ''}}>November</option>
+								      		<option value="12" {{$work_experience->to_month ==  12 ? 'selected' : ''}}>December</option>
 								      	</select>
-								      	<input type="text" class="form-control pull-left" id="company-name" value="{{$work_experience->to_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
+								      	<input type="text" class="form-control pull-left" id="ex-to-year" name="ex-to-year" value="{{$work_experience->to_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
 								      </div>
 								    </div>
 								</div>
-								<div class="form-group opt-controls">
+								<div class="form-group">
+									<label for="ex-location" class="col-sm-3 control-label">Location</label>
+								    <div class="col-sm-5">
+								      <input type="text" class="form-control" id="ex-location" name="ex-location" value="{{$work_experience->location}}">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="input-job-description" class="col-sm-3 control-label">Description</label>
+								    <div class="col-sm-9">
+								      <textarea class="form-control" id="input-job-description">{{$work_experience->job_description}}</textarea>
+								    </div>
+								</div>
+								<div class="opt-controls">
 							      <button type="button" class="btn btn-primary btn-save">Save</button>
 							      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
 							  </div>

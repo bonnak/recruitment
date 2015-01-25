@@ -72,7 +72,7 @@ class CVTableSeeder extends Seeder {
 		DB::table('can_experiences')->insert([
 			[
 				'cv_id' => $cv->id, 
-				'job_title' => 'Web Developer for Automotive Company.', 
+				'job_title' => 'Web Developer for Automotive Company', 
 				'company_name' => 'BlaudaCam', 
 				'industry_id' => 2, 
 				'function_id' => 4, 

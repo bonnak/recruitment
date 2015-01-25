@@ -333,12 +333,14 @@ class CandidateController extends BaseController
 		}
 	}
 	
-	public function postCVEditSummary($id)
+	public function editCVSummary($id)
 	{
 		
 		if($cv = \CV::find($id))
 		{
-			$cv->summary = htmlentities(\Input::get('summary'));
+			$summary = htmlentities(\Input::get('summary'));		
+			
+			$cv->summary = !empty($summary) ? $summary : null;
 			$cv->save();
 			
 			return ['summary' => \Input::get('summary')];
@@ -348,5 +350,32 @@ class CandidateController extends BaseController
 			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
 		}
 				
+	}
+	
+	public function editCVExperience($cv_id, $id)
+	{
+		if($can_experience = \CandidateExperience::where('id', '=', $id)
+								->whereAnd('cv_id', '=', $cv_id)
+								->first())
+		{			
+			$job_title = htmlentities(\Input::get('ex-job-title'));
+			$company_name = htmlentities(\Input::get('ex-company-name'));
+			$job_description = htmlentities(\Input::get('ex-job-description'));
+			
+			$can_experience->job_title = !empty($job_title) ? $job_title : null;
+			$can_experience->company_name = !empty($company_name) ? $company_name : null;
+			$can_experience->job_description = !empty($job_description) ? $job_description : null;
+			$can_experience->save();
+				
+			return [
+				'ex_job_title'			=> $job_title,
+				'ex_company_name'			=> $company_name,
+				'ex_job_description'	=> $job_description
+			];
+		}
+		else
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
+		}
 	}
 }
