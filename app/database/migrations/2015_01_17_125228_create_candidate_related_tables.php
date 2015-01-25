@@ -43,7 +43,7 @@ class CreateCandidateRelatedTables extends Migration {
 			$table->string('company_name');
 			$table->integer('industry_id')->nullable();
 			$table->integer('function_id')->nullable();
-			$table->integer('location_id')->nullable();
+			$table->text('location')->nullable();
 			$table->integer('from_month')->nullable();
 			$table->integer('from_year')->nullable();
 			$table->integer('to_month')->nullable();

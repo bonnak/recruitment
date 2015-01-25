@@ -360,17 +360,65 @@ class CandidateController extends BaseController
 		{			
 			$job_title = htmlentities(\Input::get('ex-job-title'));
 			$company_name = htmlentities(\Input::get('ex-company-name'));
+			$location = htmlentities(\Input::get('ex-location'));
 			$job_description = htmlentities(\Input::get('ex-job-description'));
+			$from_month = htmlentities(\Input::get('ex-from-month'));
+			$from_year = htmlentities(\Input::get('ex-from-year'));
+			$to_month = htmlentities(\Input::get('ex-to-month'));
+			$to_year = htmlentities(\Input::get('ex-to-year'));
 			
 			$can_experience->job_title = !empty($job_title) ? $job_title : null;
 			$can_experience->company_name = !empty($company_name) ? $company_name : null;
+			$can_experience->location = !empty($location) ? $location : null;
 			$can_experience->job_description = !empty($job_description) ? $job_description : null;
+			$can_experience->from_month = !empty($from_month) ? $from_month : null;
+			$can_experience->from_year = !empty($from_year) ? $from_year : null;
+			$can_experience->to_month = !empty($to_month) ? $to_month : null;
+			$can_experience->to_year = !empty($to_year) ? $to_year : null;
 			$can_experience->save();
 				
 			return [
 				'ex_job_title'			=> $job_title,
-				'ex_company_name'			=> $company_name,
-				'ex_job_description'	=> $job_description
+				'ex_company_name'		=> $company_name,
+				'ex_location'			=> $location,
+				'ex_job_description'	=> $job_description,
+				'ex_from_month'			=> $from_month,
+				'ex_from_year'			=> $from_year,
+				'ex_to_month'			=> $to_month,
+				'ex_to_year'			=> $to_year,
+			];
+		}
+		else
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
+		}
+	}
+	
+	public function editCVEdu($cv_id, $id)
+	{
+		if($can_edu = \CandidateEducation::where('id', '=', $id)
+								->whereAnd('cv_id', '=', $cv_id)
+								->first())
+		{
+			$institute = htmlentities(\Input::get('institute'));
+			$major = htmlentities(\Input::get('major'));
+			$degree_id = htmlentities(\Input::get('degree_id'));
+			$from_year = htmlentities(\Input::get('from-year'));
+			$grad_year = htmlentities(\Input::get('grad-year'));
+				
+			$can_edu->institute = !empty($institute) ? $institute : null;
+			$can_edu->major 	= !empty($major) ? $major : null;
+			$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
+			$can_edu->from_year = !empty($from_year) ? $from_year : null;
+			$can_edu->grad_year = !empty($grad_year) ? $grad_year : null;
+			$can_edu->save();
+		
+			return [
+				'institute'			=> $institute,
+				'major'				=> $major,
+				'degree'			=> \Degree::select('description')->where('id', '=', $degree_id)->first()->description,
+				'from_year'			=> $from_year,
+				'grad_year'			=> $grad_year,
 			];
 		}
 		else

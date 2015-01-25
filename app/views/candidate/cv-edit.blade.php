@@ -84,7 +84,7 @@
 								</span>
 							</div>
 							<div>
-								<span class="prefix-cv-info">Locate in</span><span class="cv-info">{{$work_experience->location}}</span>
+								<span class="prefix-cv-info">Locate in</span><span id="span-ex-location" class="cv-info">{{$work_experience->location}}</span>
 							</div>										
 							<div>
 								<p id="span-job-description">{{$work_experience->job_description}}</p>
@@ -112,7 +112,7 @@
 									<label class="col-sm-3 control-label">Duration</label>
 								    <div class="col-sm-9">
 								      <div class="pull-left clearfix">
-								      	<select type="text" class="form-control pull-left" id="ex-from-month" name="ex-from-month" style="width: 120px;">
+								      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
 								      		<option value="1" {{$work_experience->from_month == 1 ? 'selected' : ''}}>January</option>
 								      		<option value="2" {{$work_experience->from_month == 2 ? 'selected' : ''}}>February</option>
@@ -127,11 +127,11 @@
 								      		<option value="11" {{$work_experience->from_month == 11 ? 'selected' : ''}}>November</option>
 								      		<option value="12" {{$work_experience->from_month == 12 ? 'selected' : ''}}>December</option>
 								      	</select>
-								      	<input type="text" class="form-control pull-left" id="ex-from-year" name="ex-from-year" value="{{$work_experience->from_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
+								      	<input type="text" class="form-control pull-left" id="input-ex-from-year" value="{{$work_experience->from_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
 								      </div> 
 								      <div class="pull-left" style="padding-top: 6px; font-weight: 600;">&nbsp;&nbsp;To&nbsp;&nbsp;</div>
 								      <div class="pull-left clearfix">
-								      	<select type="text" class="form-control pull-left" id="ex-to-month" name="ex-to-month" style="width: 120px;">
+								      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
 								      		<option value="1" {{$work_experience->to_month ==  1 ? 'selected' : ''}}>January</option>
 								      		<option value="2" {{$work_experience->to_month ==  2 ? 'selected' : ''}}>February</option>
@@ -146,14 +146,14 @@
 								      		<option value="11" {{$work_experience->to_month ==  11 ? 'selected' : ''}}>November</option>
 								      		<option value="12" {{$work_experience->to_month ==  12 ? 'selected' : ''}}>December</option>
 								      	</select>
-								      	<input type="text" class="form-control pull-left" id="ex-to-year" name="ex-to-year" value="{{$work_experience->to_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
+								      	<input type="text" class="form-control pull-left" id="input-ex-to-year" value="{{$work_experience->to_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
 								      </div>
 								    </div>
 								</div>
 								<div class="form-group">
 									<label for="ex-location" class="col-sm-3 control-label">Location</label>
 								    <div class="col-sm-5">
-								      <input type="text" class="form-control" id="ex-location" name="ex-location" value="{{$work_experience->location}}">
+								      <input type="text" class="form-control" id="input-ex-location" name="ex-location" value="{{$work_experience->location}}">
 								    </div>
 								</div>
 								<div class="form-group">
@@ -178,17 +178,62 @@
 			<div>
 				@foreach($candidate->cv->education as $education)
 				<div class="items">
-					<h4 class="institute">{{$education->institute}}</h4>
-					<div>
-						<span class="cv-info">{{$education->degree}}</span> in <span>{{$education->major}}</span>
+					<div class="content-show">
+						<h4 id="span-institute">{{$education->institute}}</h4>
+						<div>
+							<span id="span-degree" class="cv-info">{{$education->degree}}</span> in <span id="span-major">{{$education->major}}</span>
+						</div>
+						<div>
+							<span class="cv-info"><span id="span-from-year">{{$education->from_year}}</span> - <span id="span-grad-year">{{$education->grad_year}}</span></span>
+						</div>
+						<div class="card-btn-group">
+							<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+						</div>
 					</div>
-					<div>
-						<span class="cv-info">{{$education->from_year}} - {{$education->grad_year}}</span>
-					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
-					</div>
+					<div class="form-edit hide">
+							{{\Form::open(['route' => ['candidate.cv.edit.edu.put', $candidate->cv->id, $education->id],  'method' => 'put', 'class' => 'form-horizontal'])}}
+								<div class="form-group">
+									<label for="input-institute" class="col-sm-3 control-label">Institute</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="input-institute" value="{{$education->institute}}">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="input-major" class="col-sm-3 control-label">Major</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="input-major" value="{{$education->major}}">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="input-degree" class="col-sm-3 control-label">Degree</label>
+								    <div class="col-sm-4">
+								      <select type="text" class="form-control" id="input-degree">
+								      	<option value="">--Select--</option>
+										@foreach(\Degree::all() as $degree)
+										<option value="{{$degree->id}}" {{$education->degree_id === $degree->id ? 'selected' : ''}}>{{$degree->description}}</option>
+										@endforeach
+								      </select>
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="input-from-year" class="col-sm-3 control-label">Start School</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="input-from-year" value="{{$education->from_year}}" style="width: 70px;">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="input-grad-year" class="col-sm-3 control-label">Graduation year</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="input-grad-year" value="{{$education->grad_year}}" style="width: 70px;">
+								    </div>
+								</div>
+								<div class="opt-controls">
+							      <button type="button" class="btn btn-primary btn-save">Save</button>
+							      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
+							  </div>
+						  {{\Form::close()}}
+						</div>
 				</div>
 				@endforeach
 			</div>
