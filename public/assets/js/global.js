@@ -1,5 +1,6 @@
 $(document).on('ready', function(){
 	/***** Edit CV *****/
+	// Edit summary.
 	$('#cv-edit #summary .btn-edit-cv').on('click', function(e){
 		e.preventDefault();
 		
@@ -50,7 +51,7 @@ $(document).on('ready', function(){
 	});
 	
 	
-	
+	// Edit cv experience.
 	$('#cv-edit #experience .btn-edit-cv').on('click', function(e){
 		e.preventDefault();
 		
@@ -88,6 +89,8 @@ $(document).on('ready', function(){
 			span_company_name = $(content_show).find('#span-company-name'), 
 			span_ex_location = $(content_show).find('#span-ex-location'), 
 			span_description = $(content_show).find('#span-job-description'),
+			span_from_date = $(content_show).find('#span-from-date'),
+			span_to_date = $(content_show).find('#span-to-date'),
 			input_job_title = $(form_edit).find('#input-job-title'),
 			input_company_name = $(form_edit).find('#input-company-name'),
 			input_ex_location = $(form_edit).find('#input-ex-location'),
@@ -119,9 +122,41 @@ $(document).on('ready', function(){
 			  }
 		}).done(function(data){
 			$(span_job_title).text(data.ex_job_title);
-			$(span_company_name).text(data.ex_company_name);
+			$(span_company_name).text(data.ex_company_name);			
 			$(span_ex_location).text(data.ex_location);
 			$(span_description).text(data.ex_job_description);
+			
+			if(data.ex_from_year !== '' && data.ex_from_month !== ''){
+				$(span_from_date).text(data.ex_from_month_name + ' - ' + data.ex_from_year);
+				$(span_from_date).attr('data-month', data.ex_from_month);
+				$(span_from_date).attr('data-year', data.ex_from_year);
+			}
+			else if(data.ex_from_year !== ''){
+				$(span_from_date).text(data.ex_from_year);
+				$(span_from_date).attr('data-month', '');
+				$(span_from_date).attr('data-year', data.ex_from_year);
+			}
+			else{
+				$(span_from_date).text('');
+				$(span_from_date).attr('data-month', '');
+				$(span_from_date).attr('data-year', '');
+			}
+			
+			if(data.ex_to_year !== '' && data.ex_to_month !== ''){
+				$(span_to_date).text(data.ex_to_month_name + ' - ' + data.ex_to_year);
+				$(span_to_date).attr('data-month', data.ex_to_month);
+				$(span_to_date).attr('data-year', data.ex_to_year);
+			}
+			else if(data.ex_to_year !== ''){
+				$(span_to_date).text(data.ex_to_year);
+				$(span_to_date).attr('data-month', '');
+				$(span_to_date).attr('data-year', data.ex_to_year);
+			}
+			else{
+				$(span_to_date).text('Present');
+				$(span_to_date).attr('data-month', '');
+				$(span_to_date).attr('data-year', '');
+			}
 		});
 		
 		$(content_show).removeClass('hide');
@@ -130,7 +165,7 @@ $(document).on('ready', function(){
 	
 	
 	
-	
+	// Edit cv education.
 	$('#cv-edit #edu .btn-edit-cv').on('click', function(e){
 		e.preventDefault();
 		

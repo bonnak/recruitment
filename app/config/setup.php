@@ -1,14 +1,6 @@
 <?php
 
-//  Year collection.
-$years = [];
-foreach(range(\Carbon\Carbon::today()->year, 1900, -1) as $year)
-{
-	array_push($years, $year);
-}
-
 return [
-	'years'		=> $years,
 
 	'months'	=> [
 		['name' => 'January', 'num' => 1],

@@ -26,6 +26,7 @@ Route::group(['before' => 'auth'], function (){
 	Route::put('/user/candidate/cv/edit/{id}/summary', ['as' => 'candidate.cv.edit.summary.put', 'uses' => 'CandidateController@editCVSummary']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/experience/{id}', ['as' => 'candidate.cv.edit.experience.put', 'uses' => 'CandidateController@editCVExperience']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/edu/{id}', ['as' => 'candidate.cv.edit.edu.put', 'uses' => 'CandidateController@editCVEdu']);
+	Route::put('/user/candidate/cv/edit/{cv_id}/skill/{id}', ['as' => 'candidate.cv.edit.skill.put', 'uses' => 'CandidateController@editCVSkill']);
 	
 	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);
 });

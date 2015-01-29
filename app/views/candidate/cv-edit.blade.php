@@ -75,12 +75,22 @@
 							</div>
 							<div>
 								<span class="prefix-cv-info">From</span>
-								<span id="span-from-date" class="cv-info" data-date="{{!empty($work_experience->from_year) ? ($work_experience->from_month . '-' . $work_experience->from_year) : ''}}">
-									{{!empty($work_experience->from_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->from_month, 1, $work_experience->from_year)) : ''}}
+								<span id="span-from-date" class="cv-info" data-month="{{$work_experience->from_month}}" data-year="{{$work_experience->to_year}}">
+									@if(!empty($work_experience->from_year) && !empty($work_experience->from_month))
+										{{date('F - Y', mktime(0, 0, 0, $work_experience->from_month, 1, $work_experience->from_year))}}
+									@elseif(!empty($work_experience->from_year))
+										{{$work_experience->from_year}}
+									@endif
 								</span>
 								<span class="prefix-cv-info" style="margin-left: 13px;">To</span>
-								<span id="span-to-date" class="cv-info" data-date="{{!empty($work_experience->to_year) ? ($work_experience->to_month . '-' . $work_experience->to_year) : ''}}">
-									{{!empty($work_experience->to_year) ? date('F - Y', mktime(0, 0, 0, $work_experience->to_month, 1, $work_experience->to_year)) : 'Present'}}
+								<span id="span-to-date" class="cv-info" data-month="{{$work_experience->to_month}}" data-year="{{$work_experience->to_year}}">
+									@if(!empty($work_experience->to_year) && !empty($work_experience->to_month))
+										{{date('F - Y', mktime(0, 0, 0, $work_experience->to_month, 1, $work_experience->to_year))}}
+									@elseif(!empty($work_experience->to_year))
+										{{$work_experience->to_year}}
+									@else
+										Present
+									@endif
 								</span>
 							</div>
 							<div>
@@ -114,18 +124,9 @@
 								      <div class="pull-left clearfix">
 								      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
-								      		<option value="1" {{$work_experience->from_month == 1 ? 'selected' : ''}}>January</option>
-								      		<option value="2" {{$work_experience->from_month == 2 ? 'selected' : ''}}>February</option>
-								      		<option value="3" {{$work_experience->from_month == 3 ? 'selected' : ''}}>March</option>
-								      		<option value="4" {{$work_experience->from_month == 4 ? 'selected' : ''}}>April</option>
-								      		<option value="5" {{$work_experience->from_month == 5 ? 'selected' : ''}}>May</option>
-								      		<option value="6" {{$work_experience->from_month == 6 ? 'selected' : ''}}>June</option>
-								      		<option value="7" {{$work_experience->from_month == 7 ? 'selected' : ''}}>July</option>
-								      		<option value="8" {{$work_experience->from_month == 8 ? 'selected' : ''}}>August</option>
-								      		<option value="9" {{$work_experience->from_month == 9 ? 'selected' : ''}}>September</option>
-								      		<option value="10" {{$work_experience->from_month == 10 ? 'selected' : ''}}>October</option>
-								      		<option value="11" {{$work_experience->from_month == 11 ? 'selected' : ''}}>November</option>
-								      		<option value="12" {{$work_experience->from_month == 12 ? 'selected' : ''}}>December</option>
+								      		@foreach(\Config::get('setup.months') as $month)
+								      			<option value="{{$month['num']}}" {{$work_experience->from_month == $month['num'] ? 'selected' : ''}}>{{$month['name']}}</option>
+								      		@endforeach
 								      	</select>
 								      	<input type="text" class="form-control pull-left" id="input-ex-from-year" value="{{$work_experience->from_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
 								      </div> 
@@ -133,18 +134,9 @@
 								      <div class="pull-left clearfix">
 								      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
-								      		<option value="1" {{$work_experience->to_month ==  1 ? 'selected' : ''}}>January</option>
-								      		<option value="2" {{$work_experience->to_month ==  2 ? 'selected' : ''}}>February</option>
-								      		<option value="3" {{$work_experience->to_month ==  3 ? 'selected' : ''}}>March</option>
-								      		<option value="4" {{$work_experience->to_month ==  4 ? 'selected' : ''}}>April</option>
-								      		<option value="5" {{$work_experience->to_month ==  5 ? 'selected' : ''}}>May</option>
-								      		<option value="6" {{$work_experience->to_month ==  6 ? 'selected' : ''}}>June</option>
-								      		<option value="7" {{$work_experience->to_month ==  7 ? 'selected' : ''}}>July</option>
-								      		<option value="8" {{$work_experience->to_month ==  8 ? 'selected' : ''}}>August</option>
-								      		<option value="9" {{$work_experience->to_month ==  9 ? 'selected' : ''}}>September</option>
-								      		<option value="10" {{$work_experience->to_month ==  10 ? 'selected' : ''}}>October</option>
-								      		<option value="11" {{$work_experience->to_month ==  11 ? 'selected' : ''}}>November</option>
-								      		<option value="12" {{$work_experience->to_month ==  12 ? 'selected' : ''}}>December</option>
+								      		@foreach(\Config::get('setup.months') as $month)
+								      			<option value="{{$month['num']}}" {{$work_experience->to_month == $month['num'] ? 'selected' : ''}}>{{$month['name']}}</option>
+								      		@endforeach
 								      	</select>
 								      	<input type="text" class="form-control pull-left" id="input-ex-to-year" value="{{$work_experience->to_year}}"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
 								      </div>
@@ -241,23 +233,39 @@
 		<div id="skills">
 			<div>
 				<h3 class="part">Skills</h3>
-				<div>
+				<div class="content-show">
 					<div class="items clearfix">
 						@foreach($candidate->cv->skills as $skill)
 						<div class="item round-box-wrapper">
 							<div>
-								<span class="cv-info">{{$skill->name}}</span>&nbsp;&nbsp;&nbsp;<span
-									class="text-muted">{{$skill->level}} ({{$skill->year_experience}}years)</span>
+								<span class="cv-info" id="skill-name">{{$skill->name}}</span>&nbsp;&nbsp;&nbsp;
+								<span class="text-muted">{{$skill->level}} ({{$skill->year_experience}}years)</span>
 							</div>
 						</div>
 						@endforeach
 					</div>
+					<div class="card-btn-group">
+						<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
+						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					</div>
 				</div>
-			</div>
-			<div class="card-btn-group">
-				<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
-			</div>
+				<div class="form-edit">
+					{{\Form::open(['route' => ['candidate.cv.edit.skill.put', $candidate->cv->id, $education->id],  'method' => 'put', 'class' => 'form-inline'])}}
+					  <div class="form-group">
+					    <label for="exampleInputName2">Skill Name</label>
+					    <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+					  </div>
+					  <div class="form-group">
+					    <label for="exampleInputEmail2">Level</label>
+					    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+					  </div>
+					  <div class="form-group">
+					    <label for="exampleInputEmail2">Year(s)</label>
+					    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+					  </div>
+					{{\Form::close()}}
+				</div>
+			</div>			
 		</div>
 		<div id="languages">
 			<div>

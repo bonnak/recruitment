@@ -383,8 +383,10 @@ class CandidateController extends BaseController
 				'ex_location'			=> $location,
 				'ex_job_description'	=> $job_description,
 				'ex_from_month'			=> $from_month,
+				'ex_from_month_name'	=> date('F', mktime(0, 0, 0, $from_month)),
 				'ex_from_year'			=> $from_year,
 				'ex_to_month'			=> $to_month,
+				'ex_to_month_name'		=> date('F', mktime(0, 0, 0, $to_month)),
 				'ex_to_year'			=> $to_year,
 			];
 		}
@@ -425,5 +427,9 @@ class CandidateController extends BaseController
 		{
 			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
 		}
+	}
+	
+	public function editCVSkill($cv_id, $id){
+		
 	}
 }
