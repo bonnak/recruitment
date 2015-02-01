@@ -983,3 +983,8 @@ hr#line-break-footer {
 #cv-edit .form-edit .btn:focus{
 	outline: none;
 }
+
+#cv-edit #skills .skill-detail{
+	font-size: 12px;
+	font-style: italic;
+}

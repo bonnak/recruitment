@@ -225,5 +225,150 @@ $(document).on('ready', function(){
 		$(content_show).removeClass('hide');
 		$(form_edit).addClass('hide');
 	});
+
+
+	// Edit cv education.
+	$('#cv-edit #skills .btn-edit-cv').on('click', function(e){
+		e.preventDefault();
+		
+		var content_show =  $(this).parents('.content-show'),
+			form_edit = $(content_show).siblings('.form-edit');
+				
+		$(content_show).addClass('hide');
+		$(form_edit).removeClass('hide');
+	});	
+	$('#cv-edit #skills .form-edit .btn-cancel').on('click', function(){
+		var form_edit =  $(this).parents('.form-edit'),
+			content_show = $(form_edit).siblings('.content-show'),
+			skills_collection =  $(form_edit).find('#skills-collection'),
+			new_skill =  $(form_edit).find('#new-skill'),
+			input_skill_name = $(new_skill).find('#input-skill-name'),
+			input_skill_year_exp = $(new_skill).find('#input-skill-year-exp'),
+			input_skill_level = $(new_skill).find('#input-skill-level');
+
+		// Back to default.
+		$(skills_collection).find('.item').each(function(index, element){
+			var status = $(element).find('#input-skill-status').val();
+
+			switch(status){
+				case '1':
+					$(element).remove();
+					break;
+
+				case '3':
+					$(element).removeClass('hide');
+					break;
+			}
+		});
+				
+		// Clear control and back to content show mode.
+		$(content_show).removeClass('hide');
+		$(form_edit).addClass('hide');
+		$(input_skill_name).val(null);
+		$(input_skill_year_exp).val(null);
+		$(input_skill_level).prop('selectedIndex', 0);
+	});
+	$('#cv-edit #skills .form-edit #new-skill #btn-add').on('click', function(){
+		var form_edit = $(this).parents('.form-edit'),
+			new_skill = $(this).parents('#new-skill'),
+			input_skill_name = $(new_skill).find('#input-skill-name'),
+			input_skill_year_exp = $(new_skill).find('#input-skill-year-exp'),
+			input_skill_level = $(new_skill).find('#input-skill-level option:selected'),
+			skills_collection =  $(form_edit).find('#skills-collection');
+
+		// Append new skill.
+		$(skills_collection).append('<div class="item round-box-wrapper">' + 
+										'<div class="span-content">' +
+											'<span class="cv-info" id="skill-name">' + $(input_skill_name).val() +'</span>&nbsp;&nbsp;&nbsp;' + 
+											'<span class="text-muted">' + $(input_skill_level).text() +' (' + $(input_skill_year_exp).val() + ')</span>&nbsp;' + 
+											'<a href="javascript:onclick" class="glyphicon glyphicon-remove" onclick="remove_skill_cv_edit(this)" style="color: #7C7C7C; text-decoration: none; text-shadow: 0 1px 1px rgba(0,0,0,.2);"></a>' + 
+										'</div>' +
+										'<div class="hidden-input">' +
+											'<input type="hidden" id="input-skill-id" value="">' +
+											'<input type="hidden" id="input-skill-name" value="' + $(input_skill_name).val() + '">' +
+											'<input type="hidden" id="input-skill-level" value="' + $(input_skill_level).val() + '">' +
+											'<input type="hidden" id="input-skill-year-exp" value="' + $(input_skill_year_exp).val() + '">' +
+											'<input type="hidden" id="input-skill-status" value="1">' +
+										'</div>' +
+									'</div>');
+		
+
+		// Clear add new controls.
+		$(input_skill_name).val(null);
+		$(input_skill_year_exp).val(null);
+		$('#input-skill-level').prop('selectedIndex', 0);
+	});
+	$('#cv-edit #skills .form-edit .btn-save').on('click', function(e){
+		var form_edit = $(this).parents('.form-edit'),
+			content_show = $(form_edit).siblings('.content-show'),
+			span_items = $(content_show).find('.items'),
+			skills_collection = $(form_edit).find('#skills-collection');
+
+
+			items = $(form_edit).find('.item'),
+			skills = [];
+
+		$(items).each(function(index, element){
+			var skill = {
+				id 			: $(element).find('#input-skill-id').val(), 
+				name 		: $(element).find('#input-skill-name').val(),
+				level 		: $(element).find('#input-skill-level').val(),
+				year_exp 	: $(element).find('#input-skill-year-exp').val(),
+				status 		: $(element).find('#input-skill-status').val()
+			};
+
+			skills.push(skill);
+		});
+		
+		$.ajax({
+			url: $(form_edit).find('form').attr('action'),
+			type: 'PUT',
+			data: {
+				'skills' : skills
+			},
+			statusCode: {
+			    403: function(response) {
+			    	var error = JSON.parse(response.responseText).error;
+			    	
+					alert(error.message);
+			    }
+			  }
+		}).done(function(elements){
+
+			// Clear old data.
+			$(span_items).children().remove();
+			$(skills_collection).children().remove();
+
+			$(elements).each(function(index, element){
+				// Update skill content show.
+				$(span_items).append(
+				'<div class="item round-box-wrapper">' +
+					'<span class="cv-info" id="skill-name">' + element.name + '</span>&nbsp;&nbsp;&nbsp;&nbsp;' +
+					'<span class="skill-detail text-muted">' + element.level + ' (' + element.year_experience + ' years)</span>' +
+				'</div>');
+
+				// Update skill form edit.
+				$(skills_collection).append(
+					'<div class="item round-box-wrapper">' +
+						'<div class="span-content">' +
+							'<span class="cv-info" id="skill-name">' + element.name + '</span>&nbsp;&nbsp;&nbsp;' +
+							'<span class="skill-detail text-muted">' + element.level + ' (' + element.year_experience + ' years)</span>&nbsp;' +
+							'<a href="javascript:onclick" id="btn-remove" class="glyphicon glyphicon-remove" onclick="remove_skill_cv_edit(this)" style="color: #7C7C7C; text-decoration: none; text-shadow: 0 1px 1px rgba(0,0,0,.2);"></a>' +
+						'</div>' +
+						'<div class="hidden-input">' +
+							'<input type="hidden" id="input-skill-id" value="' + element.id + '">' +
+							'<input type="hidden" id="input-skill-name" value="' + element.name + '">' +
+							'<input type="hidden" id="input-skill-level" value="' + element.level_id + '">' +
+							'<input type="hidden" id="input-skill-year-exp" value="' + element.year_experience + '">' +
+							'<input type="hidden" id="input-skill-status" value="2">' +
+						'</div>' +
+					'</div>'
+				);
+			});
+		});
+		
+		$(content_show).removeClass('hide');
+		$(form_edit).addClass('hide');
+	});
 	/********************/
 });

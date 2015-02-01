@@ -429,7 +429,35 @@ class CandidateController extends BaseController
 		}
 	}
 	
-	public function editCVSkill($cv_id, $id){
+	public function editCVSkill($cv_id)
+	{
+		$skills = \Input::get('skills');
+
+		foreach ($skills as $skill) 
+		{
+			switch ($skill['status']) {
+				case 3: // Delete skill
+					$can_skill = \CandidateSkill::where('id', '=', $skill['id'])
+												->whereAnd('cv_id', '=', $cv_id)
+												->first();
+
+					if($can_skill) $can_skill->delete();
+					break;
+				case 1: // Add new skill
+					$can_skill = new \CandidateSkill;
+
+					$can_skill->cv_id = $cv_id;
+					$can_skill->name = $skill['name'];
+					$can_skill->level_id = $skill['level'];
+					$can_skill->year_experience = $skill['year_exp'];
+
+					if($can_skill) $can_skill->save();
+					break;
+			}
+		}
+
+		$can_skills = \CandidateSkill::getSkill($cv_id);
 		
+		return $can_skills;
 	}
 }
