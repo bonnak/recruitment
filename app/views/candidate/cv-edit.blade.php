@@ -255,10 +255,9 @@
 							<input type="text" class="form-control pull-left" id="input-skill-year-exp" placeholder="Year of experience" style="width: 100px; margin-right: 5px;">
 							<select class="form-control pull-left" id="input-skill-level" style="width: 130px; margin-right: 5px;">
 								<option value="">---Level---</option>
-									@foreach(\Level::all() as $level)
-									<option value="{{$level->id}}">{{$level->description}}</option>
-									@endforeach
-								</option>
+								@foreach(\Level::all() as $level)
+								<option value="{{$level->id}}">{{$level->description}}</option>
+								@endforeach
 							</select>
 							<button type="button" id="btn-add" class="btn btn-primary">Add</button>
 						</div>
@@ -268,7 +267,7 @@
 								<div class="span-content">
 									<span class="cv-info" id="skill-name">{{$skill->name}}</span>&nbsp;&nbsp;&nbsp;
 									<span class="skill-detail text-muted">{{$skill->level}} ({{$skill->year_experience}} years)</span>&nbsp;
-									<a href="javascript:onclick" id="btn-remove" class="glyphicon glyphicon-remove" onclick="remove_skill_cv_edit(this)" style="color: #7C7C7C; text-decoration: none; text-shadow: 0 1px 1px rgba(0,0,0,.2);"></a>
+									<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_skill_cv_edit(this)"></a>
 								</div>
 								<div class="hidden-input">
 									<input type="hidden" id="input-skill-id" value="{{$skill->id}}">
@@ -289,23 +288,86 @@
 			</div>			
 		</div>
 		<div id="languages">
-			<div>
-				<h3 class="part">Languages</h3>
-				<div>
-					<div class="items">
-						@foreach($candidate->cv->languages as $language)
-						<div class="item">
-							<span class="lang">{{$language->language}}</span>&nbsp;&nbsp;&nbsp;<span
-								class="text-muted">Limited Work Proficiency</span>
-						</div>
-						@endforeach
+			<h3 class="part">Languages</h3>
+			<div class="content-show">
+				<div class="items">
+					@foreach($candidate->cv->languages as $language)
+					<div class="item">
+						<span class="lang">{{$language->language}}</span>&nbsp;&nbsp;&nbsp;<span
+							class="text-muted">{{$language->proficiency}}</span>
 					</div>
+					@endforeach
+				</div>
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
 				</div>
 			</div>
-			<div class="card-btn-group">
-				<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-				<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
-			</div>
+			<div class="form-edit hide">
+				{{\Form::open(['route' => ['candidate.cv.edit.lang.put', $candidate->cv->id],  'method' => 'put', 'class' => 'form-inline'])}}
+					<div id="lang-collection">	
+						@foreach($candidate->cv->languages as $language)
+						<div class="item">
+							<div class="form-group">
+						   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language" value="{{$language->language}}">
+						   </div>
+						   <div class="form-group">
+						   	<select class="form-control" id="input-lang-proficiency">
+						   		<option value="">---Proficiency---</option>
+									@foreach(\Proficiency::all() as $proficiency)
+									<option value="{{$proficiency->id}}" {{$language->proficiency_id === $proficiency->id ? 'selected' : ''}}>{{$proficiency->proficiency}}</option>
+									@endforeach
+						   	</select>
+						   </div>
+						   <div class="form-group">
+							   <a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_lang_cv_edit(this)" ></a>
+							</div>
+							<input type="hidden" id="input-lang-id" value="{{$language->id}}">
+							<input type="hidden" id="input-lang-status" value="2">
+						</div>
+					   @endforeach
+					</div>
+				   <div class="item-add-new">
+				   	<div class="form-group">
+					   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language">
+					   </div>
+					   <div class="form-group">
+					   	<select class="form-control" id="input-lang-proficiency">
+					   		<option value="">---Proficiency---</option>
+								@foreach(\Proficiency::all() as $proficiency)
+								<option value="{{$proficiency->id}}">{{$proficiency->proficiency}}</option>
+								@endforeach
+					   	</select>
+					   </div>
+					   <div class="form-group">
+						   <a href="javascript:onclick" class="btn-add glyphicon glyphicon-plus"></a>
+						</div>
+						<input type="hidden" id="input-lang-status" value="">
+				   </div>
+				   <div class="item-clone hide">
+				   	<div class="form-group">
+					   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language">
+					   </div>
+					   <div class="form-group">
+					   	<select class="form-control" id="input-lang-proficiency">
+					   		<option value="">---Proficiency---</option>
+								@foreach(\Proficiency::all() as $proficiency)
+								<option value="{{$proficiency->id}}">{{$proficiency->proficiency}}</option>
+								@endforeach
+					   	</select>
+					   </div>
+					   <div class="form-group">
+						   <a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_lang_cv_edit(this)"></a>
+						</div>
+						<input type="hidden" id="input-lang-id">
+						<input type="hidden" id="input-lang-status">
+				   </div>
+				{{\Form::close()}}
+				<div class="opt-controls">
+			      <button type="button" class="btn btn-primary btn-save">Save</button>
+			      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
+			  </div>	
+			</div>			
 		</div>
 	</div>
 	<div id="expectation-card">

@@ -988,3 +988,20 @@ hr#line-break-footer {
 	font-size: 12px;
 	font-style: italic;
 }
+#cv-edit #skills .btn-remove,
+#cv-edit #languages .btn-remove,
+#cv-edit #languages .btn-add{
+	color: #7C7C7C; 
+	text-decoration: none; 
+	text-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+#cv-edit #languages .btn-remove,
+#cv-edit #languages .btn-add{
+	margin-left: 3px;
+}
+#cv-edit #languages #input-lang-name{
+	width: 337px;
+}
+#cv-edit #languages #input-lang-proficiency{
+	width: 250px;
+}

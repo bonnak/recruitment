@@ -248,7 +248,8 @@ $(document).on('ready', function(){
 
 		// Back to default.
 		$(skills_collection).find('.item').each(function(index, element){
-			var status = $(element).find('#input-skill-status').val();
+			var input_skill_status = $(element).find('#input-skill-status'),
+				status = $(input_skill_status).val();
 
 			switch(status){
 				case '1':
@@ -256,6 +257,7 @@ $(document).on('ready', function(){
 					break;
 
 				case '3':
+					$(input_skill_status).val(2);
 					$(element).removeClass('hide');
 					break;
 			}
@@ -298,7 +300,7 @@ $(document).on('ready', function(){
 		$(input_skill_year_exp).val(null);
 		$('#input-skill-level').prop('selectedIndex', 0);
 	});
-	$('#cv-edit #skills .form-edit .btn-save').on('click', function(e){
+	$('#cv-edit #skills .form-edit .btn-save').on('click', function(){
 		var form_edit = $(this).parents('.form-edit'),
 			content_show = $(form_edit).siblings('.content-show'),
 			span_items = $(content_show).find('.items'),
@@ -365,10 +367,143 @@ $(document).on('ready', function(){
 					'</div>'
 				);
 			});
-		});
+
+			// Back to content show mode.
+			$(content_show).removeClass('hide');
+			$(form_edit).addClass('hide');
+		});	
+	});
+
+	// Edit cv language.
+	$('#cv-edit #languages .btn-edit-cv').on('click', function(e){
+		var content_show =  $(this).parents('.content-show'),
+			form_edit = $(content_show).siblings('.form-edit');
+
+		e.preventDefault();
+				
+		$(content_show).addClass('hide');
+		$(form_edit).removeClass('hide');
+	});	
+	$('#cv-edit #languages .form-edit .btn-cancel').on('click', function(e){		
+		var form_edit =  $(this).parents('.form-edit'),
+			content_show = $(form_edit).siblings('.content-show'),
+			lang_collection = $(form_edit).find('#lang-collection');
+
+		e.preventDefault();
 		
+		$(lang_collection).children().each(function(index, element){
+			var input_lang_status = $(element).find('#input-lang-status'),
+				status = $(input_lang_status).val();
+
+			if(status == 1){ // Remove new items.
+				$(element).remove();
+			}
+			else if(status == 3){ //restore old items.
+				$(input_lang_status).val(2);
+				$(element).removeClass('hide');
+			}
+			
+		});		
+
+				
+		// Back to content show mode.
 		$(content_show).removeClass('hide');
 		$(form_edit).addClass('hide');
+	});
+	$('#cv-edit #languages .form-edit .btn-add').on('click', function(e){
+		var form_edit =  $(this).parents('.form-edit'),
+			lang_collection = $(form_edit).find('#lang-collection'),
+			item_add_new = $(form_edit).find('.item-add-new'),
+			item_clone_org = $(form_edit).find('.item-clone'),
+			input_new_lang_name = $(item_add_new).find('#input-lang-name'),
+			input_new_proficiency = $(item_add_new).find('#input-lang-proficiency'),
+			item_clone = $(item_clone_org).clone();			
+
+		e.preventDefault();
+
+		// Prevent add empty.
+		if(input_new_lang_name.val() == '' || input_new_proficiency.val() == '') return;
+
+		// Copy value to cloned-item.
+		$(item_clone).attr('class','item');
+		$(item_clone).find('#input-lang-name').val($(input_new_lang_name).val());
+		$(item_clone).find('#input-lang-proficiency').prop('selectedIndex', $(input_new_proficiency).val());
+		$(item_clone).find('#input-lang-status').val(1);
+
+		// Clear add-new-item.
+		$(input_new_lang_name).val(null);
+		$(input_new_proficiency).val(null);
+
+		// Add new item before add-new-item.
+		$(lang_collection).append(
+			item_clone
+		);
+	});
+	$('#cv-edit #languages .form-edit .btn-save').on('click', function(){
+		var form_edit = $(this).parents('.form-edit'),
+			content_show = $(form_edit).siblings('.content-show'),
+			span_items = $(content_show).find('.items'),
+			lang_collection = $(form_edit).find('#lang-collection'),
+			item_clone_org = $(form_edit).find('.item-clone'),
+
+			items = $(form_edit).find('#lang-collection .item'),
+			langs = [];
+
+		$(items).each(function(index, element){
+			var lang = {
+				id 			: $(element).find('#input-lang-id').val(), 
+				name 		: $(element).find('#input-lang-name').val(), 
+				proficiency : $(element).find('#input-lang-proficiency').val(),
+				status 		: $(element).find('#input-lang-status').val()
+			};
+
+			langs.push(lang);
+		});
+
+		$.ajax({
+			url: $(form_edit).find('form').attr('action'),
+			type: 'PUT',
+			data: {
+				'language' : langs
+			},
+			statusCode: {
+			    403: function(response) {
+			    	var error = JSON.parse(response.responseText).error;
+			    	
+					alert(error.message);
+			    }
+			  }
+		}).done(function(elements){
+			// Clear old data.
+			$(span_items).children().remove();
+			$(lang_collection).children().remove();
+
+			$(elements).each(function(index, element){
+
+				// Update span items.
+				$(span_items).append(
+					'<div class="item">' +
+						'<span class="lang">' + element.language + '</span>&nbsp;&nbsp;&nbsp;<span class="text-muted">' + element.proficiency + '</span>' +
+					'</div>'
+				);
+
+				// Update input items.
+				var item_clone = $(item_clone_org).clone();
+
+				
+				$(item_clone).attr('class','item');
+				$(item_clone).find('#input-lang-name').val(element.language);
+				$(item_clone).find('#input-lang-proficiency').prop('selectedIndex', element.proficiency_id);
+				$(item_clone).find('#input-lang-id').val(element.id);
+				$(item_clone).find('#input-lang-status').val(2);
+
+				$(lang_collection).append(item_clone);
+			});
+
+			// Back to content show mode.
+			$(content_show).removeClass('hide');
+			$(form_edit).addClass('hide');
+		});
 	});
 	/********************/
 });

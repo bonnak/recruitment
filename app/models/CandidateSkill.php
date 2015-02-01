@@ -4,7 +4,7 @@ class CandidateSkill extends Eloquent
 {
 	protected $table = 'can_skills';
 	
-	public static function getSkill($cv_id)
+	public static function getSkills($cv_id)
 	{
 		$tbl_this = with(new static)->getTable();
 		$tbl_level = (new \Level)->getTable();

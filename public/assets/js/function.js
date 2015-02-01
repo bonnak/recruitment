@@ -30,3 +30,22 @@ var remove_skill_cv_edit = function(self){
 			break;
 	}
 };
+
+var remove_lang_cv_edit = function(self){
+	var item_box = $(self).parents('#lang-collection .item'),
+		hidden_input_status = $(item_box).find('#input-lang-status'),
+		status = $(hidden_input_status).val();
+
+	event.preventDefault();
+
+	switch (status){
+		case '2':
+			$(item_box).addClass('hide');
+			$(hidden_input_status).val(3);
+			break;
+
+		case '1':
+			$(item_box).remove();
+			break;
+	}
+};

@@ -456,8 +456,39 @@ class CandidateController extends BaseController
 			}
 		}
 
-		$can_skills = \CandidateSkill::getSkill($cv_id);
+		$can_skills = \CandidateSkill::getSkills($cv_id);
 		
 		return $can_skills;
+	}
+
+	public function editCVLang($cv_id)
+	{
+		$langs = \Input::get('language');
+
+		foreach ($langs as $lang) 
+		{
+			switch ($lang['status']) {
+				case 3: // Delete language
+					$can_lang = \CandidateLanguage::where('id', '=', $lang['id'])
+												->whereAnd('cv_id', '=', $cv_id)
+												->first();
+
+					if($can_lang) $can_lang->delete();
+					break;
+				case 1: // Add new language
+					$can_lang = new \CandidateLanguage;
+
+					$can_lang->cv_id = $cv_id;
+					$can_lang->language = $lang['name'];
+					$can_lang->proficiency_id = $lang['proficiency'];
+
+					if($can_lang) $can_lang->save();
+					break;
+			}
+		}
+
+		$can_langs = \CandidateLanguage::getLanguages($cv_id);
+		
+		return $can_langs;
 	}
 }

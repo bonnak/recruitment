@@ -49,12 +49,12 @@ class CV extends Eloquent
 	
 	public function skills()
 	{
-		return \CandidateSkill::getSkill($this->id);
+		return \CandidateSkill::getSkills($this->id);
 	}
 	
 	public function languages()
 	{
-		return \CandidateLanguage::getLanguage($this->id);
+		return \CandidateLanguage::getLanguages($this->id);
 	}
 	
 	public function expectation()

@@ -4,7 +4,7 @@ class CandidateLanguage extends Eloquent
 {
 	protected $table = 'can_languages';
 	
-	public static function getLanguage($cv_id)
+	public static function getLanguages($cv_id)
 	{
 		$tbl_this = with(new static)->getTable();
 		$tbl_proficiency = (new \Proficiency)->getTable();
