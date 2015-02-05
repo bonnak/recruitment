@@ -351,6 +351,11 @@ class CandidateController extends BaseController
 		}
 				
 	}
+
+	public function createCVExperience($cv_id)
+	{
+		$can_experience = new \CandidateExperience;
+	}
 	
 	public function editCVExperience($cv_id, $id)
 	{
@@ -442,6 +447,8 @@ class CandidateController extends BaseController
 												->first();
 
 					if($can_skill) $can_skill->delete();
+					else \App::abort('403', 'There\'s some wrong. Cannot delete skill(s).');
+
 					break;
 				case 1: // Add new skill
 					$can_skill = new \CandidateSkill;
@@ -452,6 +459,8 @@ class CandidateController extends BaseController
 					$can_skill->year_experience = $skill['year_exp'];
 
 					if($can_skill) $can_skill->save();
+					else \App::abort('403', 'There\'s some wrong. Cannot add new skill(s).');
+
 					break;
 			}
 		}
@@ -467,14 +476,7 @@ class CandidateController extends BaseController
 
 		foreach ($langs as $lang) 
 		{
-			switch ($lang['status']) {
-				case 3: // Delete language
-					$can_lang = \CandidateLanguage::where('id', '=', $lang['id'])
-												->whereAnd('cv_id', '=', $cv_id)
-												->first();
-
-					if($can_lang) $can_lang->delete();
-					break;
+			switch ($lang['status']) {				
 				case 1: // Add new language
 					$can_lang = new \CandidateLanguage;
 
@@ -483,6 +485,34 @@ class CandidateController extends BaseController
 					$can_lang->proficiency_id = $lang['proficiency'];
 
 					if($can_lang) $can_lang->save();
+					else \App::abort('403', 'There\'s some wrong. Cannot add new language(s).');
+
+					break;
+
+				case 2: // Update languages
+					$can_lang = \CandidateLanguage::where('id', '=', $lang['id'])
+												->whereAnd('cv_id', '=', $cv_id)
+												->first();
+					if($can_lang){
+						$can_lang->language = $lang['name'];
+						$can_lang->proficiency_id = $lang['proficiency'];
+
+						$can_lang->save();
+					}
+					else {
+						\App::abort('403', 'There\'s some wrong. Cannot update language(s).');
+					}
+
+					break;
+
+				case 3: // Delete language
+					$can_lang = \CandidateLanguage::where('id', '=', $lang['id'])
+												->whereAnd('cv_id', '=', $cv_id)
+												->first();
+
+					if($can_lang) $can_lang->delete();
+					else \App::abort('403', 'There\'s some wrong. Cannot delete language(s).');
+
 					break;
 			}
 		}

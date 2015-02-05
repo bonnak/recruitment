@@ -1,7 +1,7 @@
 $(document).on('ready', function(){
 	/***** Edit CV *****/
 	// Edit summary.
-	$('#cv-edit #summary .btn-edit-cv').on('click', function(e){
+	$('#cv-edit #summary #btn-edit-summary').on('click', function(e){
 		e.preventDefault();
 		
 		var content_show =  $(this).parents('.content-show'),
@@ -52,7 +52,7 @@ $(document).on('ready', function(){
 	
 	
 	// Edit cv experience.
-	$('#cv-edit #experience .btn-edit-cv').on('click', function(e){
+	$('#cv-edit #experience #btn-edit-experience').on('click', function(e){
 		e.preventDefault();
 		
 		var content_show =  $(this).parents('.content-show'),
@@ -166,7 +166,7 @@ $(document).on('ready', function(){
 	
 	
 	// Edit cv education.
-	$('#cv-edit #edu .btn-edit-cv').on('click', function(e){
+	$('#cv-edit #edu #btn-edit-edu').on('click', function(e){
 		e.preventDefault();
 		
 		var content_show =  $(this).parents('.content-show'),
@@ -227,8 +227,8 @@ $(document).on('ready', function(){
 	});
 
 
-	// Edit cv education.
-	$('#cv-edit #skills .btn-edit-cv').on('click', function(e){
+	// Edit cv skills.
+	$('#cv-edit #skills #btn-edit-skill').on('click', function(e){
 		e.preventDefault();
 		
 		var content_show =  $(this).parents('.content-show'),
@@ -374,8 +374,10 @@ $(document).on('ready', function(){
 		});	
 	});
 
+
+
 	// Edit cv language.
-	$('#cv-edit #languages .btn-edit-cv').on('click', function(e){
+	$('#cv-edit #languages #btn-edit-lang').on('click', function(e){
 		var content_show =  $(this).parents('.content-show'),
 			form_edit = $(content_show).siblings('.form-edit');
 

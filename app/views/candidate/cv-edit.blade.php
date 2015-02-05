@@ -47,7 +47,7 @@
 			<div class="content-show clearfix">
 				<p>{{nl2br($candidate->cv->summary)}}</p>
 				<div class="card-btn-group">
-					<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+					<a href="javascript:onclick" id="btn-edit-summary" class="glyphicon glyphicon-pencil"></a>
 				</div>
 			</div>
 			<div class="form-edit hide">
@@ -100,8 +100,8 @@
 								<p id="span-job-description">{{$work_experience->job_description}}</p>
 							</div>										
 							<div class="card-btn-group">							
-								<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-								<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+								<a href="javascript:onclick" id="btn-new-experience" class="glyphicon glyphicon-file"></a>
+								<a href="javascript:onclick" id="btn-edit-experience" class="glyphicon glyphicon-pencil"></a>
 							</div>
 						</div>
 						<div class="form-edit hide">
@@ -162,6 +162,63 @@
 						</div>
 					</div>	
 					@endforeach
+					<div class="form-new">
+						<h4 style="margin-bottom: 20px;">What is your work experience?</h4>
+						{{\Form::open(['route' => ['candidate.cv.edit.experience.put', $candidate->cv->id, $work_experience->id],  'method' => 'put', 'class' => 'form-horizontal'])}}
+						<div class="form-group">
+							<label for="input-job-title" class="col-sm-3 control-label">Job Title</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-job-title">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-company-name" class="col-sm-3 control-label">Company name</label>
+						    <div class="col-sm-5">
+						      <input type="text" class="form-control" id="input-company-name">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">Duration</label>
+						    <div class="col-sm-9">
+						      <div class="pull-left clearfix">
+						      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;">
+						      		<option value="">---Month--</option>
+						      		@foreach(\Config::get('setup.months') as $month)
+						      			<option value="{{$month['num']}}">{{$month['name']}}</option>
+						      		@endforeach
+						      	</select>
+						      	<input type="text" class="form-control pull-left" id="input-ex-from-year" style="width: 60px; margin-left: 5px;" Placeholder="Year">
+						      </div> 
+						      <div class="pull-left" style="padding-top: 6px; font-weight: 600;">&nbsp;&nbsp;To&nbsp;&nbsp;</div>
+						      <div class="pull-left clearfix">
+						      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;">
+						      		<option value="">---Month--</option>
+						      		@foreach(\Config::get('setup.months') as $month)
+						      			<option value="{{$month['num']}}">{{$month['name']}}</option>
+						      		@endforeach
+						      	</select>
+						      	<input type="text" class="form-control pull-left" id="input-ex-to-year" style="width: 60px; margin-left: 5px;" Placeholder="Year">
+						      </div>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="ex-location" class="col-sm-3 control-label">Location</label>
+						    <div class="col-sm-5">
+						      <input type="text" class="form-control" id="input-ex-location" name="ex-location">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-job-description" class="col-sm-3 control-label">Description</label>
+						    <div class="col-sm-9">
+						      <textarea class="form-control" id="input-job-description"></textarea>
+						    </div>
+						</div>
+						<div class="opt-controls">
+					      <button type="button" class="btn btn-primary btn-save">Save</button>
+					      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
+					  </div>
+					  {{\Form::close()}}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -180,7 +237,7 @@
 						</div>
 						<div class="card-btn-group">
 							<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-							<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+							<a href="javascript:onclick" id="btn-edit-edu" class="glyphicon glyphicon-pencil"></a>
 						</div>
 					</div>
 					<div class="form-edit hide">
@@ -244,7 +301,7 @@
 					</div>
 					<div class="card-btn-group">
 						<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+						<a href="javascript:onclick" id="btn-edit-skill" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
 					</div>
 				</div>
 				<div class="form-edit hide">
@@ -300,7 +357,7 @@
 				</div>
 				<div class="card-btn-group">
 					<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-					<a href="javascript:onclick" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+					<a href="javascript:onclick" id="btn-edit-lang" class="glyphicon glyphicon-pencil"></a>
 				</div>
 			</div>
 			<div class="form-edit hide">
@@ -328,6 +385,7 @@
 					   @endforeach
 					</div>
 				   <div class="item-add-new">
+				    <h4>What languages can you speak?</h4>
 				   	<div class="form-group">
 					   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language">
 					   </div>
@@ -340,7 +398,8 @@
 					   	</select>
 					   </div>
 					   <div class="form-group">
-						   <a href="javascript:onclick" class="btn-add glyphicon glyphicon-plus"></a>
+						   <!-- <a href="javascript:onclick" class="btn-add glyphicon glyphicon-plus"></a> -->
+						   <button class="btn btn-primary btn-add">Add</button>
 						</div>
 						<input type="hidden" id="input-lang-status" value="">
 				   </div>

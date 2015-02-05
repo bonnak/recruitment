@@ -934,7 +934,8 @@ hr#line-break-footer {
 	text-align: justify;
 }
 
-#cv-edit .form-edit{
+#cv-edit .form-edit,
+#cv-edit .form-new{
 	margin-left: -31px;
 	margin-right: -31px;
 	padding: 14px 31px;
@@ -951,7 +952,8 @@ hr#line-break-footer {
 #cv-edit .form-edit .form-group{
 	margin-bottom: 7px;
 }
-#cv-edit .form-edit .opt-controls{
+#cv-edit .form-edit .opt-controls,
+#cv-edit .form-new .opt-controls{
 	margin-top: 15px;
 	text-align: right;
 }
@@ -969,18 +971,23 @@ hr#line-break-footer {
 
 #cv-edit .form-edit textarea:focus,
 #cv-edit .form-edit input:focus,
-#cv-edit .form-edit select:focus{
+#cv-edit .form-edit select:focus,
+#cv-edit .form-new textarea:focus,
+#cv-edit .form-new input:focus,
+#cv-edit .form-new select:focus{
 	outline: none;
 	border-color: #999;
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
 
-#cv-edit .form-edit .btn{
+#cv-edit .form-edit .btn,
+#cv-edit .form-new .btn{
 	width: 70px;
 }
 
-#cv-edit .form-edit .btn:focus{
+#cv-edit .form-edit .btn:focus,
+#cv-edit .form-new .btn:focus{
 	outline: none;
 }
 
@@ -989,19 +996,24 @@ hr#line-break-footer {
 	font-style: italic;
 }
 #cv-edit #skills .btn-remove,
-#cv-edit #languages .btn-remove,
-#cv-edit #languages .btn-add{
+#cv-edit #languages .btn-remove{
 	color: #7C7C7C; 
 	text-decoration: none; 
 	text-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+#cv-edit #languages .btn-add{
+	color: #fff;
 }
 #cv-edit #languages .btn-remove,
 #cv-edit #languages .btn-add{
 	margin-left: 3px;
 }
 #cv-edit #languages #input-lang-name{
-	width: 337px;
+	width: 278px;
 }
 #cv-edit #languages #input-lang-proficiency{
 	width: 250px;
+}
+#cv-edit #languages .form-edit .item-add-new{
+	margin-top: 14px;
 }
