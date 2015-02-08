@@ -1,8 +1,9 @@
 <div class="container body">	
-	<div class="row">
+	<div class="clearfix">
 		<?php echo $__env->yieldContent('login'); ?>
 		<?php echo $__env->yieldContent('main'); ?>
 		<?php echo $__env->yieldContent('candidate'); ?>
+		<?php echo $__env->yieldContent('employer'); ?>
 	</div>
 	<script src="<?php echo asset('assets/js/function.js'); ?>"></script>
 </div>

@@ -1,10 +1,10 @@
 @extends('layouts.default') @section('candidate')
-<div class="col-md-2 left-side-bar">
+<div class="left-side-bar pull-left">
 	<div>
 		@include('menu.menu')
 	</div>
 </div>
-<div id="cv-create" class="col-md-7 middle-wrapper">
+<div id="cv-create" class="middle-wrapper pull-left">
 	<div class="outter-box">
 		<form method="post" action="{{URL::route('candidate.cv.create.post')}}">
 			<div class="box">
@@ -425,5 +425,5 @@
 			</div>			
 		</form>
 	</div>
-	<div class="col-md-3 right-side-bar"></div>
+	<div class="right-side-bar pull-left"></div>
 	@endsection

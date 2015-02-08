@@ -15,6 +15,8 @@ Route::get('/', ['as' => 'home', 'uses' => 'MainController@index']);
 Route::get('register', ['as' => 'user.register', 'uses' => 'AuthenticationController@getUserRegister']);
 Route::get('login', ['as' => 'user.login', 'uses' => 'AuthenticationController@getUserLogin']);
 Route::group(['before' => 'auth'], function (){
+	
+	// Candidate
 	Route::get('/user/candidate', ['as' => 'candidate', 'uses' => 'CandidateController@index']);
 	Route::get('/user/candidate/profile', ['as' => 'candidate.cv.profile', 'uses' => 'CandidateController@getProfile']);
 	Route::post('/user/candidate/profile', ['as' => 'candidate.cv.profile.post', 'uses' => 'CandidateController@postProfile']);
@@ -28,6 +30,10 @@ Route::group(['before' => 'auth'], function (){
 	Route::put('/user/candidate/cv/edit/{cv_id}/edu/{id}', ['as' => 'candidate.cv.edit.edu.put', 'uses' => 'CandidateController@editCVEdu']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/skill', ['as' => 'candidate.cv.edit.skill.put', 'uses' => 'CandidateController@editCVSkill']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/lang', ['as' => 'candidate.cv.edit.lang.put', 'uses' => 'CandidateController@editCVLang']);
+	
+	
+	// Employer
+	Route::get('/user/employer', ['as' => 'employer', 'uses' => 'EmployerController@index']);
 	
 	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);
 });

@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('candidate')
-	<div class="col-md-2 left-side-bar">
+	<div class="left-side-bar pull-left">
 		<ul class="list-unstyled">
 			<li><h3 class="title"><a href="{{URL::route('home')}}">Dashboard</a></h3></li>
 		</ul>
@@ -36,9 +36,9 @@
 			</li>
 		</ul>
 	</div>
-	<div class="col-md-7 middle-wrapper">
+	<div class="middle-wrapper pull-left">
 	
 	
 	</div>
-	<div class="col-md-3 right-side-bar"></div>
+	<div class="right-side-bar pull-left"></div>
 @endsection

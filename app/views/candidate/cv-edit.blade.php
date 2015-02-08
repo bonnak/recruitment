@@ -1,8 +1,8 @@
 @extends('layouts.default') @section('candidate')
-<div class="col-md-2 left-side-bar">
+<div class="left-side-bar pull-left">
 	<div>@include('menu.menu')</div>
 </div>
-<div id="cv-edit" class="col-md-9 middle-wrapper">
+<div id="cv-edit" class="middle-wrapper pull-left">
 	<div id="profile-card">
 		<div class="row">
 			<div class="col-sm-5">
@@ -519,5 +519,5 @@
 		</div>
 	</div>
 </div>
-<div class="col-md-3 right-side-bar"></div>
+<div class="right-side-bar pull-left"></div>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('main')
-		<div class="col-md-2 left-side-bar">		
+		<div class="left-side-bar pull-left">		
 			@if(Auth::guest() || Auth::user()->user_type === null)
 				<div id="login-box-small">
 					<form action="{{URL::route('user.login.post')}}" method="post">
@@ -31,7 +31,7 @@
 				@include('menu.menu')
 			</div>
 		</div>
-		<div class="col-md-7 middle-wrapper">
+		<div class="middle-wrapper pull-left">
 			<div class="row">
 				<div class="col-md-12">
 					<div id="browse-jobs">
@@ -229,7 +229,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3 right-side-bar">
+		<div class="right-side-bar pull-left">
 			<div id="premium-job">
 				<div class="row">
 					<div class="col-md-12">

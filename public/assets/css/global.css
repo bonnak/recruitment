@@ -356,15 +356,15 @@ input#search-keyword{
 	padding: 0;
 }
 .middle-wrapper{
-	width: 56%;
+	width: 653px;
 	margin: 0 7px;
 }
 .right-side-bar{
-	width: 22%;
+	width: 264px;
 	margin-left: 7px;
 }
 .left-side-bar {
-	width: 18%;
+	width: 216px;
 	margin-right: 16px;
 }
 .left-side-bar ul li .title{
