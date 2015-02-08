@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/global.css')}}">
 
 <!-- JS -->
+<script src="{{asset('assets/js/angular-1_3_x.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery-2.1.1.min.js')}}"></script>
  <script src="{{asset('assets/js/jquery-ui.min.js')}}"></script>
 <!--  <script src="{{asset('assets/js/jquery.mobile.min.js')}}"></script> -->
