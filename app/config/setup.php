@@ -75,30 +75,26 @@ return [
 	'employer'		=>	[
 		'menu'		=>	[
 			'Dashboard' => '#',
-			'CV and Cover Letters' => [
-				'Create a CV' => URL::route ( 'candidate.cv.create' ),
-				'My CV' => URL::route('candidate.cvs'),
-				'Create a Cover Letter' => '#',
-				'My Cover Letter' => '#'
+			'Manage Jobs' => [
+				'Post a Job' => '#',
+				'All Jobs' => '#',
 			],
-			'Jobs' => [
-				'Recommended Jobs' => '#',
-					'Job Alert' => '#',
-					'Saved Jobs' => '#',
-					'Application History' => '#'
-			],
-			'Recruitment' => [
-				'Post Jobs' => '#',
+			'Candidates' => [
+				'Applied List' => '#',
 				'CV Search' => '#',
-				'Purchase Service Packages' => '#',
-				'Manage Jobs' => '#'
+				'Your Favorite' => '#',
+			],
+			'Product & Service' => [
+				'Select a Plan' => '#',
+				'Your Credit' => '#',
+				'Plan History' => '#',
 			],
 			'Feature' => [
 				'Companies' => '#',
 				'Agencies' => '#'
 			],
 			'Account Setting' => [
-				'My Profile' => URL::route('candidate.cv.profile'),
+				'My Profile' => '#',
 				'Change Email' => '#',
 				'Change Password' => '#',
 				'Logout' => URL::route ( 'user.logout' )

@@ -109,6 +109,7 @@ class AuthenticationController extends BaseController{
 				switch (Auth::user()->user_type)
 				{
 					case 1: // Employer
+						return Redirect::route('home')->with('global', 'You are now logged in!');
 						break;
 						
 					case 2: // Employee

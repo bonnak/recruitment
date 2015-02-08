@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="<?php echo asset('assets/css/global.css'); ?>">
 
 <!-- JS -->
+<script src="<?php echo asset('assets/js/angular-1_3_x.min.js'); ?>"></script>
 <script src="<?php echo asset('assets/js/jquery-2.1.1.min.js'); ?>"></script>
  <script src="<?php echo asset('assets/js/jquery-ui.min.js'); ?>"></script>
 <!--  <script src="<?php echo asset('assets/js/jquery.mobile.min.js'); ?>"></script> -->
