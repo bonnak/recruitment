@@ -49,19 +49,20 @@ class CreateUsersTables extends Migration {
 		
 		Schema::create('employers', function($table){
 			$table->bigInteger('id');
-			$table->string('company_name');
-			$table->string('phone_number');
-			$table->string('fax')->nullable();
-			$table->integer('industries_id');
-			$table->integer('total_employee')->nullable();
+			$table->string('company_name')->nullable();
+			$table->integer('industry_id')->nullable();
+			$table->integer('total_employees')->nullable();
 			$table->string('address', 500)->nullable();
-			$table->tinyInteger('city_province_id');
+			$table->tinyInteger('city_province_id')->nullable();
 			$table->string('services')->nullable();
 			$table->string('products')->nullable();
 			$table->text('description')->nullable();
+			$table->string('phone_number')->nullable();
+			$table->string('fax')->nullable();
 			$table->string('website')->nullable();
 			$table->string('map_latitute')->nullable();
 			$table->string('map_longitute')->nullable();
+			$table->string('logo')->nullable();
 			$table->timestamps();
 			
 			$table->primary('id');

@@ -34,7 +34,7 @@ class CreateEmployerRelatedTables extends Migration {
 			$table->string('age_range')->nullable();
 			$table->integer('function_id')->nullable();
 			$table->integer('industry_id')->nullable();
-			$table->integer('status')->default(0);
+			$table->integer('status')->default(1);
 			$table->date('published_date')->nullable();
 			$table->date('closing_date')->nullable();
 			$table->timestamps();
