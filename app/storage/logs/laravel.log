@@ -9346,3 +9346,7 @@ Stack trace:
 #10 C:\wamp\www\recruitment\public\index.php(49): Illuminate\Foundation\Application->run()
 #11 C:\wamp\www\recruitment\server.php(19): require_once('C:\\wamp\\www\\rec...')
 #12 {main} [] []
+[2015-02-08 04:10:21] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Class 'Carbon' not found' in C:\wamp\www\recruitment\app\database\seeds\EmployerSeeder.php:41
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

@@ -34,6 +34,7 @@ Route::group(['before' => 'auth'], function (){
 	
 	// Employer
 	Route::get('/user/employer', ['as' => 'employer', 'uses' => 'EmployerController@index']);
+	Route::get('/user/employer/job/post', ['as' => 'employer.job-post', 'uses' => 'EmployerController@getJobPost']);
 	
 	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);
 });

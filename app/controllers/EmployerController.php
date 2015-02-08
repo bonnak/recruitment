@@ -8,7 +8,17 @@ class EmployerController extends BaseController
 		if(Auth::user ()->user_type !== 1)
 			return \Redirect::intended('/');
 		
-		// open default page of employer.
+		// Open default page of employer.
 		return \View::make('employer.employer');
+	}
+	
+	public function getJobPost()
+	{
+		// Return back homepage if user is not an employer.
+		if(Auth::user ()->user_type !== 1)
+			return \Redirect::intended('/');
+		
+		// Open job-post page.
+		return \View::make('employer.job-post');
 	}
 }
