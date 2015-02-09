@@ -737,7 +737,9 @@ hr#line-break-footer {
 #cv-edit #profile-card,
 #cv-edit #back-card,
 #cv-edit #expectation-card,
-#cv-edit #ref-card{
+#cv-edit #ref-card,
+#employer #job-list,
+#employer #job-post{
 	position: relative;
 	font-size: 14px;
 	background-color: #fff;
@@ -1016,4 +1018,9 @@ hr#line-break-footer {
 }
 #cv-edit #languages .form-edit .item-add-new{
 	margin-top: 14px;
+}
+
+#employer #job-list,
+#employer #job-post{
+	padding: 10px;
 }

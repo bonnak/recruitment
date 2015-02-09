@@ -10,9 +10,9 @@ class EmployerSeeder extends Seeder {
 		/**
 		 * *** Employer table ****
 		 */
-		DB::table ( 'employers' )->truncate ();
+		\DB::table ( 'employers' )->truncate ();
 		
-		Employer::create ( [ 
+		\Employer::create ( [ 
 				'id' => 3,
 				'company_name' => 'Home',
 				'industry_id' => 3,
@@ -24,13 +24,14 @@ class EmployerSeeder extends Seeder {
 				'website' => 'www.google.com' 
 		] );
 		
+		/**
+		 * *** Job table ****
+		 */
+		\DB::table ( 'jobs' )->truncate ();
 		
-		/***** Job table *****/
-		DB::table ( 'jobs' )->truncate ();
-		
-		Job::create(
-			[
+		\Job::create ( [ 
 				'employer_id' => 3,
+				'title' => 'Web developer for controlling stocks',
 				'job_description' => 'We are looking for hiring 20 candidates on positions: Web developers.',
 				'salary_range' => '$300 - $500',
 				'hiring' => 10,
@@ -39,9 +40,22 @@ class EmployerSeeder extends Seeder {
 				'age_range' => '20 - Up',
 				'function_id' => 20,
 				'industry_id' => 7,
-				'published_date' => \Carbon\Carbon::today(),
-				'closing_date' => \Carbon\Carbon::today()->addDays(10),
-			]
-		);
+				'published_date' => \Carbon\Carbon::today (),
+				'closing_date' => \Carbon\Carbon::today ()->addDays ( 10 ) 
+		] );
+		
+		\Job::create ( [ 
+				'employer_id' => 3,
+				'title' => 'Recieptionist at welcome stage',
+				'job_description' => 'We are looking 3 recieptionist.',
+				'salary_range' => '$300 - $500',
+				'hiring' => 3,
+				'qualification_id' => 1,
+				'age_range' => '20 - Up',
+				'function_id' => 6,
+				'industry_id' => 7,
+				'published_date' => \Carbon\Carbon::today (),
+				'closing_date' => \Carbon\Carbon::today ()->addDays ( 10 ) 
+		] );
 	}
 }

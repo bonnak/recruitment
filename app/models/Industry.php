@@ -7,7 +7,7 @@ class Industry extends Eloquent
 	
 	public static function getIndustries()
 	{
-		return DB::table('industries')->select(['id', 'name'])
+		return DB::table('constant_industries')->select(['id', 'name'])
 									  ->get();
 	}
 }

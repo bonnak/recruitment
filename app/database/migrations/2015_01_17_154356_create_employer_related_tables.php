@@ -25,6 +25,7 @@ class CreateEmployerRelatedTables extends Migration {
 		Schema::create('jobs', function ($table){
 			$table->bigIncrements('id');
 			$table->bigInteger('employer_id');
+			$table->string('title');
 			$table->longText('job_description')->nullable();
 			$table->string('salary_range')->nullable();
 			$table->char('gender', 1)->nullable();
