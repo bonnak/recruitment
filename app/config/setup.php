@@ -76,19 +76,20 @@ return [
 		'menu'		=>	[
 			'Dashboard' => \URL::route('employer'),
 			'Manage Jobs' => [
-				'Post a Job' => \URL::route('employer.job-post'),
-				'All Jobs' => '#',
+				'Post New Job' => \URL::route('employer.job-post', Auth::user()->id),
+				'Jobs Posted' => \URL::route('employer.job-list', Auth::user()->id),
 			],
 			'Candidates' => [
 				'Applied List' => '#',
 				'CV Search' => '#',
-				'Your Favorite' => '#',
+				'Your Favorite CV' => '#',
+// 				'Recommend CV' => '#',
 			],
-			'Product & Service' => [
-				'Select a Plan' => '#',
-				'Your Credit' => '#',
-				'Plan History' => '#',
-			],
+// 			'Product & Service' => [
+// 				'Select a Plan' => '#',
+// 				'Your Credit' => '#',
+// 				'Plan History' => '#',
+// 			],
 			'Feature' => [
 				'Companies' => '#',
 				'Agencies' => '#'
