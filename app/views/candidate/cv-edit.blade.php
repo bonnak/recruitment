@@ -124,7 +124,7 @@
 								      <div class="pull-left clearfix">
 								      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
-								      		@foreach(\Config::get('setup.months') as $month)
+								      		@foreach(\Config::get('constant.months') as $month)
 								      			<option value="{{$month['num']}}" {{$work_experience->from_month == $month['num'] ? 'selected' : ''}}>{{$month['name']}}</option>
 								      		@endforeach
 								      	</select>
@@ -134,7 +134,7 @@
 								      <div class="pull-left clearfix">
 								      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
-								      		@foreach(\Config::get('setup.months') as $month)
+								      		@foreach(\Config::get('constant.months') as $month)
 								      			<option value="{{$month['num']}}" {{$work_experience->to_month == $month['num'] ? 'selected' : ''}}>{{$month['name']}}</option>
 								      		@endforeach
 								      	</select>
@@ -183,7 +183,7 @@
 						      <div class="pull-left clearfix">
 						      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;">
 						      		<option value="">---Month--</option>
-						      		@foreach(\Config::get('setup.months') as $month)
+						      		@foreach(\Config::get('constant.months') as $month)
 						      			<option value="{{$month['num']}}">{{$month['name']}}</option>
 						      		@endforeach
 						      	</select>
@@ -193,7 +193,7 @@
 						      <div class="pull-left clearfix">
 						      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;">
 						      		<option value="">---Month--</option>
-						      		@foreach(\Config::get('setup.months') as $month)
+						      		@foreach(\Config::get('constant.months') as $month)
 						      			<option value="{{$month['num']}}">{{$month['name']}}</option>
 						      		@endforeach
 						      	</select>
