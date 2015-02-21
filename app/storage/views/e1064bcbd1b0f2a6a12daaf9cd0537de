@@ -131,7 +131,7 @@
 								      <div class="pull-left clearfix">
 								      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
-								      		<?php foreach(\Config::get('setup.months') as $month): ?>
+								      		<?php foreach(\Config::get('constant.months') as $month): ?>
 								      			<option value="<?php echo $month['num']; ?>" <?php echo $work_experience->from_month == $month['num'] ? 'selected' : ''; ?>><?php echo $month['name']; ?></option>
 								      		<?php endforeach; ?>
 								      	</select>
@@ -141,7 +141,7 @@
 								      <div class="pull-left clearfix">
 								      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;">
 								      		<option value="">---Month--</option>
-								      		<?php foreach(\Config::get('setup.months') as $month): ?>
+								      		<?php foreach(\Config::get('constant.months') as $month): ?>
 								      			<option value="<?php echo $month['num']; ?>" <?php echo $work_experience->to_month == $month['num'] ? 'selected' : ''; ?>><?php echo $month['name']; ?></option>
 								      		<?php endforeach; ?>
 								      	</select>
@@ -192,7 +192,7 @@
 						      <div class="pull-left clearfix">
 						      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;">
 						      		<option value="">---Month--</option>
-						      		<?php foreach(\Config::get('setup.months') as $month): ?>
+						      		<?php foreach(\Config::get('constant.months') as $month): ?>
 						      			<option value="<?php echo $month['num']; ?>"><?php echo $month['name']; ?></option>
 						      		<?php endforeach; ?>
 						      	</select>
@@ -202,7 +202,7 @@
 						      <div class="pull-left clearfix">
 						      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;">
 						      		<option value="">---Month--</option>
-						      		<?php foreach(\Config::get('setup.months') as $month): ?>
+						      		<?php foreach(\Config::get('constant.months') as $month): ?>
 						      			<option value="<?php echo $month['num']; ?>"><?php echo $month['name']; ?></option>
 						      		<?php endforeach; ?>
 						      	</select>
