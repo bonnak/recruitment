@@ -355,6 +355,31 @@ class CandidateController extends BaseController
 	public function createCVExperience($cv_id)
 	{
 		$can_experience = new \CandidateExperience;
+		
+		$job_title = htmlentities(\Input::get('job_title'));
+		$company_name = htmlentities(\Input::get('company_name'));
+		$location = htmlentities(\Input::get('location'));
+		$job_description = htmlentities(\Input::get('description'));
+		$from_month = htmlentities(\Input::get('duration.from_month'));
+		$from_year = htmlentities(\Input::get('duration.from_year'));
+		$to_month = htmlentities(\Input::get('duration.to_month'));
+		$to_year = htmlentities(\Input::get('duration.to_year'));
+		
+		$can_experience->cv_id = $cv_id;
+		$can_experience->job_title = !empty($job_title) ? $job_title : null;
+		$can_experience->company_name = !empty($company_name) ? $company_name : null;
+		$can_experience->location = !empty($location) ? $location : null;
+		$can_experience->job_description = !empty($job_description) ? $job_description : null;
+		$can_experience->from_month = !empty($from_month) ? $from_month : null;
+		$can_experience->from_year = !empty($from_year) ? $from_year : null;
+		$can_experience->to_month = !empty($to_month) ? $to_month : null;
+		$can_experience->to_year = !empty($to_year) ? $to_year : null;
+		
+		
+		if($can_experience->save())
+		{
+			return \Input::get();
+		}
 	}
 	
 	public function editCVExperience($cv_id, $id)

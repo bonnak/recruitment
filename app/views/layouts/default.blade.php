@@ -21,8 +21,8 @@
  <script src="{{asset('assets/js/lib/jquery-ui.min.js')}}"></script>
 <!--  <script src="{{asset('assets/js/lib/jquery.mobile.min.js')}}"></script> -->
 <script src="{{asset('bootstrap-3.3.1/js/bootstrap.min.js')}}"></script>
-</head>
-<body>
+
+<body ng-app="AppCandidate">
 	<div class="top-fixed-bar">		
 		@include('layouts.header') 
 	</div>
@@ -31,6 +31,8 @@
 	<div class="footer-container-back">
 		@include('layouts.footer')
 	</div>
-	<script src="{{asset('assets/js/global.js')}}"></script>
+		
+	@yield('script')
+</head>
 </body>
 </html>

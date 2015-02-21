@@ -21,8 +21,8 @@
  <script src="<?php echo asset('assets/js/lib/jquery-ui.min.js'); ?>"></script>
 <!--  <script src="<?php echo asset('assets/js/lib/jquery.mobile.min.js'); ?>"></script> -->
 <script src="<?php echo asset('bootstrap-3.3.1/js/bootstrap.min.js'); ?>"></script>
-</head>
-<body>
+
+<body ng-app="AppCandidate">
 	<div class="top-fixed-bar">		
 		<?php echo $__env->make('layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
 	</div>
@@ -31,6 +31,8 @@
 	<div class="footer-container-back">
 		<?php echo $__env->make('layouts.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	</div>
-	<script src="<?php echo asset('assets/js/global.js'); ?>"></script>
+		
+	<?php echo $__env->yieldContent('script'); ?>
+</head>
 </body>
 </html>

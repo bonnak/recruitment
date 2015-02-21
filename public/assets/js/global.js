@@ -1,4 +1,17 @@
 $(document).on('ready', function(){
+	
+	$('.btn-new-experience').on('click', function(){
+		var form_new =  $(this).parents('#experience').find('.form-new');
+			
+		$(form_new).removeClass('hide');
+	});
+	
+	$('#experience .form-new .btn-cancel').on('click', function(){
+		var form_new =  $(this).parents('#experience').find('.form-new');
+		
+		$(form_new).addClass('hide');
+	});
+	
 	/***** Edit CV *****/
 	// Edit summary.
 	$('#cv-edit #summary #btn-edit-summary').on('click', function(e){

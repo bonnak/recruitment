@@ -2,7 +2,7 @@
 <div class="left-side-bar pull-left">
 	<div>@include('menu.menu')</div>
 </div>
-<div id="cv-edit" class="middle-wrapper pull-left">
+<div id="cv-edit" class="middle-wrapper pull-left" ng-controller="CvEditCtrl">
 	<div id="profile-card">
 		<div class="row">
 			<div class="col-sm-5">
@@ -100,7 +100,7 @@
 								<p id="span-job-description">{{$work_experience->job_description}}</p>
 							</div>										
 							<div class="card-btn-group">							
-								<a href="javascript:onclick" id="btn-new-experience" class="glyphicon glyphicon-file"></a>
+								<a href="javascript:onclick" class="btn-new-experience glyphicon glyphicon-file"></a>
 								<a href="javascript:onclick" id="btn-edit-experience" class="glyphicon glyphicon-pencil"></a>
 							</div>
 						</div>
@@ -162,60 +162,60 @@
 						</div>
 					</div>	
 					@endforeach
-					<div class="form-new">
+					<div class="form-new hide">
 						<h4 style="margin-bottom: 20px;">What is your work experience?</h4>
-						{{\Form::open(['route' => ['candidate.cv.edit.experience.put', $candidate->cv->id, $work_experience->id],  'method' => 'put', 'class' => 'form-horizontal'])}}
+						{{\Form::open(['route' => ['candidate.cv.edit.experience.post', $candidate->cv->id],  'method' => 'post', 'class' => 'form-horizontal', 'id' => 'add_new_experience_frm'])}}
 						<div class="form-group">
 							<label for="input-job-title" class="col-sm-3 control-label">Job Title</label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="input-job-title">
+						      <input type="text" class="form-control" id="input-job-title" ng-model="experience.new.job_title">
 						    </div>
 						</div>
 						<div class="form-group">
 							<label for="input-company-name" class="col-sm-3 control-label">Company name</label>
 						    <div class="col-sm-5">
-						      <input type="text" class="form-control" id="input-company-name">
+						      <input type="text" class="form-control" id="input-company-name" ng-model="experience.new.company_name">
 						    </div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Duration</label>
 						    <div class="col-sm-9">
 						      <div class="pull-left clearfix">
-						      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;">
+						      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;" ng-model="experience.new.duration.from_month">
 						      		<option value="">---Month--</option>
 						      		@foreach(\Config::get('constant.months') as $month)
 						      			<option value="{{$month['num']}}">{{$month['name']}}</option>
 						      		@endforeach
 						      	</select>
-						      	<input type="text" class="form-control pull-left" id="input-ex-from-year" style="width: 60px; margin-left: 5px;" Placeholder="Year">
+						      	<input type="text" class="form-control pull-left" id="input-ex-from-year" style="width: 60px; margin-left: 5px;" Placeholder="Year" ng-model="experience.new.duration.from_year">
 						      </div> 
 						      <div class="pull-left" style="padding-top: 6px; font-weight: 600;">&nbsp;&nbsp;To&nbsp;&nbsp;</div>
 						      <div class="pull-left clearfix">
-						      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;">
+						      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;" ng-model="experience.new.duration.to_month">
 						      		<option value="">---Month--</option>
 						      		@foreach(\Config::get('constant.months') as $month)
 						      			<option value="{{$month['num']}}">{{$month['name']}}</option>
 						      		@endforeach
 						      	</select>
-						      	<input type="text" class="form-control pull-left" id="input-ex-to-year" style="width: 60px; margin-left: 5px;" Placeholder="Year">
+						      	<input type="text" class="form-control pull-left" id="input-ex-to-year" style="width: 60px; margin-left: 5px;" Placeholder="Year" ng-model="experience.new.duration.to_year">
 						      </div>
 						    </div>
 						</div>
 						<div class="form-group">
 							<label for="ex-location" class="col-sm-3 control-label">Location</label>
 						    <div class="col-sm-5">
-						      <input type="text" class="form-control" id="input-ex-location" name="ex-location">
+						      <input type="text" class="form-control" id="input-ex-location" name="ex-location" ng-model="experience.new.location">
 						    </div>
 						</div>
 						<div class="form-group">
 							<label for="input-job-description" class="col-sm-3 control-label">Description</label>
 						    <div class="col-sm-9">
-						      <textarea class="form-control" id="input-job-description"></textarea>
+						      <textarea class="form-control" id="input-job-description" ng-model="experience.new.description"></textarea>
 						    </div>
 						</div>
 						<div class="opt-controls">
-					      <button type="button" class="btn btn-primary btn-save">Save</button>
-					      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
+					      <button type="button" class="btn btn-primary btn-save" ng-click="save()">Save</button>
+					      <button type="button" class="btn btn-danger btn-cancel" ng-click="closeForm()">Cancel</button>
 					  </div>
 					  {{\Form::close()}}
 					</div>
@@ -520,4 +520,11 @@
 	</div>
 </div>
 <div class="right-side-bar pull-left"></div>
+@endsection
+
+@section('script')
+	<script src="{{asset('assets/js/global.js')}}"></script>
+	
+	<script src="{{asset('assets/js/app.js')}}"></script>
+	<script src="{{asset('assets/js/controllers/cveditCtrl.js')}}"></script>
 @endsection
