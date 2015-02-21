@@ -5,7 +5,7 @@ if (! Auth::guest () && Auth::user ()->role === null)
 	{
 		case 1 : // Employer
 ?>
-		@foreach(Config::get('setup.employer.menu') as $menu => $url)
+		@foreach(Config::get('employer.menu') as $menu => $url)
 			<ul class="list-unstyled">
 			@if(is_array($url))
 				<li><h3 class="title">{{$menu}}</h3>
@@ -24,7 +24,7 @@ if (! Auth::guest () && Auth::user ()->role === null)
 			break;
 		case 2 : // Employee
 ?>
-		@foreach(Config::get('setup.candidate.menu') as $menu => $url)
+		@foreach(Config::get('candidate.menu') as $menu => $url)
 			<ul class="list-unstyled">
 			@if(is_array($url))
 				<li><h3 class="title">{{$menu}}</h3>
@@ -46,7 +46,7 @@ if (! Auth::guest () && Auth::user ()->role === null)
 else
 { 
 ?>
-		@foreach(Config::get('setup.default.menu') as $menu => $url)
+		@foreach(Config::get('constant.menu') as $menu => $url)
 			<ul class="list-unstyled">
 			@if(is_array($url))
 				<li><h3 class="title">{{$menu}}</h3>
