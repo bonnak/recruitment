@@ -4,7 +4,7 @@
 				<div id="login-box-small">
 					<form action="<?php echo URL::route('user.login.post'); ?>" method="post">
 						<div class="form-group">
-							<input type="text" id="login-username" class="form-control input-sm" name="user_name" placeholder="User name / Email">
+							<input type="text" id="login-username" class="form-control input-sm" name="username" placeholder="User name / Email">
 						</div>
 						<div class="form-group">
 							<input type="password" id="login-pwd" class="form-control input-sm" name="password" placeholder="Password">
