@@ -1,10 +1,10 @@
  <?php $__env->startSection('candidate'); ?>
-<div class="col-md-2 left-side-bar">
+<div class="left-side-bar pull-left">
 	<div>
 		<?php echo $__env->make('menu.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	</div>
 </div>
-<div id="cv-create" class="col-md-7 middle-wrapper">
+<div id="cv-create" class="middle-wrapper pull-left">
 	<div class="outter-box">
 		<form method="post" action="<?php echo URL::route('candidate.cv.create.post'); ?>">
 			<div class="box">
@@ -425,6 +425,6 @@
 			</div>			
 		</form>
 	</div>
-	<div class="col-md-3 right-side-bar"></div>
+	<div class="right-side-bar pull-left"></div>
 	<?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

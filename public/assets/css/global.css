@@ -478,17 +478,8 @@ input#search-keyword{
 }
 
 .title-bar{
-/* 	color: #fff; */
-/* 	text-transform: uppercase; */
-/* 	padding: 10px; */
-/* 	background-color: #616161; */
-/* 	text-shadow: 0 0 1px rgba(126, 99, 31, 0.5); */
-/* 	border-bottom: 3px solid #E47911; */
-/* 	-webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52); */
-/* 	-moz-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52); */
-/* 	box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52); */
+	font-weight: 600;
 	color: #fff;
-	text-transform: uppercase;
 	padding: 10px;
 	background-color: #E4B111;
 	text-shadow: 0 0 1px rgba(126, 99, 31, 0.5);
@@ -1021,6 +1012,39 @@ hr#line-break-footer {
 }
 
 #employer #job-list,
-#employer #job-post{
-	padding: 10px;
+#employer #job-post .content-wrapper{
+	padding: 25px;
+}
+#employer #job-post .content-wrapper label{
+	font-weight: 100;
+}
+#employer #job-post .content-wrapper .block{
+	margin-top: 18px;	
+}
+#employer #job-post .content-wrapper #title-block{
+	margin-top: 0;
+}
+#employer #job-post .content-wrapper .block .field{
+	margin-left: 5px;
+}
+#employer #job-post .content-wrapper #title-block .field input{
+	width: 300px;
+}
+#employer #job-post .content-wrapper #desc-block .field{		
+	margin-top: 12px;
+	margin-left: 30px;
+}
+#employer #job-post .content-wrapper #desc-block .field textarea{
+	height: 300px;
+}
+#employer #job-post .content-wrapper #option-block .ctr-group{
+	margin-bottom: 5px;
+	margin-left: 20px;
+}
+#employer #job-post .content-wrapper #option-block .ctr-group.nomargin{
+	margin-left: 0;
+}
+#employer #job-post .content-wrapper #option-block .field input,		
+#employer #job-post .content-wrapper #option-block .field select{		
+	width: 100px;
 }
