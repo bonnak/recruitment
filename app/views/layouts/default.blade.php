@@ -22,7 +22,7 @@
 <!--  <script src="{{asset('assets/js/lib/jquery.mobile.min.js')}}"></script> -->
 <script src="{{asset('bootstrap-3.3.1/js/bootstrap.min.js')}}"></script>
 
-<body ng-app="AppCandidate">
+<body>
 	<div class="top-fixed-bar">		
 		@include('layouts.header') 
 	</div>

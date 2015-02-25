@@ -22,7 +22,7 @@
 <!--  <script src="<?php echo asset('assets/js/lib/jquery.mobile.min.js'); ?>"></script> -->
 <script src="<?php echo asset('bootstrap-3.3.1/js/bootstrap.min.js'); ?>"></script>
 
-<body ng-app="AppCandidate">
+<body>
 	<div class="top-fixed-bar">		
 		<?php echo $__env->make('layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?> 
 	</div>
