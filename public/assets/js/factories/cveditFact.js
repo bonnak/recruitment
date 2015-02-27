@@ -1,6 +1,15 @@
 app_candidate.factory('Experience', function($http){
 	
 	var Experience = function(){
+		this.job_title = '';
+		this.company_name = '';
+		this.from_month = '';
+		this.from_year = '';
+		this.to_month = '';
+		this.to_year = '';
+		this.location = '';
+		this.description = '';
+
 		this.new = {
 			'job_title' : '',
 			'company_name' : '',
