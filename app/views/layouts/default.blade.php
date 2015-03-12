@@ -13,6 +13,7 @@
 	href="{{asset('bootstrap-3.3.1/css/bootstrap-theme.min.css')}}">
 	<link rel="stylesheet"
 	href="{{asset('font-awesome-4.2.0/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/base.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/global.css')}}">
 
 <!-- JS -->

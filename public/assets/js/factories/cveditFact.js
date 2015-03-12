@@ -8,7 +8,7 @@ app_candidate.factory('Experience', function($http){
 		this.to_month = '';
 		this.to_year = '';
 		this.location = '';
-		this.description = '';
+		this.job_description = '';
 
 		this.new = {
 			'job_title' : '',
@@ -25,10 +25,15 @@ app_candidate.factory('Experience', function($http){
 	}
 		
 	Experience.prototype.createNew = function(url, data){
-		return $http.post(
-					url, 
-					data
-				);
+		return $http.post(url, data);
+	}
+	
+	Experience.prototype.update = function(url, data){
+		return $http.put(url, data);
+	}
+	
+	Experience.prototype.delete = function(url, data){
+		return $http.delete(url);
 	}
 	
 	// Clear item values.

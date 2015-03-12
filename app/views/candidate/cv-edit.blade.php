@@ -3,7 +3,7 @@
 	<div class="left-side-bar pull-left">
 		<div>@include('menu.menu')</div>
 	</div>
-	<div id="cv-edit" class="middle-wrapper pull-left" ng-controller="CvEditCtrl">
+	<div id="cv-edit" class="middle-wrapper pull-left" ng-controller="CvEditCtrl" ng-init="cv_id = '{{$candidate->cv->id}}'">
 		<div id="profile-card">
 			<div class="row">
 				<div class="col-sm-5">
@@ -64,113 +64,122 @@
 				</div>
 			</div>
 			<div id="experience">
-				<div>
-					<h3 class="part">Experience</h3>
-					<div>
-						@for($i_exp = 0; $i_exp < count($candidate->cv->work_experiences) ; $i_exp++)
-						<div class="items" 
-							ng-init="
-								addExperience({
-									job_title : '{{$candidate->cv->work_experiences[$i_exp]->job_title}}',
-									company_name : '{{$candidate->cv->work_experiences[$i_exp]->company_name}}',
-									from_month : '{{$candidate->cv->work_experiences[$i_exp]->from_month}}',
-									from_year : '{{$candidate->cv->work_experiences[$i_exp]->from_year}}',
-									to_month : '{{$candidate->cv->work_experiences[$i_exp]->to_month}}',
-									to_year : '{{$candidate->cv->work_experiences[$i_exp]->to_year}}',
-									location : '{{$candidate->cv->work_experiences[$i_exp]->location}}',
-									description : '{{$candidate->cv->work_experiences[$i_exp]->job_description}}',
-
-									content_exp_hide : false,
-									frm_exp_edit_show : false
-								})";
-						>						
-							<div class="content-show" ng-hide="experiences[{{$i_exp}}].content_exp_hide">
-								<h4 id="span-job-title" class="job-title">{% experiences[{{$i_exp}}].job_title %}</h4>
-								<div>
-									<span class="prefix-cv-info">Company</span><span id="span-company-name" class="cv-info">{% experiences[{{$i_exp}}].company_name %}</span>
-								</div>
-								<div>
-									<span class="prefix-cv-info">From</span>
-									<span id="span-from-date" class="cv-info">
-										{% getExperienceDate(experiences[{{$i_exp}}].from_year, experiences[{{$i_exp}}].from_month) %}
-									</span>
-									<span class="prefix-cv-info" style="margin-left: 13px;">To</span>
-									<span id="span-to-date" class="cv-info">
-										{% getExperienceDate(experiences[{{$i_exp}}].to_year, experiences[{{$i_exp}}].to_month) %}
-									</span>
-								</div>
-								<div>
-									<span class="prefix-cv-info">Locate in</span><span id="span-ex-location" class="cv-info" >{% experiences[{{$i_exp}}].location %}</span>
-								</div>										
-								<div>
-									<p id="span-job-description">{% experiences[{{$i_exp}}].description %}</p>
-								</div>										
-								<div class="card-btn-group">							
-									<a href="javascript:onclick" class="btn-new-experience glyphicon glyphicon-file" ng-click="frm_exp_new_show = true"></a>
-									<a href="javascript:onclick" id="btn-edit-experience" class="glyphicon glyphicon-pencil" ng-click="experiences[{{$i_exp}}].content_exp_hide = true; experiences[{{$i_exp}}].frm_exp_edit_show = true"></a>
-								</div>
+				<h3 class="part">Experience</h3>
+				<div class="items" >
+					@for($i_exp = 0; $i_exp < count($candidate->cv->work_experiences) ; $i_exp++)
+					<div class="item" 
+						ng-init="
+							addExperience({
+								id 				: '{{$candidate->cv->work_experiences[$i_exp]->id}}',
+								job_title 		: '{{$candidate->cv->work_experiences[$i_exp]->job_title}}',
+								company_name 	: '{{$candidate->cv->work_experiences[$i_exp]->company_name}}',
+								from_month 		: '{{$candidate->cv->work_experiences[$i_exp]->from_month}}',
+								from_year 		: '{{$candidate->cv->work_experiences[$i_exp]->from_year}}',
+								to_month 		: '{{$candidate->cv->work_experiences[$i_exp]->to_month}}',
+								to_year 		: '{{$candidate->cv->work_experiences[$i_exp]->to_year}}',
+								location 		: '{{$candidate->cv->work_experiences[$i_exp]->location}}',
+								job_description : '{{$candidate->cv->work_experiences[$i_exp]->job_description}}'
+							});
+							
+							exp_item_state.push({
+								item_remove : false,
+								content_exp_hide : false,
+								frm_exp_edit_show : false									
+							});"
+							
+						ng-if="!exp_item_state[{{$i_exp}}].item_remove"
+					>						
+						<div class="content-show" ng-hide="exp_item_state[{{$i_exp}}].content_exp_hide">
+							<h4 id="span-job-title" class="job-title">{% experiences[{{$i_exp}}].job_title %}</h4>
+							<div>
+								<span class="prefix-cv-info">Company</span><span id="span-company-name" class="cv-info">{% experiences[{{$i_exp}}].company_name %}</span>
 							</div>
-							<div class="form-edit" ng-show="experiences[{{$i_exp}}].frm_exp_edit_show">
-								{{\Form::open(['route' => ['candidate.cv.edit.experience.put', $candidate->cv->id, $candidate->cv->work_experiences[$i_exp]->id],  'method' => 'put', 'class' => 'form-horizontal'])}}
-									<div class="form-group">
-										<label for="input-job-title" class="col-sm-3 control-label">Job Title</label>
-									    <div class="col-sm-8">
-									      <input type="text" class="form-control" id="input-job-title" ng-model="experiences[{{$i_exp}}].job_title">
-									    </div>
-									</div>
-									<div class="form-group">
-										<label for="input-company-name" class="col-sm-3 control-label">Company name</label>
-									    <div class="col-sm-5">
-									      <input type="text" class="form-control" id="input-company-name" ng-model="experiences[{{$i_exp}}].company_name">
-									    </div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label">Duration</label>
-									    <div class="col-sm-9">
-									      <div class="pull-left clearfix">
-									      	<select type="text" class="form-control pull-left" id="input-ex-from-month" ng-model="experiences[{{$i_exp}}].from_month" only-digits style="width: 120px;">
-									      		<option value="">---Month--</option>
-									      		@foreach(\Config::get('constant.months') as $month)
-									      			<option value="{{$month['num']}}">{{$month['name']}}</option>
-									      		@endforeach
-									      	</select>
-									      	<input type="text" class="form-control pull-left" id="input-ex-from-year" ng-model="experiences[{{$i_exp}}].from_year"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
-									      </div> 
-									      <div class="pull-left" style="padding-top: 6px; font-weight: 600;">&nbsp;&nbsp;To&nbsp;&nbsp;</div>
-									      <div class="pull-left clearfix">
-									      	<select type="text" class="form-control pull-left" id="input-ex-to-month" ng-model="experiences[{{$i_exp}}].to_month" style="width: 120px;">
-									      		<option value="">---Month--</option>
-									      		@foreach(\Config::get('constant.months') as $month)
-									      			<option value="{{$month['num']}}">{{$month['name']}}</option>
-									      		@endforeach
-									      	</select>
-									      	<input type="text" class="form-control pull-left" id="input-ex-to-year" ng-model="experiences[{{$i_exp}}].to_year"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
-									      </div>
-									    </div>
-									</div>
-									<div class="form-group">
-										<label for="ex-location" class="col-sm-3 control-label">Location</label>
-									    <div class="col-sm-5">
-									      <input type="text" class="form-control" id="input-ex-location" name="ex-location" ng-model="experiences[{{$i_exp}}].location">
-									    </div>
-									</div>
-									<div class="form-group">
-										<label for="input-job-description" class="col-sm-3 control-label">Description</label>
-									    <div class="col-sm-9">
-									      <textarea class="form-control" id="input-job-description" ng-model="experiences[{{$i_exp}}].description"></textarea>
-									    </div>
-									</div>
-									<div class="opt-controls">
-								      <button type="button" class="btn btn-primary btn-save">Update</button>
-								      <button type="button" class="btn btn-danger btn-cancel" ng-click="experiences[{{$i_exp}}].frm_exp_edit_show = false; experiences[{{$i_exp}}].content_exp_hide = false">Cancel</button>
-								  </div>
-							  {{\Form::close()}}
+							<div>
+								<span class="prefix-cv-info">From</span>
+								<span id="span-from-date" class="cv-info">
+									{% getExperienceDate(experiences[{{$i_exp}}].from_year, experiences[{{$i_exp}}].from_month) %}
+								</span>
+								<span class="prefix-cv-info" style="margin-left: 13px;">To</span>
+								<span id="span-to-date" class="cv-info">
+									{% getExperienceDate(experiences[{{$i_exp}}].to_year, experiences[{{$i_exp}}].to_month) %}
+								</span>
+							</div>
+							<div>
+								<span class="prefix-cv-info">Locate in</span><span id="span-ex-location" class="cv-info" >{% experiences[{{$i_exp}}].location %}</span>
+							</div>										
+							<div>
+								<p id="span-job-description">{% experiences[{{$i_exp}}].job_description %}</p>
+							</div>										
+							<div class="card-btn-group">							
+								<a href="javascript:onclick" class="btn-new-experience glyphicon glyphicon-file" ng-click="openNewExpForm()"></a>
+								<a href="javascript:onclick" id="btn-edit-experience" class="glyphicon glyphicon-pencil" 
+									ng-click="exp_item_state[{{$i_exp}}].content_exp_hide = true; exp_item_state[{{$i_exp}}].frm_exp_edit_show = true"></a>
 							</div>
 						</div>
-						@endfor
-						<div class="form-new">
-							<h4 style="margin-bottom: 20px;">What is your work experience?</h4>
-							{{\Form::open(['route' => ['candidate.cv.edit.experience.post', $candidate->cv->id],  'method' => 'post', 'class' => 'form-horizontal', 'id' => 'add_new_experience_frm'])}}
+						<div class="form-edit" ng-show="exp_item_state[{{$i_exp}}].frm_exp_edit_show">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label for="input-job-title" class="col-sm-3 control-label">Job Title</label>
+								    <div class="col-sm-8">
+								      <input type="text" class="form-control" id="input-job-title" ng-model="experiences[{{$i_exp}}].job_title">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="input-company-name" class="col-sm-3 control-label">Company name</label>
+								    <div class="col-sm-5">
+								      <input type="text" class="form-control" id="input-company-name" ng-model="experiences[{{$i_exp}}].company_name">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">Duration</label>
+								    <div class="col-sm-9">
+								      <div class="pull-left clearfix">
+								      	<select type="text" class="form-control pull-left" id="input-ex-from-month" ng-model="experiences[{{$i_exp}}].from_month" only-digits style="width: 120px;">
+								      		<option value="">---Month--</option>
+								      		@foreach(\Config::get('constant.months') as $month)
+								      			<option value="{{$month['num']}}">{{$month['name']}}</option>
+								      		@endforeach
+								      	</select>
+								      	<input type="text" class="form-control pull-left" id="input-ex-from-year" ng-model="experiences[{{$i_exp}}].from_year"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
+								      </div> 
+								      <div class="pull-left" style="padding-top: 6px; font-weight: 600;">&nbsp;&nbsp;To&nbsp;&nbsp;</div>
+								      <div class="pull-left clearfix">
+								      	<select type="text" class="form-control pull-left" id="input-ex-to-month" ng-model="experiences[{{$i_exp}}].to_month" style="width: 120px;">
+								      		<option value="">---Month--</option>
+								      		@foreach(\Config::get('constant.months') as $month)
+								      			<option value="{{$month['num']}}">{{$month['name']}}</option>
+								      		@endforeach
+								      	</select>
+								      	<input type="text" class="form-control pull-left" id="input-ex-to-year" ng-model="experiences[{{$i_exp}}].to_year"  style="width: 60px; margin-left: 5px;" Placeholder="Year">
+								      </div>
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="ex-location" class="col-sm-3 control-label">Location</label>
+								    <div class="col-sm-5">
+								      <input type="text" class="form-control" id="input-ex-location" name="ex-location" ng-model="experiences[{{$i_exp}}].location">
+								    </div>
+								</div>
+								<div class="form-group">
+									<label for="input-job-description" class="col-sm-3 control-label">Description</label>
+								    <div class="col-sm-9">
+								      <textarea class="form-control" id="input-job-description" ng-model="experiences[{{$i_exp}}].job_description"></textarea>
+								    </div>
+								</div>
+								<div class="opt-controls">
+							      <button type="button" 
+							      		class="btn btn-primary btn-save" 
+							      		ng-click="updateExperience(experiences[{{$i_exp}}])">Update</button>
+							      <button type="button" class="btn btn-danger btn-delete" ng-click="deleteExperience(experiences[{{$i_exp}}])">Delete</button>
+							      <button type="button" class="btn btn-default btn-cancel" ng-click="exp_item_state[{{$i_exp}}].frm_exp_edit_show = false; exp_item_state[{{$i_exp}}].content_exp_hide = false">Cancel</button>
+							  </div>
+						  </form>
+						</div>
+					</div>
+					@endfor
+					<div class="form-new" ng-show="frm_exp_new_show">
+						<h4 style="margin-bottom: 20px;">What is your work experience?</h4>
+						<form class="form-horizontal">
 							<div class="form-group">
 								<label for="input-job-title" class="col-sm-3 control-label">Job Title</label>
 							    <div class="col-sm-8">
@@ -220,12 +229,12 @@
 							    </div>
 							</div>
 							<div class="opt-controls">
-						      <button type="button" class="btn btn-primary btn-save" ng-click="save()">Save</button>
-						      <button type="button" class="btn btn-danger btn-cancel" ng-click="closeForm()">Cancel</button>
+						      <button type="button" class="btn btn-primary btn-save" ng-click="addNewExperience()">Save</button>
+						      <button type="button" class="btn btn-default btn-cancel" ng-click="closeNewExpForm()">Cancel</button>
 						  </div>
-						  {{\Form::close()}}
-						</div>
+					  </form>
 					</div>
+					<alert></alert>
 				</div>
 			</div>
 			<div id="edu">
@@ -535,4 +544,5 @@
 	<script src="{{asset('assets/js/app.js')}}"></script>
 	<script src="{{asset('assets/js/controllers/cveditCtrl.js')}}"></script>
 	<script src="{{asset('assets/js/factories/cveditFact.js')}}"></script>
+	<script src="{{asset('assets/js/directives/cveditDir.js')}}"></script>
 @endsection

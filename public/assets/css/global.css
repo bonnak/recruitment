@@ -481,12 +481,8 @@ input#search-keyword{
 	font-weight: 600;
 	color: #fff;
 	padding: 10px;
-	background-color: #E4B111;
+	background-color: #434649;
 	text-shadow: 0 0 1px rgba(126, 99, 31, 0.5);
-	border-bottom: 1px solid #E47911;
-	-webkit-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
-	-moz-box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
-	box-shadow: 0 2px 2px -2px rgba(0, 0, 0, .52);
 }
 
 hr#line-break-footer {
@@ -762,7 +758,7 @@ hr#line-break-footer {
 }
 
 #cv-edit #back-card #summary,
-#cv-edit #back-card #experience .items,
+#cv-edit #back-card #experience .item,
 #cv-edit #back-card #edu .items,
 #cv-edit #back-card #skills,
 #cv-edit #back-card #languages,
@@ -805,7 +801,7 @@ hr#line-break-footer {
 	color: #434649;
 }
 
-#cv-edit #back-card #experience .items,
+#cv-edit #back-card #experience .item,
 #cv-edit #back-card #edu .items,
 #cv-edit #back-card #skills .items,
 #cv-edit #back-card #languages .items{
@@ -888,7 +884,7 @@ hr#line-break-footer {
 
 #cv-edit #back-card #summary:hover .card-btn-group,
 #cv-edit #back-card #edu .items:hover .card-btn-group,
-#cv-edit #back-card #experience .items:hover .card-btn-group,
+#cv-edit #back-card #experience .item:hover .card-btn-group,
 #cv-edit #back-card #skills:hover .card-btn-group,
 #cv-edit #back-card #languages:hover .card-btn-group,
 #cv-edit #expectation-card .items:hover .card-btn-group{
@@ -957,9 +953,10 @@ hr#line-break-footer {
 	border: 1px solid #ccc;
 }
 
-#cv-edit .form-edit textarea{
+#cv-edit .form-edit textarea,
+#cv-edit .form-new textarea{
 	width: 100%;
-	min-height: 100px;
+	min-height: 200px;
 }
 
 #cv-edit .form-edit textarea:focus,
@@ -1025,7 +1022,7 @@ hr#line-break-footer {
 	margin-top: 0;
 }
 #employer #job-post .content-wrapper .block .field{
-	margin-left: 5px;
+	margin-left: 15px;
 }
 #employer #job-post .content-wrapper #title-block .field input{
 	width: 300px;
@@ -1034,17 +1031,20 @@ hr#line-break-footer {
 	margin-top: 12px;
 	margin-left: 30px;
 }
-#employer #job-post .content-wrapper #desc-block .field textarea{
+#employer #job-post .content-wrapper #desc-block textarea{
 	height: 300px;
 }
 #employer #job-post .content-wrapper #option-block .ctr-group{
 	margin-bottom: 5px;
-	margin-left: 20px;
 }
 #employer #job-post .content-wrapper #option-block .ctr-group.nomargin{
 	margin-left: 0;
 }
+#employer #job-post .content-wrapper #option-block .ctr-group label{
+	font-size: 13px;
+	width: 109px;
+}
 #employer #job-post .content-wrapper #option-block .field input,		
 #employer #job-post .content-wrapper #option-block .field select{		
-	width: 100px;
+	width: 147px;
 }

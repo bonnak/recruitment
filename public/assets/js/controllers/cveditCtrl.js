@@ -1,6 +1,17 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, Experience){
+app_candidate.controller('CvEditCtrl', function($scope, $filter, Experience){	
+	$scope.cv_id = null;	
 	$scope.experiences = [];
-	$scope.experience = new Experience;	
+	$scope.experience = new Experience;		
+	$scope.exp_item_state = [];
+	$scope.frm_exp_new_show = false;
+	
+	$scope.openNewExpForm = function(){
+		$scope.frm_exp_new_show = true;
+	}
+	
+	$scope.closeNewExpForm = function(){
+		$scope.frm_exp_new_show = false;
+	}
 
 	/*****
 	*	Add a new experience.
@@ -12,6 +23,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, Experience){
 		if (typeof item !== 'object') return;
 
 		// Set value of a new experience element.
+		experience.id = item.id;
 		experience.job_title = item.job_title;
 		experience.company_name = item.company_name;
 		experience.from_month = item.from_month;
@@ -19,30 +31,52 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, Experience){
 		experience.to_month = item.to_month;
 		experience.to_year = item.to_year;
 		experience.location = item.location;
-		experience.description = item.description;
+		experience.job_description = item.job_description;
 
 		// Add new experience element to container.
 		$scope.experiences.push(experience);
 	}
 	
-	$scope.save =  function(){
-		var url = $('#add_new_experience_frm').attr('action'),
-			post_data = $scope.experience.new;
+	$scope.updateExperience = function(experience){		
+		// Get index of the current element.
+		var index = $scope.experiences.indexOf(experience); 
 		
-		$scope.experience.createNew(
-			url, 
-			post_data
-		).success(function(data){
-			console.log(data);
+		$scope.experience.update(
+				'/user/candidate/cv/edit/' + $scope.cv_id + '/experience/' + experience.id, 
+				experience
+		).success(function(data){	
+			// Close form after update.
+			$scope.exp_item_state[index].frm_exp_edit_show = false;
+			$scope.exp_item_state[index].content_exp_hide = false;
+			
 		}).error(function(data, status){
-			console.log(data.error);
 		});
 	}
 	
-	$scope.closeForm = function(){	
-		// $scope.experience.clearItem();
+	$scope.deleteExperience = function(experience){
+		// Get index of the current element.
+		var index = $scope.experiences.indexOf(experience); 
 		
-		// $scope.frm_exp_new_show = false;
+		$scope.experience.delete(
+				'/user/candidate/cv/edit/' + $scope.cv_id + '/experience/' + experience.id
+		).success(function(data){		
+			// Remove experience item from the list.
+			$scope.exp_item_state[index].item_remove = true;
+		}).error(function(data, status){
+		});
+	}
+	
+	$scope.addNewExperience =  function(){
+		var post_data = $scope.experience.new;
+		
+		$scope.experience.createNew(
+			'/user/candidate/cv/edit/' + $scope.cv_id + '/experience', 
+			post_data
+		).success(function(data){
+			// Close new form.
+			$scope.frm_exp_new_show = false;
+		}).error(function(data, status){
+		});
 	}
 
 	$scope.getExperienceDate = function(year, month){

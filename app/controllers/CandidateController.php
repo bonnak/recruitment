@@ -383,19 +383,19 @@ class CandidateController extends BaseController
 	}
 	
 	public function editCVExperience($cv_id, $id)
-	{
+	{		
 		if($can_experience = \CandidateExperience::where('id', '=', $id)
 								->whereAnd('cv_id', '=', $cv_id)
 								->first())
 		{			
-			$job_title = htmlentities(\Input::get('ex-job-title'));
-			$company_name = htmlentities(\Input::get('ex-company-name'));
-			$location = htmlentities(\Input::get('ex-location'));
-			$job_description = htmlentities(\Input::get('ex-job-description'));
-			$from_month = htmlentities(\Input::get('ex-from-month'));
-			$from_year = htmlentities(\Input::get('ex-from-year'));
-			$to_month = htmlentities(\Input::get('ex-to-month'));
-			$to_year = htmlentities(\Input::get('ex-to-year'));
+			$job_title = htmlentities(\Input::get('job_title'));
+			$company_name = htmlentities(\Input::get('company_name'));
+			$location = htmlentities(\Input::get('location'));
+			$job_description = htmlentities(\Input::get('job_description'));
+			$from_month = htmlentities(\Input::get('from_month'));
+			$from_year = htmlentities(\Input::get('from_year'));
+			$to_month = htmlentities(\Input::get('to_month'));
+			$to_year = htmlentities(\Input::get('to_year'));
 			
 			$can_experience->job_title = !empty($job_title) ? $job_title : null;
 			$can_experience->company_name = !empty($company_name) ? $company_name : null;
@@ -408,22 +408,36 @@ class CandidateController extends BaseController
 			$can_experience->save();
 				
 			return [
-				'ex_job_title'			=> $job_title,
-				'ex_company_name'		=> $company_name,
-				'ex_location'			=> $location,
-				'ex_job_description'	=> $job_description,
-				'ex_from_month'			=> $from_month,
-				'ex_from_month_name'	=> date('F', mktime(0, 0, 0, $from_month)),
-				'ex_from_year'			=> $from_year,
-				'ex_to_month'			=> $to_month,
-				'ex_to_month_name'		=> date('F', mktime(0, 0, 0, $to_month)),
-				'ex_to_year'			=> $to_year,
+				'job_title'			=> $job_title,
+				'company_name'		=> $company_name,
+				'location'			=> $location,
+				'job_description'	=> $job_description,
+				'from_month'		=> $from_month,
+				//'from_month_name'	=> date('F', mktime(0, 0, 0, $from_month)),
+				'from_year'			=> $from_year,
+				'to_month'			=> $to_month,
+				//'to_month_name'		=> date('F', mktime(0, 0, 0, $to_month)),
+				'to_year'			=> $to_year,
 			];
 		}
 		else
 		{
 			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
 		}
+	}
+	
+	public function deleteCVExperience($cv_id, $id)
+	{
+		// Check if record exist.
+		if(!$can_experience = \CandidateExperience::where('id', '=', $id)
+							->whereAnd('cv_id', '=', $cv_id)
+							->first())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot delete CV.');
+		}
+		
+		// Delete record.
+		$can_experience->delete();
 	}
 	
 	public function editCVEdu($cv_id, $id)
