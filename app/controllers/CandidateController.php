@@ -167,6 +167,26 @@ class CandidateController extends BaseController
 		]);
 	}
 	
+	public function getCVExperience($cv_id)
+	{
+		$cv =  CV::getCVDetail($cv_id);		
+		$edu = $cv->education();
+		$experiences = $cv->workExperience();
+		$skills = $cv->skills();
+		$languages = $cv->languages();	
+		$expectations = $cv->expectation();
+		
+		$candidate = json_decode(json_encode($this->candidate), true);		
+		$candidate['cv'] = json_decode(json_encode($cv), true);
+		$candidate['cv']['education'] = json_decode(json_encode($edu), true);
+		$candidate['cv']['work_experiences'] = json_decode(json_encode($experiences), true);
+		$candidate['cv']['skills'] = json_decode(json_encode($skills), true);
+		$candidate['cv']['languages'] = json_decode(json_encode($languages), true);
+		$candidate['cv']['expectation'] = $expectations;
+		
+		return $candidate['cv']['work_experiences'];
+	}
+	
 	public function postCVEdit($cv_id)
 	{			
 		

@@ -25,6 +25,7 @@ Route::group(['before' => 'auth'], function (){
 	Route::post('/user/candidate/cv/create', ['as' => 'candidate.cv.create.post', 'uses' => 'CandidateController@postCVCreate']);
 	Route::get('/user/candidate/cv/edit/{id}', ['as' => 'candidate.cv.create.edit', 'uses' => 'CandidateController@getCVEdit']);
 	Route::put('/user/candidate/cv/edit/{id}/summary', ['as' => 'candidate.cv.edit.summary.put', 'uses' => 'CandidateController@editCVSummary']);
+	Route::get('/user/candidate/cv/edit/{cv_id}/experience', ['as' => 'candidate.cv.edit.experience.get', 'uses' => 'CandidateController@getCVExperience']);
 	Route::post('/user/candidate/cv/edit/{cv_id}/experience', ['as' => 'candidate.cv.edit.experience.post', 'uses' => 'CandidateController@createCVExperience']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/experience/{id}', ['as' => 'candidate.cv.edit.experience.put', 'uses' => 'CandidateController@editCVExperience']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/experience/{id}', ['as' => 'candidate.cv.edit.experience.delete', 'uses' => 'CandidateController@deleteCVExperience']);

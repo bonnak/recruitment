@@ -4,7 +4,7 @@ return [
 				'Dashboard' => \URL::route ( 'employer' ),
 				'Manage Jobs' => [ 
 						'Post New Job' => \URL::route ( 'employer.job-post', Auth::user ()->id ),
-						'Jobs Posted' => \URL::route ( 'employer.job-list', Auth::user ()->id ) 
+						'Jobs List' => \URL::route ( 'employer.job-list', Auth::user ()->id ) 
 				],
 				'Candidates' => [ 
 						'Applied List' => '#',

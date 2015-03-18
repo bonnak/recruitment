@@ -1,9 +1,11 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, Experience){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $compile, Experience){	
 	$scope.cv_id = null;	
 	$scope.experiences = [];
 	$scope.experience = new Experience;		
 	$scope.exp_item_state = [];
 	$scope.frm_exp_new_show = false;
+	
+	$scope.count = 0;
 	
 	$scope.openNewExpForm = function(){
 		$scope.frm_exp_new_show = true;
@@ -37,6 +39,18 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, Experience){
 		$scope.experiences.push(experience);
 	}
 	
+	$scope.getExperiences = [];
+		
+	$scope.experience.getExperiences(
+			'/user/candidate/cv/edit/' + 1 + '/experience'
+	).success(function(data){
+		angular.forEach(data, function(value, key) {
+			$scope.getExperiences.push(value);
+		});
+	}).error(function(data, status){
+		
+	});
+	
 	$scope.updateExperience = function(experience){		
 		// Get index of the current element.
 		var index = $scope.experiences.indexOf(experience); 
@@ -69,10 +83,14 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, Experience){
 	$scope.addNewExperience =  function(){
 		var post_data = $scope.experience.new;
 		
+//		angular.element($('#experience .items')).append($compile('<alert topic="Alert box">' + $scope.count + '</alert>')($scope));	
+//		return;
+		
 		$scope.experience.createNew(
 			'/user/candidate/cv/edit/' + $scope.cv_id + '/experience', 
 			post_data
 		).success(function(data){
+			angular.element($('#experience .items')).append($compile('<alert topic="Alert box">' + $scope.count + '</alert>')($scope));		
 			// Close new form.
 			$scope.frm_exp_new_show = false;
 		}).error(function(data, status){

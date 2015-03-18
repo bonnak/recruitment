@@ -23,6 +23,10 @@ app_candidate.factory('Experience', function($http){
 			'description' : ''	
 		};
 	}
+	
+	Experience.prototype.getExperiences = function(url){
+		return $http.get(url);
+	}
 		
 	Experience.prototype.createNew = function(url, data){
 		return $http.post(url, data);

@@ -1008,7 +1008,7 @@ hr#line-break-footer {
 	margin-top: 14px;
 }
 
-#employer #job-list,
+#employer #job-list .content-wrapper,
 #employer #job-post .content-wrapper{
 	padding: 25px;
 }
