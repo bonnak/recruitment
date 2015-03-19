@@ -1,4 +1,4 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, $compile, Experience){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience){	
 	$scope.cv_id = null;	
 	$scope.experiences = [];
 	$scope.experience = new Experience;		
@@ -15,67 +15,60 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $compile, Exper
 		$scope.frm_exp_new_show = false;
 	}
 
-	/*****
-	*	Add a new experience.
-	*/
-	$scope.addExperience = function(item){
-		var experience = new Experience;
-
-		// Item must be object.
-		if (typeof item !== 'object') return;
-
-		// Set value of a new experience element.
-		experience.id = item.id;
-		experience.job_title = item.job_title;
-		experience.company_name = item.company_name;
-		experience.from_month = item.from_month;
-		experience.from_year = item.from_year;
-		experience.to_month = item.to_month;
-		experience.to_year = item.to_year;
-		experience.location = item.location;
-		experience.job_description = item.job_description;
-
-		// Add new experience element to container.
-		$scope.experiences.push(experience);
-	}
-	
-	$scope.getExperiences = [];
-		
-	$scope.experience.getExperiences(
-			'/user/candidate/cv/edit/' + 1 + '/experience'
-	).success(function(data){
-		angular.forEach(data, function(value, key) {
-			$scope.getExperiences.push(value);
+	// Load CV detail from the server.
+	$scope.loadData = function(cv_id){
+		return $http.get(
+			'/user/candidate/cv/edit/' + cv_id + '/experience'
+		).success(function(data){
+			var experiences = data.work_experiences;
+			
+			// Push experience element to the experiences collection scope.
+			angular.forEach(experiences, function(value, key) {
+				var experience = new Experience;
+				
+				// Convert raw data into experience object.
+				experience.setValue(value, true);
+				
+				// Add a new element.
+				$scope.experiences.push(experience);
+			});
+			
+			
+		}).error(function(data, status){
+			
 		});
-	}).error(function(data, status){
-		
-	});
+	};
 	
+	// Update an experience information.
 	$scope.updateExperience = function(experience){		
-		// Get index of the current element.
-		var index = $scope.experiences.indexOf(experience); 
-		
 		$scope.experience.update(
 				'/user/candidate/cv/edit/' + $scope.cv_id + '/experience/' + experience.id, 
 				experience
-		).success(function(data){	
+		).success(function(data){
+			// Save new employee to draft.
+			experience.saveDraft(experience);
+			
 			// Close form after update.
-			$scope.exp_item_state[index].frm_exp_edit_show = false;
-			$scope.exp_item_state[index].content_exp_hide = false;
+			experience.frm_exp_edit_show = false;
+			experience.content_exp_hide = false;
 			
 		}).error(function(data, status){
+			// Restore to old value.
+			experience.setValue(experience.draft);
 		});
 	}
 	
 	$scope.deleteExperience = function(experience){
-		// Get index of the current element.
-		var index = $scope.experiences.indexOf(experience); 
-		
 		$scope.experience.delete(
 				'/user/candidate/cv/edit/' + $scope.cv_id + '/experience/' + experience.id
-		).success(function(data){		
+		).success(function(data){	
 			// Remove experience item from the list.
-			$scope.exp_item_state[index].item_remove = true;
+			$scope.experiences.splice($scope.experiences.indexOf(experience), 1);
+			
+			// Close form after delete.
+			experience.frm_exp_edit_show = false;
+			experience.content_exp_hide = false;
+			
 		}).error(function(data, status){
 		});
 	}
@@ -83,27 +76,27 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $compile, Exper
 	$scope.addNewExperience =  function(){
 		var post_data = $scope.experience.new;
 		
-//		angular.element($('#experience .items')).append($compile('<alert topic="Alert box">' + $scope.count + '</alert>')($scope));	
-//		return;
-		
 		$scope.experience.createNew(
 			'/user/candidate/cv/edit/' + $scope.cv_id + '/experience', 
 			post_data
 		).success(function(data){
-			angular.element($('#experience .items')).append($compile('<alert topic="Alert box">' + $scope.count + '</alert>')($scope));		
+			
+			
 			// Close new form.
 			$scope.frm_exp_new_show = false;
+			
 		}).error(function(data, status){
+			
 		});
 	}
 
 	$scope.getExperienceDate = function(year, month){
 		var str_date;
 
-		if(year !== '' && month !== ''){
+		if(year !== null && month !== null){
 			str_date = $filter('date')(new Date(year, month - 1), 'MMMM - yyyy');
 		}
-		else if(year !== ''){
+		else if(year !== null){
 			str_date = year;
 		}
 		else{

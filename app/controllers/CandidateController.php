@@ -184,7 +184,7 @@ class CandidateController extends BaseController
 		$candidate['cv']['languages'] = json_decode(json_encode($languages), true);
 		$candidate['cv']['expectation'] = $expectations;
 		
-		return $candidate['cv']['work_experiences'];
+		return $candidate['cv'];
 	}
 	
 	public function postCVEdit($cv_id)
@@ -374,8 +374,10 @@ class CandidateController extends BaseController
 
 	public function createCVExperience($cv_id)
 	{
+		// Initialize a new experience model object.
 		$can_experience = new \CandidateExperience;
 		
+		// Assign each inputs' value to variable.
 		$job_title = htmlentities(\Input::get('job_title'));
 		$company_name = htmlentities(\Input::get('company_name'));
 		$location = htmlentities(\Input::get('location'));
@@ -385,6 +387,7 @@ class CandidateController extends BaseController
 		$to_month = htmlentities(\Input::get('duration.to_month'));
 		$to_year = htmlentities(\Input::get('duration.to_year'));
 		
+		// Assign value to new experience.
 		$can_experience->cv_id = $cv_id;
 		$can_experience->job_title = !empty($job_title) ? $job_title : null;
 		$can_experience->company_name = !empty($company_name) ? $company_name : null;
@@ -395,11 +398,13 @@ class CandidateController extends BaseController
 		$can_experience->to_month = !empty($to_month) ? $to_month : null;
 		$can_experience->to_year = !empty($to_year) ? $to_year : null;
 		
-		
-		if($can_experience->save())
+		// Save a new experience.
+		if(!$can_experience->save())
 		{
-			return \Input::get();
+			\App::abort('403', 'There\'s some wrong. Cannot add a new experience.');
 		}
+		
+		return $can_experience;
 	}
 	
 	public function editCVExperience($cv_id, $id)

@@ -3,7 +3,10 @@
 	<div class="left-side-bar pull-left">
 		<div>@include('menu.menu')</div>
 	</div>
-	<div id="cv-edit" class="middle-wrapper pull-left" ng-controller="CvEditCtrl" ng-init="cv_id = '{{$candidate->cv->id}}'">
+	<div id="cv-edit" class="middle-wrapper pull-left" 
+		ng-controller="CvEditCtrl" 
+		ng-init="cv_id = '{{$candidate->cv->id}}'; loadData({{$candidate->cv->id}})"
+	>
 		<div id="profile-card">
 			<div class="row">
 				<div class="col-sm-5">
@@ -65,8 +68,8 @@
 			</div>
 			<div id="experience">
 				<h3 class="part">Experience</h3>
-				<div class="items" >					
-					<div class="item" ng-repeat="experience in getExperiences">						
+				<div class="items">					
+					<div class="item" ng-repeat="experience in experiences">						
 						<div class="content-show" ng-hide="experience.content_exp_hide">
 							<h4 id="span-job-title" class="job-title">{% experience.job_title %}</h4>
 							<div>
@@ -145,9 +148,7 @@
 								    </div>
 								</div>
 								<div class="opt-controls">
-							      <button type="button" 
-							      		class="btn btn-primary btn-save" 
-							      		ng-click="updateExperience(experience)">Update</button>
+							      <button type="button" class="btn btn-primary btn-save" ng-click="updateExperience(experience)">Update</button>
 							      <button type="button" class="btn btn-danger btn-delete" ng-click="deleteExperience(experience)">Delete</button>
 							      <button type="button" class="btn btn-default btn-cancel" ng-click="experience.frm_exp_edit_show = false; experience.content_exp_hide = false">Cancel</button>
 							  </div>
@@ -215,9 +216,9 @@
 			</div>
 			<div id="edu">
 				<h3 class="part">Education</h3>
-				<div>
+				<div class="items">
 					@foreach($candidate->cv->education as $education)
-					<div class="items">
+					<div class="item">
 						<div class="content-show">
 							<h4 id="span-institute">{{$education->institute}}</h4>
 							<div>
