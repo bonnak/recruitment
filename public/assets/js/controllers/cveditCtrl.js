@@ -2,14 +2,17 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.cv_id = null;	
 	$scope.experiences = [];
 	$scope.new_experience = {};	
-	$scope.frm_exp_new_show = false;
+	$scope.summary;
 
 	// Load CV detail from the server.
 	$scope.loadData = function(cv_id){
 		return $http.get(
-			'/user/candidate/cv/edit/' + cv_id + '/experience'
+			'/user/candidate/cv/edit/' + cv_id + '?data=json'
 		).success(function(cv){
 			var experiences = cv.work_experiences;
+			
+			// Load summary into data scope.
+			$scope.summary = cv.summary;
 			
 			// Push experience element to the experiences collection scope.
 			angular.forEach(experiences, function(data, key) {
@@ -23,8 +26,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 				
 				// Add a new element.
 				$scope.experiences.push(experience);
-
-				console.log(experience);
 			});		
 
 			// Set new experience default cv_id.
@@ -41,8 +42,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		experience.update().success(function(data){
 			// Save new employee to draft.
 			experience.saveDraft(experience);
-
-			console.log(experience);
 			
 			// Close experience form, and show content.
 			experience.frm_exp_edit_show = false;
@@ -89,7 +88,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	}
 
 	// Get experience datetime format due to situation.
-	$scope.getExperienceDate = function(year, month){
+	$scope.getExperienceDate = function(year, month, substitution){
 		var str_date;
 
 		if(year !== '' && month !== ''){
@@ -99,7 +98,12 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			str_date = year;
 		}
 		else{
-			str_date = 'Present';
+			if(substitution !== undefined){
+				str_date = substitution;
+			}
+			else{
+				str_date = '-';
+			}
 		}		
 
 		return str_date;

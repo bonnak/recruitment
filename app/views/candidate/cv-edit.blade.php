@@ -48,13 +48,13 @@
 			<span class="card-article">Backgound</span>
 			<div id="summary">			
 				<h3 class="part">Summary</h3>
-				<div class="content-show clearfix">
-					<p>{{nl2br($candidate->cv->summary)}}</p>
+				<div class="content-show clearfix" ng-hide="show_frm_summary">
+					<p>{%summary%}</p>
 					<div class="card-btn-group">
-						<a href="javascript:onclick" id="btn-edit-summary" class="glyphicon glyphicon-pencil"></a>
+						<a href="javascript:onclick" id="btn-edit-summary" class="glyphicon glyphicon-pencil" ng-click="show_frm_summary = true"></a>
 					</div>
 				</div>
-				<div class="form-edit hide">
+				<div class="form-edit" ng-show="show_frm_summary">
 					{{\Form::open(['route' => ['candidate.cv.edit.summary.put', $candidate->cv->id],  'method' => 'put'])}}
 						<div class="form-group">
 						      <textarea class="form-control" id="ex-summary">{{$candidate->cv->summary}}</textarea>
@@ -82,7 +82,7 @@
 								</span>
 								<span class="prefix-cv-info" style="margin-left: 13px;">To</span>
 								<span id="span-to-date" class="cv-info">
-									{% getExperienceDate(experience.to_year, experience.to_month) %}
+									{% getExperienceDate(experience.to_year, experience.to_month, 'Present') %}
 								</span>
 							</div>
 							<div>
