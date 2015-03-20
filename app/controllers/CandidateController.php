@@ -381,11 +381,11 @@ class CandidateController extends BaseController
 		$job_title = htmlentities(\Input::get('job_title'));
 		$company_name = htmlentities(\Input::get('company_name'));
 		$location = htmlentities(\Input::get('location'));
-		$job_description = htmlentities(\Input::get('description'));
-		$from_month = htmlentities(\Input::get('duration.from_month'));
-		$from_year = htmlentities(\Input::get('duration.from_year'));
-		$to_month = htmlentities(\Input::get('duration.to_month'));
-		$to_year = htmlentities(\Input::get('duration.to_year'));
+		$job_description = htmlentities(\Input::get('job_description'));
+		$from_month = htmlentities(\Input::get('from_month'));
+		$from_year = htmlentities(\Input::get('from_year'));
+		$to_month = htmlentities(\Input::get('to_month'));
+		$to_year = htmlentities(\Input::get('to_year'));
 		
 		// Assign value to new experience.
 		$can_experience->cv_id = $cv_id;
@@ -432,18 +432,7 @@ class CandidateController extends BaseController
 			$can_experience->to_year = !empty($to_year) ? $to_year : null;
 			$can_experience->save();
 				
-			return [
-				'job_title'			=> $job_title,
-				'company_name'		=> $company_name,
-				'location'			=> $location,
-				'job_description'	=> $job_description,
-				'from_month'		=> $from_month,
-				//'from_month_name'	=> date('F', mktime(0, 0, 0, $from_month)),
-				'from_year'			=> $from_year,
-				'to_month'			=> $to_month,
-				//'to_month_name'		=> date('F', mktime(0, 0, 0, $to_month)),
-				'to_year'			=> $to_year,
-			];
+			return $can_experience;
 		}
 		else
 		{

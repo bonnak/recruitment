@@ -66,7 +66,7 @@
 				  {{\Form::close()}}
 				</div>
 			</div>
-			<div id="experience">
+			<div id="experience" ng-cloak>
 				<h3 class="part">Experience</h3>
 				<div class="items">					
 					<div class="item" ng-repeat="experience in experiences">						
@@ -91,10 +91,11 @@
 							<div>
 								<p id="span-job-description">{% experience.job_description %}</p>
 							</div>										
-							<div class="card-btn-group">							
-								<a href="javascript:onclick" class="btn-new-experience glyphicon glyphicon-file" ng-click="openNewExpForm()"></a>
+							<div class="card-btn-group">
+								<a href="javascript:onclick" id="btn-edit-experience" class="glyphicon glyphicon-remove" 
+									ng-click="deleteExperience(experience)"></a>							
 								<a href="javascript:onclick" id="btn-edit-experience" class="glyphicon glyphicon-pencil" 
-									ng-click="experience.content_exp_hide = true; experience.frm_exp_edit_show = true"></a>
+									ng-click="openEditFormExp(experience)"></a>
 							</div>
 						</div>
 						<div class="form-edit" ng-show="experience.frm_exp_edit_show">
@@ -149,67 +150,67 @@
 								</div>
 								<div class="opt-controls">
 							      <button type="button" class="btn btn-primary btn-save" ng-click="updateExperience(experience)">Update</button>
-							      <button type="button" class="btn btn-danger btn-delete" ng-click="deleteExperience(experience)">Delete</button>
-							      <button type="button" class="btn btn-default btn-cancel" ng-click="experience.frm_exp_edit_show = false; experience.content_exp_hide = false">Cancel</button>
+							      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelFormExperience(experience)">Cancel</button>
 							  </div>
 						  </form>
 						</div>
 					</div>				
 				</div>
+				<a href="" id="btn-show-formnew" ng-click="openNewExpForm()" ng-hide="frm_exp_new_show"><i class="fa fa-plus-circle"></i>Add new</a>
 				<div class="form-new" ng-show="frm_exp_new_show">
 					<h4 style="margin-bottom: 20px;">What is your work experience?</h4>
 					<form class="form-horizontal">
 						<div class="form-group">
 							<label for="input-job-title" class="col-sm-3 control-label">Job Title</label>
 						    <div class="col-sm-8">
-						      <input type="text" class="form-control" id="input-job-title" ng-model="experience.new.job_title">
+						      <input type="text" class="form-control" id="input-job-title" ng-model="new_experience.job_title">
 						    </div>
 						</div>
 						<div class="form-group">
 							<label for="input-company-name" class="col-sm-3 control-label">Company name</label>
 						    <div class="col-sm-5">
-						      <input type="text" class="form-control" id="input-company-name" ng-model="experience.new.company_name">
+						      <input type="text" class="form-control" id="input-company-name" ng-model="new_experience.company_name">
 						    </div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Duration</label>
 						    <div class="col-sm-9">
 						      <div class="pull-left clearfix">
-						      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;" ng-model="experience.new.duration.from_month">
+						      	<select type="text" class="form-control pull-left" id="input-ex-from-month" style="width: 120px;" ng-model="new_experience.from_month">
 						      		<option value="">---Month--</option>
 						      		@foreach(\Config::get('constant.months') as $month)
 						      			<option value="{{$month['num']}}">{{$month['name']}}</option>
 						      		@endforeach
 						      	</select>
-						      	<input type="text" class="form-control pull-left" id="input-ex-from-year" style="width: 60px; margin-left: 5px;" Placeholder="Year" ng-model="experience.new.duration.from_year">
+						      	<input type="text" class="form-control pull-left" id="input-ex-from-year" style="width: 60px; margin-left: 5px;" Placeholder="Year" ng-model="new_experience.from_year">
 						      </div> 
 						      <div class="pull-left" style="padding-top: 6px; font-weight: 600;">&nbsp;&nbsp;To&nbsp;&nbsp;</div>
 						      <div class="pull-left clearfix">
-						      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;" ng-model="experience.new.duration.to_month">
+						      	<select type="text" class="form-control pull-left" id="input-ex-to-month" style="width: 120px;" ng-model="new_experience.to_month">
 						      		<option value="">---Month--</option>
 						      		@foreach(\Config::get('constant.months') as $month)
 						      			<option value="{{$month['num']}}">{{$month['name']}}</option>
 						      		@endforeach
 						      	</select>
-						      	<input type="text" class="form-control pull-left" id="input-ex-to-year" style="width: 60px; margin-left: 5px;" Placeholder="Year" ng-model="experience.new.duration.to_year">
+						      	<input type="text" class="form-control pull-left" id="input-ex-to-year" style="width: 60px; margin-left: 5px;" Placeholder="Year" ng-model="new_experience.to_year">
 						      </div>
 						    </div>
 						</div>
 						<div class="form-group">
 							<label for="ex-location" class="col-sm-3 control-label">Location</label>
 						    <div class="col-sm-5">
-						      <input type="text" class="form-control" id="input-ex-location" name="ex-location" ng-model="experience.new.location">
+						      <input type="text" class="form-control" id="input-ex-location" name="ex-location" ng-model="new_experience.location">
 						    </div>
 						</div>
 						<div class="form-group">
 							<label for="input-job-description" class="col-sm-3 control-label">Description</label>
 						    <div class="col-sm-9">
-						      <textarea class="form-control" id="input-job-description" ng-model="experience.new.description"></textarea>
+						      <textarea class="form-control" id="input-job-description" ng-model="new_experience.job_description"></textarea>
 						    </div>
 						</div>
 						<div class="opt-controls">
-					      <button type="button" class="btn btn-primary btn-save" ng-click="addNewExperience()">Save</button>
-					      <button type="button" class="btn btn-default btn-cancel" ng-click="closeNewExpForm()">Cancel</button>
+					      <button type="button" class="btn btn-primary btn-save" ng-click="createNewExperience(new_experience)">Save</button>
+					      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelFormNewExperience()">Cancel</button>
 					  </div>
 				  </form>
 				</div>
