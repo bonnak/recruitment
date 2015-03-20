@@ -13,8 +13,12 @@
 	href="{{asset('bootstrap-3.3.1/css/bootstrap-theme.min.css')}}">
 	<link rel="stylesheet"
 	href="{{asset('font-awesome-4.2.0/css/font-awesome.min.css')}}">
-<link rel="stylesheet" href="{{asset('assets/css/base.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/global.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/base.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/layout.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/module.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/state.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/theme.css')}}">
 
 <!-- JS -->
 <script src="{{asset('assets/js/lib/angular-1_3_x.min.js')}}"></script>
