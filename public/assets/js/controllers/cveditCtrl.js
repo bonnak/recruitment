@@ -1,18 +1,37 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education){	
 	$scope.cv_id = null;	
+	$scope.summary = '';
 	$scope.experiences = [];
 	$scope.new_experience = {};	
-	$scope.summary;
+	$scope.educations = [];	
+	$scope.draft = {};
+	
+	/***
+	 * Watch scope summary and filter to nl2br and htmlentities.
+	 */
+	$scope.$watch("summary", function (str) {		
+		str = $filter('htmlentities')(str);
+		$scope.summary_html = $filter('nl2br')(str);		
+	});
+	
 
-	// Load CV detail from the server.
-	$scope.loadData = function(cv_id){
-		return $http.get(
+	/***
+	 * Load CV detail from the server.
+	 */ 
+	$scope.loadData = function(cv_id){		
+		// Set scope cv id.
+		$scope.cv_id = cv_id;
+		
+		// Request and get cv information.
+		$http.get(
 			'/user/candidate/cv/edit/' + cv_id + '?data=json'
 		).success(function(cv){
-			var experiences = cv.work_experiences;
+			var experiences = cv.work_experiences,
+				educations = cv.education;
 			
 			// Load summary into data scope.
-			$scope.summary = cv.summary;
+			$scope.summary = cv.summary !== null ? cv.summary : '';
+			$scope.draft.summary = angular.copy($scope.summary);
 			
 			// Push experience element to the experiences collection scope.
 			angular.forEach(experiences, function(data, key) {
@@ -26,19 +45,57 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 				
 				// Add a new element.
 				$scope.experiences.push(experience);
+				
+				
 			});		
 
 			// Set new experience default cv_id.
 			$scope.new_experience.cv_id = cv.id;	
+			
+			
+			// Push education element to the education collection scope.
+			angular.forEach(educations, function(data, key) {
+				var edu = new Education(data);
+				
+				// Add a new element.
+				$scope.educations.push(edu);
+			});
+			
 			
 		}).error(function(data, status){
 			
 		});
 	};
 	
+	// Update CV summary.
+	$scope.saveSummary = function(){
+		$http.put(
+			'/user/candidate/cv/edit/' + $scope.cv_id + '/summary',
+			{'summary' : $scope.summary}
+		).success(function(data){		
+			// Update summary in draft.
+			$scope.draft.summary = angular.copy($scope.summary);
+			
+			// Hide edit form.
+			$scope.show_frm_summary = false;
+		}).error(function(data, status){
+			
+		});
+	}
+	
+	/***
+	 * Cancel update summary model.
+	 */
+	$scope.cancelSummary = function(){		
+		// restore the old summary value.
+		$scope.summary = angular.copy($scope.draft.summary);
+		
+		// Hide form.
+		$scope.show_frm_summary = false;
+	}
+	
 	// Update an experience information.
 	$scope.updateExperience = function(experience){	
-
 		experience.update().success(function(data){
 			// Save new employee to draft.
 			experience.saveDraft(experience);
@@ -113,13 +170,12 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	// and hide all other experience form.
 	$scope.openEditFormExp = function(cur_experience){
 		// Hide all other edit form.
-		angular.forEach($scope.experiences, function(experience, key) {
-			experience.content_exp_hide = false; 
-			experience.frm_exp_edit_show = false;
+		angular.forEach($scope.experiences, function(experience, key) {			
+			$scope.cancelFormExperience(experience);						
 		});
 
 		// Hide new form.
-		$scope.frm_exp_new_show = false;
+		$scope.cancelFormNewExperience();
 
 		// Show current form.
 		cur_experience.content_exp_hide = true; 
@@ -130,8 +186,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.openNewExpForm = function(){
 		// Hide all other edit form.
 		angular.forEach($scope.experiences, function(experience, key) {
-			experience.content_exp_hide = false; 
-			experience.frm_exp_edit_show = false;
+			$scope.cancelFormExperience(experience);
 		});
 
 		// Show new form
@@ -158,4 +213,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		// Close form.
 		$scope.frm_exp_new_show = false;
 	}
+	
+	//
 });

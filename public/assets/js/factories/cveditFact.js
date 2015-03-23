@@ -14,6 +14,7 @@ app_candidate.factory('Experience', function($http){
 		
 		this.draft = {
 			id 				: '',
+			cv_id 			: '',
 			job_title 		: '',
 			company_name 	: '',
 			from_month 		: '',
@@ -27,6 +28,8 @@ app_candidate.factory('Experience', function($http){
 	
 	// Save old properties to draft.
 	Experience.prototype.saveDraft = function(new_exp){	
+		this.draft.id 				= new_exp.id;
+		this.draft.cv_id 			= new_exp.cv_id;
 		this.draft.job_title 		= new_exp.job_title !== null ? new_exp.job_title : '';
 		this.draft.company_name 	= new_exp.company_name !== null ? new_exp.company_name : '';
 		this.draft.from_month 		= new_exp.from_month !== null ? new_exp.from_month : '';
@@ -65,7 +68,7 @@ app_candidate.factory('Experience', function($http){
 	}
 	
 	// Send update request.
-	Experience.prototype.update = function(){
+	Experience.prototype.update = function(){	
 		return $http.put(
 			'/user/candidate/cv/edit/' + this.cv_id + '/experience/' + this.id, 
 			this
@@ -80,4 +83,37 @@ app_candidate.factory('Experience', function($http){
 	}
 	
 	return Experience;
+})
+
+.factory('Education', function($http){
+	
+	var Education = function(data){
+		this.id 			= data.id !== undefined ? data.id : '';
+		this.degree 		= data.degree !== undefined ? data.degree : '';
+		this.degree_id 		= data.degree_id !== undefined ? data.degree_id : '';
+		this.from_year 		= data.from_year !== undefined ? data.from_year : '';
+		this.grad_year 		= data.grad_year !== undefined ? data.grad_year : '';
+		this.institute 		= data.institute !== undefined ? data.institute : '';
+		this.major 			= data.major !== undefined ? data.major : '';
+		this.situation 		= data.situation !== undefined ? data.situation : '';
+		this.situation_id 	= data.situation_id !== undefined ? data.situation_id : '';
+		
+		this.draft = {
+			id				: this.id,
+			degree			: this.degree,
+			degree_id		: this.degree_id,
+			from_year		: this.from_year,
+			grad_year		: this.grad_year,
+			institute		: this.institute,
+			major			: this.major,
+			situation		: this.situation,
+			situation_id	: this.situation_id
+		}
+	}
+	
+	Education.prototype.update = function(){
+		return $http.put()
+	}
+	
+	return Education;
 });

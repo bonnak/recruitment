@@ -335,11 +335,10 @@ class CandidateController extends BaseController
 	}
 	
 	public function editCVSummary($id)
-	{
-		
+	{		
 		if($cv = \CV::find($id))
 		{
-			$summary = htmlentities(\Input::get('summary'));		
+			$summary = \Input::get('summary');		
 			
 			$cv->summary = !empty($summary) ? $summary : null;
 			$cv->save();
