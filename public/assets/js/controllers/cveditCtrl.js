@@ -3,7 +3,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.summary = '';
 	$scope.experiences = [];
 	$scope.new_experience = {};	
-	$scope.educations = [];	
+	$scope.educations = [];
+	$scope.new_education = {};
 	$scope.draft = {};
 	
 	/***
@@ -35,13 +36,10 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Push experience element to the experiences collection scope.
 			angular.forEach(experiences, function(data, key) {
-				var experience = new Experience;
-
-				// Set data CV experience ID.
-				data.cv_id = cv.id;
+				var experience = new Experience(data);
 				
-				// Convert raw data into experience object.
-				experience.setValue(data, true);
+				// Set data CV experience ID.
+				experience.cv_id = cv.id;
 				
 				// Add a new element.
 				$scope.experiences.push(experience);
@@ -57,17 +55,24 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			angular.forEach(educations, function(data, key) {
 				var edu = new Education(data);
 				
+				// Set education element CV id.
+				edu.cv_id = cv.id;
+				
 				// Add a new element.
 				$scope.educations.push(edu);
 			});
 			
+			// Set new education default cv_id.
+			$scope.new_education.cv_id = cv.id;
 			
 		}).error(function(data, status){
 			
 		});
 	};
 	
-	// Update CV summary.
+	/***
+	 * Update CV summary.
+	 */
 	$scope.saveSummary = function(){
 		$http.put(
 			'/user/candidate/cv/edit/' + $scope.cv_id + '/summary',
@@ -94,11 +99,13 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		$scope.show_frm_summary = false;
 	}
 	
-	// Update an experience information.
+	/***
+	 * Update an experience information.
+	 */
 	$scope.updateExperience = function(experience){	
 		experience.update().success(function(data){
 			// Save new employee to draft.
-			experience.saveDraft(experience);
+			experience.saveDraft();
 			
 			// Close experience form, and show content.
 			experience.frm_exp_edit_show = false;
@@ -106,11 +113,13 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 		}).error(function(data, status){
 			// Restore to old value.
-			experience.setValue(experience.draft);
+			experience.restore();
 		});
 	}
 	
-	// Delete an experience informaton.
+	/***
+	 * Delete an experience informaton.
+	 */
 	$scope.deleteExperience = function(experience){
 		experience.delete().success(function(data){	
 			// Remove experience item from the list.
@@ -120,21 +129,23 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		});
 	}
 	
-	// Add new experience information.
+	/***
+	 * Add new experience information.
+	 */
 	$scope.createNewExperience =  function(data){
-		var new_experience = new Experience;
-
-		// Set new experience properties' value.
-		new_experience.setValue(data, true);
+		var new_experience = new Experience(data);
 
 		// Save new experience to database.
 		new_experience.save().success(function(data){
 
 			// set new experience id.
-			new_experience.setValue(data, true);	
+			new_experience.id = data.id;	
 			
 			// Add a new element.
 			$scope.experiences.push(new_experience);
+			
+			// Clear new experience scope properties.
+			$scope.new_experience = {};
 			
 			// Close new form.
 			$scope.frm_exp_new_show = false;
@@ -197,7 +208,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.cancelFormExperience = function(experience){
 
 		// Restore experience to its original value.
-		experience.setValue(experience.draft);
+		experience.restore();
 
 		// Close experience form, and show content.
 		experience.frm_exp_edit_show = false;
@@ -214,5 +225,64 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		$scope.frm_exp_new_show = false;
 	}
 	
-	//
+	/***
+	 * Add a new education information.
+	 */
+	$scope.createNewEducation = function(el){
+		var new_edu = new Education(el);
+		
+		new_edu.createNew().success(function(data){
+			console.log(data);
+			// set new experience id.
+			//new_edu.id = data.id;	
+			
+			// Add a new element.
+			$scope.educations.push(new_edu);
+			
+			console.log(new_edu);
+			
+			// Clear new experience scope properties.
+			$scope.new_education = {};
+			
+			// Close new form.
+			//$scope.frm_exp_new_show = false;
+		});
+	}
+	
+	/***
+	 * Update education information.
+	 */
+	$scope.updateEducation = function(edu){
+		edu.update().success(function(){
+			// Save backup data.
+			edu.saveDraft();
+			
+			// Hide form and show content.
+			edu.show_frm_edu = false;
+			
+		}).error(function(data, status){
+			// Restore old data.
+			edu.restore();
+		});
+	}
+	
+	/***
+	 * Delete education information.
+	 */
+	$scope.deleteEducation = function(edu){
+		edu.delete().success(function(){
+			// Remove education item from the list.
+			$scope.educations.splice($scope.educations.indexOf(edu), 1);
+		}).error(function(data, status){
+			
+		});
+	}
+	
+	$scope.cancelEditFormEdu = function(edu){
+		// Restore old data.
+		edu.restore();
+		
+		// Hide form and show content.
+		edu.show_frm_edu = false;
+	}
 });

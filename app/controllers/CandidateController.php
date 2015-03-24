@@ -334,6 +334,9 @@ class CandidateController extends BaseController
 		}
 	}
 	
+	/***
+	 * Edit CV summary.
+	 */
 	public function editCVSummary($id)
 	{		
 		if($cv = \CV::find($id))
@@ -352,6 +355,9 @@ class CandidateController extends BaseController
 				
 	}
 
+	/***
+	 * Add a new candidate experience.
+	 */
 	public function createCVExperience($cv_id)
 	{
 		// Initialize a new experience model object.
@@ -387,6 +393,9 @@ class CandidateController extends BaseController
 		return $can_experience;
 	}
 	
+	/***
+	 * Update a candidate experience.
+	 */
 	public function editCVExperience($cv_id, $id)
 	{		
 		if($can_experience = \CandidateExperience::where('id', '=', $id)
@@ -420,6 +429,9 @@ class CandidateController extends BaseController
 		}
 	}
 	
+	/***
+	 * Delete a candidate experience.
+	 */
 	public function deleteCVExperience($cv_id, $id)
 	{
 		// Check if record exist.
@@ -434,37 +446,82 @@ class CandidateController extends BaseController
 		$can_experience->delete();
 	}
 	
+	/***
+	 * Add a new candidate education background.
+	 */
+	public function createCVEdu($cv_id)
+	{
+		$can_edu = new \CandidateEducation;
+		
+		$institute = \Input::get('institute');
+		$major = \Input::get('major');
+		$degree_id = \Input::get('degree_id');
+		$situation_id = \Input::get('situation_id');
+		$from_year = \Input::get('from_year');
+		$grad_year = \Input::get('grad_year');
+		
+		$can_edu->institute = !empty($institute) ? $institute : null;
+		$can_edu->major 	= !empty($major) ? $major : null;
+		$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
+		$can_edu->situation_id = !empty($situation_id) ? $situation_id : null;
+		$can_edu->from_year = !empty($from_year) ? $from_year : null;
+		$can_edu->grad_year = !empty($grad_year) ? $grad_year : null;
+		
+		if(!$can_edu->save())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot create this new education.');
+		}
+		
+		return $can_edu;
+	}
+	
+	/***
+	 * Update a candidate education background.
+	 */
 	public function editCVEdu($cv_id, $id)
 	{
 		if($can_edu = \CandidateEducation::where('id', '=', $id)
 								->whereAnd('cv_id', '=', $cv_id)
 								->first())
 		{
-			$institute = htmlentities(\Input::get('institute'));
-			$major = htmlentities(\Input::get('major'));
-			$degree_id = htmlentities(\Input::get('degree_id'));
-			$from_year = htmlentities(\Input::get('from-year'));
-			$grad_year = htmlentities(\Input::get('grad-year'));
+			$institute = \Input::get('institute');
+			$major = \Input::get('major');
+			$degree_id = \Input::get('degree_id');
+			$situation_id = \Input::get('situation_id');
+			$from_year = \Input::get('from_year');
+			$grad_year = \Input::get('grad_year');
 				
 			$can_edu->institute = !empty($institute) ? $institute : null;
 			$can_edu->major 	= !empty($major) ? $major : null;
 			$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
+			$can_edu->situation_id = !empty($situation_id) ? $situation_id : null;
 			$can_edu->from_year = !empty($from_year) ? $from_year : null;
 			$can_edu->grad_year = !empty($grad_year) ? $grad_year : null;
 			$can_edu->save();
 		
-			return [
-				'institute'			=> $institute,
-				'major'				=> $major,
-				'degree'			=> \Degree::select('description')->where('id', '=', $degree_id)->first()->description,
-				'from_year'			=> $from_year,
-				'grad_year'			=> $grad_year,
-			];
+			return $can_edu;
 		}
 		else
 		{
-			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
+			\App::abort('403', 'There\'s some wrong. Cannot update this education.');
 		}
+	}
+	
+	/***
+	 * Delete a candidate education background.
+	 */
+	public function deleteCVEdu($cv_id, $id)
+	{				
+		// Check if record exist.
+		if(!$can_edu = \CandidateEducation::where('id', '=', $id)
+							->whereAnd('cv_id', '=', $cv_id)
+							->first())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot delete this education.');
+		}
+		
+		// Delete record.
+		$can_edu->delete();
 	}
 	
 	public function editCVSkill($cv_id)

@@ -31,7 +31,10 @@ Route::group(['before' => 'auth'], function (){
 	Route::put('/user/candidate/cv/edit/{cv_id}/experience/{id}', ['as' => 'candidate.cv.edit.experience.put', 'uses' => 'CandidateController@editCVExperience']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/experience/{id}', ['as' => 'candidate.cv.edit.experience.delete', 'uses' => 'CandidateController@deleteCVExperience']);
 	
+	Route::post('/user/candidate/cv/edit/{cv_id}/edu', ['as' => 'candidate.cv.edit.edu.post', 'uses' => 'CandidateController@createCVEdu']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/edu/{id}', ['as' => 'candidate.cv.edit.edu.put', 'uses' => 'CandidateController@editCVEdu']);
+	Route::delete('/user/candidate/cv/edit/{cv_id}/edu/{id}', ['as' => 'candidate.cv.edit.edu.delete', 'uses' => 'CandidateController@deleteCVEdu']);
+	
 	Route::put('/user/candidate/cv/edit/{cv_id}/skill', ['as' => 'candidate.cv.edit.skill.put', 'uses' => 'CandidateController@editCVSkill']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/lang', ['as' => 'candidate.cv.edit.lang.put', 'uses' => 'CandidateController@editCVLang']);
 	

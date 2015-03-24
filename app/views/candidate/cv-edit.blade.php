@@ -223,10 +223,11 @@
 								<span id="span-degree" class="cv-info">{% education.degree %}</span> in <span id="span-major">{% education.major %}</span>
 							</div>
 							<div>
-								<span class="cv-info"><span id="span-from-year">{% education.from_year %}</span> - <span id="span-grad-year">{% education.grad_year %}</span></span>
+								<span class="cv-info"><span id="span-from-year">{% education.from_year %}</span> - <span id="span-grad-year">{% education.grad_year %}</span></span>&nbsp;
+								<span class="span-situation">({% education.situation %})</span>
 							</div>
 							<div class="card-btn-group">
-								<a href="javascript:onclick" class="glyphicon glyphicon-remove"></a>
+								<a href="javascript:onclick" class="glyphicon glyphicon-remove" ng-click="deleteEducation(education)"></a>
 								<a href="javascript:onclick" id="btn-edit-edu" class="glyphicon glyphicon-pencil" ng-click="education.show_frm_edu = true"></a>
 							</div>
 						</div>
@@ -267,13 +268,80 @@
 									      <input type="text" class="form-control" id="input-grad-year" ng-model="education.grad_year" style="width: 70px;">
 									    </div>
 									</div>
+									<div class="form-group">
+										<label for="input-grad-year" class="col-sm-3 control-label">Situation</label>
+									    <div class="col-sm-4">
+									      <select type="text" class="form-control" id="input-degree" ng-model="education.situation_id">
+									      	<option value="">--Select--</option>
+											@foreach(\SchoolSituation::all() as $situation)
+											<option value="{{$situation->id}}">{{$situation->description}}</option>
+											@endforeach
+									      </select>
+									    </div>
+									</div>
 									<div class="opt-controls">
-								      <button type="button" class="btn btn-primary btn-save">Save</button>
-								      <button type="button" class="btn btn-danger btn-cancel" ng-click="education.show_frm_edu = false">Cancel</button>
+								      <button type="button" class="btn btn-primary btn-save" ng-click="updateEducation(education)">Update</button>
+								      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelEditFormEdu(education)">Cancel</button>
 								  </div>
 							 </form>
 						</div>
 					</div>
+				</div>
+				<a href="" id="btn-show-formnew" ng-click="" ng-hide=""><i class="fa fa-plus-circle"></i>Add new</a>
+				<div class="form-new">
+					<h4 style="margin-bottom: 20px;">What is your education background?</h4>
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="input-institute" class="col-sm-3 control-label">Institute</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-institute" ng-model="new_education.institute">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-major" class="col-sm-3 control-label">Major</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-major" ng-model="new_education.major">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-degree" class="col-sm-3 control-label">Degree</label>
+						    <div class="col-sm-4">
+						      <select type="text" class="form-control" id="input-degree" ng-model="new_education.degree_id">
+						      	<option value="">--Select--</option>
+								@foreach(\Degree::all() as $degree)
+								<option value="{{$degree->id}}">{{$degree->description}}</option>
+								@endforeach
+						      </select>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-from-year" class="col-sm-3 control-label">Start School</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-from-year" ng-model="new_education.from_year" style="width: 70px;">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-grad-year" class="col-sm-3 control-label">Graduation year</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-grad-year" ng-model="new_education.grad_year" style="width: 70px;">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-grad-year" class="col-sm-3 control-label">Situation</label>
+						    <div class="col-sm-4">
+						      <select type="text" class="form-control" id="input-degree" ng-model="new_education.situation_id">
+						      	<option value="">--Select--</option>
+								@foreach(\SchoolSituation::all() as $situation)
+								<option value="{{$situation->id}}">{{$situation->description}}</option>
+								@endforeach
+						      </select>
+						    </div>
+						</div>
+						<div class="opt-controls">
+					      <button type="button" class="btn btn-primary btn-save" ng-click="createNewEducation(education)">Save</button>
+					      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelEditFormEdu(education)">Cancel</button>
+					  </div>
+					</form>
 				</div>
 			</div>
 			<div id="skills">
