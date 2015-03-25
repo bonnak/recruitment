@@ -460,6 +460,7 @@ class CandidateController extends BaseController
 		$from_year = \Input::get('from_year');
 		$grad_year = \Input::get('grad_year');
 		
+		$can_edu->cv_id = $cv_id;
 		$can_edu->institute = !empty($institute) ? $institute : null;
 		$can_edu->major 	= !empty($major) ? $major : null;
 		$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
@@ -472,7 +473,7 @@ class CandidateController extends BaseController
 			\App::abort('403', 'There\'s some wrong. Cannot create this new education.');
 		}
 		
-		return $can_edu;
+		return $can_edu->getEducation();
 	}
 	
 	/***
@@ -489,8 +490,8 @@ class CandidateController extends BaseController
 			$degree_id = \Input::get('degree_id');
 			$situation_id = \Input::get('situation_id');
 			$from_year = \Input::get('from_year');
-			$grad_year = \Input::get('grad_year');
-				
+			$grad_year = \Input::get('grad_year');				
+			
 			$can_edu->institute = !empty($institute) ? $institute : null;
 			$can_edu->major 	= !empty($major) ? $major : null;
 			$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;

@@ -232,20 +232,17 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		var new_edu = new Education(el);
 		
 		new_edu.createNew().success(function(data){
-			console.log(data);
-			// set new experience id.
-			//new_edu.id = data.id;	
+			// load new education.
+			new_edu.setValue(data);
 			
 			// Add a new element.
 			$scope.educations.push(new_edu);
-			
-			console.log(new_edu);
 			
 			// Clear new experience scope properties.
 			$scope.new_education = {};
 			
 			// Close new form.
-			//$scope.frm_exp_new_show = false;
+			$scope.frm_exp_new_show = false;
 		});
 	}
 	
@@ -278,11 +275,54 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		});
 	}
 	
+	/***
+	 * Cancel edit education information.
+	 */
 	$scope.cancelEditFormEdu = function(edu){
 		// Restore old data.
 		edu.restore();
 		
 		// Hide form and show content.
 		edu.show_frm_edu = false;
+	}
+	
+	/***
+	 * Open current edit form only, and hide all other education form.
+	 */
+	$scope.openEditFormEdu = function(cur_edu){
+		// Hide all other edit form.
+		angular.forEach($scope.educations, function(education, key) {			
+			$scope.cancelEditFormEdu(education);						
+		});
+
+		// Hide new form.
+		$scope.closeFormNewExperience();
+
+		// Show current form.
+		cur_edu.show_frm_edu = true;
+	}
+	
+	/***
+	 * Open new form and hide all other edit form.
+	 */
+	$scope.openNewEduForm = function(){
+		// Hide all other edit form.
+		angular.forEach($scope.educations, function(education, key) {
+			$scope.cancelEditFormEdu(education);
+		});
+
+		// Show new form
+		$scope.show_frm_edu_new = true;
+	} 
+	
+	/***
+	 * Close new education form.
+	 */ 
+	$scope.closeFormNewExperience = function(){
+		// Clear new experience properties model.
+		$scope.new_education = {};	
+
+		// Close form.
+		$scope.show_frm_edu_new = false;
 	}
 });

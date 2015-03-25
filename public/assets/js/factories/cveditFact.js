@@ -77,6 +77,10 @@ app_candidate.factory('Experience', function($http){
 .factory('Education', function($http){
 	
 	var Education = function(data){
+		this.setValue(data);
+	}
+	
+	Education.prototype.setValue = function(data){
 		this.id 			= data.id !== undefined ? data.id : '';
 		this.cv_id 			= data.cv_id !== undefined ? data.cv_id : '';
 		this.degree 		= data.degree !== undefined ? data.degree : '';

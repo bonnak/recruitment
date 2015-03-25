@@ -44,7 +44,7 @@ class CV extends Eloquent
 	
 	public function education()
 	{
-		return \CandidateEducation::getEducation($this->id);
+		return \CandidateEducation::getEducations($this->id);
 	}
 	
 	public function skills()

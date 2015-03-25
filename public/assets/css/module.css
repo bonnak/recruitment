@@ -1,4 +1,5 @@
-#cv-edit #experience .items{
+#cv-edit #experience .items,
+#cv-edit #edu .items{
 	margin-bottom: 10px;
 }
 

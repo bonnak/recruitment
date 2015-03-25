@@ -228,7 +228,7 @@
 							</div>
 							<div class="card-btn-group">
 								<a href="javascript:onclick" class="glyphicon glyphicon-remove" ng-click="deleteEducation(education)"></a>
-								<a href="javascript:onclick" id="btn-edit-edu" class="glyphicon glyphicon-pencil" ng-click="education.show_frm_edu = true"></a>
+								<a href="javascript:onclick" id="btn-edit-edu" class="glyphicon glyphicon-pencil" ng-click="openEditFormEdu(education)"></a>
 							</div>
 						</div>
 						<div class="form-edit" ng-show="education.show_frm_edu">
@@ -287,8 +287,8 @@
 						</div>
 					</div>
 				</div>
-				<a href="" id="btn-show-formnew" ng-click="" ng-hide=""><i class="fa fa-plus-circle"></i>Add new</a>
-				<div class="form-new">
+				<a href="" id="btn-show-formnew" ng-click="openNewEduForm()" ng-hide="show_frm_edu_new"><i class="fa fa-plus-circle"></i>Add new</a>
+				<div class="form-new" ng-show="show_frm_edu_new">
 					<h4 style="margin-bottom: 20px;">What is your education background?</h4>
 					<form class="form-horizontal">
 						<div class="form-group">
@@ -338,8 +338,8 @@
 						    </div>
 						</div>
 						<div class="opt-controls">
-					      <button type="button" class="btn btn-primary btn-save" ng-click="createNewEducation(education)">Save</button>
-					      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelEditFormEdu(education)">Cancel</button>
+					      <button type="button" class="btn btn-primary btn-save" ng-click="createNewEducation(new_education)">Save</button>
+					      <button type="button" class="btn btn-danger btn-cancel" ng-click="closeFormNewExperience()">Cancel</button>
 					  </div>
 					</form>
 				</div>
