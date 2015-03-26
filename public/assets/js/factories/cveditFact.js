@@ -80,6 +80,7 @@ app_candidate.factory('Experience', function($http){
 		this.setValue(data);
 	}
 	
+	// Set education value.
 	Education.prototype.setValue = function(data){
 		this.id 			= data.id !== undefined ? data.id : '';
 		this.cv_id 			= data.cv_id !== undefined ? data.cv_id : '';
@@ -162,4 +163,60 @@ app_candidate.factory('Experience', function($http){
 	}
 	
 	return Education;
+})
+
+.factory('Skill', function($http){
+	
+	var Skill = function(data){
+		this.setValue(data);
+	}
+	
+	// Set skill value.
+	Skill.prototype.setValue = function(data){
+		this.id = data.id !== undefined ? data.id : '';
+		this.cv_id = data.cv_id !== undefined ? data.cv_id : '';
+		this.name = data.name !== undefined ? data.name : '';
+		this.level_id = data.level_id !== undefined ? data.level_id : '';
+		this.level = data.level !== undefined ? data.level : '';
+		this.year_experience = data.year_experience !== undefined ? data.year_experience : '';
+		
+		this.draft = {
+			name			: this.name,
+			level_id		: this.level_id,
+			level 			: this.level,
+			year_experience : this.year_experience
+		}
+	}
+	
+	/***
+	 * Save draft to backup data.
+	 */
+	Skill.prototype.saveDraft = function(){
+		this.draft.name = this.name;
+		this.draft.level_id = this.level_id;
+		this.draft.level = this.level;
+		this.draft.year_experience = this.year_experience;
+	}
+	
+	/***
+	 * Restore the original data.
+	 */
+	Skill.prototype.restore = function(){
+		this.name = this.draft.name;
+		this.level_id = this.draft.level_id;
+		this.level = this.draft.level;
+		this.year_experience = this.draft.year_experience;
+	}
+	
+	/***
+	 * Send request to server to create a new skill.
+	 */
+	Skill.prototype.createNew = function(){
+		return $http.post(
+			'/user/candidate/cv/edit/' + this.cv_id + '/skill',
+			this
+		);
+	}
+	
+	return Skill;
 });

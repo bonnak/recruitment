@@ -1,10 +1,12 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill){	
 	$scope.cv_id = null;	
 	$scope.summary = '';
 	$scope.experiences = [];
 	$scope.new_experience = {};	
 	$scope.educations = [];
 	$scope.new_education = {};
+	$scope.skills = [];
+	$scope.new_skill = {};
 	$scope.draft = {};
 	
 	/***
@@ -28,7 +30,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			'/user/candidate/cv/edit/' + cv_id + '?data=json'
 		).success(function(cv){
 			var experiences = cv.work_experiences,
-				educations = cv.education;
+				educations = cv.education,
+				skills = cv.skills;
 			
 			// Load summary into data scope.
 			$scope.summary = cv.summary !== null ? cv.summary : '';
@@ -43,10 +46,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 				
 				// Add a new element.
 				$scope.experiences.push(experience);
-				
-				console.log(experience);
-				
-				
 			});		
 
 			// Set new experience default cv_id.
@@ -66,6 +65,20 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Set new education default cv_id.
 			$scope.new_education.cv_id = cv.id;
+			
+			// Push skill element to the skills collection scope.
+			angular.forEach(skills, function(data, key){
+				var skill = new Skill(data);
+				
+				// Set skill element cv id.
+				skill.cv_id = cv.id;
+				
+				// Add a new element.
+				$scope.skills.push(skill);
+			});
+			
+			// Set new skill default cv_id.
+			$scope.new_skill.cv_id = cv.id;
 			
 		}).error(function(data, status){
 			
@@ -326,5 +339,26 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 
 		// Close form.
 		$scope.show_frm_edu_new = false;
+	}
+	
+	/***
+	 * Add a new skill.
+	 */
+	$scope.createNewSkill = function(el){
+		var new_skill = new Skill(el);
+		
+		new_skill.createNew().success(function(data){
+			// load new skill.
+			new_skill.setValue(data);
+			
+			// Add a new element.
+			$scope.skills.push(new_skill);
+			
+			// Clear new skill scope properties.
+			$scope.new_skill = {};			
+			
+		}).error(function(data, status){
+			
+		});
 	}
 });

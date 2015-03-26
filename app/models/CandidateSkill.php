@@ -19,4 +19,20 @@ class CandidateSkill extends Eloquent
 							->where('cv_id', '=', $cv_id)
 							->get();
 	}
+	
+	public function getSkill()
+	{
+		$tbl_level = (new \Level)->getTable();
+	
+		return CandidateSkill::select(DB::raw(
+									"id,
+									name,
+									level_id,
+									(SELECT description FROM {$tbl_level} WHERE id = {$this->table}.level_id LIMIT 1) level,
+									year_experience"
+							))
+							->where('id', '=', $this->id)
+							->whereAnd('cv_id', '=', $this->cv_id)
+							->first();
+	}
 }

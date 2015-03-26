@@ -525,6 +525,30 @@ class CandidateController extends BaseController
 		$can_edu->delete();
 	}
 	
+	/***
+	 * Create new CV skill.
+	*/
+	public function createCVSkill($cv_id)
+	{
+		$can_skill = new \CandidateSkill;
+	
+		$name 				= \Input::get('name');
+		$level_id 			= \Input::get('level_id');
+		$year_experience 	= \Input::get('year_experience');
+		
+		$can_skill->cv_id 			= $cv_id;
+		$can_skill->name 			= !empty($name) ? $name : null;
+		$can_skill->level_id 		= !empty($level_id) ? $level_id : null;
+		$can_skill->year_experience = !empty($year_experience) ? $year_experience : null;
+		
+		if(!$can_skill->save())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot create this new education.');
+		}
+		
+		return $can_skill->getSkill();
+	}
+	
 	public function editCVSkill($cv_id)
 	{
 		$skills = \Input::get('skills');

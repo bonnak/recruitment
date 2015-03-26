@@ -347,56 +347,40 @@
 			<div id="skills">
 				<div>
 					<h3 class="part">Skills</h3>
-					<div class="content-show">
+					<div class="content-show" ng-hide="show_frm_skill">
 						<div class="items clearfix">
-							@foreach($candidate->cv->skills as $skill)
-							<div class="item round-box-wrapper">
-								<span class="cv-info" id="skill-name">{{$skill->name}}</span>&nbsp;&nbsp;&nbsp;
-								<span class="skill-detail text-muted">{{$skill->level}} ({{$skill->year_experience}} years)</span>
+							<div class="item round-box-wrapper" ng-repeat="skill in skills">
+								<span class="cv-info" id="skill-name">{% skill.name %}</span>&nbsp;&nbsp;&nbsp;
+								<span class="skill-detail text-muted">{% skill.level %} ({% skill.year_experience %} years)</span>
 							</div>
-							@endforeach
 						</div>
 						<div class="card-btn-group">
-							<a href="javascript:onclick" id="btn-edit-skill" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+							<a href="javascript:onclick" id="btn-edit-skill" class="glyphicon glyphicon-pencil btn-edit-cv" ng-click="show_frm_skill = true"></a>
 						</div>
 					</div>
-					<div class="form-edit">
-						{{\Form::open(['route' => ['candidate.cv.edit.skill.put', $candidate->cv->id],  'method' => 'put'])}}
+					<div class="form-edit" ng-show="show_frm_skill">
 							<h4>What is your area of expertise?</h4>
 							<div id="new-skill" class="clearfix">
-								<input type="text" class="form-control pull-left" id="input-skill-name" placeholder="Skill name" style="width: 295px; margin-right: 5px;">
-								<input type="text" class="form-control pull-left" id="input-skill-year-exp" placeholder="Year of experience" style="width: 100px; margin-right: 5px;">
-								<select class="form-control pull-left" id="input-skill-level" style="width: 130px; margin-right: 5px;">
+								<input type="text" class="form-control pull-left" id="input-skill-name" placeholder="Skill name" style="width: 202px; margin-right: 5px;" ng-model="new_skill.name">
+								<input type="text" class="form-control pull-left" id="input-skill-year-exp" placeholder="Year of experience" style="width: 100px; margin-right: 5px;" ng-model="new_skill.year_experience">
+								<select class="form-control pull-left" id="input-skill-level" style="width: 130px; margin-right: 5px;" ng-model="new_skill.level_id">
 									<option value="">---Level---</option>
 									@foreach(\Level::all() as $level)
 									<option value="{{$level->id}}">{{$level->description}}</option>
 									@endforeach
 								</select>
-								<button type="button" id="btn-add" class="btn btn-primary">Add</button>
+								<button type="button" id="btn-add" class="btn btn-primary" ng-click="createNewSkill(new_skill)">Add</button>
+								<button type="button" id="btn-add" class="btn btn-danger" ng-click="show_frm_skill = false">Close</button>
 							</div>
 							<div id="skills-collection" class="items clearfix" style="background-color: #FFF; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
-								@foreach($candidate->cv->skills as $skill)
-								<div class="item round-box-wrapper">
+								<div class="item round-box-wrapper" ng-repeat="skill in skills">
 									<div class="span-content">
-										<span class="cv-info" id="skill-name">{{$skill->name}}</span>&nbsp;&nbsp;&nbsp;
-										<span class="skill-detail text-muted">{{$skill->level}} ({{$skill->year_experience}} years)</span>&nbsp;
+										<span class="cv-info" id="skill-name">{% skill.name %}</span>&nbsp;&nbsp;&nbsp;
+										<span class="skill-detail text-muted">{% skill.level %} ({% skill.year_experience %} years)</span>&nbsp;
 										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_skill_cv_edit(this)"></a>
 									</div>
-									<div class="hidden-input">
-										<input type="hidden" id="input-skill-id" value="{{$skill->id}}">
-										<input type="hidden" id="input-skill-name" value="{{$skill->name}}">
-										<input type="hidden" id="input-skill-level" value="{{$skill->level_id}}">
-										<input type="hidden" id="input-skill-year-exp" value="{{$skill->year_experience}}">
-										<input type="hidden" id="input-skill-status" value="2">
-									</div>
 								</div>
-								@endforeach
-							</div>
-							<div class="opt-controls">
-						      <button type="button" class="btn btn-primary btn-save">Save</button>
-						      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
-						  </div>						
-						{{\Form::close()}}
+							</div>			
 					</div>
 				</div>			
 			</div>
