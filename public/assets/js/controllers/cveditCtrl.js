@@ -44,6 +44,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 				// Add a new element.
 				$scope.experiences.push(experience);
 				
+				console.log(experience);
+				
 				
 			});		
 
@@ -159,10 +161,10 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.getExperienceDate = function(year, month, substitution){
 		var str_date;
 
-		if(year !== null && month !== null){
+		if(year != null && month != null){
 			str_date = $filter('date')(new Date(year, month - 1), 'MMMM - yyyy');
 		}
-		else if(year !== null){
+		else if(year != null){
 			str_date = year;
 		}
 		else{
