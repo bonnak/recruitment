@@ -159,10 +159,10 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.getExperienceDate = function(year, month, substitution){
 		var str_date;
 
-		if(year !== '' && month !== ''){
+		if(year !== null && month !== null){
 			str_date = $filter('date')(new Date(year, month - 1), 'MMMM - yyyy');
 		}
-		else if(year !== ''){
+		else if(year !== null){
 			str_date = year;
 		}
 		else{
