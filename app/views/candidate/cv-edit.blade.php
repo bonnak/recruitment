@@ -357,11 +357,10 @@
 							@endforeach
 						</div>
 						<div class="card-btn-group">
-							<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
 							<a href="javascript:onclick" id="btn-edit-skill" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
 						</div>
 					</div>
-					<div class="form-edit hide">
+					<div class="form-edit">
 						{{\Form::open(['route' => ['candidate.cv.edit.skill.put', $candidate->cv->id],  'method' => 'put'])}}
 							<h4>What is your area of expertise?</h4>
 							<div id="new-skill" class="clearfix">
