@@ -11,6 +11,7 @@ class CandidateSkill extends Eloquent
 		
 		return CandidateSkill::select(DB::raw(
 								"id,
+								cv_id,
 								name,
 								level_id,
 								(SELECT description FROM {$tbl_level} WHERE id = {$tbl_this}.level_id LIMIT 1) level,
@@ -26,6 +27,7 @@ class CandidateSkill extends Eloquent
 	
 		return CandidateSkill::select(DB::raw(
 									"id,
+									cv_id,
 									name,
 									level_id,
 									(SELECT description FROM {$tbl_level} WHERE id = {$this->table}.level_id LIMIT 1) level,

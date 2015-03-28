@@ -7,3 +7,11 @@
 #cv-edit #edu #btn-show-formnew i{
  margin-right: 5px;
 }
+
+#cv-edit #back-card #skills #skills-collection{
+  background-color: #FFF;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+}

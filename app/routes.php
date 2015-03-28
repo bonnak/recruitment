@@ -36,6 +36,7 @@ Route::group(['before' => 'auth'], function (){
 	Route::delete('/user/candidate/cv/edit/{cv_id}/edu/{id}', ['as' => 'candidate.cv.edit.edu.delete', 'uses' => 'CandidateController@deleteCVEdu']);
 	
 	Route::post('/user/candidate/cv/edit/{cv_id}/skill', ['as' => 'candidate.cv.edit.skill.post', 'uses' => 'CandidateController@createCVSkill']);
+	Route::delete('/user/candidate/cv/edit/{cv_id}/skill/{id}', ['as' => 'candidate.cv.edit.skill.delete', 'uses' => 'CandidateController@deleteCVSkill']);
 	
 	Route::put('/user/candidate/cv/edit/{cv_id}/lang', ['as' => 'candidate.cv.edit.lang.put', 'uses' => 'CandidateController@editCVLang']);
 	

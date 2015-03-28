@@ -13,6 +13,7 @@ class CandidateExperience extends Eloquent
 		
 		return \CandidateExperience::select(DB::raw(
 								"id,
+								cv_id,
 								job_title,
 								company_name,
 								industry_id,

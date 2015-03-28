@@ -41,9 +41,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			angular.forEach(experiences, function(data, key) {
 				var experience = new Experience(data);
 				
-				// Set data CV experience ID.
-				experience.cv_id = cv.id;
-				
 				// Add a new element.
 				$scope.experiences.push(experience);
 			});		
@@ -56,9 +53,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			angular.forEach(educations, function(data, key) {
 				var edu = new Education(data);
 				
-				// Set education element CV id.
-				edu.cv_id = cv.id;
-				
 				// Add a new element.
 				$scope.educations.push(edu);
 			});
@@ -69,9 +63,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			// Push skill element to the skills collection scope.
 			angular.forEach(skills, function(data, key){
 				var skill = new Skill(data);
-				
-				// Set skill element cv id.
-				skill.cv_id = cv.id;
 				
 				// Add a new element.
 				$scope.skills.push(skill);
@@ -161,6 +152,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Clear new experience scope properties.
 			$scope.new_experience = {};
+			$scope.new_experience.cv_id = $scope.cv_id;	
 			
 			// Close new form.
 			$scope.frm_exp_new_show = false;
@@ -235,6 +227,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 
 		// Clear new experience properties model.
 		$scope.new_experience = {};	
+		$scope.new_experience.cv_id = $scope.cv_id;	
 
 		// Close form.
 		$scope.frm_exp_new_show = false;
@@ -243,7 +236,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	/***
 	 * Add a new education information.
 	 */
-	$scope.createNewEducation = function(el){
+	$scope.createNewEducation = function(el){		
 		var new_edu = new Education(el);
 		
 		new_edu.createNew().success(function(data){
@@ -255,9 +248,10 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Clear new experience scope properties.
 			$scope.new_education = {};
+			$scope.new_education.cv_id = $scope.cv_id;
 			
 			// Close new form.
-			$scope.frm_exp_new_show = false;
+			$scope.show_frm_edu_new = false;
 		});
 	}
 	
@@ -333,9 +327,10 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	/***
 	 * Close new education form.
 	 */ 
-	$scope.closeFormNewExperience = function(){
+	$scope.cancelFormNewEdu = function(){
 		// Clear new experience properties model.
 		$scope.new_education = {};	
+		$scope.new_education.cv_id = $scope.cv_id;
 
 		// Close form.
 		$scope.show_frm_edu_new = false;
@@ -355,8 +350,21 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			$scope.skills.push(new_skill);
 			
 			// Clear new skill scope properties.
-			$scope.new_skill = {};			
+			$scope.new_skill = {};	
+			$scope.new_skill.cv_id = $scope.cv_id;
 			
+		}).error(function(data, status){
+			
+		});
+	}
+	
+	/***
+	 * Delete skill.
+	 */
+	$scope.deleteSkill = function(skill){
+		skill.delete().success(function(){
+			// Remove education item from the list.
+			$scope.skills.splice($scope.skills.indexOf(skill), 1);
 		}).error(function(data, status){
 			
 		});

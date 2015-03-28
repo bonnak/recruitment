@@ -12,6 +12,7 @@ class CandidateEducation extends Eloquent
 		
 		return CandidateEducation::select(DB::raw(
 									"id,
+									cv_id,
 									institute,
 									major,
 									(SELECT description FROM {$tbl_degree} WHERE id = {$tbl_this}.degree_id LIMIT 1) degree,
@@ -32,6 +33,7 @@ class CandidateEducation extends Eloquent
 		
 		return CandidateEducation::select(DB::raw(
 									"id,
+									cv_id,
 									institute,
 									major,
 									(SELECT description FROM {$tbl_degree} WHERE id = {$this->table}.degree_id LIMIT 1) degree,

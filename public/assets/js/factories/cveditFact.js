@@ -1,6 +1,11 @@
 app_candidate.factory('Experience', function($http){
 	
 	var Experience = function(data){
+		this.setValue(data);
+	}
+	
+	// Set experience properties values.
+	Experience.prototype.setValue = function(data){
 		this.id 				= data.id !== undefined ? data.id : '';
 		this.cv_id 				= data.cv_id !== undefined ? data.cv_id : '';
 		this.job_title 			= data.job_title !== undefined ? data.job_title : '';
@@ -215,6 +220,15 @@ app_candidate.factory('Experience', function($http){
 		return $http.post(
 			'/user/candidate/cv/edit/' + this.cv_id + '/skill',
 			this
+		);
+	}
+	
+	/***
+	 * Send request to server to delete a new skill.
+	 */
+	Skill.prototype.delete = function(){
+		return $http.delete(
+			'/user/candidate/cv/edit/' + this.cv_id + '/skill/' + this.id			
 		);
 	}
 	

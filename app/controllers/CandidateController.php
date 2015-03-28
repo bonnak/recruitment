@@ -536,17 +536,37 @@ class CandidateController extends BaseController
 		$level_id 			= \Input::get('level_id');
 		$year_experience 	= \Input::get('year_experience');
 		
-		$can_skill->cv_id 			= $cv_id;
-		$can_skill->name 			= !empty($name) ? $name : null;
-		$can_skill->level_id 		= !empty($level_id) ? $level_id : null;
-		$can_skill->year_experience = !empty($year_experience) ? $year_experience : null;
-		
-		if(!$can_skill->save())
+		try
 		{
-			\App::abort('403', 'There\'s some wrong. Cannot create this new education.');
+			$can_skill->cv_id 			= $cv_id;
+			$can_skill->name 			= !empty($name) ? $name : null;
+			$can_skill->level_id 		= !empty($level_id) ? $level_id : null;
+			$can_skill->year_experience = !empty($year_experience) ? $year_experience : null;			
+			$can_skill->save();
+		}
+		catch (\PDOException $e)
+		{
+			App::abort(403, 'Not authenticated');
 		}
 		
 		return $can_skill->getSkill();
+	}
+	
+	/***
+	 * Delete CV skill.
+	 */
+	public function deleteCVSkill($cv_id, $id)
+	{
+		// Check if record exist.
+		if(!$can_skill = \CandidateSkill::where('id', '=', $id)
+						->whereAnd('cv_id', '=', $cv_id)
+						->first())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot delete this skill.');
+		}
+		
+		// Delete record.
+		$can_skill->delete();
 	}
 	
 	public function editCVSkill($cv_id)

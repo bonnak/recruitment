@@ -339,7 +339,7 @@
 						</div>
 						<div class="opt-controls">
 					      <button type="button" class="btn btn-primary btn-save" ng-click="createNewEducation(new_education)">Save</button>
-					      <button type="button" class="btn btn-danger btn-cancel" ng-click="closeFormNewExperience()">Cancel</button>
+					      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelFormNewEdu()">Cancel</button>
 					  </div>
 					</form>
 				</div>
@@ -351,11 +351,12 @@
 						<div class="items clearfix">
 							<div class="item round-box-wrapper" ng-repeat="skill in skills">
 								<span class="cv-info" id="skill-name">{% skill.name %}</span>&nbsp;&nbsp;&nbsp;
-								<span class="skill-detail text-muted">{% skill.level %} ({% skill.year_experience %} years)</span>
+								<span class="skill-detail text-muted">{% skill.level %} <span ng-if="skill.year_experience">({% skill.year_experience %} years)</span></span>
 							</div>
 						</div>
-						<div class="card-btn-group">
-							<a href="javascript:onclick" id="btn-edit-skill" class="glyphicon glyphicon-pencil btn-edit-cv" ng-click="show_frm_skill = true"></a>
+						<a href="" id="btn-show-formnew" ng-click="show_frm_skill = true" ng-hide="skills.length"><i class="fa fa-plus-circle"></i>Add new</a>
+						<div class="card-btn-group" ng-show="skills.length">
+							<a href="javascript:onclick" id="btn-edit-skill" class="glyphicon glyphicon-pencil btn-edit-cv" ng-click="show_frm_skill = true" ></a>
 						</div>
 					</div>
 					<div class="form-edit" ng-show="show_frm_skill">
@@ -372,12 +373,12 @@
 								<button type="button" id="btn-add" class="btn btn-primary" ng-click="createNewSkill(new_skill)">Add</button>
 								<button type="button" id="btn-add" class="btn btn-danger" ng-click="show_frm_skill = false">Close</button>
 							</div>
-							<div id="skills-collection" class="items clearfix" style="background-color: #FFF; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
+							<div id="skills-collection" class="items clearfix" ng-if="skills.length">
 								<div class="item round-box-wrapper" ng-repeat="skill in skills">
 									<div class="span-content">
 										<span class="cv-info" id="skill-name">{% skill.name %}</span>&nbsp;&nbsp;&nbsp;
-										<span class="skill-detail text-muted">{% skill.level %} ({% skill.year_experience %} years)</span>&nbsp;
-										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_skill_cv_edit(this)"></a>
+										<span class="skill-detail text-muted">{% skill.level %}  <span ng-if="skill.year_experience">({% skill.year_experience %} years)</span></span>&nbsp;
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteSkill(skill)"></a>
 									</div>
 								</div>
 							</div>			
