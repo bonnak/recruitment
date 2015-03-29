@@ -90,13 +90,13 @@ app_candidate.factory('Experience', function($http){
 		this.id 			= data.id !== undefined ? data.id : '';
 		this.cv_id 			= data.cv_id !== undefined ? data.cv_id : '';
 		this.degree 		= data.degree !== undefined ? data.degree : '';
-		this.degree_id 		= data.degree_id !== undefined ? data.degree_id : '';
+		this.degree_id 		= (data.degree_id !== undefined && data.degree_id !== null) ? data.degree_id : '';
 		this.from_year 		= data.from_year !== undefined ? data.from_year : '';
 		this.grad_year 		= data.grad_year !== undefined ? data.grad_year : '';
 		this.institute 		= data.institute !== undefined ? data.institute : '';
 		this.major 			= data.major !== undefined ? data.major : '';
 		this.situation 		= data.situation !== undefined ? data.situation : '';
-		this.situation_id 	= data.situation_id !== undefined ? data.situation_id : '';
+		this.situation_id 	= (data.situation_id !== undefined && data.situation_id !== null) ? data.situation_id : '';
 		
 		this.draft = {
 			degree			: this.degree,

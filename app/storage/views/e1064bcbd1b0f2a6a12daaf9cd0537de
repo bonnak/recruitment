@@ -220,11 +220,11 @@
 						<div class="content-show" ng-hide="education.show_frm_edu">
 							<h4 id="span-institute">{% education.institute %}</h4>
 							<div>
-								<span id="span-degree" class="cv-info">{% education.degree %}</span> in <span id="span-major">{% education.major %}</span>
+								<span id="span-degree" class="cv-info" ng-show="education.degree_id">{% education.degree %} in </span><span id="span-major">{% education.major %}</span>
 							</div>
 							<div>
 								<span class="cv-info"><span id="span-from-year">{% education.from_year %}</span> - <span id="span-grad-year">{% education.grad_year %}</span></span>&nbsp;
-								<span class="span-situation">({% education.situation %})</span>
+								<span class="span-situation" ng-show="education.situation_id">({% education.situation %})</span>
 							</div>
 							<div class="card-btn-group">
 								<a href="javascript:onclick" class="glyphicon glyphicon-remove" ng-click="deleteEducation(education)"></a>

@@ -485,22 +485,29 @@ class CandidateController extends BaseController
 								->whereAnd('cv_id', '=', $cv_id)
 								->first())
 		{
-			$institute = \Input::get('institute');
-			$major = \Input::get('major');
-			$degree_id = \Input::get('degree_id');
-			$situation_id = \Input::get('situation_id');
-			$from_year = \Input::get('from_year');
-			$grad_year = \Input::get('grad_year');				
-			
-			$can_edu->institute = !empty($institute) ? $institute : null;
-			$can_edu->major 	= !empty($major) ? $major : null;
-			$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
-			$can_edu->situation_id = !empty($situation_id) ? $situation_id : null;
-			$can_edu->from_year = !empty($from_year) ? $from_year : null;
-			$can_edu->grad_year = !empty($grad_year) ? $grad_year : null;
-			$can_edu->save();
+			try
+			{
+				$institute = \Input::get('institute');
+				$major = \Input::get('major');
+				$degree_id = \Input::get('degree_id');
+				$situation_id = \Input::get('situation_id');
+				$from_year = \Input::get('from_year');
+				$grad_year = \Input::get('grad_year');				
+				
+				$can_edu->institute = !empty($institute) ? $institute : null;
+				$can_edu->major 	= !empty($major) ? $major : null;
+				$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
+				$can_edu->situation_id = !empty($situation_id) ? $situation_id : null;
+				$can_edu->from_year = !empty($from_year) ? $from_year : null;
+				$can_edu->grad_year = !empty($grad_year) ? $grad_year : null;
+				$can_edu->save();
+			}
+			catch (\PDOException $e)
+			{
+				App::abort(403, 'Not authenticated');
+			}
 		
-			return $can_edu;
+			return $can_edu->getEducation();
 		}
 		else
 		{

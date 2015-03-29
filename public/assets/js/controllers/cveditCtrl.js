@@ -259,9 +259,9 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	 * Update education information.
 	 */
 	$scope.updateEducation = function(edu){
-		edu.update().success(function(){
+		edu.update().success(function(data){
 			// Save backup data.
-			edu.saveDraft();
+			edu.setValue(data);
 			
 			// Hide form and show content.
 			edu.show_frm_edu = false;
@@ -305,7 +305,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		});
 
 		// Hide new form.
-		$scope.closeFormNewExperience();
+		$scope.cancelFormNewEdu();
 
 		// Show current form.
 		cur_edu.show_frm_edu = true;
