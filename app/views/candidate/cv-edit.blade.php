@@ -371,7 +371,7 @@
 									@endforeach
 								</select>
 								<button type="button" id="btn-add" class="btn btn-primary" ng-click="createNewSkill(new_skill)">Add</button>
-								<button type="button" id="btn-add" class="btn btn-danger" ng-click="show_frm_skill = false">Close</button>
+								<button type="button" id="btn-add" class="btn btn-danger" ng-click="closeFormSkill()">Close</button>
 							</div>
 							<div id="skills-collection" class="items clearfix" ng-if="skills.length">
 								<div class="item round-box-wrapper" ng-repeat="skill in skills">

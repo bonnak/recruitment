@@ -369,4 +369,16 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 		});
 	}
+	
+	/***
+	 * Close Skill form.
+	 */
+	$scope.closeFormSkill = function(){
+		// Clear new skill scope properties.
+		$scope.new_skill = {};	
+		$scope.new_skill.cv_id = $scope.cv_id;
+		
+		// Hide form.
+		$scope.show_frm_skill = false;
+	}
 });
