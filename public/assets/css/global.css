@@ -841,12 +841,7 @@ hr#line-break-footer {
 	border-radius: 20px;
 }
 
-#cv-edit #back-card #skills .item,
-#cv-edit #expectation-card .item{
-	float: left;
-	margin-right: 7px;
-	margin-bottom: 5px;
-}
+
 
 #cv-edit #back-card #languages .lang{
 	font-size: 16px;
@@ -980,11 +975,6 @@ hr#line-break-footer {
 #cv-edit .form-new .btn:focus{
 	outline: none;
 }
-
-#cv-edit #skills .skill-detail{
-	font-size: 12px;
-	font-style: italic;
-}
 #cv-edit #skills .btn-remove,
 #cv-edit #languages .btn-remove{
 	color: #7C7C7C; 
@@ -998,12 +988,7 @@ hr#line-break-footer {
 #cv-edit #languages .btn-add{
 	margin-left: 3px;
 }
-#cv-edit #languages #input-lang-name{
-	width: 278px;
-}
-#cv-edit #languages #input-lang-proficiency{
-	width: 250px;
-}
+
 #cv-edit #languages .form-edit .item-add-new{
 	margin-top: 14px;
 }

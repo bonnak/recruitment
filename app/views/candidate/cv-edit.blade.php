@@ -387,87 +387,43 @@
 			</div>
 			<div id="languages">
 				<h3 class="part">Languages</h3>
-				<div class="content-show">
+				<div class="content-show" ng-hide="show_frm_lang">
 					<div class="items">
-						@foreach($candidate->cv->languages as $language)
-						<div class="item">
-							<span class="lang">{{$language->language}}</span>&nbsp;&nbsp;&nbsp;<span
-								class="text-muted">{{$language->proficiency}}</span>
+						<div class="item" ng-repeat="language in languages">
+							<span class="lang">{% language.language %}</span>&nbsp;&nbsp;&nbsp;<span
+								class="text-muted">{% language.proficiency %}</span>
 						</div>
-						@endforeach
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-						<a href="javascript:onclick" id="btn-edit-lang" class="glyphicon glyphicon-pencil"></a>
+					<a href="" id="btn-show-formnew" ng-click="show_frm_lang = true" ng-hide="languages.length"><i class="fa fa-plus-circle"></i>Add new</a>
+					<div class="card-btn-group" ng-show="languages.length">
+						<a href="javascript:onclick" id="btn-edit-lang" class="glyphicon glyphicon-pencil" ng-click="show_frm_lang = true"></a>
 					</div>
 				</div>
-				<div class="form-edit hide">
-					{{\Form::open(['route' => ['candidate.cv.edit.lang.put', $candidate->cv->id],  'method' => 'put', 'class' => 'form-inline'])}}
-						<div id="lang-collection">	
-							@foreach($candidate->cv->languages as $language)
-							<div class="item">
-								<div class="form-group">
-							   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language" value="{{$language->language}}">
-							   </div>
-							   <div class="form-group">
-							   	<select class="form-control" id="input-lang-proficiency">
-							   		<option value="">---Proficiency---</option>
-										@foreach(\Proficiency::all() as $proficiency)
-										<option value="{{$proficiency->id}}" {{$language->proficiency_id === $proficiency->id ? 'selected' : ''}}>{{$proficiency->proficiency}}</option>
-										@endforeach
-							   	</select>
-							   </div>
-							   <div class="form-group">
-								   <a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_lang_cv_edit(this)" ></a>
+				<div class="form-edit" ng-show="show_frm_lang">
+					<form  class="form-inline">
+						<div class="item-add-new">
+						    <h4>What languages can you speak?</h4>
+						   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language" ng-model="new_language.language">
+						   	<select class="form-control" id="input-lang-proficiency" ng-model="new_language.proficiency_id">
+						   		<option value="">---Proficiency---</option>
+								@foreach(\Proficiency::all() as $proficiency)
+								<option value="{{$proficiency->id}}">{{$proficiency->proficiency}}</option>
+								@endforeach
+						   	</select>
+						    <button type="button" class="btn btn-primary btn-save" ng-click="createNewLang(new_language)">Add</button>
+						    <button type="button" class="btn btn-danger btn-close" ng-click="closeLangForm()">Close</button>
+						 </div>
+						<div id="lang-collection" class="clearfix" ng-show="languages.length">	
+							<div class="item round-box-wrapper" ng-repeat="language in languages">
+								<div class="span-content">
+									<span>{% language.language %}</span>&nbsp;&nbsp;
+									<span id="lang-proficiency" class="text-muted">{% language.proficiency %}</span>
+									<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteLang(language)"></a>
 								</div>
-								<input type="hidden" id="input-lang-id" value="{{$language->id}}">
-								<input type="hidden" id="input-lang-status" value="2">
 							</div>
-						   @endforeach
-						</div>
-					   <div class="item-add-new">
-					    <h4>What languages can you speak?</h4>
-					   	<div class="form-group">
-						   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language">
-						   </div>
-						   <div class="form-group">
-						   	<select class="form-control" id="input-lang-proficiency">
-						   		<option value="">---Proficiency---</option>
-									@foreach(\Proficiency::all() as $proficiency)
-									<option value="{{$proficiency->id}}">{{$proficiency->proficiency}}</option>
-									@endforeach
-						   	</select>
-						   </div>
-						   <div class="form-group">
-							   <!-- <a href="javascript:onclick" class="btn-add glyphicon glyphicon-plus"></a> -->
-							   <button class="btn btn-primary btn-add">Add</button>
-							</div>
-							<input type="hidden" id="input-lang-status" value="">
-					   </div>
-					   <div class="item-clone hide">
-					   	<div class="form-group">
-						   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language">
-						   </div>
-						   <div class="form-group">
-						   	<select class="form-control" id="input-lang-proficiency">
-						   		<option value="">---Proficiency---</option>
-									@foreach(\Proficiency::all() as $proficiency)
-									<option value="{{$proficiency->id}}">{{$proficiency->proficiency}}</option>
-									@endforeach
-						   	</select>
-						   </div>
-						   <div class="form-group">
-							   <a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_lang_cv_edit(this)"></a>
-							</div>
-							<input type="hidden" id="input-lang-id">
-							<input type="hidden" id="input-lang-status">
-					   </div>
-					{{\Form::close()}}
-					<div class="opt-controls">
-				      <button type="button" class="btn btn-primary btn-save">Save</button>
-				      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
-				  </div>	
-				</div>			
+						</div>					   
+					</form>																  	
+				</div>						
 			</div>
 		</div>
 		<div id="expectation-card">

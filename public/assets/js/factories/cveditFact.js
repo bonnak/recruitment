@@ -2,7 +2,7 @@ app_candidate.factory('Experience', function($http){
 	
 	var Experience = function(data){
 		this.setValue(data);
-	}
+	};
 	
 	// Set experience properties values.
 	Experience.prototype.setValue = function(data){
@@ -27,7 +27,7 @@ app_candidate.factory('Experience', function($http){
 			location 		: this.location,
 			job_description : this.job_description	
 		};
-	}
+	};
 	
 	// Save old properties to draft.
 	Experience.prototype.saveDraft = function(){	
@@ -39,7 +39,7 @@ app_candidate.factory('Experience', function($http){
 		this.draft.to_year 			= this.to_year;
 		this.draft.location 		= this.location;
 		this.draft.job_description 	= this.job_description;
-	}
+	};
 	
 	// Set properties' value.
 	Experience.prototype.restore = function(){
@@ -51,7 +51,7 @@ app_candidate.factory('Experience', function($http){
 		this.to_year 			= this.draft.to_year;
 		this.location 			= this.draft.location;
 		this.job_description 	= this.draft.job_description;
-	}
+	};
 		
 	// Send request to create new experience to database.
 	Experience.prototype.save = function(){
@@ -59,7 +59,7 @@ app_candidate.factory('Experience', function($http){
 			'/user/candidate/cv/edit/' + this.cv_id + '/experience', 
 			this
 		);
-	}
+	};
 	
 	// Send update request.
 	Experience.prototype.update = function(){	
@@ -67,14 +67,14 @@ app_candidate.factory('Experience', function($http){
 			'/user/candidate/cv/edit/' + this.cv_id + '/experience/' + this.id, 
 			this
 		);
-	}
+	};
 	
 	// Send delete request.
 	Experience.prototype.delete = function(){
 		return $http.delete(
 			'/user/candidate/cv/edit/' + this.cv_id + '/experience/' + this.id
 		);
-	}
+	};
 	
 	return Experience;
 })
@@ -83,7 +83,7 @@ app_candidate.factory('Experience', function($http){
 	
 	var Education = function(data){
 		this.setValue(data);
-	}
+	};
 	
 	// Set education value.
 	Education.prototype.setValue = function(data){
@@ -108,7 +108,7 @@ app_candidate.factory('Experience', function($http){
 			situation		: this.situation,
 			situation_id	: this.situation_id
 		}
-	}
+	};
 	
 	/***
 	 * Save draft to backup data.
@@ -122,7 +122,7 @@ app_candidate.factory('Experience', function($http){
 		this.draft.major		= this.major;
 		this.draft.situation	= this.situation;
 		this.draft.situation_id	= this.situation_id;
-	}
+	};
 	
 	/***
 	 * Restore the original data.
@@ -136,7 +136,7 @@ app_candidate.factory('Experience', function($http){
 		this.major			= this.draft.major;
 		this.situation		= this.draft.situation;
 		this.situation_id	= this.draft.situation_id;
-	}
+	};
 	
 	/***
 	 * Send request to server to create a new education.
@@ -146,7 +146,7 @@ app_candidate.factory('Experience', function($http){
 				'/user/candidate/cv/edit/' + this.cv_id + ' /edu',
 				this
 		);
-	}
+	};
 	
 	/***
 	 * Send request to server to update an existing eduation.
@@ -156,7 +156,7 @@ app_candidate.factory('Experience', function($http){
 			'/user/candidate/cv/edit/' + this.cv_id + '/edu/' + this.id,
 			this
 		);
-	}
+	};
 	
 	/***
 	 * Send request to server to delete an education.
@@ -165,7 +165,7 @@ app_candidate.factory('Experience', function($http){
 		return $http.delete(
 			'/user/candidate/cv/edit/' + this.cv_id + '/edu/' + this.id
 		);
-	}
+	};
 	
 	return Education;
 })
@@ -174,7 +174,7 @@ app_candidate.factory('Experience', function($http){
 	
 	var Skill = function(data){
 		this.setValue(data);
-	}
+	};
 	
 	// Set skill value.
 	Skill.prototype.setValue = function(data){
@@ -191,7 +191,7 @@ app_candidate.factory('Experience', function($http){
 			level 			: this.level,
 			year_experience : this.year_experience
 		}
-	}
+	};
 	
 	/***
 	 * Save draft to backup data.
@@ -201,7 +201,7 @@ app_candidate.factory('Experience', function($http){
 		this.draft.level_id = this.level_id;
 		this.draft.level = this.level;
 		this.draft.year_experience = this.year_experience;
-	}
+	};
 	
 	/***
 	 * Restore the original data.
@@ -211,7 +211,7 @@ app_candidate.factory('Experience', function($http){
 		this.level_id = this.draft.level_id;
 		this.level = this.draft.level;
 		this.year_experience = this.draft.year_experience;
-	}
+	};
 	
 	/***
 	 * Send request to server to create a new skill.
@@ -221,7 +221,7 @@ app_candidate.factory('Experience', function($http){
 			'/user/candidate/cv/edit/' + this.cv_id + '/skill',
 			this
 		);
-	}
+	};
 	
 	/***
 	 * Send request to server to delete a new skill.
@@ -230,7 +230,70 @@ app_candidate.factory('Experience', function($http){
 		return $http.delete(
 			'/user/candidate/cv/edit/' + this.cv_id + '/skill/' + this.id			
 		);
-	}
+	};
 	
 	return Skill;
+})
+
+.factory('Language', function($http){
+	
+	var Language = function(data){
+		this.setValue(data);
+	};
+	
+	/***
+	 * Set proterties value function of object.
+	 */
+	Language.prototype.setValue = function(data){
+		this.id = data.id !== undefined ? data.id : '';		
+		this.cv_id = data.cv_id !== undefined ? data.cv_id : '';			
+		this.language = data.language !== undefined ? data.language : '';		
+		this.proficiency_id = (data.proficiency_id !== undefined && data.proficiency_id !== null)? data.proficiency_id : '';		
+		this.proficiency = data.proficiency !== undefined ? data.proficiency : '';	
+		
+		this.draft = {
+			language 		: this.language,
+			proficiency_id 	: this.proficiency_id,
+			proficiency 	: this.proficiency
+		}
+	};
+	
+	/***
+	 * Save draft to backup data.
+	 */
+	Language.prototype.saveDraft = function(){
+		this.draft.language 		= this.language;		
+		this.draft.proficiency_id 	= this.proficiency_id;		
+		this.draft.proficiency 		= this.proficiency;		
+	};
+	
+	/***
+	 * Restore the original data.
+	 */
+	Language.prototype.restore = function(){
+		this.language 		= this.draft.language;		
+		this.proficiency_id = this.draft.proficiency_id;		
+		this.proficiency 	= this.draft.proficiency;	
+	};
+	
+	/***
+	 * Send request to server to create a new language.
+	 */
+	Language.prototype.createNew = function(){
+		return $http.post(
+			'/user/candidate/cv/edit/' + this.cv_id +'/lang',
+			this
+		);
+	};
+	
+	/***
+	 * Send request to server to delete a new language.
+	 */
+	Language.prototype.delete = function(){
+		return $http.delete(
+				'/user/candidate/cv/edit/' + this.cv_id + '/lang/' + this.id
+		);
+	};
+	
+	return Language;
 });

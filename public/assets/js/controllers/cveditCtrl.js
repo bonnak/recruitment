@@ -1,4 +1,4 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language){	
 	$scope.cv_id = null;	
 	$scope.summary = '';
 	$scope.experiences = [];
@@ -7,6 +7,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.new_education = {};
 	$scope.skills = [];
 	$scope.new_skill = {};
+	$scope.languages = [];
+	$scope.new_language = {};
 	$scope.draft = {};
 	
 	/***
@@ -31,7 +33,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		).success(function(cv){
 			var experiences = cv.work_experiences,
 				educations = cv.education,
-				skills = cv.skills;
+				skills = cv.skills,
+				languages = cv.languages;
 			
 			// Load summary into data scope.
 			$scope.summary = cv.summary !== null ? cv.summary : '';
@@ -70,6 +73,18 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Set new skill default cv_id.
 			$scope.new_skill.cv_id = cv.id;
+			
+			// Push language element to the collection.
+			angular.forEach(languages, function(data, key){
+				var language = new Language(data);
+				
+				// Add new element.
+				$scope.languages.push(language);
+			});
+			
+			// Set new language default cv_id.
+			$scope.new_language.cv_id = cv.id;
+			
 			
 		}).error(function(data, status){
 			
@@ -380,5 +395,51 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		
 		// Hide form.
 		$scope.show_frm_skill = false;
+	}
+	
+	/***
+	 * Create a new language.
+	 */
+	$scope.createNewLang = function(data){
+		var new_lang = new Language(data);
+		
+		new_lang.createNew().success(function(data){
+			// load new skill.
+			new_lang.setValue(data);
+			
+			// Add a new element.
+			$scope.languages.push(new_lang);
+			
+			// Clear new skill scope properties.
+			$scope.new_language = {};	
+			$scope.new_language.cv_id = $scope.cv_id;
+			
+		}).error(function(data, status){
+			
+		});
+	}
+	
+	/***
+	 * Delete language information.
+	 */
+	$scope.deleteLang = function(language){
+		language.delete().success(function(){
+			// Remove education item from the list.
+			$scope.languages.splice($scope.languages.indexOf(language), 1);			
+		}).error(function(data, status){
+			
+		});
+	}
+	
+	/***
+	 * Close language form.
+	 */
+	$scope.closeLangForm = function(){
+		// Clear new skill scope properties.
+		$scope.new_language = {};	
+		$scope.new_language.cv_id = $scope.cv_id;
+		
+		// Hide form.
+		$scope.show_frm_lang = false;
 	}
 });

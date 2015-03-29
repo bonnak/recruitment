@@ -611,6 +611,54 @@ class CandidateController extends BaseController
 		
 		return $can_skills;
 	}
+	
+	/***
+	 * Create new CV language.
+	 */
+	public function createCVLang($cv_id)
+	{
+		// Initialize a new language object.
+		$can_language = new \CandidateLanguage;
+		
+		// Get input values.
+		$language	= \Input::get('language');
+		$proficiency_id	= \Input::get('proficiency_id');
+		
+		try
+		{			
+			// Assign the new language properties' value.
+			$can_language->cv_id 			= $cv_id;
+			$can_language->language			= !empty($language) ? $language : null;
+			$can_language->proficiency_id	= !empty($proficiency_id) ? $proficiency_id : null;
+			
+			// Insert into the database.
+			$can_language->save();
+		}
+		catch (\PDOException $e)
+		{
+			App::abort(403, 'Not authenticated');
+		}
+		
+		// Return the new saved-language detail.
+		return $can_language->getLanguage();
+	}
+	
+	/***
+	 * Delete language.
+	 */
+	public function deleteCVLang($cv_id, $id)
+	{
+		// Check if record exist.
+		if(!$can_language = \CandidateLanguage::where('id', '=', $id)
+											->whereAnd('cv_id', '=', $cv_id)
+											->first())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot delete this languague.');
+		}
+		
+		// Delete record.
+		$can_language->delete();
+	}
 
 	public function editCVLang($cv_id)
 	{
