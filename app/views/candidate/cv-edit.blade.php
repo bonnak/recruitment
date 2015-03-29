@@ -349,7 +349,7 @@
 					<h3 class="part">Skills</h3>
 					<div class="content-show" ng-hide="show_frm_skill">
 						<div class="items clearfix">
-							<div class="item round-box-wrapper" ng-repeat="skill in skills">
+							<div class="item" ng-repeat="skill in skills">
 								<span class="cv-info" id="skill-name">{% skill.name %}</span>&nbsp;&nbsp;&nbsp;
 								<span class="skill-detail text-muted">{% skill.level %} <span ng-if="skill.year_experience">({% skill.year_experience %} years)</span></span>
 							</div>
@@ -391,7 +391,7 @@
 					<div class="items">
 						<div class="item" ng-repeat="language in languages">
 							<span class="lang">{% language.language %}</span>&nbsp;&nbsp;&nbsp;<span
-								class="text-muted">{% language.proficiency %}</span>
+								class="lang-proficiency text-muted">{% language.proficiency %}</span>
 						</div>
 					</div>
 					<a href="" id="btn-show-formnew" ng-click="show_frm_lang = true" ng-hide="languages.length"><i class="fa fa-plus-circle"></i>Add new</a>
@@ -417,7 +417,7 @@
 							<div class="item round-box-wrapper" ng-repeat="language in languages">
 								<div class="span-content">
 									<span>{% language.language %}</span>&nbsp;&nbsp;
-									<span id="lang-proficiency" class="text-muted">{% language.proficiency %}</span>
+									<span class="lang-proficiency text-muted">{% language.proficiency %}</span>
 									<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteLang(language)"></a>
 								</div>
 							</div>

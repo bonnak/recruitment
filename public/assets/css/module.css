@@ -22,7 +22,7 @@
 #cv-edit #languages #input-lang-proficiency{
 	width: 200px;
 }
-#cv-edit #back-card #skills .item,
+#cv-edit #back-card #skills .form-edit .item,
 #cv-edit #expectation-card .item,
 #cv-edit #back-card #languages .form-edit .item{
 	float: left;
@@ -30,7 +30,12 @@
 	margin-bottom: 5px;
 }
 #cv-edit #skills .skill-detail,
-#cv-edit #languages #lang-proficiency{
-	font-size: 12px;
+#cv-edit #languages .lang-proficiency{
+	font-size: 13px;
 	font-style: italic;
+}
+#cv-edit #back-card #skills #skill-name,
+#cv-edit #back-card #languages .lang{
+/* 	font-size: 16px; */
+/* 	color: #434649; */
 }

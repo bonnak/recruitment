@@ -840,14 +840,6 @@ hr#line-break-footer {
 	background-color: #ECECEC;
 	border-radius: 20px;
 }
-
-
-
-#cv-edit #back-card #languages .lang{
-	font-size: 16px;
-	color: #434649;
-}
-
 #cv-edit #back-card .card-article,
 #cv-edit #expectation-card .card-article,
 #cv-edit #ref-card .card-article{
