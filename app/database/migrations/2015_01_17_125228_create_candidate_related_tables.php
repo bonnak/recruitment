@@ -71,10 +71,11 @@ class CreateCandidateRelatedTables extends Migration {
 		});
 		
 		Schema::create('can_exp_functions', function ($table){
-			$table->bigIncrements('id');
 			$table->bigInteger('cv_id');
 			$table->integer('function_id');
 			$table->timestamps();
+			
+			$table->primary(['cv_id', 'function_id']);
 		});
 		
 		Schema::create('can_exp_industries', function ($table){

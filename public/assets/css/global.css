@@ -762,7 +762,7 @@ hr#line-break-footer {
 #cv-edit #back-card #edu .item,
 #cv-edit #back-card #skills,
 #cv-edit #back-card #languages,
-#cv-edit #expectation-card .item,
+#cv-edit #expectation-card .content-show,
 #cv-edit #ref-card .items{
 	position: relative;
 }
@@ -807,11 +807,9 @@ hr#line-break-footer {
 #cv-edit #back-card #languages .items{
 	margin-top: 0;
 }
-
 #cv-edit #back-card #experience{
 	margin-top: 33px;
 }
-
 #cv-edit #back-card .btn-addnew{
 	color: #434649;
 	padding: 8px 10px 7px;
@@ -825,12 +823,10 @@ hr#line-break-footer {
 	background-image:-o-linear-gradient(top, #ececec 0%,#e1e1e1 100%);
 	background-image:linear-gradient(top, #ececec 0%,#e1e1e1 100%);
 }
-
 #cv-edit #back-card .items-control{
 	text-align: right;
 	padding: 15px 0;
 }
-
 #cv-edit #back-card .round-box-wrapper,
 #cv-edit #expectation-card .round-box-wrapper{
 	padding: 8px 10px 7px;
@@ -853,7 +849,6 @@ hr#line-break-footer {
 	margin-right: -50px;
 	margin-top: -1px;
 }
-
 #cv-edit #back-card .card-btn-group,
 #cv-edit #expectation-card .card-btn-group,
 #cv-edit #ref-card .card-btn-group{
@@ -868,13 +863,12 @@ hr#line-break-footer {
 	border-radius: 5px 0 0 5px;
 	transform: translate(-9px);
 }
-
 #cv-edit #back-card #summary:hover .card-btn-group,
 #cv-edit #back-card #edu .item:hover .card-btn-group,
 #cv-edit #back-card #experience .item:hover .card-btn-group,
 #cv-edit #back-card #skills:hover .card-btn-group,
 #cv-edit #back-card #languages:hover .card-btn-group,
-#cv-edit #expectation-card .items:hover .card-btn-group{
+#cv-edit #expectation-card .content-show:hover .card-btn-group{
 	display: block;
 }
 

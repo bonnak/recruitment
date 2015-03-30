@@ -9,6 +9,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.new_skill = {};
 	$scope.languages = [];
 	$scope.new_language = {};
+	$scope.functions = [];
+	$scope.new_function = {};
 	$scope.draft = {};
 	
 	/***
@@ -34,7 +36,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			var experiences = cv.work_experiences,
 				educations = cv.education,
 				skills = cv.skills,
-				languages = cv.languages;
+				languages = cv.languages,
+				functions = cv.expectation.functions;
 			
 			// Load summary into data scope.
 			$scope.summary = cv.summary !== null ? cv.summary : '';
@@ -85,7 +88,13 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			// Set new language default cv_id.
 			$scope.new_language.cv_id = cv.id;
 			
-			
+			// Push function element to to collection.
+			angular.forEach(languages, function(data, key){
+//				var f = new Language(data);
+//				
+//				// Add new element.
+//				$scope.languages.push(language);
+			});
 		}).error(function(data, status){
 			
 		});
@@ -442,4 +451,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		// Hide form.
 		$scope.show_frm_lang = false;
 	}
+	
+	
 });

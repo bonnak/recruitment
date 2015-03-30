@@ -296,4 +296,24 @@ app_candidate.factory('Experience', function($http){
 	};
 	
 	return Language;
+})
+
+.factory('Function', function($http){
+	
+	var Function = function(data){
+		this.setValue(data);
+	};
+	
+	/***
+	 * Set proterties value function of object.
+	 */
+	Function.prototype.setValue = function(data){	
+		this.cv_id = data.cv_id !== undefined ? data.cv_id : '';
+		this.function_id = data.function_id !== undefined ? data.function_id : '';
+		this.function_name = data.function_name !== undefined ? data.function_name : '';
+		
+		this.draft = {
+				
+		};
+	};
 });

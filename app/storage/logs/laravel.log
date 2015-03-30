@@ -17207,3 +17207,7 @@ Stack trace:
 #17 C:\wamp\www\recruitment\public\index.php(49): Illuminate\Foundation\Application->run()
 #18 C:\wamp\www\recruitment\server.php(19): require_once('C:\\wamp\\www\\rec...')
 #19 {main} [] []
+[2015-03-30 15:00:00] production.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot redeclare CandidateExpFunction::getExpFunctions()' in C:\wamp\www\recruitment\app\models\CandidateExpFunction.php:29
+Stack trace:
+#0 [internal function]: Illuminate\Exception\Handler->handleShutdown()
+#1 {main} [] []

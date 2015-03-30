@@ -59,10 +59,9 @@ class CV extends Eloquent
 	
 	public function expectation()
 	{
-		$exp_functions = \DB::table('can_exp_functions as cf')->select(DB::raw(
-								"*, 
-								(SELECT name FROM constant_functions WHERE id = cf.function_id LIMIT 1) function"
-						))->where('cv_id', '=', $this->id)->get();
+		// Load expectation functions.
+		$exp_functions = \CandidateExpFunction::getExpFunctions($this->id);
+		
 		$exp_industries = \DB::table('can_exp_industries as ci')->select(DB::raw(
 								"*, 
 								(SELECT name FROM constant_industries WHERE id = ci.industry_id LIMIT 1) industry"

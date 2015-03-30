@@ -429,17 +429,17 @@
 		<div id="expectation-card">
 			<span class="card-article">Expectation</span>
 			<div>
-				<div class="items">
+				<div class="content-show">
 					<h3 class="part">Functions</h3>
-					<div>
-						<div class="items clearfix">
+					<div class="items clearfix">
+						<div class="item clearfix">
 							@foreach($candidate->cv->expectation->functions as $function)
 							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$function->function}}</span>
+								<span class="cv-info">{{$function->function_name}}</span>
 							</div>
 							@endforeach
 						</div>
-					</div>
+					</div>					
 					<div class="card-btn-group">
 						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
 					</div>
