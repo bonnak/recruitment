@@ -55,7 +55,7 @@ class ConstantTableSeeder extends Seeder {
 			['name' => 'Customer Service'],
 			['name' => 'Education / Teaching'],
 			['name' => 'Electronic / Electrical / Equipment'],
-			['name' => 'Food &amp; Beverages'],
+			['name' => 'Food & Beverages'],
 			['name' => 'Freight / Shipping / Delivery'],
 			['name' => 'General Business Services'],
 			['name' => 'Human Resources / Consultant'],
