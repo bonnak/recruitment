@@ -41,6 +41,9 @@ Route::group(['before' => 'auth'], function (){
 	Route::post('/user/candidate/cv/edit/{cv_id}/lang', ['as' => 'candidate.cv.edit.lang.post', 'uses' => 'CandidateController@createCVLang']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/lang/{id}', ['as' => 'candidate.cv.edit.lang.delete', 'uses' => 'CandidateController@deleteCVLang']);
 	
+	Route::post('/user/candidate/cv/edit/{cv_id}/function', ['as' => 'candidate.cv.edit.function.post', 'uses' => 'CandidateController@createFunction']);
+	Route::post('/user/candidate/cv/edit/{cv_id}/function/{func_id}', ['as' => 'candidate.cv.edit.function.delete', 'uses' => 'CandidateController@deleteFunction']);
+	
 	
 	// Employer
 	Route::get('/user/employer', ['as' => 'employer', 'uses' => 'EmployerController@index']);

@@ -429,19 +429,40 @@
 		<div id="expectation-card">
 			<span class="card-article">Expectation</span>
 			<div>
-				<div class="content-show">
+				<div id="function">
 					<h3 class="part">Functions</h3>
-					<div class="items clearfix">
-						<div class="item clearfix">
-							@foreach($candidate->cv->expectation->functions as $function)
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$function->function_name}}</span>
+					<div class="content-show">						
+						<div class="items clearfix">
+							<div class="item pull-left" ng-repeat="function in functions">
+								<span class="cv-info">{% $last === false ? function.function_name + ',&nbsp;&nbsp;&nbsp;' : function.function_name %}</span>
 							</div>
-							@endforeach
+						</div>					
+						<div class="card-btn-group">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
 						</div>
-					</div>					
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					</div>
+					<div class="form-edit">
+						<form  class="form-inline">
+							<div class="item-add-new">
+							    <h4>What function would you expect?</h4>
+							   	<select class="form-control" id="input-function" ng-model="new_function.function_id">
+							   		<option value="">---Function---</option>
+									@foreach(\Func::getFunctions() as $function)
+									<option value="{{$function->id}}">{{$function->name}}</option>
+									@endforeach
+							   	</select>
+							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewFunc(new_function)">Add</button>
+							    <button type="button" class="btn btn-danger btn-close">Close</button>
+							 </div>
+							 <div id="func-collection" class="clearfix">	
+								<div class="item round-box-wrapper" ng-repeat="function in functions">
+									<div class="span-content">
+										<span>{% function.function_name %}</span>
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove"></a>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
 				<div class="items">

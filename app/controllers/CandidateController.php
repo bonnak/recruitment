@@ -711,4 +711,42 @@ class CandidateController extends BaseController
 		
 		return $can_langs;
 	}
+	
+	/***
+	 * Add new candidate function.
+	 */
+	public function createFunction($cv_id)
+	{
+		// Initialize a new function object.
+		$can_func = new \CandidateExpFunction;
+		
+		// Get input values.
+		$function_id	= \Input::get('function_id');
+		
+		try
+		{
+			// Assign the new language properties' value.
+			$can_func->cv_id 		= $cv_id;
+			$can_func->function_id	= $function_id;
+				
+			// Insert into the database.
+			$can_func->save();
+		}
+		catch (\PDOException $e)
+		{		
+			switch ($e->getCode())
+			{
+				case 23000:
+					App::abort(403, 'This function already added.');
+					break;
+					
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+		// Return the new saved-language detail.
+		return $can_func->getExpFunction();
+	}
 }

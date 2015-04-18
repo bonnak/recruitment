@@ -287,7 +287,7 @@ app_candidate.factory('Experience', function($http){
 	};
 	
 	/***
-	 * Send request to server to delete a new language.
+	 * Send request to server to delete a language.
 	 */
 	Language.prototype.delete = function(){
 		return $http.delete(
@@ -313,7 +313,45 @@ app_candidate.factory('Experience', function($http){
 		this.function_name = data.function_name !== undefined ? data.function_name : '';
 		
 		this.draft = {
-				
+			function_id		: this.function_id,
+			function_name	: this.function_name
 		};
 	};
+	
+	/***
+	 * Save draft to backup data.
+	 */
+	Function.prototype.saveDraft = function(){
+		this.draft.function_id = this.function_id;
+		this.draft.function_name = this.function_name;
+	};
+	
+	/***
+	 * Send request to server to delete a new language.
+	 */
+	Function.prototype.restore = function(){
+		this.function_id = this.draft.function_id;
+		this.function_name = this.draft.function_name;
+	};
+	
+	/***
+	 * Send request to server to create a new function.
+	 */
+	Function.prototype.createNew = function(){
+		return $http.post(
+				'/user/candidate/cv/edit/' + this.cv_id +'/function',
+			this
+		);
+	};
+	
+	/***
+	 * Send request to server to delete a function.
+	 */
+	Function.prototype.delete = function(){
+		return $http.delete(
+				'/user/candidate/cv/edit/' + this.cv_id + '/function/' + this.function_id
+		);
+	};
+	
+	return Function;
 });

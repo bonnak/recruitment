@@ -25,16 +25,19 @@ class CandidateExpFunction extends Eloquent
 	/***
 	 * Get as single function object detail.
 	 */
-	public function getExpFunction($cv_id, $id)
+	public function getExpFunction()
 	{	
+		// Get constant function table name.
+		$tbl_func = (new \Func)->getTable();
+		
 		return CandidateExpFunction::select(DB::raw(
 											"cv_id,
 											function_id,
-											(SELECT name FROM constant_functions WHERE id = {$this->table}.function_id LIMIT 1) function_name
+											(SELECT name FROM {$tbl_func} WHERE id = {$this->table}.function_id LIMIT 1) function_name
 											"
 									))
-									->where('cv_id', '=', $cv_id)
-									->whereAnd('function_id', '=', $this->function_id)
+									->where('cv_id', '=', $this->cv_id)
+									->where('function_id', '=', $this->function_id)
 									->first();
 	}
 }

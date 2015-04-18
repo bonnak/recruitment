@@ -1,4 +1,4 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language, Function){	
 	$scope.cv_id = null;	
 	$scope.summary = '';
 	$scope.experiences = [];
@@ -89,12 +89,16 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			$scope.new_language.cv_id = cv.id;
 			
 			// Push function element to to collection.
-			angular.forEach(languages, function(data, key){
-//				var f = new Language(data);
-//				
-//				// Add new element.
-//				$scope.languages.push(language);
+			angular.forEach(functions, function(data, key){
+				var func = new Function(data);
+				
+				// Add new element.
+				$scope.functions.push(func);
 			});
+			
+			// Set new function default cv_id.
+			$scope.new_function.cv_id = cv.id;
+			
 		}).error(function(data, status){
 			
 		});
@@ -452,5 +456,27 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		$scope.show_frm_lang = false;
 	}
 	
-	
+	/***
+	 * Create a new function.
+	 */
+	$scope.createNewFunc = function(data){
+		var new_func = new Function(data);
+		
+		new_func.createNew().success(function(data){
+			
+			console.log(data);
+			// load new func.
+			new_func.setValue(data);
+			
+			// Add a new element.
+			$scope.functions.push(new_func);
+			
+			// Clear new skill scope properties.
+			$scope.new_function = {};	
+			$scope.new_function.cv_id = $scope.cv_id;
+			
+		}).error(function(data, status){
+			alert(data.error.message);
+		});
+	}
 });
