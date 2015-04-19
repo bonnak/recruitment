@@ -479,4 +479,36 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			alert(data.error.message);
 		});
 	}
+	
+	/***
+	 * Delete expectation function.
+	 */
+	$scope.deleteFunc = function(func){
+		func.delete().success(function(){
+			// Remove education item from the list.
+			$scope.functions.splice($scope.functions.indexOf(func), 1);	
+		}).error(function(data,status){
+			alert(data.error.message);
+		});
+	}
+	
+	/***
+	 * Open edit function form.
+	 */
+	$scope.openFuncForm = function(){
+		$scope.show_frm_function = true;
+	}
+	
+	/***
+	 * Close edit function form.
+	 */
+	$scope.closeFuncForm = function(){		
+		// Clear new function scope properties.
+		$scope.new_function = {};	
+		$scope.new_function.cv_id = $scope.cv_id;
+		
+		// Hide form.
+		$scope.show_frm_function = false;
+	}
+		
 });

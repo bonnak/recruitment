@@ -399,7 +399,7 @@ class CandidateController extends BaseController
 	public function editCVExperience($cv_id, $id)
 	{		
 		if($can_experience = \CandidateExperience::where('id', '=', $id)
-								->whereAnd('cv_id', '=', $cv_id)
+								->where('cv_id', '=', $cv_id)
 								->first())
 		{			
 			$job_title = htmlentities(\Input::get('job_title'));
@@ -436,7 +436,7 @@ class CandidateController extends BaseController
 	{
 		// Check if record exist.
 		if(!$can_experience = \CandidateExperience::where('id', '=', $id)
-							->whereAnd('cv_id', '=', $cv_id)
+							->where('cv_id', '=', $cv_id)
 							->first())
 		{
 			\App::abort('403', 'There\'s some wrong. Cannot delete CV.');
@@ -482,7 +482,7 @@ class CandidateController extends BaseController
 	public function editCVEdu($cv_id, $id)
 	{
 		if($can_edu = \CandidateEducation::where('id', '=', $id)
-								->whereAnd('cv_id', '=', $cv_id)
+								->where('cv_id', '=', $cv_id)
 								->first())
 		{
 			try
@@ -522,7 +522,7 @@ class CandidateController extends BaseController
 	{				
 		// Check if record exist.
 		if(!$can_edu = \CandidateEducation::where('id', '=', $id)
-							->whereAnd('cv_id', '=', $cv_id)
+							->where('cv_id', '=', $cv_id)
 							->first())
 		{
 			\App::abort('403', 'There\'s some wrong. Cannot delete this education.');
@@ -566,7 +566,7 @@ class CandidateController extends BaseController
 	{
 		// Check if record exist.
 		if(!$can_skill = \CandidateSkill::where('id', '=', $id)
-						->whereAnd('cv_id', '=', $cv_id)
+						->where('cv_id', '=', $cv_id)
 						->first())
 		{
 			\App::abort('403', 'There\'s some wrong. Cannot delete this skill.');
@@ -585,7 +585,7 @@ class CandidateController extends BaseController
 			switch ($skill['status']) {
 				case 3: // Delete skill
 					$can_skill = \CandidateSkill::where('id', '=', $skill['id'])
-												->whereAnd('cv_id', '=', $cv_id)
+												->where('cv_id', '=', $cv_id)
 												->first();
 
 					if($can_skill) $can_skill->delete();
@@ -650,7 +650,7 @@ class CandidateController extends BaseController
 	{
 		// Check if record exist.
 		if(!$can_language = \CandidateLanguage::where('id', '=', $id)
-											->whereAnd('cv_id', '=', $cv_id)
+											->where('cv_id', '=', $cv_id)
 											->first())
 		{
 			\App::abort('403', 'There\'s some wrong. Cannot delete this languague.');
@@ -681,7 +681,7 @@ class CandidateController extends BaseController
 
 				case 2: // Update languages
 					$can_lang = \CandidateLanguage::where('id', '=', $lang['id'])
-												->whereAnd('cv_id', '=', $cv_id)
+												->where('cv_id', '=', $cv_id)
 												->first();
 					if($can_lang){
 						$can_lang->language = $lang['name'];
@@ -697,7 +697,7 @@ class CandidateController extends BaseController
 
 				case 3: // Delete language
 					$can_lang = \CandidateLanguage::where('id', '=', $lang['id'])
-												->whereAnd('cv_id', '=', $cv_id)
+												->where('cv_id', '=', $cv_id)
 												->first();
 
 					if($can_lang) $can_lang->delete();
@@ -748,5 +748,35 @@ class CandidateController extends BaseController
 		
 		// Return the new saved-language detail.
 		return $can_func->getExpFunction();
+	}
+	
+	
+	/***
+	 * Delete candidate expectation function.
+	 */
+	public function deleteFunction($cv_id, $function_id)
+	{
+		try 
+		{
+			// Find expectation function base on cv_id and function_id.
+			$can_func = \CandidateExpFunction::where('cv_id', '=', $cv_id)
+											->where('function_id', '=', $function_id);
+			
+			// Check if deleting function fail.
+			if(!$can_func->delete())
+			{
+				App::abort(403, 'This function doesn\'t exist or may already deleted.');
+			}
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
 	}
 }
