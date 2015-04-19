@@ -327,7 +327,7 @@ app_candidate.factory('Experience', function($http){
 	};
 	
 	/***
-	 * Send request to server to delete a new language.
+	 * Restore original function.
 	 */
 	Function.prototype.restore = function(){
 		this.function_id = this.draft.function_id;
@@ -354,4 +354,62 @@ app_candidate.factory('Experience', function($http){
 	};
 	
 	return Function;
+})
+
+.factory('Industry', function($http){
+	
+	var Industry = function(data){
+		this.setValue(data);
+	};
+	
+	/***
+	 * Set proterties value function of object.
+	 */
+	Industry.prototype.setValue = function(data){
+		this.cv_id = data.cv_id !== undefined ? data.cv_id : '';
+		this.industry_id = data.industry_id !== undefined ? data.industry_id : '';
+		this.industry_name = data.industry_name !== undefined ? data.industry_name : '';
+		
+		this.draft = {
+			industry_id		: this.industry_id,
+			industry_name	: this.industry_name
+		};
+	};
+	
+	/***
+	 * Save draft to backup data.
+	 */
+	Industry.prototype.saveDraft = function(){
+		this.draft.industry_id = this.industry_id;
+		this.draft.industry_name = this.industry_name;
+	};
+	
+	/***
+	 * Restore original industry.
+	 */
+	Industry.prototype.restore = function(){
+		this.industry_id = this.draft.industry_id;
+		this.industry_name = this.draft.industry_name;
+	};
+	
+	/***
+	 * Send request to server to delete a new industry.
+	 */
+	Industry.prototype.createNew = function(){
+		return $http.post(
+				'/user/candidate/cv/edit/' + this.cv_id +'/industry',
+			this
+		);
+	};
+	
+	/***
+	 * Send request to server to delete a industry.
+	 */
+	Industry.prototype.delete = function(){
+		return $http.delete(
+				'/user/candidate/cv/edit/' + this.cv_id + '/industry/' + this.industry_id
+		);
+	};
+	
+	return Industry;
 });

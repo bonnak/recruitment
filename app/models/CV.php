@@ -62,10 +62,10 @@ class CV extends Eloquent
 		// Load expectation functions.
 		$exp_functions = \CandidateExpFunction::getExpFunctions($this->id);
 		
-		$exp_industries = \DB::table('can_exp_industries as ci')->select(DB::raw(
-								"*, 
-								(SELECT name FROM constant_industries WHERE id = ci.industry_id LIMIT 1) industry"
-						))->where('cv_id', '=', $this->id)->get();
+		// Load expectation industries.
+		$exp_industries = \CandidateExpIndustry::getExpIndustries($this->id);
+		
+		
 		$exp_salaries = \DB::table('can_exp_salaries as cs')->select(DB::raw(
 								"*,
 								 CASE WHEN min is null THEN 'Below' ELSE min END min_salary, 

@@ -1,4 +1,4 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language, Function){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language, Function, Industry){	
 	$scope.cv_id = null;	
 	$scope.summary = '';
 	$scope.experiences = [];
@@ -11,6 +11,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.new_language = {};
 	$scope.functions = [];
 	$scope.new_function = {};
+	$scope.industries = [];
+	$scope.new_industry = {};
 	$scope.draft = {};
 	
 	/***
@@ -37,7 +39,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 				educations = cv.education,
 				skills = cv.skills,
 				languages = cv.languages,
-				functions = cv.expectation.functions;
+				functions = cv.expectation.functions,
+				industries = cv.expectation.industries;
 			
 			// Load summary into data scope.
 			$scope.summary = cv.summary !== null ? cv.summary : '';
@@ -88,7 +91,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			// Set new language default cv_id.
 			$scope.new_language.cv_id = cv.id;
 			
-			// Push function element to to collection.
+			// Push function element to collection.
 			angular.forEach(functions, function(data, key){
 				var func = new Function(data);
 				
@@ -98,6 +101,17 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Set new function default cv_id.
 			$scope.new_function.cv_id = cv.id;
+			
+			// Push industry element to the collection.
+			angular.forEach(industries, function(data, key){
+				var industry = new Industry(data);
+				
+				// Add new element.
+				$scope.industries.push(industry);
+			});
+			
+			// Set new industry default cv_id.
+			$scope.new_industry.cv_id = cv.id;
 			
 		}).error(function(data, status){
 			
@@ -463,8 +477,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		var new_func = new Function(data);
 		
 		new_func.createNew().success(function(data){
-			
-			console.log(data);
 			// load new func.
 			new_func.setValue(data);
 			
@@ -510,5 +522,57 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		// Hide form.
 		$scope.show_frm_function = false;
 	}
+	
+	/***
+	 * Create a new industry.
+	 */
+	$scope.createNewIndustry = function(data){
+		var new_industry = new Industry(data);
 		
+		new_industry.createNew().success(function(data){
+			// load new func.
+			new_industry.setValue(data);
+			
+			// Add a new element.
+			$scope.industries.push(new_industry);
+			
+			// Clear new skill scope properties.
+			$scope.new_industry = {};	
+			$scope.new_industry.cv_id = $scope.cv_id;
+			
+		}).error(function(data, status){
+			alert(data.error.message);
+		});
+	}
+	
+	/***
+	 * Delete expectation function.
+	 */
+	$scope.deleteIndustry = function(industry){
+		industry.delete().success(function(){
+			// Remove education item from the list.
+			$scope.industries.splice($scope.industries.indexOf(industry), 1);	
+		}).error(function(data,status){
+			alert(data.error.message);
+		});
+	}
+	
+	/***
+	 * Open edit industry form.
+	 */
+	$scope.openIndustryForm = function(){
+		$scope.show_frm_industry = true;
+	}
+	
+	/***
+	 * Close edit industry form.
+	 */
+	$scope.closeIndustryForm = function(){		
+		// Clear new function scope properties.
+		$scope.new_industry = {};	
+		$scope.new_industry.cv_id = $scope.cv_id;
+		
+		// Hide form.
+		$scope.show_frm_industry = false;
+	}
 });

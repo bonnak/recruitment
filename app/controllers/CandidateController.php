@@ -746,11 +746,9 @@ class CandidateController extends BaseController
 			}
 		}
 		
-		// Return the new saved-language detail.
 		return $can_func->getExpFunction();
 	}
-	
-	
+		
 	/***
 	 * Delete candidate expectation function.
 	 */
@@ -778,5 +776,68 @@ class CandidateController extends BaseController
 			}
 		}
 		
+	}
+	
+	/***
+	 * Add new expectation industry.
+	 */
+	public function createIndustry($cv_id)
+	{
+		// Initialize a new industry object
+		$can_industry = new \CandidateExpIndustry;
+		
+		try 
+		{
+			// Assign the new expectation industry properties' values.
+			$can_industry->cv_id = $cv_id;
+			$can_industry->industry_id = \Input::get('industry_id');
+			
+			// Insert into the database.
+			$can_industry->save();
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				case 23000:
+					App::abort(403, 'This industry already added.');
+					break;
+					
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+		return $can_industry->getExpIndustry();
+	}
+	
+	/***
+	 * Delete candidate expectation function.
+	*/
+	public function deleteIndustry($cv_id, $industry_id)
+	{
+		try
+		{
+			// Find expectation industry base on cv_id and industry_id.
+			$can_industry = \CandidateExpIndustry::where('cv_id', '=', $cv_id)
+												->where('industry_id', '=', $industry_id);
+				
+			// Check if deleting industry fail.
+			if(!$can_industry->delete())
+			{
+				App::abort(403, 'This industry doesn\'t exist or may already deleted.');
+			}
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+	
 	}
 }

@@ -10,7 +10,8 @@
 }
 #cv-edit #back-card #skills #skills-collection,
 #cv-edit #back-card #languages #lang-collection,
-#cv-edit #expectation-card #function #func-collection{
+#cv-edit #expectation-card #function #func-collection,
+#cv-edit #expectation-card #industry #func-collection{
   background-color: #FFF;
   padding: 12px;
   border: 1px solid #ccc;
@@ -26,7 +27,8 @@
 }
 #cv-edit #back-card #skills .form-edit .item,
 #cv-edit #back-card #languages .form-edit .item,
-#cv-edit #expectation-card #function .form-edit .item{
+#cv-edit #expectation-card #function .form-edit .item,
+#cv-edit #expectation-card #industry .form-edit .item{
 	float: left;
 	margin-right: 7px;
 	margin-bottom: 5px;
@@ -62,7 +64,8 @@
 	text-decoration: none; 
 	text-shadow: 0 1px 1px rgba(0,0,0,.2);
 }
-#cv-edit #expectation-card #function #input-function
+#cv-edit #expectation-card #function #input-function,
+#cv-edit #expectation-card #industry #input-industry
 {
 	width: 443px;
 }

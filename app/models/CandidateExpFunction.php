@@ -11,11 +11,12 @@ class CandidateExpFunction extends Eloquent
 	{
 		// Get this table name.
 		$tbl_this = with(new static)->getTable();
+		$tbl_func = (new \Func)->getTable();
 		
 		return CandidateExpFunction::select(DB::raw(
 										"cv_id,
 										function_id,
-										(SELECT name FROM constant_functions WHERE id = {$tbl_this}.function_id LIMIT 1) function_name
+										(SELECT name FROM {$tbl_func} WHERE id = {$tbl_this}.function_id LIMIT 1) function_name
 										"
 									))
 									->where('cv_id', '=', $cv_id)

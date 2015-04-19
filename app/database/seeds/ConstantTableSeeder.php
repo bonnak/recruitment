@@ -95,7 +95,7 @@ class ConstantTableSeeder extends Seeder {
 			['name' => 'Insurance'],
 			['name' => 'Energy / Oil / Gasoline'],
 			['name' => 'Entertainment'],
-			['name' => 'Food &amp; Beverages'],
+			['name' => 'Food & Beverages'],
 			['name' => 'Freight / Shipping / Delivery'],
 			['name' => 'General Business Services'],
 			['name' => 'Hospital / Pharmacy'],

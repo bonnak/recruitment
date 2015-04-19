@@ -465,21 +465,42 @@
 						</form>
 					</div>
 				</div>
-				<div class="items">
+				<div id="industry">
 					<h3 class="part">Industries</h3>
-					<div>
+					<div class="content-show" ng-hide="show_frm_industry">
 						<div class="items clearfix">
-							@foreach($candidate->cv->expectation->industries as $industry)
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$industry->industry}}</span>
+							<div class="item pull-left" ng-repeat="industry in industries">
+								<span class="cv-info">{% $last === false ? industry.industry_name + ',&nbsp;&nbsp;&nbsp;' : industry.industry_name %}</span>
 							</div>
-							@endforeach
+						</div>					
+						<div class="card-btn-group">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openIndustryForm()"></a>
 						</div>
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<div class="form-edit" ng-show="show_frm_industry">
+						<form  class="form-inline">
+							<div class="item-add-new">
+							    <h4>What function would you expect?</h4>
+							   	<select class="form-control" id="input-industry" ng-model="new_industry.industry_id">
+							   		<option value="">---Industry---</option>
+									@foreach(\Industry::getIndustries() as $industry)
+									<option value="{{$industry->id}}">{{$industry->name}}</option>
+									@endforeach
+							   	</select>
+							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewIndustry(new_industry)">Add</button>
+							    <button type="button" class="btn btn-danger btn-close" ng-click="closeIndustryForm()">Close</button>
+							 </div>
+							 <div id="func-collection" class="clearfix">	
+								<div class="item round-box-wrapper" ng-repeat="industry in industries">
+									<div class="span-content">
+										<span>{% industry.industry_name %}</span>
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteIndustry(industry)"></a>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
-				</div>
+				</div>	
 				<div class="items">
 					<h3 class="part">Locations</h3>
 					<div>
