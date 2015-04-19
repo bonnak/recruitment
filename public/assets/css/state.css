@@ -1,0 +1,6 @@
+#cv-edit #profile-card .card-btn-group a:hover,
+#cv-edit #back-card .card-btn-group a:hover,
+#cv-edit #expectation-card .card-btn-group a:hover,
+#cv-edit #ref-card .card-btn-group a:hover{
+	text-shadow: 1px 1px 4px rgba(0,0,0,.2)
+}

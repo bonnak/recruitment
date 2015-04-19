@@ -428,8 +428,8 @@
 		</div>
 		<div id="expectation-card" ng-cloak>
 			<span class="card-article">Expectation</span>
-			<div>
-				<div id="function">
+			<div id="function">
+				<div>
 					<h3 class="part">Functions</h3>
 					<div class="content-show" ng-hide="show_frm_function">						
 						<div class="items clearfix">
@@ -465,7 +465,9 @@
 						</form>
 					</div>
 				</div>
-				<div id="industry">
+			</div>
+			<div id="industry">
+				<div>
 					<h3 class="part">Industries</h3>
 					<div class="content-show" ng-hide="show_frm_industry">
 						<div class="items clearfix">
@@ -480,7 +482,7 @@
 					<div class="form-edit" ng-show="show_frm_industry">
 						<form  class="form-inline">
 							<div class="item-add-new">
-							    <h4>What function would you expect?</h4>
+							    <h4>What industry would you expect?</h4>
 							   	<select class="form-control" id="input-industry" ng-model="new_industry.industry_id">
 							   		<option value="">---Industry---</option>
 									@foreach(\Industry::getIndustries() as $industry)
@@ -500,51 +502,51 @@
 							</div>
 						</form>
 					</div>
-				</div>	
-				<div class="items">
-					<h3 class="part">Locations</h3>
-					<div>
-						<div class="items clearfix">
-							@foreach($candidate->cv->expectation->locations as $location)
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$location->location}}</span>
-							</div>
-							@endforeach
+				</div>
+			</div>	
+			<div class="items">
+				<h3 class="part">Locations</h3>
+				<div>
+					<div class="items clearfix">
+						@foreach($candidate->cv->expectation->locations as $location)
+						<div class="item round-box-wrapper">
+							<span class="cv-info">{{$location->location}}</span>
 						</div>
-					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+						@endforeach
 					</div>
 				</div>
-				<div class="items">
-					<h3 class="part">Salary</h3>
-					<div>
-						<div class="items clearfix">
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$candidate->cv->expectation->salary->min_salary}} - {{$candidate->cv->expectation->salary->max_salary}}</span>
-							</div>
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				</div>
+			</div>
+			<div class="items">
+				<h3 class="part">Salary</h3>
+				<div>
+					<div class="items clearfix">
+						<div class="item round-box-wrapper">
+							<span class="cv-info">{{$candidate->cv->expectation->salary->min_salary}} - {{$candidate->cv->expectation->salary->max_salary}}</span>
 						</div>
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
-					</div>
 				</div>
-				<div class="items">
-					<h3 class="part">Terms</h3>
-					<div>
-						<div class="items clearfix">
-							@foreach($candidate->cv->expectation->job_terms as $job_term)
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$job_term->term}}</span>
-							</div>
-							@endforeach
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				</div>
+			</div>
+			<div class="items">
+				<h3 class="part">Terms</h3>
+				<div>
+					<div class="items clearfix">
+						@foreach($candidate->cv->expectation->job_terms as $job_term)
+						<div class="item round-box-wrapper">
+							<span class="cv-info">{{$job_term->term}}</span>
 						</div>
-					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+						@endforeach
 					</div>
 				</div>
-			</div>		
+				<div class="card-btn-group">
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+				</div>
+			</div>	
 		</div>
 		<div id="ref-card">
 			<div class="items">
