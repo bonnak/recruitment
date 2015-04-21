@@ -506,19 +506,43 @@
 					</div>
 				</div>
 			</div>	
-			<div class="items">
-				<h3 class="part">Locations</h3>
+			<div id="location">
 				<div>
-					<div class="items clearfix">
-						@foreach($candidate->cv->expectation->locations as $location)
-						<div class="item round-box-wrapper">
-							<span class="cv-info">{{$location->location}}</span>
+					<h3 class="part">Locations</h3>
+					<div class="content-show" ng-hide="show_frm_location">
+						<div class="items clearfix">
+							<div class="item pull-left" ng-repeat="location in locations">
+								<span class="cv-info">{% $last === false ? location.location_name + ',&nbsp;&nbsp;&nbsp;' : location.location_name %}</span>
+							</div>
+						</div>		
+						<a href="" id="btn-show-formnew" ng-click="openLocationForm()" ng-hide="locations.length"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<div class="card-btn-group" ng-show="locations.length">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openLocationForm()"></a>
 						</div>
-						@endforeach
 					</div>
-				</div>
-				<div class="card-btn-group">
-					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<div class="form-edit" ng-show="show_frm_location">
+						<form  class="form-inline">
+							<div class="item-add-new">
+							    <h4>What location would you expect?</h4>
+							   	<select class="form-control" id="input-location" ng-model="new_location.location_id">
+							   		<option value="">---Location---</option>
+									@foreach(\Location::getProvinces_Cities() as $location)
+									<option value="{{$location->id}}">{{$location->name}}</option>
+									@endforeach
+							   	</select>
+							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewLocation(new_location)">Add</button>
+							    <button type="button" class="btn btn-danger btn-close" ng-click="closeLocationForm()">Close</button>
+							 </div>
+							 <div id="collection" class="clearfix" ng-show="locations.length">	
+								<div class="item round-box-wrapper" ng-repeat="location in locations">
+									<div class="span-content">
+										<span>{% location.location_name %}</span>
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteLocation(location)"></a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 			<div class="items">

@@ -363,7 +363,7 @@ app_candidate.factory('Experience', function($http){
 	};
 	
 	/***
-	 * Set proterties value function of object.
+	 * Set proterties value industry of object.
 	 */
 	Industry.prototype.setValue = function(data){
 		this.cv_id = data.cv_id !== undefined ? data.cv_id : '';
@@ -412,4 +412,62 @@ app_candidate.factory('Experience', function($http){
 	};
 	
 	return Industry;
+})
+
+.factory('Location', function($http){
+	
+	var Location = function(data){
+		this.setValue(data);
+	};
+	
+	/***
+	 * Set proterties value location of object.
+	 */
+	Location.prototype.setValue = function(data){
+		this.cv_id = data.cv_id !== undefined ? data.cv_id : '';
+		this.location_id = data.location_id !== undefined ? data.location_id : '';
+		this.location_name = data.location_name !== undefined ? data.location_name : '';
+		
+		this.draft = {
+			location_id		: this.location_id,
+			location_name	: this.location_name
+		};
+	};
+	
+	/***
+	 * Save draft to backup data.
+	 */
+	Location.prototype.saveDraft = function(){
+		this.draft.location_id = this.location_id;
+		this.draft.location_name = this.location_name;
+	};
+	
+	/***
+	 * Restore original location.
+	 */
+	Location.prototype.restore = function(){
+		this.location_id = this.draft.location_id;
+		this.location_name = this.draft.location_name;
+	};
+	
+	/***
+	 * Send request to server to delete a new location.
+	 */
+	Location.prototype.createNew = function(){
+		return $http.post(
+				'/user/candidate/cv/edit/' + this.cv_id +'/location',
+			this
+		);
+	};
+	
+	/***
+	 * Send request to server to delete a location.
+	 */
+	Location.prototype.delete = function(){
+		return $http.delete(
+				'/user/candidate/cv/edit/' + this.cv_id + '/location/' + this.location_id
+		);
+	};
+	
+	return Location;
 });

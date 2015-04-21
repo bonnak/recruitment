@@ -840,4 +840,67 @@ class CandidateController extends BaseController
 		}
 	
 	}
+	
+	/***
+	 * Add new expectation location.
+	 */
+	public function createLocation($cv_id)
+	{
+		// Initialize a new location object
+		$can_location = new \CandidateExpLocation;
+		
+		try
+		{
+			// Assign the new expectation location properties' values.
+			$can_location->cv_id = $cv_id;
+			$can_location->location_id = \Input::get('location_id');
+				
+			// Insert into the database.
+			$can_location->save();
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				case 23000:
+					App::abort(403, 'This location already added.');
+					break;
+						
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+		return $can_location->getExpLocation();
+	}
+	
+	/***
+	 * Delete candidate expectation location.
+	*/
+	public function deleteLocation($cv_id, $location_id)
+	{
+		try
+		{
+			// Find expectation location base on cv_id and location_id.
+			$can_location = \CandidateExpLocation::where('cv_id', '=', $cv_id)
+												->where('location_id', '=', $location_id);
+	
+			// Check if deleting location fail.
+			if(!$can_location->delete())
+			{
+				App::abort(403, 'This location doesn\'t exist or may already deleted.');
+			}
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+	
+	}
 }

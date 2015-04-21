@@ -1,4 +1,4 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language, Function, Industry){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language, Function, Industry, Location){	
 	$scope.cv_id = null;	
 	$scope.summary = '';
 	$scope.experiences = [];
@@ -13,6 +13,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.new_function = {};
 	$scope.industries = [];
 	$scope.new_industry = {};
+	$scope.locations = [];
+	$scope.new_location = {};
 	$scope.draft = {};
 	
 	/***
@@ -40,7 +42,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 				skills = cv.skills,
 				languages = cv.languages,
 				functions = cv.expectation.functions,
-				industries = cv.expectation.industries;
+				industries = cv.expectation.industries,
+				locations = cv.expectation.locations;
 			
 			// Load summary into data scope.
 			$scope.summary = cv.summary !== null ? cv.summary : '';
@@ -112,6 +115,17 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Set new industry default cv_id.
 			$scope.new_industry.cv_id = cv.id;
+			
+			// Push location element to the collection.
+			angular.forEach(locations, function(data, key){
+				var location = new Location(data);
+				
+				// Add new element.
+				$scope.locations.push(location);
+			});
+			
+			// Set new location default cv_id.
+			$scope.new_location.cv_id = cv.id;
 			
 		}).error(function(data, status){
 			
@@ -405,7 +419,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	 */
 	$scope.deleteSkill = function(skill){
 		skill.delete().success(function(){
-			// Remove education item from the list.
+			// Remove skill item from the list.
 			$scope.skills.splice($scope.skills.indexOf(skill), 1);
 		}).error(function(data, status){
 			
@@ -451,7 +465,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	 */
 	$scope.deleteLang = function(language){
 		language.delete().success(function(){
-			// Remove education item from the list.
+			// Remove language item from the list.
 			$scope.languages.splice($scope.languages.indexOf(language), 1);			
 		}).error(function(data, status){
 			
@@ -497,7 +511,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	 */
 	$scope.deleteFunc = function(func){
 		func.delete().success(function(){
-			// Remove education item from the list.
+			// Remove function item from the list.
 			$scope.functions.splice($scope.functions.indexOf(func), 1);	
 		}).error(function(data,status){
 			alert(data.error.message);
@@ -550,7 +564,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	 */
 	$scope.deleteIndustry = function(industry){
 		industry.delete().success(function(){
-			// Remove education item from the list.
+			// Remove location item from the list.
 			$scope.industries.splice($scope.industries.indexOf(industry), 1);	
 		}).error(function(data,status){
 			alert(data.error.message);
@@ -574,5 +588,58 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		
 		// Hide form.
 		$scope.show_frm_industry = false;
+	}
+	
+	/***
+	 * Create a new location.
+	 */
+	$scope.createNewLocation = function(data){
+		var new_location= new Location(data);
+		
+		new_location.createNew().success(function(data){
+			// load new location.
+			new_location.setValue(data);
+			
+			// Add a new element.
+			$scope.locations.push(new_location);
+			
+			// Clear new skill scope properties.
+			$scope.new_location = {};	
+			$scope.new_location.cv_id = $scope.cv_id;
+			
+		}).error(function(data, status){
+			alert(data.error.message);
+		});
+	}
+	
+	/***
+	 * Delete expectation location.
+	 */
+	$scope.deleteLocation = function(location){
+		location.delete().success(function(){
+			// Remove location item from the list.
+			$scope.locations.splice($scope.locations.indexOf(location), 1);	
+		}).error(function(data,status){
+			alert(data.error.message);
+		});
+	}
+	
+	/***
+	 * Open edit location form.
+	 */
+	$scope.openLocationForm = function(){
+		$scope.show_frm_location = true;
+	}
+	
+	/***
+	 * Close edit location form.
+	 */
+	$scope.closeLocationForm = function(){		
+		// Clear new function scope properties.
+		$scope.new_location = {};	
+		$scope.new_location.cv_id = $scope.cv_id;
+		
+		// Hide form.
+		$scope.show_frm_location = false;
 	}
 });
