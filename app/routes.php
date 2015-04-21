@@ -16,7 +16,9 @@ Route::get('register', ['as' => 'user.register', 'uses' => 'AuthenticationContro
 Route::get('login', ['as' => 'user.login', 'uses' => 'AuthenticationController@getUserLogin']);
 Route::group(['before' => 'auth'], function (){
 	
-	// Candidate
+	/***********************************
+	 * Candidate
+	 */
 	Route::get('/user/candidate', ['as' => 'candidate', 'uses' => 'CandidateController@index']);
 	Route::get('/user/candidate/profile', ['as' => 'candidate.cv.profile', 'uses' => 'CandidateController@getProfile']);
 	Route::post('/user/candidate/profile', ['as' => 'candidate.cv.profile.post', 'uses' => 'CandidateController@postProfile']);
@@ -25,27 +27,41 @@ Route::group(['before' => 'auth'], function (){
 	Route::post('/user/candidate/cv/create', ['as' => 'candidate.cv.create.post', 'uses' => 'CandidateController@postCVCreate']);
 	Route::get('/user/candidate/cv/edit/{id}', ['as' => 'candidate.cv.create.edit', 'uses' => 'CandidateController@getCVEdit']);
 	
+	// Route CV edit summary.
 	Route::put('/user/candidate/cv/edit/{id}/summary', ['as' => 'candidate.cv.edit.summary.put', 'uses' => 'CandidateController@editCVSummary']);
 	
+	// Route CV edit experience.
 	Route::post('/user/candidate/cv/edit/{cv_id}/experience', ['as' => 'candidate.cv.edit.experience.post', 'uses' => 'CandidateController@createCVExperience']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/experience/{id}', ['as' => 'candidate.cv.edit.experience.put', 'uses' => 'CandidateController@editCVExperience']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/experience/{id}', ['as' => 'candidate.cv.edit.experience.delete', 'uses' => 'CandidateController@deleteCVExperience']);
 	
+	// Route CV edit education.
 	Route::post('/user/candidate/cv/edit/{cv_id}/edu', ['as' => 'candidate.cv.edit.edu.post', 'uses' => 'CandidateController@createCVEdu']);
 	Route::put('/user/candidate/cv/edit/{cv_id}/edu/{id}', ['as' => 'candidate.cv.edit.edu.put', 'uses' => 'CandidateController@editCVEdu']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/edu/{id}', ['as' => 'candidate.cv.edit.edu.delete', 'uses' => 'CandidateController@deleteCVEdu']);
 	
+	// Route CV edit skill.
 	Route::post('/user/candidate/cv/edit/{cv_id}/skill', ['as' => 'candidate.cv.edit.skill.post', 'uses' => 'CandidateController@createCVSkill']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/skill/{id}', ['as' => 'candidate.cv.edit.skill.delete', 'uses' => 'CandidateController@deleteCVSkill']);
 	
+	// Route CV edit language.
 	Route::post('/user/candidate/cv/edit/{cv_id}/lang', ['as' => 'candidate.cv.edit.lang.post', 'uses' => 'CandidateController@createCVLang']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/lang/{id}', ['as' => 'candidate.cv.edit.lang.delete', 'uses' => 'CandidateController@deleteCVLang']);
 	
+	// Route CV edit function.
 	Route::post('/user/candidate/cv/edit/{cv_id}/function', ['as' => 'candidate.cv.edit.function.post', 'uses' => 'CandidateController@createFunction']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/function/{func_id}', ['as' => 'candidate.cv.edit.function.delete', 'uses' => 'CandidateController@deleteFunction']);
 	
+	// Route CV edit industry.
 	Route::post('/user/candidate/cv/edit/{cv_id}/industry', ['as' => 'candidate.cv.edit.industry.post', 'uses' => 'CandidateController@createIndustry']);	
-	Route::delete('/user/candidate/cv/edit/{cv_id}/industry/{industry_id}', ['as' => 'candidate.cv.edit.industry.post', 'uses' => 'CandidateController@deleteIndustry']);	
+	Route::delete('/user/candidate/cv/edit/{cv_id}/industry/{industry_id}', ['as' => 'candidate.cv.edit.industry.delete', 'uses' => 'CandidateController@deleteIndustry']);	
+	
+	// Route CV edit location.
+	Route::post('/user/candidate/cv/edit/{cv_id}/location', ['as' => 'candidate.cv.edit.location.post', 'uses' => 'CandidateController@createLocation']);
+	Route::delete('/user/candidate/cv/edit/{cv_id}/location/{location_id}', ['as' => 'candidate.cv.edit.location.delete', 'uses' => 'CandidateController@deleteLocation']);
+	
+	/**************************************************
+	 **************************************************/
 	
 	// Employer
 	Route::get('/user/employer', ['as' => 'employer', 'uses' => 'EmployerController@index']);
