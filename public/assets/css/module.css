@@ -40,13 +40,15 @@
 #cv-edit #experience #btn-show-formnew i,
 #cv-edit #edu #btn-show-formnew i,
 #cv-edit #back-card #skills #btn-show-formnew i,
-#cv-edit #back-card #languages #btn-show-formnew i{
+#cv-edit #back-card #languages #btn-show-formnew i,
+#cv-edit #expectation-card #function #btn-show-formnew i,
+#cv-edit #expectation-card #industry #btn-show-formnew i{
  margin-right: 5px;
 }
 #cv-edit #back-card #skills #skills-collection,
 #cv-edit #back-card #languages #lang-collection,
-#cv-edit #expectation-card #function #func-collection,
-#cv-edit #expectation-card #industry #func-collection{
+#cv-edit #expectation-card #function #collection,
+#cv-edit #expectation-card #industry #collection{
   background-color: #FFF;
   padding: 12px;
   border: 1px solid #ccc;

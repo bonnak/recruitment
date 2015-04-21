@@ -436,8 +436,9 @@
 							<div class="item pull-left" ng-repeat="function in functions">
 								<span class="cv-info">{% $last === false ? function.function_name + ',&nbsp;&nbsp;&nbsp;' : function.function_name %}</span>
 							</div>
-						</div>					
-						<div class="card-btn-group">
+						</div>	
+						<a href="" id="btn-show-formnew" ng-click="openFuncForm()" ng-hide="functions.length"><i class="fa fa-plus-circle"></i>Add new</a>						
+						<div class="card-btn-group" ng-show="functions.length">
 							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openFuncForm()"></a>
 						</div>
 					</div>
@@ -454,7 +455,7 @@
 							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewFunc(new_function)">Add</button>
 							    <button type="button" class="btn btn-danger btn-close" ng-click="closeFuncForm()">Close</button>
 							 </div>
-							 <div id="func-collection" class="clearfix">	
+							 <div id="collection" class="clearfix" ng-show="functions.length">	
 								<div class="item round-box-wrapper" ng-repeat="function in functions">
 									<div class="span-content">
 										<span>{% function.function_name %}</span>
@@ -474,8 +475,9 @@
 							<div class="item pull-left" ng-repeat="industry in industries">
 								<span class="cv-info">{% $last === false ? industry.industry_name + ',&nbsp;&nbsp;&nbsp;' : industry.industry_name %}</span>
 							</div>
-						</div>					
-						<div class="card-btn-group">
+						</div>		
+						<a href="" id="btn-show-formnew" ng-click="openIndustryForm()" ng-hide="industries.length"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<div class="card-btn-group" ng-show="industries.length">
 							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openIndustryForm()"></a>
 						</div>
 					</div>
@@ -492,7 +494,7 @@
 							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewIndustry(new_industry)">Add</button>
 							    <button type="button" class="btn btn-danger btn-close" ng-click="closeIndustryForm()">Close</button>
 							 </div>
-							 <div id="func-collection" class="clearfix">	
+							 <div id="collection" class="clearfix" ng-show="industries.length">	
 								<div class="item round-box-wrapper" ng-repeat="industry in industries">
 									<div class="span-content">
 										<span>{% industry.industry_name %}</span>
