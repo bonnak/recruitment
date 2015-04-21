@@ -102,10 +102,11 @@ class CreateCandidateRelatedTables extends Migration {
 		});
 		
 		Schema::create('can_exp_locations', function ($table){
-			$table->bigIncrements('id');
 			$table->bigInteger('cv_id');
 			$table->integer('location_id');
 			$table->timestamps();
+			
+			$table->primary(['cv_id', 'location_id']);
 		});
 		
 		Schema::create('can_cover_letters', function ($table){
