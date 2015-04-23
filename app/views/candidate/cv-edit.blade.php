@@ -346,7 +346,7 @@
 			</div>
 			<div id="skills">
 				<div>
-					<h3 class="part">Skills</h3>
+					<h3 class="part">Skill</h3>
 					<div class="content-show" ng-hide="show_frm_skill">
 						<div class="items clearfix">
 							<div class="item" ng-repeat="skill in skills">
@@ -386,7 +386,7 @@
 				</div>			
 			</div>
 			<div id="languages">
-				<h3 class="part">Languages</h3>
+				<h3 class="part">Language</h3>
 				<div class="content-show" ng-hide="show_frm_lang">
 					<div class="items">
 						<div class="item" ng-repeat="language in languages">
@@ -430,7 +430,7 @@
 			<span class="card-article">Expectation</span>
 			<div id="function">
 				<div>
-					<h3 class="part">Functions</h3>
+					<h3 class="part">Function</h3>
 					<div class="content-show" ng-hide="show_frm_function">						
 						<div class="items clearfix">
 							<div class="item pull-left" ng-repeat="function in functions">
@@ -469,7 +469,7 @@
 			</div>
 			<div id="industry">
 				<div>
-					<h3 class="part">Industries</h3>
+					<h3 class="part">Industry</h3>
 					<div class="content-show" ng-hide="show_frm_industry">
 						<div class="items clearfix">
 							<div class="item pull-left" ng-repeat="industry in industries">
@@ -508,7 +508,7 @@
 			</div>	
 			<div id="location">
 				<div>
-					<h3 class="part">Locations</h3>
+					<h3 class="part">Location</h3>
 					<div class="content-show" ng-hide="show_frm_location">
 						<div class="items clearfix">
 							<div class="item pull-left" ng-repeat="location in locations">
@@ -545,21 +545,28 @@
 					</div>
 				</div>
 			</div>
-			<div class="items">
-				<h3 class="part">Salary</h3>
+			<div id="salary">
 				<div>
-					<div class="items clearfix">
-						<div class="item round-box-wrapper">
-							<span class="cv-info">{{$candidate->cv->expectation->salary->min_salary}} - {{$candidate->cv->expectation->salary->max_salary}}</span>
+					<h3 class="part">Salary</h3>
+					<div class="content-show clearfix" ng-hide="show_frm_salary">
+						<span>{% salary_range %}</span>
+						<a href="" id="btn-show-formnew" ng-click="openSalaryForm()" ng-show="salary_range == ''"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<div class="card-btn-group" ng-show="salary_range != ''">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openSalaryForm()"></a>
 						</div>
 					</div>
-				</div>
-				<div class="card-btn-group">
-					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<div class="form-edit" ng-show="show_frm_salary">
+						<form  class="form-inline">
+							<h4>What salary would you expect?</h4>
+							<input type="text" class="form-control" id="input-salary" ng-model="salary_range">
+						    <button type="button" class="btn btn-primary btn-save" ng-click="saveSalary()">Save</button>
+						    <button type="button" class="btn btn-danger btn-close" ng-click="cancelSalary()">Cancel</button>
+						</form>
+					</div>
 				</div>
 			</div>
 			<div class="items">
-				<h3 class="part">Terms</h3>
+				<h3 class="part">Term</h3>
 				<div>
 					<div class="items clearfix">
 						@foreach($candidate->cv->expectation->job_terms as $job_term)

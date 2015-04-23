@@ -6,6 +6,7 @@
 #cv-edit #expectation-card #function,
 #cv-edit #expectation-card #industry,
 #cv-edit #expectation-card #location,
+#cv-edit #expectation-card #salary,
 #cv-edit #ref-card .items{
 	position: relative;
 }
@@ -44,7 +45,8 @@
 #cv-edit #back-card #languages #btn-show-formnew i,
 #cv-edit #expectation-card #function #btn-show-formnew i,
 #cv-edit #expectation-card #industry #btn-show-formnew i,
-#cv-edit #expectation-card #location #btn-show-formnew i{
+#cv-edit #expectation-card #location #btn-show-formnew i,
+#cv-edit #expectation-card #salary #btn-show-formnew i{
  margin-right: 5px;
 }
 #cv-edit #back-card #skills #skills-collection,

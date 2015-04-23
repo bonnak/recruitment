@@ -26,6 +26,7 @@ class CV extends Eloquent
 					title,
 					searchable,
 					summary,
+					salary_range,
 					reference,
 					available_datetime"
 				))
@@ -65,13 +66,6 @@ class CV extends Eloquent
 		// Load expectation industries.
 		$exp_industries = \CandidateExpIndustry::getExpIndustries($this->id);
 		
-		
-		$exp_salaries = \DB::table('can_exp_salaries as cs')->select(DB::raw(
-								"*,
-								 CASE WHEN min is null THEN 'Below' ELSE min END min_salary, 
-								 CASE WHEN max is null THEN 'Up' ELSE max END max_salary"
-						))->where('cv_id', '=', $this->id)->first();
-		
 		// Load expectation location.
 		$exp_locations = \CandidateExpLocation::getExpLocations($this->id);
 		
@@ -84,7 +78,6 @@ class CV extends Eloquent
 		return [
 			'functions'		=> json_decode(json_encode($exp_functions), true),
 			'industries'	=> json_decode(json_encode($exp_industries), true),
-			'salary'		=> json_decode(json_encode($exp_salaries), true),
 			'locations'		=> json_decode(json_encode($exp_locations), true),
 			'job_terms'		=> json_decode(json_encode($exp_job_terms), true)
 		];

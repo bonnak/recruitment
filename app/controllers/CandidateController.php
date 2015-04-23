@@ -877,7 +877,7 @@ class CandidateController extends BaseController
 	
 	/***
 	 * Delete candidate expectation location.
-	*/
+	 */
 	public function deleteLocation($cv_id, $location_id)
 	{
 		try
@@ -902,5 +902,25 @@ class CandidateController extends BaseController
 			}
 		}
 	
+	}
+
+	/***
+	 * Edit candidate expected salary.
+     */
+	public function editSalary($cv_id)
+	{
+		if($cv = \CV::find($cv_id))
+		{
+			$salary_range = \Input::get('salary_range');		
+			
+			$cv->salary_range = !empty($salary_range) ? $salary_range : null;
+			$cv->save();	
+		}
+		else 
+		{
+			\App::abort('403', 'Cannot update expected salary.');
+		}
+
+		return ['salary_range' => \Input::get('salary_range')];
 	}
 }

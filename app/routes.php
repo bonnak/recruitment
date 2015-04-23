@@ -18,7 +18,7 @@ Route::group(['before' => 'auth'], function (){
 	
 	/***********************************
 	 * Candidate
-	 */
+	 ***********************************/
 	Route::get('/user/candidate', ['as' => 'candidate', 'uses' => 'CandidateController@index']);
 	Route::get('/user/candidate/profile', ['as' => 'candidate.cv.profile', 'uses' => 'CandidateController@getProfile']);
 	Route::post('/user/candidate/profile', ['as' => 'candidate.cv.profile.post', 'uses' => 'CandidateController@postProfile']);
@@ -58,17 +58,22 @@ Route::group(['before' => 'auth'], function (){
 	
 	// Route CV edit location.
 	Route::post('/user/candidate/cv/edit/{cv_id}/location', ['as' => 'candidate.cv.edit.location.post', 'uses' => 'CandidateController@createLocation']);
-	Route::delete('/user/candidate/cv/edit/{cv_id}/location/{location_id}', ['as' => 'candidate.cv.edit.location.delete', 'uses' => 'CandidateController@deleteLocation']);
+	Route::delete('/user/candidate/cv/edit/{cv_id}/location/{location_id}', ['as' => 'candidate.cv.edit.location.delete', 'uses' => 'CandidateController@deleteLocation']);	
 	
+	// Route CV edit salary.
+	Route::put('/user/candidate/cv/edit/{cv_id}/salary', ['as' => 'candidate.cv.edit.salary.put', 'uses' => 'CandidateController@editSalary']);
 	/**************************************************
 	 **************************************************/
 	
-	// Employer
+	/***********************************
+	 * Employer
+	 ***********************************/	
 	Route::get('/user/employer', ['as' => 'employer', 'uses' => 'EmployerController@index']);
 	Route::get('/user/employer/{emp_id}/job/list', ['as' => 'employer.job-list', 'uses' => 'EmployerController@getJobList']);
 	Route::get('/user/employer/{emp_id}/job/post', ['as' => 'employer.job-post', 'uses' => 'EmployerController@getJobPost']);
-	Route::post('/user/employer/{emp_id}/job/post', ['as' => 'employer.job-post.post', 'uses' => 'EmployerController@postJobPost']);
-	
+	Route::post('/user/employer/{emp_id}/job/post', ['as' => 'employer.job-post.post', 'uses' => 'EmployerController@postJobPost']);	
+	/**************************************************
+	 **************************************************/
 	
 	// Logout
 	Route::get('logout', ['as' => 'user.logout', 'uses' => 'AuthenticationController@getUserlogout']);

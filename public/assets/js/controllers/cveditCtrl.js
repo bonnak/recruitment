@@ -1,6 +1,7 @@
 app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language, Function, Industry, Location){	
 	$scope.cv_id = null;	
 	$scope.summary = '';
+	$scope.salary_range = '';
 	$scope.experiences = [];
 	$scope.new_experience = {};	
 	$scope.educations = [];
@@ -48,6 +49,12 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			// Load summary into data scope.
 			$scope.summary = cv.summary !== null ? cv.summary : '';
 			$scope.draft.summary = angular.copy($scope.summary);
+
+			// Load salary range.
+			$scope.salary_range = cv.salary_range !== null ? cv.salary_range : '';;
+			$scope.draft.salary_range = angular.copy($scope.salary_range);
+
+			console.log(cv.salary_range);
 			
 			// Push experience element to the experiences collection scope.
 			angular.forEach(experiences, function(data, key) {
@@ -159,6 +166,42 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		
 		// Hide form.
 		$scope.show_frm_summary = false;
+	}
+
+	/***
+	 * Update CV salary range.
+	 */
+	$scope.saveSalary = function(){
+		$http.put(
+			'/user/candidate/cv/edit/' + $scope.cv_id + '/salary',
+			{'salary_range' : $scope.salary_range}
+		).success(function(data){		
+			// Update salary in draft.
+			$scope.draft.salary_range = angular.copy($scope.salary_range);
+			
+			// Hide edit form.
+			$scope.show_frm_salary = false;
+		}).error(function(data, status){
+			
+		});
+	}
+	
+	/***
+	 * Cancel update salary model.
+	 */
+	$scope.cancelSalary = function(){		
+		// restore the old salary value.
+		$scope.salary_range = angular.copy($scope.draft.salary_range);
+		
+		// Hide form.
+		$scope.show_frm_salary = false;
+	}
+
+	/***
+	 * Open expected salary edit form.
+	 */
+	$scope.openSalaryForm = function(){
+		$scope.show_frm_salary = true;
 	}
 	
 	/***

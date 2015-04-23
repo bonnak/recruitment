@@ -5,7 +5,8 @@
 #cv-edit #back-card #languages:hover .card-btn-group,
 #cv-edit #expectation-card #function:hover .card-btn-group,
 #cv-edit #expectation-card #industry:hover .card-btn-group,
-#cv-edit #expectation-card #location:hover .card-btn-group{
+#cv-edit #expectation-card #location:hover .card-btn-group,
+#cv-edit #expectation-card #salary:hover .card-btn-group{
 	display: block;
 }
 #cv-edit #profile-card .card-btn-group a:hover,

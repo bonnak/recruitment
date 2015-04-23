@@ -20,6 +20,7 @@ class CreateCandidateRelatedTables extends Migration {
 			$table->tinyInteger('searchable')->default(1);
 			$table->longText('reference')->nullable();
 			$table->longText('summary')->nullable();
+			$table->string('salary_range')->nullable();
 			$table->datetime('available_datetime')->nullable();
 			$table->timestamps();
 		});
@@ -86,14 +87,6 @@ class CreateCandidateRelatedTables extends Migration {
 			$table->primary(['cv_id', 'industry_id']);
 		});
 		
-		Schema::create('can_exp_salaries', function ($table){
-			$table->bigIncrements('id');
-			$table->bigInteger('cv_id');
-			$table->integer('min')->nullable();
-			$table->integer('max')->nullable();
-			$table->timestamps();
-		});
-		
 		Schema::create('can_exp_job_terms', function ($table){
 			$table->bigIncrements('id');
 			$table->bigInteger('cv_id');
@@ -140,7 +133,6 @@ class CreateCandidateRelatedTables extends Migration {
 		Schema::drop('can_languages');
 		Schema::drop('can_exp_functions');
 		Schema::drop('can_exp_industries');
-		Schema::drop('can_exp_salaries');
 		Schema::drop('can_exp_job_terms');
 		Schema::drop('can_exp_locations');
 		Schema::drop('can_cover_letters');
