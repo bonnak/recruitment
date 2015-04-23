@@ -923,4 +923,67 @@ class CandidateController extends BaseController
 
 		return ['salary_range' => \Input::get('salary_range')];
 	}
+	
+	/***
+	 * Add a new expected job term.
+	 */
+	public function createJobTerm($cv_id)
+	{
+		// Initialize a new job term object
+		$can_job_term = new \CandidateExpJobTerm();
+		
+		try
+		{
+			// Assign the new expectation location properties' values.
+			$can_job_term->cv_id = $cv_id;
+			$can_job_term->term_id = \Input::get('term_id');
+		
+			// Insert into the database.
+			$can_job_term->save();
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				case 23000:
+					App::abort(403, 'This job term already added.');
+					break;
+		
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+		return $can_job_term->getExpJobTerm();
+	}
+	
+	/***
+	 * Delete candidate expectation job term.
+	*/
+	public function deleteJobTerm($cv_id, $term_id)
+	{
+		try
+		{
+			// Find expectation job term base on cv_id and term_id.
+			$can_job_term = \CandidateExpJobTerm::where('cv_id', '=', $cv_id)
+												->where('term_id', '=', $term_id);
+	
+			// Check if deleting job term fail.
+			if(!$can_job_term->delete())
+			{
+				App::abort(403, 'This job term doesn\'t exist or may already deleted.');
+			}
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+	
+	}
 }

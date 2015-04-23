@@ -1,4 +1,4 @@
-app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language, Function, Industry, Location){	
+app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experience, Education, Skill, Language, Function, Industry, Location, JobTerm){	
 	$scope.cv_id = null;	
 	$scope.summary = '';
 	$scope.salary_range = '';
@@ -16,6 +16,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.new_industry = {};
 	$scope.locations = [];
 	$scope.new_location = {};
+	$scope.job_terms = [];
+	$scope.new_job_term= {};
 	$scope.draft = {};
 	
 	/***
@@ -44,7 +46,8 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 				languages = cv.languages,
 				functions = cv.expectation.functions,
 				industries = cv.expectation.industries,
-				locations = cv.expectation.locations;
+				locations = cv.expectation.locations,
+				job_terms = cv.expectation.job_terms;
 			
 			// Load summary into data scope.
 			$scope.summary = cv.summary !== null ? cv.summary : '';
@@ -53,8 +56,6 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			// Load salary range.
 			$scope.salary_range = cv.salary_range !== null ? cv.salary_range : '';;
 			$scope.draft.salary_range = angular.copy($scope.salary_range);
-
-			console.log(cv.salary_range);
 			
 			// Push experience element to the experiences collection scope.
 			angular.forEach(experiences, function(data, key) {
@@ -65,8 +66,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			});		
 
 			// Set new experience default cv_id.
-			$scope.new_experience.cv_id = cv.id;	
-			
+			$scope.new_experience.cv_id = cv.id;				
 			
 			// Push education element to the education collection scope.
 			angular.forEach(educations, function(data, key) {
@@ -133,6 +133,17 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Set new location default cv_id.
 			$scope.new_location.cv_id = cv.id;
+			
+			// Push job term element to the collection.
+			angular.forEach(job_terms, function(data, key){
+				var job_term = new JobTerm(data);
+				
+				// Add new element.
+				$scope.job_terms.push(job_term);
+			});
+			
+			// Set new job term default cv_id.
+			$scope.new_job_term.cv_id = cv.id;
 			
 		}).error(function(data, status){
 			
@@ -684,5 +695,58 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		
 		// Hide form.
 		$scope.show_frm_location = false;
+	}
+	
+	/***
+	 * Add a new expected job term.
+	 */
+	$scope.createNewJobTerm = function(data){
+		var new_job_term= new JobTerm(data);
+		
+		new_job_term.createNew().success(function(data){
+			// load new job term.
+			new_job_term.setValue(data);
+			
+			// Add a new element.
+			$scope.job_terms.push(new_job_term);
+			
+			// Clear new skill scope properties.
+			$scope.new_job_term = {};	
+			$scope.new_job_term.cv_id = $scope.cv_id;
+			
+		}).error(function(data, status){
+			alert(data.error.message);
+		});
+	}
+	
+	/***
+	 * Delete a specific job term.
+	 */
+	$scope.deleteJobterm = function(job_term){
+		job_term.delete().success(function(){
+			// Remove job term item from the list.
+			$scope.job_terms.splice($scope.job_terms.indexOf(job_term), 1);	
+		}).error(function(data,status){
+			alert(data.error.message);
+		});
+	}
+	
+	/***
+	 * Open edit job term form.
+	 */
+	$scope.openJobTermForm = function(){
+		$scope.show_frm_job_term = true;
+	}
+	
+	/***
+	 * Close edit job term form.
+	 */
+	$scope.closeJobTermForm = function(){		
+		// Clear new function scope properties.
+		$scope.new_job_term= {};	
+		$scope.new_job_term.cv_id = $scope.cv_id;
+		
+		// Hide form.
+		$scope.show_frm_job_term = false;
 	}
 });

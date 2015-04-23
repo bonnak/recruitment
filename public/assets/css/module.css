@@ -7,6 +7,7 @@
 #cv-edit #expectation-card #industry,
 #cv-edit #expectation-card #location,
 #cv-edit #expectation-card #salary,
+#cv-edit #expectation-card #job_term,
 #cv-edit #ref-card .items{
 	position: relative;
 }
@@ -46,14 +47,16 @@
 #cv-edit #expectation-card #function #btn-show-formnew i,
 #cv-edit #expectation-card #industry #btn-show-formnew i,
 #cv-edit #expectation-card #location #btn-show-formnew i,
-#cv-edit #expectation-card #salary #btn-show-formnew i{
+#cv-edit #expectation-card #salary #btn-show-formnew i,
+#cv-edit #expectation-card #job_term #btn-show-formnew i{
  margin-right: 5px;
 }
 #cv-edit #back-card #skills #skills-collection,
 #cv-edit #back-card #languages #lang-collection,
 #cv-edit #expectation-card #function #collection,
 #cv-edit #expectation-card #industry #collection,
-#cv-edit #expectation-card #location #collection{
+#cv-edit #expectation-card #location #collection,
+#cv-edit #expectation-card #job_term #collection{
   background-color: #FFF;
   padding: 12px;
   border: 1px solid #ccc;
@@ -71,7 +74,8 @@
 #cv-edit #back-card #languages .form-edit .item,
 #cv-edit #expectation-card #function .form-edit .item,
 #cv-edit #expectation-card #industry .form-edit .item,
-#cv-edit #expectation-card #location .form-edit .item{
+#cv-edit #expectation-card #location .form-edit .item,
+#cv-edit #expectation-card #job_term .form-edit .item{
 	float: left;
 	margin-right: 7px;
 	margin-bottom: 5px;
@@ -109,7 +113,7 @@
 }
 #cv-edit #expectation-card #function #input-function,
 #cv-edit #expectation-card #industry #input-industry,
-#cv-edit #expectation-card #location #input-location
-{
+#cv-edit #expectation-card #location #input-location,
+#cv-edit #expectation-card #job_term #input-job-term{
 	width: 443px;
 }

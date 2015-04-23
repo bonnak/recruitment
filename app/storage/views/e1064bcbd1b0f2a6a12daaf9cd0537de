@@ -565,21 +565,45 @@
 					</div>
 				</div>
 			</div>
-			<div class="items">
-				<h3 class="part">Term</h3>
+			<div id="job_term">
 				<div>
-					<div class="items clearfix">
-						<?php foreach($candidate->cv->expectation->job_terms as $job_term): ?>
-						<div class="item round-box-wrapper">
-							<span class="cv-info"><?php echo $job_term->term; ?></span>
+					<h3 class="part">Job Term</h3>
+					<div class="content-show" ng-hide="show_frm_job_term">
+						<div class="items clearfix">
+							<div class="item pull-left" ng-repeat="job_term in job_terms">
+								<span class="cv-info">{% $last === false ? job_term.term + ',&nbsp;&nbsp;&nbsp;' : job_term.term %}</span>
+							</div>
+						</div>		
+						<a href="" id="btn-show-formnew" ng-click="openLocationForm()" ng-hide="job_terms.length"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<div class="card-btn-group" ng-show="job_terms.length">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openJobTermForm()"></a>
 						</div>
-						<?php endforeach; ?>
+					</div>
+					<div class="form-edit" ng-show="show_frm_job_term">
+						<form  class="form-inline">
+							<div class="item-add-new">
+							    <h4>What location would you expect?</h4>
+							   	<select class="form-control" id="input-job-term" ng-model="new_job_term.term_id">
+							   		<option value="">---Job Term---</option>
+									<?php foreach(\JobTerm::getJobTerms() as $job_term): ?>
+									<option value="<?php echo $job_term->id; ?>"><?php echo $job_term->term; ?></option>
+									<?php endforeach; ?>
+							   	</select>
+							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewJobTerm(new_job_term)">Add</button>
+							    <button type="button" class="btn btn-danger btn-close" ng-click="closeJobTermForm()">Close</button>
+							 </div>
+							 <div id="collection" class="clearfix" ng-show="job_terms.length">	
+								<div class="item round-box-wrapper" ng-repeat="job_term in job_terms">
+									<div class="span-content">
+										<span>{% job_term.term %}</span>
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteJobterm(job_term)"></a>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-				<div class="card-btn-group">
-					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
-				</div>
-			</div>	
+			</div>
 		</div>
 		<div id="ref-card">
 			<div class="items">

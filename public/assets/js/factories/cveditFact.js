@@ -470,4 +470,62 @@ app_candidate.factory('Experience', function($http){
 	};
 	
 	return Location;
+})
+
+.factory('JobTerm', function($http){
+	
+	var JobTerm = function(data){
+		this.setValue(data);
+	};
+	
+	/***
+	 * Set proterties value job term of object.
+	 */
+	JobTerm.prototype.setValue = function(data){
+		this.cv_id = data.cv_id !== undefined ? data.cv_id : '';
+		this.term_id = data.term_id !== undefined ? data.term_id : '';
+		this.term = data.term!== undefined ? data.term : '';
+		
+		this.draft = {
+			term_id	: this.term_id,
+			term	: this.term
+		};
+	};
+	
+	/***
+	 * Save draft to backup data.
+	 */
+	JobTerm.prototype.saveDraft = function(){
+		this.draft.term_id 	= this.term_id;
+		this.draft.term 	= this.term;
+	};
+	
+	/***
+	 * Restore original job term.
+	 */
+	JobTerm.prototype.restore = function(){
+		this.term_id = this.draft.term_id;
+		this.term 	 = this.draft.term;
+	};
+	
+	/***
+	 * Send request to server to add a new job term.
+	 */
+	JobTerm.prototype.createNew = function(){
+		return $http.post(
+				'/user/candidate/cv/edit/' + this.cv_id +'/job_term',
+			this
+		);
+	};
+	
+	/***
+	 * Send request to server to delete a job term.
+	 */
+	JobTerm.prototype.delete = function(){
+		return $http.delete(
+				'/user/candidate/cv/edit/' + this.cv_id + '/job_term/' + this.term_id
+		);
+	};
+	
+	return JobTerm;
 });

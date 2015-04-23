@@ -69,11 +69,8 @@ class CV extends Eloquent
 		// Load expectation location.
 		$exp_locations = \CandidateExpLocation::getExpLocations($this->id);
 		
-		
-		$exp_job_terms = \DB::table('can_exp_job_terms as cjt')->select(DB::raw(
-								"*,
-								(SELECT term FROM constant_job_terms WHERE id = cjt.term_id LIMIT 1) term"
-						))->where('cv_id', '=', $this->id)->get();
+		// Load expectation job term.
+		$exp_job_terms = \CandidateExpJobTerm::getExpJobTerms($this->id);
 		
 		return [
 			'functions'		=> json_decode(json_encode($exp_functions), true),
