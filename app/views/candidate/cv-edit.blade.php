@@ -606,7 +606,7 @@
 			</div>
 		</div>
 		<div id="ref-card">
-			<span class="card-article">Reference</span>
+			<span class="card-article">Reference345</span>
 			<div class="items hide">
 				<div class="items">
 					<p>{{$candidate->cv->reference}}</p>			
