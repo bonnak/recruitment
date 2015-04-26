@@ -609,6 +609,7 @@
 			<span class="card-article">Reference345</span>
 			git from nak2bo
 			git from nak2bo 2
+			git from cuoool 
 			<div class="items hide">
 				<div class="items">
 					<p>{{$candidate->cv->reference}}</p>			
