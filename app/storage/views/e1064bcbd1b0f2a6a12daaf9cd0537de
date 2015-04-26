@@ -574,7 +574,7 @@
 								<span class="cv-info">{% $last === false ? job_term.term + ',&nbsp;&nbsp;&nbsp;' : job_term.term %}</span>
 							</div>
 						</div>		
-						<a href="" id="btn-show-formnew" ng-click="openLocationForm()" ng-hide="job_terms.length"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<a href="" id="btn-show-formnew" ng-click="openJobTermForm()" ng-hide="job_terms.length"><i class="fa fa-plus-circle"></i>Add new</a>			
 						<div class="card-btn-group" ng-show="job_terms.length">
 							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openJobTermForm()"></a>
 						</div>
@@ -606,8 +606,8 @@
 			</div>
 		</div>
 		<div id="ref-card">
-			<div class="items">
-				<span class="card-article">Reference</span>
+			<span class="card-article">Reference</span>
+			<div class="items hide">
 				<div class="items">
 					<p><?php echo $candidate->cv->reference; ?></p>			
 				</div>
@@ -615,6 +615,9 @@
 					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
 				</div>
 			</div>
+			<form style="margin-top: 10px;">			  
+			  <textarea id="textarea" placeholder="Enter text ..." style="width: 100%; height: 200px;"></textarea>
+			</form>
 		</div>
 	</div>
 	<div class="right-side-bar pull-left"></div>
@@ -628,6 +631,20 @@
 	<script src="<?php echo asset('assets/js/controllers/cveditCtrl.js'); ?>"></script>
 	<script src="<?php echo asset('assets/js/factories/cveditFact.js'); ?>"></script>
 	<script src="<?php echo asset('assets/js/directives/cveditDir.js'); ?>"></script>
+<!-- 	<script src="<?php echo asset('assets/js/lib/wysihtml5/parser_rules/advanced.js'); ?>"></script> -->
+	<script src="<?php echo asset('assets/js/lib/wysihtml5/wysihtml5-0.3.0_rc2.js'); ?>"></script>
+	  <script src="<?php echo asset('assets/js/lib/wysihtml5/bootstrap-wysihtml5.js'); ?>"></script>
+	  <script>
+	  $('#textarea').wysihtml5({
+		  "stylesheets": ["<?php echo asset('assets/js/lib/wysihtml5/css/wysihtml5.css'); ?>"], // CSS stylesheets to load
+		  "color": true, // enable text color selection
+		  "size": 'sm', // buttons size
+		  "html": true, // enable button to edit HTML
+		  "format-code" : true // enable syntax highlighting
+		});
+	  </script>
+	  <link rel="stylesheet" href="<?php echo asset('assets/js/lib/wysihtml5/css/bootstrap-wysihtml5.css'); ?>">
+	  
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.default', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

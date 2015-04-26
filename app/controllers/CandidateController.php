@@ -936,7 +936,7 @@ class CandidateController extends BaseController
 		{
 			// Assign the new expectation location properties' values.
 			$can_job_term->cv_id = $cv_id;
-			$can_job_term->term_id = \Input::get('term_id');
+			$can_job_term->term_id = null;
 		
 			// Insert into the database.
 			$can_job_term->save();
@@ -946,7 +946,8 @@ class CandidateController extends BaseController
 			switch ($e->getCode())
 			{
 				case 23000:
-					App::abort(403, 'This job term already added.');
+					//App::abort(403, 'This job term already added.');
+					App::abort(403, $e->getMessage());
 					break;
 		
 				default:
