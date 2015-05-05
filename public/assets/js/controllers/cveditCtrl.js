@@ -18,6 +18,7 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 	$scope.new_location = {};
 	$scope.job_terms = [];
 	$scope.new_job_term= {};
+	$scope.reference = '';
 	$scope.draft = {};
 	
 	/***
@@ -144,6 +145,10 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 			
 			// Set new job term default cv_id.
 			$scope.new_job_term.cv_id = cv.id;
+			
+			// Load reference into data scope.
+			$scope.reference = cv.reference !== null ? cv.reference : '';
+			$scope.draft.reference = angular.copy($scope.reference);
 			
 		}).error(function(data, status){
 			
@@ -748,5 +753,34 @@ app_candidate.controller('CvEditCtrl', function($scope, $filter, $http, Experien
 		
 		// Hide form.
 		$scope.show_frm_job_term = false;
+	}
+	
+	/***
+	 * Update CV reference.
+	 */
+	$scope.saveReference = function(){
+		$http.put(
+			'/user/candidate/cv/edit/' + $scope.cv_id + '/reference',
+			{'reference' : $scope.reference}
+		).success(function(data){		
+			// Update reference in draft.
+			$scope.draft.reference = angular.copy($scope.reference);
+			
+			// Hide edit form.
+			$scope.show_frm_reference = false;
+		}).error(function(data, status){
+			
+		});
+	}
+	
+	/***
+	 * Cancel update reference model.
+	 */
+	$scope.cancelReference = function(){		
+		// restore the old reference value.
+		$scope.reference = angular.copy($scope.draft.reference);
+		
+		// Hide form.
+		$scope.show_frm_reference = false;
 	}
 });

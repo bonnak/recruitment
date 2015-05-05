@@ -606,21 +606,24 @@
 			</div>
 		</div>
 		<div id="ref-card">
-			<span class="card-article">Reference345</span>
-			git from nak2bo
-			git from nak2bo 2
-			git from cuoool 
-			<div class="items hide">
+			<span class="card-article">Reference</span> 
+			<div class="content-show" ng-hide="show_frm_reference">
 				<div class="items">
-					<p>{{$candidate->cv->reference}}</p>			
+					<p>{% reference %}</p>			
 				</div>
 				<div class="card-btn-group">
-					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="show_frm_reference = true"></a>
 				</div>
 			</div>
-			<form style="margin-top: 10px;">			  
-			  <textarea id="textarea" placeholder="Enter text ..." style="width: 100%; height: 200px;"></textarea>
-			</form>
+			<div class="form-edit" ng-show="show_frm_reference">
+				<div class="form-group">			  
+				  <textarea id="input-job-ref" ng-model="reference"></textarea>
+				</div>
+				<div class="opt-controls">
+				      <button type="button" class="btn btn-primary btn-save" ng-click="saveReference()">Save</button>
+				      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelReference()">Cancel</button>
+				 </div>
+			</div>
 		</div>
 	</div>
 	<div class="right-side-bar pull-left"></div>
@@ -634,9 +637,10 @@
 	<script src="{{asset('assets/js/controllers/cveditCtrl.js')}}"></script>
 	<script src="{{asset('assets/js/factories/cveditFact.js')}}"></script>
 	<script src="{{asset('assets/js/directives/cveditDir.js')}}"></script>
-<!-- 	<script src="{{asset('assets/js/lib/wysihtml5/parser_rules/advanced.js')}}"></script> -->
+<!--  <script src="{{asset('assets/js/lib/wysihtml5/parser_rules/advanced.js')}}"></script> -->
 	<script src="{{asset('assets/js/lib/wysihtml5/wysihtml5-0.3.0_rc2.js')}}"></script>
-	  <script src="{{asset('assets/js/lib/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
+	  <script src="{{asset('assets/js/lib/wysihtml5/bootstrap-wysihtml5.js')}}"></script>	  
+	  <link rel="stylesheet" href="{{asset('assets/js/lib/wysihtml5/css/bootstrap-wysihtml5.css')}}">
 	  <script>
 	  $('#textarea').wysihtml5({
 		  "stylesheets": ["{{asset('assets/js/lib/wysihtml5/css/wysihtml5.css')}}"], // CSS stylesheets to load
@@ -646,6 +650,5 @@
 		  "format-code" : true // enable syntax highlighting
 		});
 	  </script>
-	  <link rel="stylesheet" href="{{asset('assets/js/lib/wysihtml5/css/bootstrap-wysihtml5.css')}}">
 	  
 @endsection

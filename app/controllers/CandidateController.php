@@ -987,4 +987,36 @@ class CandidateController extends BaseController
 		}
 	
 	}
+	
+	/***
+	 * Edit CV reference.
+	*/
+	public function editCVReference($id)
+	{
+		if($cv = \CV::find($id))
+		{
+			try 
+			{
+				$reference = \Input::get('reference');
+					
+				$cv->reference = !empty($reference) ? $reference : null;
+				$cv->save();
+					
+				return ['reference' => \Input::get('reference')];
+			}
+			catch (\PDOException $e)
+			{
+				switch ($e->getCode())
+				{
+					default:
+						App::abort(403, 'Not authenticated');
+						break;
+				}
+			}
+		}
+		else
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
+		}
+	}
 }

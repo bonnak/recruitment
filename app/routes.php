@@ -66,6 +66,9 @@ Route::group(['before' => 'auth'], function (){
 	// Route CV edit job term.
 	Route::post('/user/candidate/cv/edit/{cv_id}/job_term', ['as' => 'candidate.cv.edit.job_term.post', 'uses' => 'CandidateController@createJobTerm']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/job_term/{job_term_id}', ['as' => 'candidate.cv.edit.job_term.delete', 'uses' => 'CandidateController@deleteJobTerm']);
+	
+	// Route CV edit reference.
+	Route::put('/user/candidate/cv/edit/{id}/reference', ['as' => 'candidate.cv.edit.reference.put', 'uses' => 'CandidateController@editCVReference']);
 	/**************************************************
 	 **************************************************/
 	
