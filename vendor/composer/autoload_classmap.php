@@ -40,6 +40,7 @@ return array(
     'Industry' => $baseDir . '/app/models/Industry.php',
     'IndustryController' => $baseDir . '/app/controllers/IndustryController.php',
     'Job' => $baseDir . '/app/models/Job.php',
+    'JobTerm' => $baseDir . '/app/models/JobTerm.php',
     'Level' => $baseDir . '/app/models/Level.php',
     'Location' => $baseDir . '/app/models/Location.php',
     'MainController' => $baseDir . '/app/controllers/MainController.php',
