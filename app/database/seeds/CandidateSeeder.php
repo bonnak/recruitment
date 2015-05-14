@@ -34,7 +34,6 @@ class CandidateSeeder extends Seeder {
 		DB::table ( 'can_exp_functions' )->truncate ();
 		DB::table ( 'can_exp_industries' )->truncate ();
 		DB::table ( 'can_exp_job_terms' )->truncate ();
-		DB::table ( 'can_exp_salaries' )->truncate ();
 		DB::table ( 'can_exp_locations' )->truncate ();
 		DB::table ( 'can_languages' )->truncate ();
 		DB::table ( 'can_skills' )->truncate ();
@@ -47,6 +46,7 @@ class CandidateSeeder extends Seeder {
 				'searchable' => 1,
 				'reference' => 'Sentence 1 puts forth the main claim: The punishment of criminals has always been a problem for society. Sentence 2 specifies the exact nature of the problem by listing society\'s choices: Citizens have had to decide whether offenders such as first-degree murderers should be killed in a gas chamber, imprisoned for life, or rehabilitated and given a second chance in society. Sentence 3 further develops the topic by stating one point of view: Many citizens argue that serious criminals should be executed. The reasons for this point of view are then provided in sentence 4: They believe that killing criminals will set an example for others and also rid society of a cumbersome burden.',
 				'summary' => 'Professional with 20+ years of experience in IT and Education industry.',
+				'salary_range' => '200 - Up',
 				'available_datetime' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ) 
 		] );
 		
@@ -102,37 +102,6 @@ class CandidateSeeder extends Seeder {
 				[ 
 						'cv_id' => $cv->id,
 						'term_id' => 1,
-						'created_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ),
-						'updated_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ) 
-				] 
-		] );
-		
-		DB::table ( 'can_exp_salaries' )->insert ( [ 
-				[ 
-						'cv_id' => $cv->id,
-						'min' => 200,
-						'max' => null,
-						'created_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ),
-						'updated_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ) 
-				],
-				[ 
-						'cv_id' => $cv->id,
-						'min' => null,
-						'max' => 100,
-						'created_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ),
-						'updated_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ) 
-				],
-				[ 
-						'cv_id' => $cv->id,
-						'min' => 300,
-						'max' => 2000,
-						'created_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ),
-						'updated_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ) 
-				],
-				[ 
-						'cv_id' => $cv->id,
-						'min' => 1000,
-						'max' => 3000,
 						'created_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ),
 						'updated_at' => date ( 'Y-m-d', strtotime ( '12/20/2014' ) ) 
 				] 

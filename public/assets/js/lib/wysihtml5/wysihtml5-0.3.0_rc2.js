@@ -7666,11 +7666,11 @@ wysihtml5.Commands = Base.extend(
   
   wysihtml5.commands.underline = {
     exec: function(composer, command) {
-      return wysihtml5.commands.formatInline.exec(composer, command, "span", CLASS_NAME, REG_EXP);
+      return wysihtml5.commands.formatInline.exec(composer, command, "u", CLASS_NAME, REG_EXP);
     },
 
     state: function(composer, command) {
-      return wysihtml5.commands.formatInline.state(composer, command, "span", CLASS_NAME, REG_EXP);
+      return wysihtml5.commands.formatInline.state(composer, command, "u", CLASS_NAME, REG_EXP);
     },
 
     value: function() {

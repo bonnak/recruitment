@@ -334,12 +334,14 @@ class CandidateController extends BaseController
 		}
 	}
 	
+	/***
+	 * Edit CV summary.
+	 */
 	public function editCVSummary($id)
-	{
-		
+	{		
 		if($cv = \CV::find($id))
 		{
-			$summary = htmlentities(\Input::get('summary'));		
+			$summary = \Input::get('summary');		
 			
 			$cv->summary = !empty($summary) ? $summary : null;
 			$cv->save();
@@ -353,6 +355,9 @@ class CandidateController extends BaseController
 				
 	}
 
+	/***
+	 * Add a new candidate experience.
+	 */
 	public function createCVExperience($cv_id)
 	{
 		// Initialize a new experience model object.
@@ -388,10 +393,13 @@ class CandidateController extends BaseController
 		return $can_experience;
 	}
 	
+	/***
+	 * Update a candidate experience.
+	 */
 	public function editCVExperience($cv_id, $id)
 	{		
 		if($can_experience = \CandidateExperience::where('id', '=', $id)
-								->whereAnd('cv_id', '=', $cv_id)
+								->where('cv_id', '=', $cv_id)
 								->first())
 		{			
 			$job_title = htmlentities(\Input::get('job_title'));
@@ -421,11 +429,14 @@ class CandidateController extends BaseController
 		}
 	}
 	
+	/***
+	 * Delete a candidate experience.
+	 */
 	public function deleteCVExperience($cv_id, $id)
 	{
 		// Check if record exist.
 		if(!$can_experience = \CandidateExperience::where('id', '=', $id)
-							->whereAnd('cv_id', '=', $cv_id)
+							->where('cv_id', '=', $cv_id)
 							->first())
 		{
 			\App::abort('403', 'There\'s some wrong. Cannot delete CV.');
@@ -435,37 +446,134 @@ class CandidateController extends BaseController
 		$can_experience->delete();
 	}
 	
+	/***
+	 * Add a new candidate education background.
+	 */
+	public function createCVEdu($cv_id)
+	{
+		$can_edu = new \CandidateEducation;
+		
+		$institute = \Input::get('institute');
+		$major = \Input::get('major');
+		$degree_id = \Input::get('degree_id');
+		$situation_id = \Input::get('situation_id');
+		$from_year = \Input::get('from_year');
+		$grad_year = \Input::get('grad_year');
+		
+		$can_edu->cv_id = $cv_id;
+		$can_edu->institute = !empty($institute) ? $institute : null;
+		$can_edu->major 	= !empty($major) ? $major : null;
+		$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
+		$can_edu->situation_id = !empty($situation_id) ? $situation_id : null;
+		$can_edu->from_year = !empty($from_year) ? $from_year : null;
+		$can_edu->grad_year = !empty($grad_year) ? $grad_year : null;
+		
+		if(!$can_edu->save())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot create this new education.');
+		}
+		
+		return $can_edu->getEducation();
+	}
+	
+	/***
+	 * Update a candidate education background.
+	 */
 	public function editCVEdu($cv_id, $id)
 	{
 		if($can_edu = \CandidateEducation::where('id', '=', $id)
-								->whereAnd('cv_id', '=', $cv_id)
+								->where('cv_id', '=', $cv_id)
 								->first())
 		{
-			$institute = htmlentities(\Input::get('institute'));
-			$major = htmlentities(\Input::get('major'));
-			$degree_id = htmlentities(\Input::get('degree_id'));
-			$from_year = htmlentities(\Input::get('from-year'));
-			$grad_year = htmlentities(\Input::get('grad-year'));
+			try
+			{
+				$institute = \Input::get('institute');
+				$major = \Input::get('major');
+				$degree_id = \Input::get('degree_id');
+				$situation_id = \Input::get('situation_id');
+				$from_year = \Input::get('from_year');
+				$grad_year = \Input::get('grad_year');				
 				
-			$can_edu->institute = !empty($institute) ? $institute : null;
-			$can_edu->major 	= !empty($major) ? $major : null;
-			$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
-			$can_edu->from_year = !empty($from_year) ? $from_year : null;
-			$can_edu->grad_year = !empty($grad_year) ? $grad_year : null;
-			$can_edu->save();
+				$can_edu->institute = !empty($institute) ? $institute : null;
+				$can_edu->major 	= !empty($major) ? $major : null;
+				$can_edu->degree_id = !empty($degree_id) ? $degree_id : null;
+				$can_edu->situation_id = !empty($situation_id) ? $situation_id : null;
+				$can_edu->from_year = !empty($from_year) ? $from_year : null;
+				$can_edu->grad_year = !empty($grad_year) ? $grad_year : null;
+				$can_edu->save();
+			}
+			catch (\PDOException $e)
+			{
+				App::abort(403, 'Not authenticated');
+			}
 		
-			return [
-				'institute'			=> $institute,
-				'major'				=> $major,
-				'degree'			=> \Degree::select('description')->where('id', '=', $degree_id)->first()->description,
-				'from_year'			=> $from_year,
-				'grad_year'			=> $grad_year,
-			];
+			return $can_edu->getEducation();
 		}
 		else
 		{
-			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
+			\App::abort('403', 'There\'s some wrong. Cannot update this education.');
 		}
+	}
+	
+	/***
+	 * Delete a candidate education background.
+	 */
+	public function deleteCVEdu($cv_id, $id)
+	{				
+		// Check if record exist.
+		if(!$can_edu = \CandidateEducation::where('id', '=', $id)
+							->where('cv_id', '=', $cv_id)
+							->first())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot delete this education.');
+		}
+		
+		// Delete record.
+		$can_edu->delete();
+	}
+	
+	/***
+	 * Create new CV skill.
+	*/
+	public function createCVSkill($cv_id)
+	{
+		$can_skill = new \CandidateSkill;
+	
+		$name 				= \Input::get('name');
+		$level_id 			= \Input::get('level_id');
+		$year_experience 	= \Input::get('year_experience');
+		
+		try
+		{
+			$can_skill->cv_id 			= $cv_id;
+			$can_skill->name 			= !empty($name) ? $name : null;
+			$can_skill->level_id 		= !empty($level_id) ? $level_id : null;
+			$can_skill->year_experience = !empty($year_experience) ? $year_experience : null;			
+			$can_skill->save();
+		}
+		catch (\PDOException $e)
+		{
+			App::abort(403, 'Not authenticated');
+		}
+		
+		return $can_skill->getSkill();
+	}
+	
+	/***
+	 * Delete CV skill.
+	 */
+	public function deleteCVSkill($cv_id, $id)
+	{
+		// Check if record exist.
+		if(!$can_skill = \CandidateSkill::where('id', '=', $id)
+						->where('cv_id', '=', $cv_id)
+						->first())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot delete this skill.');
+		}
+		
+		// Delete record.
+		$can_skill->delete();
 	}
 	
 	public function editCVSkill($cv_id)
@@ -477,7 +585,7 @@ class CandidateController extends BaseController
 			switch ($skill['status']) {
 				case 3: // Delete skill
 					$can_skill = \CandidateSkill::where('id', '=', $skill['id'])
-												->whereAnd('cv_id', '=', $cv_id)
+												->where('cv_id', '=', $cv_id)
 												->first();
 
 					if($can_skill) $can_skill->delete();
@@ -503,6 +611,54 @@ class CandidateController extends BaseController
 		
 		return $can_skills;
 	}
+	
+	/***
+	 * Create new CV language.
+	 */
+	public function createCVLang($cv_id)
+	{
+		// Initialize a new language object.
+		$can_language = new \CandidateLanguage;
+		
+		// Get input values.
+		$language	= \Input::get('language');
+		$proficiency_id	= \Input::get('proficiency_id');
+		
+		try
+		{			
+			// Assign the new language properties' value.
+			$can_language->cv_id 			= $cv_id;
+			$can_language->language			= !empty($language) ? $language : null;
+			$can_language->proficiency_id	= !empty($proficiency_id) ? $proficiency_id : null;
+			
+			// Insert into the database.
+			$can_language->save();
+		}
+		catch (\PDOException $e)
+		{
+			App::abort(403, 'Not authenticated');
+		}
+		
+		// Return the new saved-language detail.
+		return $can_language->getLanguage();
+	}
+	
+	/***
+	 * Delete language.
+	 */
+	public function deleteCVLang($cv_id, $id)
+	{
+		// Check if record exist.
+		if(!$can_language = \CandidateLanguage::where('id', '=', $id)
+											->where('cv_id', '=', $cv_id)
+											->first())
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot delete this languague.');
+		}
+		
+		// Delete record.
+		$can_language->delete();
+	}
 
 	public function editCVLang($cv_id)
 	{
@@ -525,7 +681,7 @@ class CandidateController extends BaseController
 
 				case 2: // Update languages
 					$can_lang = \CandidateLanguage::where('id', '=', $lang['id'])
-												->whereAnd('cv_id', '=', $cv_id)
+												->where('cv_id', '=', $cv_id)
 												->first();
 					if($can_lang){
 						$can_lang->language = $lang['name'];
@@ -541,7 +697,7 @@ class CandidateController extends BaseController
 
 				case 3: // Delete language
 					$can_lang = \CandidateLanguage::where('id', '=', $lang['id'])
-												->whereAnd('cv_id', '=', $cv_id)
+												->where('cv_id', '=', $cv_id)
 												->first();
 
 					if($can_lang) $can_lang->delete();
@@ -554,5 +710,313 @@ class CandidateController extends BaseController
 		$can_langs = \CandidateLanguage::getLanguages($cv_id);
 		
 		return $can_langs;
+	}
+	
+	/***
+	 * Add new candidate function.
+	 */
+	public function createFunction($cv_id)
+	{
+		// Initialize a new function object.
+		$can_func = new \CandidateExpFunction;
+		
+		// Get input values.
+		$function_id	= \Input::get('function_id');
+		
+		try
+		{
+			// Assign the new language properties' value.
+			$can_func->cv_id 		= $cv_id;
+			$can_func->function_id	= $function_id;
+				
+			// Insert into the database.
+			$can_func->save();
+		}
+		catch (\PDOException $e)
+		{		
+			switch ($e->getCode())
+			{
+				case 23000:
+					App::abort(403, 'This function already added.');
+					break;
+					
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+		return $can_func->getExpFunction();
+	}
+		
+	/***
+	 * Delete candidate expectation function.
+	 */
+	public function deleteFunction($cv_id, $function_id)
+	{
+		try 
+		{
+			// Find expectation function base on cv_id and function_id.
+			$can_func = \CandidateExpFunction::where('cv_id', '=', $cv_id)
+											->where('function_id', '=', $function_id);
+			
+			// Check if deleting function fail.
+			if(!$can_func->delete())
+			{
+				App::abort(403, 'This function doesn\'t exist or may already deleted.');
+			}
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+	}
+	
+	/***
+	 * Add new expectation industry.
+	 */
+	public function createIndustry($cv_id)
+	{
+		// Initialize a new industry object
+		$can_industry = new \CandidateExpIndustry;
+		
+		try 
+		{
+			// Assign the new expectation industry properties' values.
+			$can_industry->cv_id = $cv_id;
+			$can_industry->industry_id = \Input::get('industry_id');
+			
+			// Insert into the database.
+			$can_industry->save();
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				case 23000:
+					App::abort(403, 'This industry already added.');
+					break;
+					
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+		return $can_industry->getExpIndustry();
+	}
+	
+	/***
+	 * Delete candidate expectation function.
+	*/
+	public function deleteIndustry($cv_id, $industry_id)
+	{
+		try
+		{
+			// Find expectation industry base on cv_id and industry_id.
+			$can_industry = \CandidateExpIndustry::where('cv_id', '=', $cv_id)
+												->where('industry_id', '=', $industry_id);
+				
+			// Check if deleting industry fail.
+			if(!$can_industry->delete())
+			{
+				App::abort(403, 'This industry doesn\'t exist or may already deleted.');
+			}
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+	
+	}
+	
+	/***
+	 * Add new expectation location.
+	 */
+	public function createLocation($cv_id)
+	{
+		// Initialize a new location object
+		$can_location = new \CandidateExpLocation;
+		
+		try
+		{
+			// Assign the new expectation location properties' values.
+			$can_location->cv_id = $cv_id;
+			$can_location->location_id = \Input::get('location_id');
+				
+			// Insert into the database.
+			$can_location->save();
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				case 23000:
+					App::abort(403, 'This location already added.');
+					break;
+						
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+		return $can_location->getExpLocation();
+	}
+	
+	/***
+	 * Delete candidate expectation location.
+	 */
+	public function deleteLocation($cv_id, $location_id)
+	{
+		try
+		{
+			// Find expectation location base on cv_id and location_id.
+			$can_location = \CandidateExpLocation::where('cv_id', '=', $cv_id)
+												->where('location_id', '=', $location_id);
+	
+			// Check if deleting location fail.
+			if(!$can_location->delete())
+			{
+				App::abort(403, 'This location doesn\'t exist or may already deleted.');
+			}
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+	
+	}
+
+	/***
+	 * Edit candidate expected salary.
+     */
+	public function editSalary($cv_id)
+	{
+		if($cv = \CV::find($cv_id))
+		{
+			$salary_range = \Input::get('salary_range');		
+			
+			$cv->salary_range = !empty($salary_range) ? $salary_range : null;
+			$cv->save();	
+		}
+		else 
+		{
+			\App::abort('403', 'Cannot update expected salary.');
+		}
+
+		return ['salary_range' => \Input::get('salary_range')];
+	}
+	
+	/***
+	 * Add a new expected job term.
+	 */
+	public function createJobTerm($cv_id)
+	{
+		// Initialize a new job term object
+		$can_job_term = new \CandidateExpJobTerm();
+		
+		try
+		{
+			// Assign the new expectation location properties' values.
+			$can_job_term->cv_id = $cv_id;
+			$can_job_term->term_id = null;
+		
+			// Insert into the database.
+			$can_job_term->save();
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				case 23000:
+					//App::abort(403, 'This job term already added.');
+					App::abort(403, $e->getMessage());
+					break;
+		
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+		
+		return $can_job_term->getExpJobTerm();
+	}
+	
+	/***
+	 * Delete candidate expectation job term.
+	*/
+	public function deleteJobTerm($cv_id, $term_id)
+	{
+		try
+		{
+			// Find expectation job term base on cv_id and term_id.
+			$can_job_term = \CandidateExpJobTerm::where('cv_id', '=', $cv_id)
+												->where('term_id', '=', $term_id);
+	
+			// Check if deleting job term fail.
+			if(!$can_job_term->delete())
+			{
+				App::abort(403, 'This job term doesn\'t exist or may already deleted.');
+			}
+		}
+		catch (\PDOException $e)
+		{
+			switch ($e->getCode())
+			{
+				default:
+					App::abort(403, 'Not authenticated');
+					break;
+			}
+		}
+	
+	}
+	
+	/***
+	 * Edit CV reference.
+	*/
+	public function editCVReference($id)
+	{
+		if($cv = \CV::find($id))
+		{
+			try 
+			{
+				$reference = \Input::get('reference');
+					
+				$cv->reference = !empty($reference) ? $reference : null;
+				$cv->save();
+					
+				return ['reference' => \Input::get('reference')];
+			}
+			catch (\PDOException $e)
+			{
+				switch ($e->getCode())
+				{
+					default:
+						App::abort(403, 'Not authenticated');
+						break;
+				}
+			}
+		}
+		else
+		{
+			\App::abort('403', 'There\'s some wrong. Cannot update CV.');
+		}
 	}
 }

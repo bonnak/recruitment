@@ -20,6 +20,7 @@ class CreateCandidateRelatedTables extends Migration {
 			$table->tinyInteger('searchable')->default(1);
 			$table->longText('reference')->nullable();
 			$table->longText('summary')->nullable();
+			$table->string('salary_range')->nullable();
 			$table->datetime('available_datetime')->nullable();
 			$table->timestamps();
 		});
@@ -71,39 +72,35 @@ class CreateCandidateRelatedTables extends Migration {
 		});
 		
 		Schema::create('can_exp_functions', function ($table){
-			$table->bigIncrements('id');
 			$table->bigInteger('cv_id');
 			$table->integer('function_id');
 			$table->timestamps();
+			
+			$table->primary(['cv_id', 'function_id']);
 		});
 		
 		Schema::create('can_exp_industries', function ($table){
-			$table->bigIncrements('id');
 			$table->bigInteger('cv_id');
 			$table->integer('industry_id');
 			$table->timestamps();
-		});
-		
-		Schema::create('can_exp_salaries', function ($table){
-			$table->bigIncrements('id');
-			$table->bigInteger('cv_id');
-			$table->integer('min')->nullable();
-			$table->integer('max')->nullable();
-			$table->timestamps();
+			
+			$table->primary(['cv_id', 'industry_id']);
 		});
 		
 		Schema::create('can_exp_job_terms', function ($table){
-			$table->bigIncrements('id');
 			$table->bigInteger('cv_id');
 			$table->integer('term_id');
 			$table->timestamps();
+			
+			$table->primary(['cv_id', 'term_id']);
 		});
 		
 		Schema::create('can_exp_locations', function ($table){
-			$table->bigIncrements('id');
 			$table->bigInteger('cv_id');
 			$table->integer('location_id');
 			$table->timestamps();
+			
+			$table->primary(['cv_id', 'location_id']);
 		});
 		
 		Schema::create('can_cover_letters', function ($table){
@@ -137,7 +134,6 @@ class CreateCandidateRelatedTables extends Migration {
 		Schema::drop('can_languages');
 		Schema::drop('can_exp_functions');
 		Schema::drop('can_exp_industries');
-		Schema::drop('can_exp_salaries');
 		Schema::drop('can_exp_job_terms');
 		Schema::drop('can_exp_locations');
 		Schema::drop('can_cover_letters');

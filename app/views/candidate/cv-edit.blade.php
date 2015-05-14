@@ -5,7 +5,7 @@
 	</div>
 	<div id="cv-edit" class="middle-wrapper pull-left" 
 		ng-controller="CvEditCtrl" 
-		ng-init="cv_id = '{{$candidate->cv->id}}'; loadData({{$candidate->cv->id}})"
+		ng-init="loadData({{$candidate->cv->id}})"
 	>
 		<div id="profile-card">
 			<div class="row">
@@ -49,21 +49,19 @@
 			<div id="summary">			
 				<h3 class="part">Summary</h3>
 				<div class="content-show clearfix" ng-hide="show_frm_summary">
-					<p>{%summary%}</p>
+					<p  ng-bind-html="summary_html"></p>
 					<div class="card-btn-group">
 						<a href="javascript:onclick" id="btn-edit-summary" class="glyphicon glyphicon-pencil" ng-click="show_frm_summary = true"></a>
 					</div>
 				</div>
 				<div class="form-edit" ng-show="show_frm_summary">
-					{{\Form::open(['route' => ['candidate.cv.edit.summary.put', $candidate->cv->id],  'method' => 'put'])}}
-						<div class="form-group">
-						      <textarea class="form-control" id="ex-summary">{{$candidate->cv->summary}}</textarea>
-						</div>
-						<div class="opt-controls">
-					      <button type="button" class="btn btn-primary btn-save">Save</button>
-					      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
-					  </div>
-				  {{\Form::close()}}
+					<div class="form-group">
+					      <textarea class="form-control" id="ex-summary" ng-model="summary"></textarea>
+					</div>
+					<div class="opt-controls">
+				      <button type="button" class="btn btn-primary btn-save" ng-click="saveSummary()">Save</button>
+				      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelSummary();">Cancel</button>
+				  </div>
 				</div>
 			</div>
 			<div id="experience" ng-cloak>
@@ -215,45 +213,45 @@
 				  </form>
 				</div>
 			</div>
-			<div id="edu">
+			<div id="edu" ng-cloak>
 				<h3 class="part">Education</h3>
 				<div class="items">
-					@foreach($candidate->cv->education as $education)
-					<div class="item">
-						<div class="content-show">
-							<h4 id="span-institute">{{$education->institute}}</h4>
+					<div class="item" ng-repeat="education in educations">
+						<div class="content-show" ng-hide="education.show_frm_edu">
+							<h4 id="span-institute">{% education.institute %}</h4>
 							<div>
-								<span id="span-degree" class="cv-info">{{$education->degree}}</span> in <span id="span-major">{{$education->major}}</span>
+								<span id="span-degree" class="cv-info" ng-show="education.degree_id">{% education.degree %} in </span><span id="span-major">{% education.major %}</span>
 							</div>
 							<div>
-								<span class="cv-info"><span id="span-from-year">{{$education->from_year}}</span> - <span id="span-grad-year">{{$education->grad_year}}</span></span>
+								<span class="cv-info"><span id="span-from-year">{% education.from_year %}</span> - <span id="span-grad-year">{% education.grad_year %}</span></span>&nbsp;
+								<span class="span-situation" ng-show="education.situation_id">({% education.situation %})</span>
 							</div>
 							<div class="card-btn-group">
-								<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-								<a href="javascript:onclick" id="btn-edit-edu" class="glyphicon glyphicon-pencil"></a>
+								<a href="javascript:onclick" class="glyphicon glyphicon-remove" ng-click="deleteEducation(education)"></a>
+								<a href="javascript:onclick" id="btn-edit-edu" class="glyphicon glyphicon-pencil" ng-click="openEditFormEdu(education)"></a>
 							</div>
 						</div>
-						<div class="form-edit hide">
-								{{\Form::open(['route' => ['candidate.cv.edit.edu.put', $candidate->cv->id, $education->id],  'method' => 'put', 'class' => 'form-horizontal'])}}
-									<div class="form-group">
+						<div class="form-edit" ng-show="education.show_frm_edu">
+							<form class="form-horizontal">
+								<div class="form-group">
 										<label for="input-institute" class="col-sm-3 control-label">Institute</label>
 									    <div class="col-sm-8">
-									      <input type="text" class="form-control" id="input-institute" value="{{$education->institute}}">
+									      <input type="text" class="form-control" id="input-institute" ng-model="education.institute">
 									    </div>
 									</div>
 									<div class="form-group">
 										<label for="input-major" class="col-sm-3 control-label">Major</label>
 									    <div class="col-sm-8">
-									      <input type="text" class="form-control" id="input-major" value="{{$education->major}}">
+									      <input type="text" class="form-control" id="input-major" ng-model="education.major">
 									    </div>
 									</div>
 									<div class="form-group">
 										<label for="input-degree" class="col-sm-3 control-label">Degree</label>
 									    <div class="col-sm-4">
-									      <select type="text" class="form-control" id="input-degree">
+									      <select type="text" class="form-control" id="input-degree" ng-model="education.degree_id">
 									      	<option value="">--Select--</option>
 											@foreach(\Degree::all() as $degree)
-											<option value="{{$degree->id}}" {{$education->degree_id === $degree->id ? 'selected' : ''}}>{{$degree->description}}</option>
+											<option value="{{$degree->id}}">{{$degree->description}}</option>
 											@endforeach
 									      </select>
 									    </div>
@@ -261,254 +259,370 @@
 									<div class="form-group">
 										<label for="input-from-year" class="col-sm-3 control-label">Start School</label>
 									    <div class="col-sm-8">
-									      <input type="text" class="form-control" id="input-from-year" value="{{$education->from_year}}" style="width: 70px;">
+									      <input type="text" class="form-control" id="input-from-year" ng-model="education.from_year" style="width: 70px;">
 									    </div>
 									</div>
 									<div class="form-group">
 										<label for="input-grad-year" class="col-sm-3 control-label">Graduation year</label>
 									    <div class="col-sm-8">
-									      <input type="text" class="form-control" id="input-grad-year" value="{{$education->grad_year}}" style="width: 70px;">
+									      <input type="text" class="form-control" id="input-grad-year" ng-model="education.grad_year" style="width: 70px;">
+									    </div>
+									</div>
+									<div class="form-group">
+										<label for="input-grad-year" class="col-sm-3 control-label">Situation</label>
+									    <div class="col-sm-4">
+									      <select type="text" class="form-control" id="input-degree" ng-model="education.situation_id">
+									      	<option value="">--Select--</option>
+											@foreach(\SchoolSituation::all() as $situation)
+											<option value="{{$situation->id}}">{{$situation->description}}</option>
+											@endforeach
+									      </select>
 									    </div>
 									</div>
 									<div class="opt-controls">
-								      <button type="button" class="btn btn-primary btn-save">Save</button>
-								      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
+								      <button type="button" class="btn btn-primary btn-save" ng-click="updateEducation(education)">Update</button>
+								      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelEditFormEdu(education)">Cancel</button>
 								  </div>
-							  {{\Form::close()}}
-							</div>
+							 </form>
+						</div>
 					</div>
-					@endforeach
+				</div>
+				<a href="" id="btn-show-formnew" ng-click="openNewEduForm()" ng-hide="show_frm_edu_new"><i class="fa fa-plus-circle"></i>Add new</a>
+				<div class="form-new" ng-show="show_frm_edu_new">
+					<h4 style="margin-bottom: 20px;">What is your education background?</h4>
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label for="input-institute" class="col-sm-3 control-label">Institute</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-institute" ng-model="new_education.institute">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-major" class="col-sm-3 control-label">Major</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-major" ng-model="new_education.major">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-degree" class="col-sm-3 control-label">Degree</label>
+						    <div class="col-sm-4">
+						      <select type="text" class="form-control" id="input-degree" ng-model="new_education.degree_id">
+						      	<option value="">--Select--</option>
+								@foreach(\Degree::all() as $degree)
+								<option value="{{$degree->id}}">{{$degree->description}}</option>
+								@endforeach
+						      </select>
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-from-year" class="col-sm-3 control-label">Start School</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-from-year" ng-model="new_education.from_year" style="width: 70px;">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-grad-year" class="col-sm-3 control-label">Graduation year</label>
+						    <div class="col-sm-8">
+						      <input type="text" class="form-control" id="input-grad-year" ng-model="new_education.grad_year" style="width: 70px;">
+						    </div>
+						</div>
+						<div class="form-group">
+							<label for="input-grad-year" class="col-sm-3 control-label">Situation</label>
+						    <div class="col-sm-4">
+						      <select type="text" class="form-control" id="input-degree" ng-model="new_education.situation_id">
+						      	<option value="">--Select--</option>
+								@foreach(\SchoolSituation::all() as $situation)
+								<option value="{{$situation->id}}">{{$situation->description}}</option>
+								@endforeach
+						      </select>
+						    </div>
+						</div>
+						<div class="opt-controls">
+					      <button type="button" class="btn btn-primary btn-save" ng-click="createNewEducation(new_education)">Save</button>
+					      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelFormNewEdu()">Cancel</button>
+					  </div>
+					</form>
 				</div>
 			</div>
 			<div id="skills">
 				<div>
-					<h3 class="part">Skills</h3>
-					<div class="content-show">
+					<h3 class="part">Skill</h3>
+					<div class="content-show" ng-hide="show_frm_skill">
 						<div class="items clearfix">
-							@foreach($candidate->cv->skills as $skill)
-							<div class="item round-box-wrapper">
-								<span class="cv-info" id="skill-name">{{$skill->name}}</span>&nbsp;&nbsp;&nbsp;
-								<span class="skill-detail text-muted">{{$skill->level}} ({{$skill->year_experience}} years)</span>
+							<div class="item" ng-repeat="skill in skills">
+								<span class="cv-info" id="skill-name">{% skill.name %}</span>&nbsp;&nbsp;&nbsp;
+								<span class="skill-detail text-muted">{% skill.level %} <span ng-if="skill.year_experience">({% skill.year_experience %} years)</span></span>
 							</div>
-							@endforeach
 						</div>
-						<div class="card-btn-group">
-							<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-							<a href="javascript:onclick" id="btn-edit-skill" class="glyphicon glyphicon-pencil btn-edit-cv"></a>
+						<a href="" id="btn-show-formnew" ng-click="show_frm_skill = true" ng-hide="skills.length"><i class="fa fa-plus-circle"></i>Add new</a>
+						<div class="card-btn-group" ng-show="skills.length">
+							<a href="javascript:onclick" id="btn-edit-skill" class="glyphicon glyphicon-pencil btn-edit-cv" ng-click="show_frm_skill = true" ></a>
 						</div>
 					</div>
-					<div class="form-edit hide">
-						{{\Form::open(['route' => ['candidate.cv.edit.skill.put', $candidate->cv->id],  'method' => 'put'])}}
+					<div class="form-edit" ng-show="show_frm_skill">
 							<h4>What is your area of expertise?</h4>
 							<div id="new-skill" class="clearfix">
-								<input type="text" class="form-control pull-left" id="input-skill-name" placeholder="Skill name" style="width: 295px; margin-right: 5px;">
-								<input type="text" class="form-control pull-left" id="input-skill-year-exp" placeholder="Year of experience" style="width: 100px; margin-right: 5px;">
-								<select class="form-control pull-left" id="input-skill-level" style="width: 130px; margin-right: 5px;">
+								<input type="text" class="form-control pull-left" id="input-skill-name" placeholder="Skill name" style="width: 202px; margin-right: 5px;" ng-model="new_skill.name">
+								<input type="text" class="form-control pull-left" id="input-skill-year-exp" placeholder="Year of experience" style="width: 100px; margin-right: 5px;" ng-model="new_skill.year_experience">
+								<select class="form-control pull-left" id="input-skill-level" style="width: 130px; margin-right: 5px;" ng-model="new_skill.level_id">
 									<option value="">---Level---</option>
 									@foreach(\Level::all() as $level)
 									<option value="{{$level->id}}">{{$level->description}}</option>
 									@endforeach
 								</select>
-								<button type="button" id="btn-add" class="btn btn-primary">Add</button>
+								<button type="button" id="btn-add" class="btn btn-primary" ng-click="createNewSkill(new_skill)">Add</button>
+								<button type="button" id="btn-add" class="btn btn-danger" ng-click="closeFormSkill()">Close</button>
 							</div>
-							<div id="skills-collection" class="items clearfix" style="background-color: #FFF; padding: 12px; border: 1px solid #ccc; border-radius: 5px;">
-								@foreach($candidate->cv->skills as $skill)
-								<div class="item round-box-wrapper">
+							<div id="skills-collection" class="items clearfix" ng-if="skills.length">
+								<div class="item round-box-wrapper" ng-repeat="skill in skills">
 									<div class="span-content">
-										<span class="cv-info" id="skill-name">{{$skill->name}}</span>&nbsp;&nbsp;&nbsp;
-										<span class="skill-detail text-muted">{{$skill->level}} ({{$skill->year_experience}} years)</span>&nbsp;
-										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_skill_cv_edit(this)"></a>
-									</div>
-									<div class="hidden-input">
-										<input type="hidden" id="input-skill-id" value="{{$skill->id}}">
-										<input type="hidden" id="input-skill-name" value="{{$skill->name}}">
-										<input type="hidden" id="input-skill-level" value="{{$skill->level_id}}">
-										<input type="hidden" id="input-skill-year-exp" value="{{$skill->year_experience}}">
-										<input type="hidden" id="input-skill-status" value="2">
+										<span class="cv-info" id="skill-name">{% skill.name %}</span>&nbsp;&nbsp;&nbsp;
+										<span class="skill-detail text-muted">{% skill.level %}  <span ng-if="skill.year_experience">({% skill.year_experience %} years)</span></span>&nbsp;
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteSkill(skill)"></a>
 									</div>
 								</div>
-								@endforeach
-							</div>
-							<div class="opt-controls">
-						      <button type="button" class="btn btn-primary btn-save">Save</button>
-						      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
-						  </div>						
-						{{\Form::close()}}
+							</div>			
 					</div>
 				</div>			
 			</div>
 			<div id="languages">
-				<h3 class="part">Languages</h3>
-				<div class="content-show">
+				<h3 class="part">Language</h3>
+				<div class="content-show" ng-hide="show_frm_lang">
 					<div class="items">
-						@foreach($candidate->cv->languages as $language)
-						<div class="item">
-							<span class="lang">{{$language->language}}</span>&nbsp;&nbsp;&nbsp;<span
-								class="text-muted">{{$language->proficiency}}</span>
+						<div class="item" ng-repeat="language in languages">
+							<span class="lang">{% language.language %}</span>&nbsp;&nbsp;&nbsp;<span
+								class="lang-proficiency text-muted">{% language.proficiency %}</span>
 						</div>
-						@endforeach
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-file"></a>
-						<a href="javascript:onclick" id="btn-edit-lang" class="glyphicon glyphicon-pencil"></a>
+					<a href="" id="btn-show-formnew" ng-click="show_frm_lang = true" ng-hide="languages.length"><i class="fa fa-plus-circle"></i>Add new</a>
+					<div class="card-btn-group" ng-show="languages.length">
+						<a href="javascript:onclick" id="btn-edit-lang" class="glyphicon glyphicon-pencil" ng-click="show_frm_lang = true"></a>
 					</div>
 				</div>
-				<div class="form-edit hide">
-					{{\Form::open(['route' => ['candidate.cv.edit.lang.put', $candidate->cv->id],  'method' => 'put', 'class' => 'form-inline'])}}
-						<div id="lang-collection">	
-							@foreach($candidate->cv->languages as $language)
-							<div class="item">
-								<div class="form-group">
-							   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language" value="{{$language->language}}">
-							   </div>
-							   <div class="form-group">
-							   	<select class="form-control" id="input-lang-proficiency">
-							   		<option value="">---Proficiency---</option>
-										@foreach(\Proficiency::all() as $proficiency)
-										<option value="{{$proficiency->id}}" {{$language->proficiency_id === $proficiency->id ? 'selected' : ''}}>{{$proficiency->proficiency}}</option>
-										@endforeach
-							   	</select>
-							   </div>
-							   <div class="form-group">
-								   <a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_lang_cv_edit(this)" ></a>
+				<div class="form-edit" ng-show="show_frm_lang">
+					<form  class="form-inline">
+						<div class="item-add-new">
+						    <h4>What languages can you speak?</h4>
+						   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language" ng-model="new_language.language">
+						   	<select class="form-control" id="input-lang-proficiency" ng-model="new_language.proficiency_id">
+						   		<option value="">---Proficiency---</option>
+								@foreach(\Proficiency::all() as $proficiency)
+								<option value="{{$proficiency->id}}">{{$proficiency->proficiency}}</option>
+								@endforeach
+						   	</select>
+						    <button type="button" class="btn btn-primary btn-save" ng-click="createNewLang(new_language)">Add</button>
+						    <button type="button" class="btn btn-danger btn-close" ng-click="closeLangForm()">Close</button>
+						 </div>
+						<div id="lang-collection" class="clearfix" ng-show="languages.length">	
+							<div class="item round-box-wrapper" ng-repeat="language in languages">
+								<div class="span-content">
+									<span>{% language.language %}</span>&nbsp;&nbsp;
+									<span class="lang-proficiency text-muted">{% language.proficiency %}</span>
+									<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteLang(language)"></a>
 								</div>
-								<input type="hidden" id="input-lang-id" value="{{$language->id}}">
-								<input type="hidden" id="input-lang-status" value="2">
 							</div>
-						   @endforeach
-						</div>
-					   <div class="item-add-new">
-					    <h4>What languages can you speak?</h4>
-					   	<div class="form-group">
-						   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language">
-						   </div>
-						   <div class="form-group">
-						   	<select class="form-control" id="input-lang-proficiency">
-						   		<option value="">---Proficiency---</option>
-									@foreach(\Proficiency::all() as $proficiency)
-									<option value="{{$proficiency->id}}">{{$proficiency->proficiency}}</option>
-									@endforeach
-						   	</select>
-						   </div>
-						   <div class="form-group">
-							   <!-- <a href="javascript:onclick" class="btn-add glyphicon glyphicon-plus"></a> -->
-							   <button class="btn btn-primary btn-add">Add</button>
-							</div>
-							<input type="hidden" id="input-lang-status" value="">
-					   </div>
-					   <div class="item-clone hide">
-					   	<div class="form-group">
-						   	<input type="text" class="form-control" id="input-lang-name" placeholder="Language">
-						   </div>
-						   <div class="form-group">
-						   	<select class="form-control" id="input-lang-proficiency">
-						   		<option value="">---Proficiency---</option>
-									@foreach(\Proficiency::all() as $proficiency)
-									<option value="{{$proficiency->id}}">{{$proficiency->proficiency}}</option>
-									@endforeach
-						   	</select>
-						   </div>
-						   <div class="form-group">
-							   <a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" onclick="remove_lang_cv_edit(this)"></a>
-							</div>
-							<input type="hidden" id="input-lang-id">
-							<input type="hidden" id="input-lang-status">
-					   </div>
-					{{\Form::close()}}
-					<div class="opt-controls">
-				      <button type="button" class="btn btn-primary btn-save">Save</button>
-				      <button type="button" class="btn btn-danger btn-cancel">Cancel</button>
-				  </div>	
-				</div>			
+						</div>					   
+					</form>																  	
+				</div>						
 			</div>
 		</div>
-		<div id="expectation-card">
+		<div id="expectation-card" ng-cloak>
 			<span class="card-article">Expectation</span>
-			<div>
-				<div class="items">
-					<h3 class="part">Functions</h3>
-					<div>
+			<div id="function">
+				<div>
+					<h3 class="part">Function</h3>
+					<div class="content-show" ng-hide="show_frm_function">						
 						<div class="items clearfix">
-							@foreach($candidate->cv->expectation->functions as $function)
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$function->function}}</span>
+							<div class="item pull-left" ng-repeat="function in functions">
+								<span class="cv-info">{% $last === false ? function.function_name + ',&nbsp;&nbsp;&nbsp;' : function.function_name %}</span>
 							</div>
-							@endforeach
+						</div>	
+						<a href="" id="btn-show-formnew" ng-click="openFuncForm()" ng-hide="functions.length"><i class="fa fa-plus-circle"></i>Add new</a>						
+						<div class="card-btn-group" ng-show="functions.length">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openFuncForm()"></a>
 						</div>
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<div class="form-edit" ng-show="show_frm_function">
+						<form  class="form-inline">
+							<div class="item-add-new">
+							    <h4>What function would you expect?</h4>
+							   	<select class="form-control" id="input-function" ng-model="new_function.function_id">
+							   		<option value="">---Function---</option>
+									@foreach(\Func::getFunctions() as $function)
+									<option value="{{$function->id}}">{{$function->name}}</option>
+									@endforeach
+							   	</select>
+							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewFunc(new_function)">Add</button>
+							    <button type="button" class="btn btn-danger btn-close" ng-click="closeFuncForm()">Close</button>
+							 </div>
+							 <div id="collection" class="clearfix" ng-show="functions.length">	
+								<div class="item round-box-wrapper" ng-repeat="function in functions">
+									<div class="span-content">
+										<span>{% function.function_name %}</span>
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteFunc(function)"></a>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-				<div class="items">
-					<h3 class="part">Industries</h3>
-					<div>
+			</div>
+			<div id="industry">
+				<div>
+					<h3 class="part">Industry</h3>
+					<div class="content-show" ng-hide="show_frm_industry">
 						<div class="items clearfix">
-							@foreach($candidate->cv->expectation->industries as $industry)
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$industry->industry}}</span>
+							<div class="item pull-left" ng-repeat="industry in industries">
+								<span class="cv-info">{% $last === false ? industry.industry_name + ',&nbsp;&nbsp;&nbsp;' : industry.industry_name %}</span>
 							</div>
-							@endforeach
+						</div>		
+						<a href="" id="btn-show-formnew" ng-click="openIndustryForm()" ng-hide="industries.length"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<div class="card-btn-group" ng-show="industries.length">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openIndustryForm()"></a>
 						</div>
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<div class="form-edit" ng-show="show_frm_industry">
+						<form  class="form-inline">
+							<div class="item-add-new">
+							    <h4>What industry would you expect?</h4>
+							   	<select class="form-control" id="input-industry" ng-model="new_industry.industry_id">
+							   		<option value="">---Industry---</option>
+									@foreach(\Industry::getIndustries() as $industry)
+									<option value="{{$industry->id}}">{{$industry->name}}</option>
+									@endforeach
+							   	</select>
+							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewIndustry(new_industry)">Add</button>
+							    <button type="button" class="btn btn-danger btn-close" ng-click="closeIndustryForm()">Close</button>
+							 </div>
+							 <div id="collection" class="clearfix" ng-show="industries.length">	
+								<div class="item round-box-wrapper" ng-repeat="industry in industries">
+									<div class="span-content">
+										<span>{% industry.industry_name %}</span>
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteIndustry(industry)"></a>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-				<div class="items">
-					<h3 class="part">Locations</h3>
-					<div>
+			</div>	
+			<div id="location">
+				<div>
+					<h3 class="part">Location</h3>
+					<div class="content-show" ng-hide="show_frm_location">
 						<div class="items clearfix">
-							@foreach($candidate->cv->expectation->locations as $location)
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$location->location}}</span>
+							<div class="item pull-left" ng-repeat="location in locations">
+								<span class="cv-info">{% $last === false ? location.location_name + ',&nbsp;&nbsp;&nbsp;' : location.location_name %}</span>
 							</div>
-							@endforeach
+						</div>		
+						<a href="" id="btn-show-formnew" ng-click="openLocationForm()" ng-hide="locations.length"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<div class="card-btn-group" ng-show="locations.length">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openLocationForm()"></a>
 						</div>
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<div class="form-edit" ng-show="show_frm_location">
+						<form  class="form-inline">
+							<div class="item-add-new">
+							    <h4>What location would you expect?</h4>
+							   	<select class="form-control" id="input-location" ng-model="new_location.location_id">
+							   		<option value="">---Location---</option>
+									@foreach(\Location::getProvinces_Cities() as $location)
+									<option value="{{$location->id}}">{{$location->name}}</option>
+									@endforeach
+							   	</select>
+							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewLocation(new_location)">Add</button>
+							    <button type="button" class="btn btn-danger btn-close" ng-click="closeLocationForm()">Close</button>
+							 </div>
+							 <div id="collection" class="clearfix" ng-show="locations.length">	
+								<div class="item round-box-wrapper" ng-repeat="location in locations">
+									<div class="span-content">
+										<span>{% location.location_name %}</span>
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteLocation(location)"></a>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-				<div class="items">
+			</div>
+			<div id="salary">
+				<div>
 					<h3 class="part">Salary</h3>
-					<div>
-						<div class="items clearfix">
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$candidate->cv->expectation->salary->min_salary}} - {{$candidate->cv->expectation->salary->max_salary}}</span>
-							</div>
+					<div class="content-show clearfix" ng-hide="show_frm_salary">
+						<span>{% salary_range %}</span>
+						<a href="" id="btn-show-formnew" ng-click="openSalaryForm()" ng-show="salary_range == ''"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<div class="card-btn-group" ng-show="salary_range != ''">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openSalaryForm()"></a>
 						</div>
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<div class="form-edit" ng-show="show_frm_salary">
+						<form  class="form-inline">
+							<h4>What salary would you expect?</h4>
+							<input type="text" class="form-control" id="input-salary" ng-model="salary_range">
+						    <button type="button" class="btn btn-primary btn-save" ng-click="saveSalary()">Save</button>
+						    <button type="button" class="btn btn-danger btn-close" ng-click="cancelSalary()">Cancel</button>
+						</form>
 					</div>
 				</div>
-				<div class="items">
-					<h3 class="part">Terms</h3>
-					<div>
+			</div>
+			<div id="job_term">
+				<div>
+					<h3 class="part">Job Term</h3>
+					<div class="content-show" ng-hide="show_frm_job_term">
 						<div class="items clearfix">
-							@foreach($candidate->cv->expectation->job_terms as $job_term)
-							<div class="item round-box-wrapper">
-								<span class="cv-info">{{$job_term->term}}</span>
+							<div class="item pull-left" ng-repeat="job_term in job_terms">
+								<span class="cv-info">{% $last === false ? job_term.term + ',&nbsp;&nbsp;&nbsp;' : job_term.term %}</span>
 							</div>
-							@endforeach
+						</div>		
+						<a href="" id="btn-show-formnew" ng-click="openJobTermForm()" ng-hide="job_terms.length"><i class="fa fa-plus-circle"></i>Add new</a>			
+						<div class="card-btn-group" ng-show="job_terms.length">
+							<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="openJobTermForm()"></a>
 						</div>
 					</div>
-					<div class="card-btn-group">
-						<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<div class="form-edit" ng-show="show_frm_job_term">
+						<form  class="form-inline">
+							<div class="item-add-new">
+							    <h4>What location would you expect?</h4>
+							   	<select class="form-control" id="input-job-term" ng-model="new_job_term.term_id">
+							   		<option value="">---Job Term---</option>
+									@foreach(\JobTerm::getJobTerms() as $job_term)
+									<option value="{{$job_term->id}}">{{$job_term->term}}</option>
+									@endforeach
+							   	</select>
+							    <button type="button" class="btn btn-primary btn-save" ng-click="createNewJobTerm(new_job_term)">Add</button>
+							    <button type="button" class="btn btn-danger btn-close" ng-click="closeJobTermForm()">Close</button>
+							 </div>
+							 <div id="collection" class="clearfix" ng-show="job_terms.length">	
+								<div class="item round-box-wrapper" ng-repeat="job_term in job_terms">
+									<div class="span-content">
+										<span>{% job_term.term %}</span>
+										<a href="javascript:onclick" class="btn-remove glyphicon glyphicon-remove" ng-click="deleteJobterm(job_term)"></a>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
 				</div>
-			</div>		
+			</div>
 		</div>
 		<div id="ref-card">
-			<div class="items">
-				<span class="card-article">Reference</span>
+			<span class="card-article">Reference</span> 
+			<div class="content-show" ng-hide="show_frm_reference">
 				<div class="items">
-					<p>{{$candidate->cv->reference}}</p>			
+					<p>{% reference %}</p>			
 				</div>
 				<div class="card-btn-group">
-					<a href="javascript:onclick" class="glyphicon glyphicon-pencil"></a>
+					<a href="javascript:onclick" class="glyphicon glyphicon-pencil" ng-click="show_frm_reference = true"></a>
 				</div>
+			</div>
+			<div class="form-edit" ng-show="show_frm_reference">
+				<div class="form-group">			  
+				  <textarea id="input-job-ref" ng-model="reference"></textarea>
+				</div>
+				<div class="opt-controls">
+				      <button type="button" class="btn btn-primary btn-save" ng-click="saveReference()">Save</button>
+				      <button type="button" class="btn btn-danger btn-cancel" ng-click="cancelReference()">Cancel</button>
+				 </div>
 			</div>
 		</div>
 	</div>
@@ -523,4 +637,18 @@
 	<script src="{{asset('assets/js/controllers/cveditCtrl.js')}}"></script>
 	<script src="{{asset('assets/js/factories/cveditFact.js')}}"></script>
 	<script src="{{asset('assets/js/directives/cveditDir.js')}}"></script>
+<!--  <script src="{{asset('assets/js/lib/wysihtml5/parser_rules/advanced.js')}}"></script> -->
+	<script src="{{asset('assets/js/lib/wysihtml5/wysihtml5-0.3.0_rc2.js')}}"></script>
+	  <script src="{{asset('assets/js/lib/wysihtml5/bootstrap-wysihtml5.js')}}"></script>	  
+	  <link rel="stylesheet" href="{{asset('assets/js/lib/wysihtml5/css/bootstrap-wysihtml5.css')}}">
+	  <script>
+	  $('#textarea').wysihtml5({
+		  "stylesheets": ["{{asset('assets/js/lib/wysihtml5/css/wysihtml5.css')}}"], // CSS stylesheets to load
+		  "color": true, // enable text color selection
+		  "size": 'sm', // buttons size
+		  "html": true, // enable button to edit HTML
+		  "format-code" : true // enable syntax highlighting
+		});
+	  </script>
+	  
 @endsection

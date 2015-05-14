@@ -5,7 +5,7 @@
         "font-styles": function(locale, options) {
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li class='dropdown'>" +
-              "<a class='btn dropdown-toggle" + size + "' data-toggle='dropdown' href='#'>" +
+              "<a class='btn btn-default dropdown-toggle" + size + "' data-toggle='dropdown' href='#'>" +
               "<i class='icon-font'></i>&nbsp;<span class='current-font'>" + locale.font_styles.normal + "</span>&nbsp;<b class='caret'></b>" +
               "</a>" +
               "<ul class='dropdown-menu'>" +
@@ -24,9 +24,9 @@
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
               "<div class='btn-group'>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='bold' title='CTRL+B' tabindex='-1'>" + locale.emphasis.bold + "</a>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='italic' title='CTRL+I' tabindex='-1'>" + locale.emphasis.italic + "</a>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='underline' title='CTRL+U' tabindex='-1'>" + locale.emphasis.underline + "</a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='bold' title='CTRL+B' tabindex='-1'>" + locale.emphasis.bold + "</a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='italic' title='CTRL+I' tabindex='-1'>" + locale.emphasis.italic + "</a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='underline' title='CTRL+U' tabindex='-1'>" + locale.emphasis.underline + "</a>" +
               "</div>" +
             "</li>";
         },
@@ -35,10 +35,10 @@
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
               "<div class='btn-group'>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='insertUnorderedList' title='" + locale.lists.unordered + "' tabindex='-1'><i class='icon-list'></i></a>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='insertOrderedList' title='" + locale.lists.ordered + "' tabindex='-1'><i class='icon-th-list'></i></a>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='Outdent' title='" + locale.lists.outdent + "' tabindex='-1'><i class='icon-indent-right'></i></a>" +
-                "<a class='btn" + size + "' data-wysihtml5-command='Indent' title='" + locale.lists.indent + "' tabindex='-1'><i class='icon-indent-left'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='insertUnorderedList' title='" + locale.lists.unordered + "' tabindex='-1'><i class='icon-list'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='insertOrderedList' title='" + locale.lists.ordered + "' tabindex='-1'><i class='icon-th-list'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='Outdent' title='" + locale.lists.outdent + "' tabindex='-1'><i class='icon-indent-right'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-command='Indent' title='" + locale.lists.indent + "' tabindex='-1'><i class='icon-indent-left'></i></a>" +
               "</div>" +
             "</li>";
         },
@@ -60,7 +60,7 @@
                   "<a href='#' class='btn btn-primary' data-dismiss='modal'>" + locale.link.insert + "</a>" +
                 "</div>" +
               "</div>" +
-              "<a class='btn" + size + "' data-wysihtml5-command='createLink' title='" + locale.link.insert + "' tabindex='-1'><i class='icon-share'></i></a>" +
+              "<a class='btn btn-default" + size + "' data-wysihtml5-command='createLink' title='" + locale.link.insert + "' tabindex='-1'><i class='icon-share'></i></a>" +
             "</li>";
         },
 
@@ -80,7 +80,7 @@
                   "<a href='#' class='btn btn-primary' data-dismiss='modal'>" + locale.image.insert + "</a>" +
                 "</div>" +
               "</div>" +
-              "<a class='btn" + size + "' data-wysihtml5-command='insertImage' title='" + locale.image.insert + "' tabindex='-1'><i class='icon-picture'></i></a>" +
+              "<a class='btn btn-default" + size + "' data-wysihtml5-command='insertImage' title='" + locale.image.insert + "' tabindex='-1'><i class='icon-picture'></i></a>" +
             "</li>";
         },
 
@@ -88,7 +88,7 @@
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li>" +
               "<div class='btn-group'>" +
-                "<a class='btn" + size + "' data-wysihtml5-action='change_view' title='" + locale.html.edit + "' tabindex='-1'><i class='icon-pencil'></i></a>" +
+                "<a class='btn btn-default" + size + "' data-wysihtml5-action='change_view' title='" + locale.html.edit + "' tabindex='-1'><i class='icon-pencil'></i></a>" +
               "</div>" +
             "</li>";
         },
@@ -96,7 +96,7 @@
         "color": function(locale, options) {
             var size = (options && options.size) ? ' btn-'+options.size : '';
             return "<li class='dropdown'>" +
-              "<a class='btn dropdown-toggle" + size + "' data-toggle='dropdown' href='#' tabindex='-1'>" +
+              "<a class='btn btn-default dropdown-toggle" + size + "' data-toggle='dropdown' href='#' tabindex='-1'>" +
                 "<span class='current-color'>" + locale.colours.black + "</span>&nbsp;<b class='caret'></b>" +
               "</a>" +
               "<ul class='dropdown-menu'>" +
@@ -474,29 +474,45 @@
         "html": true,
         "link": true,
         "image": true,
-        "video": true,
+        "video": false,
         events: {},
         parserRules: {
             classes: {
                 // (path_to_project/lib/css/wysiwyg-color.css)
-                "wysiwyg-color-silver" : 1,
-                "wysiwyg-color-gray" : 1,
-                "wysiwyg-color-white" : 1,
-                "wysiwyg-color-maroon" : 1,
-                "wysiwyg-color-red" : 1,
-                "wysiwyg-color-purple" : 1,
-                "wysiwyg-color-fuchsia" : 1,
-                "wysiwyg-color-green" : 1,
-                "wysiwyg-color-lime" : 1,
-                "wysiwyg-color-olive" : 1,
-                "wysiwyg-color-yellow" : 1,
-                "wysiwyg-color-navy" : 1,
-                "wysiwyg-color-blue" : 1,
-                "wysiwyg-color-cornflowerblue" : 1,
-                "wysiwyg-color-teal" : 1,
-                "wysiwyg-color-aqua" : 1,
-                "wysiwyg-color-orange" : 1,
-                "wysiwyg-color-brown" : 1
+            	"wysiwyg-clear-both": 1,
+                "wysiwyg-clear-left": 1,
+                "wysiwyg-clear-right": 1,
+                "wysiwyg-color-aqua": 1,
+                "wysiwyg-color-black": 1,
+                "wysiwyg-color-blue": 1,
+                "wysiwyg-color-fuchsia": 1,
+                "wysiwyg-color-gray": 1,
+                "wysiwyg-color-green": 1,
+                "wysiwyg-color-lime": 1,
+                "wysiwyg-color-maroon": 1,
+                "wysiwyg-color-navy": 1,
+                "wysiwyg-color-olive": 1,
+                "wysiwyg-color-purple": 1,
+                "wysiwyg-color-red": 1,
+                "wysiwyg-color-silver": 1,
+                "wysiwyg-color-teal": 1,
+                "wysiwyg-color-white": 1,
+                "wysiwyg-color-yellow": 1,
+                "wysiwyg-float-left": 1,
+                "wysiwyg-float-right": 1,
+                "wysiwyg-font-size-large": 1,
+                "wysiwyg-font-size-larger": 1,
+                "wysiwyg-font-size-medium": 1,
+                "wysiwyg-font-size-small": 1,
+                "wysiwyg-font-size-smaller": 1,
+                "wysiwyg-font-size-x-large": 1,
+                "wysiwyg-font-size-x-small": 1,
+                "wysiwyg-font-size-xx-large": 1,
+                "wysiwyg-font-size-xx-small": 1,
+                "wysiwyg-text-align-center": 1,
+                "wysiwyg-text-align-justify": 1,
+                "wysiwyg-text-align-left": 1,
+                "wysiwyg-text-align-right": 1
             },
             tags: {
                 "b":  {},
@@ -577,20 +593,23 @@
             html: {
                 edit: "Edit HTML"
             },
-            colours: {
-                black: "Black",
-                silver: "Silver",
-                gray: "Grey",
-                maroon: "Maroon",
-                red: "Red",
-                purple: "Purple",
-                green: "Green",
-                olive: "Olive",
-                navy: "Navy",
-                blue: "Blue",
-                orange: "Orange",
-                brown: "Brown",
-                cornflowerblue: "CornflowerBlue"
+            colours: {               
+                aqua	: "Aqua",
+                black	: "Black",
+                blue	: "Blue",
+                fuchsia	: "Fuchsia",
+                gray	: "Gray",
+                green	: "Green",
+                lime	: "Lime",
+                maroon	: "Maroon",
+                navy	: "Navy",
+                olive	: "Olive",
+                purple	: "Purple",
+                red		: "Red",
+                silver	: "Silver",
+                tea		: "Tea",
+                white	: "White",
+                yellow	: "Yellow"
             },
             video: {
                 insert: "Insert video",

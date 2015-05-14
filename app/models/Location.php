@@ -5,11 +5,14 @@ class Location extends Eloquent
 	protected $table = 'constant_locations';
 	protected $fillable = ['name', 'type', 'created_at', 'updated_at'];
 	
+	/***
+	 * Get all actice locations available.
+	 */
 	public static function getProvinces_Cities()
 	{
-		return DB::table('locations')->select(['id', 'name'])
-									->where('type', '=', '100')
-									->orWhere('type', '=', '200')
-									->get();
+		return Location::select(['id', 'name'])
+						->where('code', '=', '100')
+						->orWhere('code', '=', '200')
+						->get();
 	}
 }

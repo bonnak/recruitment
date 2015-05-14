@@ -21,10 +21,11 @@
 <link rel="stylesheet" href="{{asset('assets/css/theme.css')}}">
 
 <!-- JS -->
-<script src="{{asset('assets/js/lib/angular-1_3_x.min.js')}}"></script>
 <script src="{{asset('assets/js/lib/jquery-2.1.1.min.js')}}"></script>
  <script src="{{asset('assets/js/lib/jquery-ui.min.js')}}"></script>
 <!--  <script src="{{asset('assets/js/lib/jquery.mobile.min.js')}}"></script> -->
+ <script src="{{asset('assets/js/lib/angular-1_3_x.min.js')}}"></script>
+ <script src="{{asset('assets/js/lib/angular-sanitize.js')}}"></script>
 <script src="{{asset('bootstrap-3.3.1/js/bootstrap.min.js')}}"></script>
 
 <body>
