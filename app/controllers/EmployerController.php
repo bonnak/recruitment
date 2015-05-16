@@ -29,7 +29,7 @@ class EmployerController extends BaseController
 	public function getJobList($emp_id)
 	{
 		// Return back homepage if user is not an employer.
-		if(Auth::user ()->user_type !== 1)
+		if(Auth::user ()->user_type != 1)
 			return \Redirect::intended('/');		
 		// Get employer's posted-jobs.
 		$jobs = \Job::where('employer_id' , '=', $emp_id)

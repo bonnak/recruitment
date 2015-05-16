@@ -6,7 +6,7 @@
 <div id="employer" class="middle-wrapper pull-left">
 
 	<div id="job-list">
-		@include('menu.message')
+		
 		<div class="title-bar" align="center"> Jobs List</div>
 		<div class="content-wrapper">
 			<table class="table table-condensed table-bordered">
