@@ -9,7 +9,7 @@
 </div>
 <div id="employer" class="middle-wrapper pull-left">
 	<div id="job-post">
-		@include('menu.message')
+		
 		<div class="title-bar" align="center">Create New Job</div>
 		<div class="content-wrapper">
 
