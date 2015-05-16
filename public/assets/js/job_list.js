@@ -51,7 +51,7 @@ $(document).ready(function(){
 	});
 
 	// hover show mouse texh on mouse hover
-	$(".title").mouseenter(function(e){
+	$(".title span").mouseenter(function(e){
 		$("ul ").css({"top":(e.pageY - 115) + "px", "left":(e.pageX - 320) + "px"});
 	});
 });
