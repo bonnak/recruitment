@@ -6,7 +6,7 @@
 <div id="employer" class="middle-wrapper pull-left">
 
 	<div id="job-list">
-		@include('menu.message')
+		
 		<div class="title-bar" align="center"> Jobs List</div>
 		<div class="content-wrapper">
 			<table class="table table-condensed table-bordered">
@@ -23,7 +23,7 @@
 					@foreach($jobs as $job)
 					<tr>					
 						<td><input	type="checkbox" name="chk_delete_post[]" class="chk-delete-job" value="{{$job->id}}"/></td>
-						<td class="title">{{$job->title}}
+						<td class="title"><span>{{$job->title}}</span>
 							<ul>
 								<li><a class="edit-job" href="{{URL::route('employer.job-edit',$job->employer_id)}}/{{$job->id}}">Edit</a></li>
 								<li><a class="edit-job" href="{{URL::route('employer.job-view',$job->employer_id)}}/{{$job->id}}">&nbsp;View</a></li>
@@ -56,4 +56,5 @@
 {{Form::close()}}
 
 <div class="right-side-bar pull-left"></div>
+<script type="text/javascript" src="{{asset('assets/js/job_list.js')}}"></script>
 @endsection

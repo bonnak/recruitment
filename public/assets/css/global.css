@@ -945,3 +945,155 @@ hr#line-break-footer {
 #employer #job-post .content-wrapper #option-block .field select{		
 	width: 147px;
 }
+
+
+/****/
+a{
+	color: blue;
+	border-color: 12px blue;
+}
+#employer #job-list a:hover{
+	color: blue;
+	text-decoration: none;
+}
+.title {
+	cursor: pointer;
+}
+.title li {
+	float: left;
+	list-style: none;
+	padding: 5px 10px;
+}
+.title ul {	
+	display: none;		
+	position: absolute;
+	background: lavender;
+	box-shadow: 0px 0px 1px 1px silver;
+	padding: 0;
+	font-size: 12px;
+	
+}
+.chk-delete-job{
+	width: 1.5em;
+    height: 1.3em;
+  	cursor: pointer;
+}
+.chk-delete-job:hover{
+	background:blue;
+}
+.title:hover ul {
+	display:inline;
+	padding-left: -40px;
+}
+
+.title ul li input{
+	background: none;
+	border:solid 0px;
+}
+.btn-job-delete{
+	color:black;
+}
+.btn-job-delete:hover{
+	color:red;
+}
+.chk-publish{
+	height: 18px;
+	width: 18px;
+	margin-top: 0px;	
+}
+.error{
+	color: red;	
+}
+
+.contact ul li{
+	list-style: none;
+}
+
+.companyprofile{
+	background: green;
+	
+	color: white;
+	text-align: center;
+	font-size: 22px;
+	
+	opacity: 0.8;
+	border-radius: 8px;
+}
+.content_profile {
+	font-size: 15px;
+	padding: 15px;
+	padding-left: 20px;
+	margin: 5px;
+}
+hr.style15 {
+	border-top: 4px double #8c8b8b;
+	text-align: center;
+}
+.content_profile p{
+	line-height: 25px;
+	font-size: 16px;
+}
+.img_profile{ 
+	margin: 0 auto;
+}
+.edit-job{
+	color: black;
+}
+.content ul li{
+	line-height: 25px;
+	font-size: 16px;
+
+}
+.messageshow{
+	background: #a2d246;
+	font-size: 21px;
+	text-align: center;
+	width: 655px;
+	border-radius: 2px;	
+	color: white;
+	position: absolute;
+}
+.messageshow:hover{
+	opacity: 0.4;
+}
+.cv_search ul li{
+	list-style: none;
+	font-size: 15px;
+}
+.search_cv{
+	padding: 20px;
+	margin: 8px;
+}
+#keyworkcv{
+	background: blue;
+	border-radius: 0px 5px 5px 0px;
+}
+.search{
+	padding: 2px 18px;
+	margin: 9px;
+}
+.total_cv ul li{
+	list-style: none;
+	font-size: 18px;
+	color:gray;
+}
+.create{
+	margin-left: 50%;
+}
+.create:hover{
+	background: green;
+	color:white;
+	border-radius: 5px;
+};
+.download{
+	background: blue;
+}
+section{
+	margin-top: -30px;
+}
+label{
+	color: gray;
+}
+.save{
+	width: 72px;
+}

@@ -1,5 +1,5 @@
 <?php
-
+ 
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -78,7 +78,12 @@ Route::group(['before' => 'auth'], function (){
 	Route::get('/user/employer', ['as' => 'employer', 'uses' => 'EmployerController@index']);
 	Route::get('/user/employer/{emp_id}/job/list', ['as' => 'employer.job-list', 'uses' => 'EmployerController@getJobList']);
 	Route::get('/user/employer/{emp_id}/job/post', ['as' => 'employer.job-post', 'uses' => 'EmployerController@getJobPost']);
-	Route::post('/user/employer/{emp_id}/job/post', ['as' => 'employer.job-post.post', 'uses' => 'EmployerController@postJobPost']);	
+	Route::post('/user/employer/{emp_id}/job/post', ['as' => 'employer.job-post.post', 'uses' => 'EmployerController@postJobPost']);
+	Route::get('/user/employer/{emp_id}/job/edit/{id}', ['as' => 'employer.job-edit', 'uses' => 'EmployerController@getJobEdit']);
+	Route::put('/user/employer/{emp_id}/job/edit', ['as' => 'employer.job-edit.edit', 'uses' => 'EmployerController@editJobEdit']);
+	Route::get('/user/employer/{emp_id}/job/view/{id}', ['as' => 'employer.job-view', 'uses' => 'EmployerController@viewJob']);
+	Route::delete('/user/employer/{emp_id}/job/delete', ['as' => 'employer.job-post.delete', 'uses' => 'EmployerController@DeleteJobPost']);
+	Route::get('/user/employer/{emp_id}/cv_search', ['as' => 'employer.cv.search', 'uses' => 'AdminController@cvSearch']);
 	/**************************************************
 	 **************************************************/
 	
