@@ -2,13 +2,17 @@
 <div class="left-side-bar pull-left">
 	<div>@include('menu.menu')</div>
 </div>
+{{\Form::open(['route' => ['employer.job-post.delete', Auth::user()->id], 'method' => 'delete', 'class' => 'form-horizontal'])}}
 <div id="employer" class="middle-wrapper pull-left">
+
 	<div id="job-list">
-		<div class="title-bar">Jobs List</div>
+		
+		<div class="title-bar" align="center"> Jobs List</div>
 		<div class="content-wrapper">
 			<table class="table table-condensed table-bordered">
 				<thead>
 					<tr>
+						<th><input	type="checkbox" id="chk-delete-jobs" class="chk-delete-job"/></th>
 						<th>Title</th>
 						<th>Published Date</th>
 						<th>Closing Date</th>
@@ -17,21 +21,40 @@
 				</thead>
 				<tbody>
 					@foreach($jobs as $job)
-					<tr>
-						<td>{{$job->title}}</td>
-						<td>{{$job->published_date}}</td>
-						<td>{{$job->closing_date}}</td>
+					<tr>					
+						<td><input	type="checkbox" name="chk_delete_post[]" class="chk-delete-job" value="{{$job->id}}"/></td>
+						<td class="title"><span>{{$job->title}}</span>
+							<ul>
+								<li><a class="edit-job" href="{{URL::route('employer.job-edit',$job->employer_id)}}/{{$job->id}}">Edit</a></li>
+								<li><a class="edit-job" href="{{URL::route('employer.job-view',$job->employer_id)}}/{{$job->id}}">&nbsp;View</a></li>
+								<li><input  class="btn-job-delete"  type="submit" value="Delete"></li>
+							</ul>
+						</td>
+						<td>{{date('m-d-Y', strtotime($job->published_date))}}</td>
+						<td>{{date('m-d-Y', strtotime($job->closing_date))}}</td>
 						<td>
-							<a href="">Edit</a><br>
-							<a href="">Delete</a><br> 
-							<a href="">Preview</a>
+							@if($job->status == 0)
+							 	<p>Draft</p>
+							@else
+								<p>Published</p>							
+							@endif
 						</td>
 					</tr>
 					@endforeach
-				</tbody>
+				</tbody>				
 			</table>
+			<div  class="input-group-1">
+				<label><input name="chk-delete-jobs" type="submit" value="Delete"  class="btn btn-danger btn-jobs-delete "></label>
+			</div>
+		</div>
+		<div class="input-group">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$jobs->links()}}
 		</div>
 	</div>
 </div>
+
+{{Form::close()}}
+
 <div class="right-side-bar pull-left"></div>
+<script type="text/javascript" src="{{asset('assets/js/job_list.js')}}"></script>
 @endsection

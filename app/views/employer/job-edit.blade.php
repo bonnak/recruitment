@@ -1,28 +1,20 @@
 @extends('layouts.default') 
 
 @section('employer')
-
 <div class="left-side-bar pull-left">
-
 	<div>@include('menu.menu')</div>
-
 </div>
 <div id="employer" class="middle-wrapper pull-left">
 	<div id="job-post">
-		
-		<div class="title-bar" align="center">Create New Job</div>
+		@include('menu.message')
+		<div class="title-bar" align="center">Update Job</div>
 		<div class="content-wrapper">
-
-	 		{{\Form::open(['route' => ['employer.job-post.post', $emp_id], 'method' => 'post', 'class' => 'form-horizontal'])}}
+			{{\Form::open(['route' => ['employer.job-edit.edit', Auth::user()->id], 'method' => 'PUT', 'class' => 'form-horizontal'])}}
 				<div id="title-block" class="block clearfix">
+					<input type="hidden" name="id" value="{{$job_edit->id}}">
 				    <div>
-				      <input type="email" class="form-control" id="input-job-title" name="input-job-title" placeholder="Enter your job title here">
-				    </div>
-				    @if($errors->has())
-						<div class="error">								
-							{{$errors->first('input-job-title', ':message')}}
-						</div>
-					@endif
+				      <input type="text" value="{{$job_edit->title}}" class="form-control" id="input-job-title" name="input-job-title">
+		 		    </div>
 				</div>
 				<div id="option-block" class="block clearfix">	
 					<h4>Options Selection</h4>	
@@ -32,7 +24,7 @@
 								<div class="ctr-group nomargin clearfix pull-left">
 									<label for="input-salary-range" class="control-label pull-left">Salary Range</label>
 								    <div class="field pull-left">
-								      <input type="text" class="form-control" id="input-salary-range" name="input-salary-range">
+								      <input type="text" name="input-salary-range" value="{{$job_edit->salary_range}}"  class="form-control" id="input-salary-range">
 								    </div>
 							    </div>
 							</div>
@@ -40,10 +32,11 @@
 								<div class="ctr-group clearfix pull-left">
 									<label for="input-gender" class="control-label pull-left">Gender</label>
 								    <div class="field pull-left">
-								      <select type="text" class="form-control" id="input-gender" name="input-gender">
-								      	<option value="">--Select--</option>
-								      	<option value="M">Male</option>
-								      	<option value="F">Female</option>
+								      <select type="text" class="form-control" id="input-gender" name="input-gender">								      	
+							      		<option value="">---Select---</option>
+							      		@foreach(\Gender::getSexes() as $gender)
+										<option value="{{$gender->id}}" {{$job_edit->gender === $gender->id ? 'selected' : ''}}>{{$gender->sex}}</option>
+										@endforeach
 								      </select>
 								    </div>
 								</div>
@@ -56,9 +49,9 @@
 								<label for="input-qualification" class="control-label pull-left">Qualification</label>
 							    <div class="field pull-left">
 							      <select type="text" class="form-control" id="input-qualification" name="input-qualification">
-							      		<option value="">--Select--</option>
+							      		<option value="">---Select---</option>
 							      		@foreach(\Degree::all() as $degree)
-										<option value="{{$degree->id}}" >{{$degree->description}}</option>
+										<option value="{{$degree->id}}" {{$job_edit->qualification_id === $degree->id ? 'selected' : ''}}>{{$degree->description}}</option>
 										@endforeach
 							      </select>
 							    </div>
@@ -68,7 +61,7 @@
 							<div class="ctr-group nomargin clearfix pull-left">
 								<label for="input-hiring" class="control-label pull-left">Hiring</label>
 							    <div class="field pull-left">
-							      <input type="text" class="form-control" id="input-hiring" name="input-hiring">
+							      <input type="text" value="{{$job_edit->hiring}}" class="form-control" id="input-hiring" name="input-hiring">
 							    </div>
 							</div>
 						</div>
@@ -78,7 +71,7 @@
 							<div class="ctr-group clearfix pull-left">
 								<label for="input-age-range" class="control-label pull-left">Age Range</label>
 							    <div class="field pull-left">
-							      <input type="text" class="form-control" id="input-age-range" name="input-age-range">
+							      <input type="text" value="{{$job_edit->age_range}}" class="form-control" id="input-age-range" name="input-age-range">
 							    </div>
 							</div>
 						</div>
@@ -86,7 +79,7 @@
 							<div class="ctr-group clearfix pull-left">
 								<label for="input-min-year-exp" class="control-label pull-left">Year Experience</label>
 							    <div class="field pull-left">
-							      <input type="text" class="form-control" id="input-min-year-exp" name="input-min-year-exp">
+							      <input type="text" value="{{$job_edit->min_year_exp}}" class="form-control" id="input-min-year-exp" name="input-min-year-exp">
 							    </div>
 							</div>
 						</div>
@@ -97,9 +90,9 @@
 								<label for="input-function" class="control-label pull-left">Function</label>
 							    <div class="field pull-left">
 							      <select type="text" class="form-control" id="input-function" name="input-function">
-							      		<option value="">--Select--</option>
-							      		@foreach(\Func::all() as $func)
-										<option value="{{$func->id}}" >{{$func->name}}</option>
+							      		<option value="">--select--</option>
+							      		@foreach(\Func::getFunctions() as $func)
+										<option value="{{$func->id}}" {{$job_edit->function_id === $func->id ? 'selected' : ''}} >{{$func->name}}</option>
 										@endforeach
 							      </select>
 							    </div>
@@ -110,9 +103,9 @@
 								<label for="input-industry" class="control-label pull-left">Industry</label>
 							    <div class="field pull-left">
 							      <select type="text" class="form-control" id="input-industry" name="input-industry">
-							      		<option value="">--Select--</option>
-							      		@foreach(\Industry::all() as $industry)
-										<option value="{{$industry->id}}" >{{$industry->name}}</option>
+							      		<option value="">--select--</option>
+							      		@foreach(\Industry::getIndustries() as $industry)
+										<option value="{{$industry->id}}" {{$job_edit->industry_id === $industry->id ? 'selected' : ''}} >{{$industry->name}}</option>
 										@endforeach
 							      </select>
 							    </div>
@@ -122,16 +115,11 @@
 				</div>
 				<div id="desc-block" class="block clearfix">
 					<h4>Description</h4>
-				    <div>				    					     
+				    <div>				    					    					     
 				      	 <textarea class="textarea" name="input-job-description" placeholder="Enter text ..." style="width: 600px; height: 200px;">
-				      	 	
+				      	 	{{$job_edit->job_description}}				    
 				      	 </textarea>				   
 				    </div>
-				    @if($errors->has())
-						<div class="error">								
-							{{$errors->first('input-job-description', ':message')}}
-						</div>
-					@endif
 				</div>					
 				<div class="block">				
 					<div class="clearfix">					
@@ -142,23 +130,18 @@
 				                	<span class="input-group-addon">
 				                	 Closing Date
 				                	</span>				                	
-				                    <input type="text" class="form-control" name="input-closing-date" id="nput-closing-date">				                   			                   
-				                </div>
-			                 	@if($errors->has())
-									<div class="error">								
-										{{$errors->first('input-closing-date', ':message')}}
-									</div>
-								@endif
+				                    <input type="text" value="{{$job_edit->closing_date}}" class="form-control" name="input-closing-date" id="datepicker">				                   			                   
+				                </div>			                 	
 				            </div>	
 				        </div>												
-						</div>
+						</div>						
 					</div>
 				</div><br>				
-				<div class="input-group">
-				    <div class="col-sm-offset">
-				    	<button type="submit" class="btn btn-success" id="btn-publish-job">Publish</button>
+				<div class="form-group">
+			    <div class="col-sm-offset col-sm-10">
+			      <button type="submit" class="btn btn-success" id="btn-publish-job">Publish</button>
 				      	<button type="submit" class="btn btn-success save" id="btn-save-job">Save</button>
-				    </div>
+			    </div>
 			  </div>
 			{{\Form::close()}}
 			<script>
@@ -177,12 +160,14 @@
 					$(form).attr('action', url);
 					$(form).submit();
 				});
-			</script>
+			</script>	
 		</div>
 	</div>
 </div>
 <div class="right-side-bar pull-left"></div>
+@endsection
 
+@section('script')
 <script>
     $('.textarea').wysihtml5();
 </script>
@@ -190,9 +175,9 @@
 <script type="text/javascript" charset="utf-8">
     $(prettyPrint);
 </script>
-<script type="text/javascript">
-	$(function(){
-		$( "#nput-closing-date").datepicker({dateFormat: 'yy-mm-dd'});
-	});
-</script>
+  <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+  });
+  </script>
 @endsection

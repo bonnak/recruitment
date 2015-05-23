@@ -26,18 +26,23 @@ class CV extends Eloquent
 					title,
 					searchable,
 					summary,
-					salary_range,
 					reference,
 					available_datetime"
 				))
-				->where('id', '=', $cv_id)
-				->first();
-		
+				->where('id','=', $cv_id)
+				->first();		
 		return $cv;
 	}
-	
-
-
+	public static function get_cv_search($keyword){
+		
+		return  \DB::table('cv')
+            // ->join('can_exp_industries', 'cv.id', '=', 'can_exp_industries.cv_id')
+            // ->join('can_exp_job_terms', 'cv.id', '=', 'can_exp_job_terms.cv_id')
+            // ->join('can_educations', 'cv.id', '=', 'can_educations.cv_id')
+			->Where('title', 'LIKE', '%'. $keyword. '%')->get();
+			// ->orWhere('institute', 'LIKE', '%'. $keyword. '%')
+			// ->orWhere('major', 'LIKE', '%'. $keyword. '%')->get();
+	}
 	public function workExperience()
 	{
 		return \CandidateExperience::getExperience($this->id);
@@ -45,7 +50,7 @@ class CV extends Eloquent
 	
 	public function education()
 	{
-		return \CandidateEducation::getEducations($this->id);
+		return \CandidateEducation::getEducation($this->id);
 	}
 	
 	public function skills()
@@ -60,21 +65,32 @@ class CV extends Eloquent
 	
 	public function expectation()
 	{
-		// Load expectation functions.
-		$exp_functions = \CandidateExpFunction::getExpFunctions($this->id);
-		
-		// Load expectation industries.
-		$exp_industries = \CandidateExpIndustry::getExpIndustries($this->id);
-		
-		// Load expectation location.
-		$exp_locations = \CandidateExpLocation::getExpLocations($this->id);
-		
-		// Load expectation job term.
-		$exp_job_terms = \CandidateExpJobTerm::getExpJobTerms($this->id);
+		$exp_functions = \DB::table('can_exp_functions as cf')->select(DB::raw(
+								"*, 
+								(SELECT name FROM constant_functions WHERE id = cf.function_id LIMIT 1) function"
+						))->where('cv_id', '=', $this->id)->get();
+		$exp_industries = \DB::table('can_exp_industries as ci')->select(DB::raw(
+								"*, 
+								(SELECT name FROM constant_industries WHERE id = ci.industry_id LIMIT 1) industry"
+						))->where('cv_id', '=', $this->id)->get();
+		$exp_salaries = \DB::table('can_exp_salaries as cs')->select(DB::raw(
+								"*,
+								 CASE WHEN min is null THEN 'Below' ELSE min END min_salary, 
+								 CASE WHEN max is null THEN 'Up' ELSE max END max_salary"
+						))->where('cv_id', '=', $this->id)->first();
+		$exp_locations = \DB::table('can_exp_locations as cl')->select(DB::raw(
+								"location_id,
+								(SELECT name FROM constant_locations WHERE id = cl.location_id LIMIT 1) location"
+						))->where('cv_id', '=', $this->id)->get();
+		$exp_job_terms = \DB::table('can_exp_job_terms as cjt')->select(DB::raw(
+								"*,
+								(SELECT term FROM constant_job_terms WHERE id = cjt.term_id LIMIT 1) term"
+						))->where('cv_id', '=', $this->id)->get();
 		
 		return [
 			'functions'		=> json_decode(json_encode($exp_functions), true),
 			'industries'	=> json_decode(json_encode($exp_industries), true),
+			'salary'		=> json_decode(json_encode($exp_salaries), true),
 			'locations'		=> json_decode(json_encode($exp_locations), true),
 			'job_terms'		=> json_decode(json_encode($exp_job_terms), true)
 		];

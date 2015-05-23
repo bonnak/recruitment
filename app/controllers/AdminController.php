@@ -22,7 +22,7 @@ class AdminController extends BaseController
 	
 	public function storeCV()
 	{
-		$new_cv = [ 
+		 $new_cv = [
 			'surname' => htmlentities(Input::get('surname')), 
 			'name' => htmlentities(Input::get('name')), 
 			'sex' => htmlentities(Input::get('sex')), 
@@ -41,9 +41,29 @@ class AdminController extends BaseController
 			'current_job_title' => htmlentities(Input::get('current_job_title')), 
 			'available_date' => date('Y-m-d',strtotime(htmlentities(Input::get('available_date'))))
 		];
-		
-		CV::create($new_cv);
+		// $new_cv = CV::all();
+		//  echo $new_cv;
+		Crawl_cv::create($new_cv);
 		
 		return Redirect::back();
+	}
+	//**
+	// Seach cv by title and by candidate_id
+	public function cvSearch($key){
+	
+			$keyword = Input::get('keyword');
+
+			// return View::make('admin.cv_search')								
+			// 		->with('cv_title', CV::Where('title','LIKE','%'.$keyword.'%')
+			// 							->orWhere('id','LIKE','%'. $keyword.'%')
+										
+			// 							->paginate(3))													
+								
+		
+			$cvs = CV::get_cv_search($keyword);
+			return View::make('admin.cv_search')
+				->with('cv_title', $cvs)
+				->with('keyword', $keyword);
+
 	}
 }

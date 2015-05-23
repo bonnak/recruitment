@@ -11,8 +11,9 @@
 	href="{{asset('bootstrap-3.3.1/css/bootstrap.min.css')}}">
 <link rel="stylesheet"
 	href="{{asset('bootstrap-3.3.1/css/bootstrap-theme.min.css')}}">
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="{{asset('font-awesome-4.2.0/css/font-awesome.min.css')}}">
+<link rel="stylesheet" href="{{asset('assets/css/jquery-ui.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/global.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/base.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/layout.css')}}">
