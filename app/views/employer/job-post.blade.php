@@ -13,7 +13,7 @@
 		<div class="title-bar" align="center">Create New Job</div>
 		<div class="content-wrapper">
 
-	 		{{\Form::open(['route' => ['employer.job-post.post', $emp_id], 'method' => 'post', 'class' => 'form-horizontal'])}}
+	 		{{\Form::open(['route' => ['employer.job-post.post', Auth::user()->id], 'method' => 'post', 'class' => 'form-horizontal'])}}
 				<div id="title-block" class="block clearfix">
 				    <div>
 				      <input type="email" class="form-control" id="input-job-title" name="input-job-title" placeholder="Enter your job title here">
@@ -25,7 +25,7 @@
 					@endif
 				</div>
 				<div id="option-block" class="block clearfix">	
-					<h4>Options Selection</h4>	
+					<h4>Options Selection</h4>	 
 					<div>									
 						<div class="clearfix">
 							<div class="col-sm-6">
@@ -123,7 +123,7 @@
 				<div id="desc-block" class="block clearfix">
 					<h4>Description</h4>
 				    <div>				    					     
-				      	 <textarea class="textarea" name="input-job-description" placeholder="Enter text ..." style="width: 600px; height: 200px;">
+				      	 <textarea id="textarea" name="input-job-description" placeholder="Enter text ..." style="width: 650px; height: 200px;">
 				      	 	
 				      	 </textarea>				   
 				    </div>
@@ -133,27 +133,20 @@
 						</div>
 					@endif
 				</div>					
-				<div class="block">				
+					<div class="block" style="margin-left:-20px;">				
 					<div class="clearfix">					
 						<div class="clearfix pull-left">
-						<div class="col-md-7">
-							<div class="form-group">
-				                <div class='input-group date' >
-				                	<span class="input-group-addon">
-				                	 Closing Date
-				                	</span>				                	
-				                    <input type="text" class="form-control" name="input-closing-date" id="nput-closing-date">				                   			                   
-				                </div>
-			                 	@if($errors->has())
-									<div class="error">								
-										{{$errors->first('input-closing-date', ':message')}}
-									</div>
-								@endif
-				            </div>	
-				        </div>												
-						</div>
-					</div>
-				</div><br>				
+						<div class="col-sm-12">
+							<div class="ctr-group clearfix pull-left">
+								<label for="input-industry" class="control-label pull-left">Closing Date :</label>
+							    <div class="field pull-left">							     
+							      	<input style="width:125%;" type="text" class="form-control" name="input-closing-date" id="input-closing-date">							     
+							    </div>							   		
+								</div>
+							</div>						              				               	                 	
+		            	</div>
+	            	</div>
+	            </div><br>			
 				<div class="input-group">
 				    <div class="col-sm-offset">
 				    	<button type="submit" class="btn btn-success" id="btn-publish-job">Publish</button>
@@ -179,20 +172,25 @@
 				});
 			</script>
 		</div>
-	</div>
 </div>
 <div class="right-side-bar pull-left"></div>
 
 <script>
-    $('.textarea').wysihtml5();
-</script>
+  $('#textarea').wysihtml5({
+	  "stylesheets": ["{{asset('assets/js/lib/wysihtml5/css/wysihtml5.css')}}"], // CSS stylesheets to load
+	  "color": true, // enable text color selection
+	  "size": 'sm', // buttons size
+	  "html": true, // enable button to edit HTML
+	  "format-code" : true // enable syntax highlighting
+	});
+  </script>
 
 <script type="text/javascript" charset="utf-8">
     $(prettyPrint);
 </script>
 <script type="text/javascript">
 	$(function(){
-		$( "#nput-closing-date").datepicker({dateFormat: 'yy-mm-dd'});
+		$( "#input-closing-date").datepicker({dateFormat: 'yy-mm-dd'});
 	});
 </script>
 @endsection
