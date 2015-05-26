@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,6 +23,8 @@
 <link rel="stylesheet" href="{{asset('assets/css/state.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/theme.css')}}">
 
+  <link rel="stylesheet" href="{{asset('assets/js/lib/wysihtml5/css/bootstrap-wysihtml5.css')}}">
+
 <!-- JS -->
 <script src="{{asset('assets/js/lib/jquery-2.1.1.min.js')}}"></script>
  <script src="{{asset('assets/js/lib/jquery-ui.min.js')}}"></script>
@@ -28,6 +32,11 @@
  <script src="{{asset('assets/js/lib/angular-1_3_x.min.js')}}"></script>
  <script src="{{asset('assets/js/lib/angular-sanitize.js')}}"></script>
 <script src="{{asset('bootstrap-3.3.1/js/bootstrap.min.js')}}"></script>
+
+<script src="{{asset('assets/js/lib/wysihtml5/parser_rules/advanced.js')}}"></script>
+<script src="{{asset('assets/js/lib/wysihtml5/wysihtml5-0.3.0_rc2.js')}}"></script>
+ <script src="{{asset('assets/js/lib/wysihtml5/bootstrap-wysihtml5.js')}}"></script>
+
 
 <body>
 	<div class="top-fixed-bar">		
@@ -43,3 +52,4 @@
 </head>
 </body>
 </html>
+
