@@ -730,7 +730,7 @@ hr#line-break-footer {
 	position: relative;
 	font-size: 14px;
 	background-color: #fff;
-	width: 100%;
+	width: 109%;
 	min-height: 100px;
 	margin-bottom: 10px;
 	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
@@ -948,61 +948,70 @@ hr#line-break-footer {
 
 
 /****/
-a{
-	color: blue;
-	border-color: 12px blue;
-}
-#employer #job-list a:hover{
+
+#employer #job-list a{
 	color: blue;
 	text-decoration: none;
 }
-.title {
-	cursor: pointer;
+#employer #job-list a:hover{
+	color: blueviolet;
+	text-decoration: none;
 }
-.title li {
+.content-wrapper table tbody tr td ul li:last-child{
+	border-right: none;
+}
+.content-wrapper table tbody tr td ul li {
 	float: left;
 	list-style: none;
-	padding: 5px 10px;
+	padding: 1px 10px;
+	font-size: 12px;
+	border-right: dotted 1px;
 }
-.title ul {	
+.content-wrapper table tbody tr .title ul {	
+	margin-top: 4px;
 	display: none;		
 	position: absolute;
-	background: lavender;
-	box-shadow: 0px 0px 1px 1px silver;
 	padding: 0;
-	font-size: 12px;
+	
 	
 }
+.content-wrapper table tbody tr .title:hover ul {
+	cursor: pointer;
+	display:block;
+	padding-left: -60px;
+}
+.content-wrapper table tbody tr td {
+	height: 55px;
+}
+.content-wrapper table thead tr th input {
+	top:4px;
+	position: relative;
+}
+
 .chk-delete-job{
-	width: 1.5em;
-    height: 1.3em;
+	width: 1.2em;
+    height: 1.2em;
   	cursor: pointer;
 }
 .chk-delete-job:hover{
 	background:blue;
 }
-.title:hover ul {
-	display:inline;
-	padding-left: -40px;
-}
 
+.error {
+	color:red;
+}
 .title ul li input{
 	background: none;
 	border:solid 0px;
 }
+
 .btn-job-delete{
-	color:black;
-}
-.btn-job-delete:hover{
 	color:red;
 }
 .chk-publish{
 	height: 18px;
 	width: 18px;
 	margin-top: 0px;	
-}
-.error{
-	color: red;	
 }
 
 .contact ul li{
