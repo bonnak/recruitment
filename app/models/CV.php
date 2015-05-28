@@ -17,7 +17,7 @@ class CV extends Eloquent
 					->get();
 		
 		return $cv_list;
-	}
+	} 
 	
 	public static function getCVDetail($cv_id)
 	{
@@ -36,12 +36,10 @@ class CV extends Eloquent
 	public static function get_cv_search($keyword){
 		
 		return  \DB::table('cv')
-            // ->join('can_exp_industries', 'cv.id', '=', 'can_exp_industries.cv_id')
-            // ->join('can_exp_job_terms', 'cv.id', '=', 'can_exp_job_terms.cv_id')
-            // ->join('can_educations', 'cv.id', '=', 'can_educations.cv_id')
-			->Where('title', 'LIKE', '%'. $keyword. '%')->get();
-			// ->orWhere('institute', 'LIKE', '%'. $keyword. '%')
-			// ->orWhere('major', 'LIKE', '%'. $keyword. '%')->get();
+         
+			->Where('title', 'LIKE', '%'. $keyword. '%')
+			->orWhere('available_datetime', 'LIKE', '%'. $keyword. '%')			
+			->paginate(2);
 	}
 	public function workExperience()
 	{
