@@ -51,6 +51,20 @@ class CandidateSeeder extends Seeder {
 				'city_province_id' => 1,
 				'address' => '#59, st456, Tuol Tumpoung, Chamkar Morn' 
 		] );
+		Candidate::create ( [ 
+				'id' => 3,
+				'surname' => 'Dara',
+				'name' => 'hight',
+				'sex' => 'M',
+				'date_of_birth' => '1991-4-3',
+				'marital_id' => 1,
+				'nationality_id' => 'KHM',
+				'phone_number' => '012000888',
+				'email' => 'employee1@mail.com',
+				'city_province_id' => 1,
+				'address' => '#59, st456, Tuol Tumpoung, Chamkar Morn' 
+		] );
+		
 		
 		
 		/**
