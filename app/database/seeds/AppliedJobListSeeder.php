@@ -20,12 +20,12 @@ class AppliedJobListSeeder extends Seeder {
 		AppliedJobList::create ( [ 
 				'job_id' => 2,
 				'cv_id'  => 2,
-				'status' => 2
+				'status' => 1
 		] );
 		AppliedJobList::create ( [ 
 				'job_id' => 3,
 				'cv_id'  => 3,
-				'status' => 3
+				'status' => 0
 		] );
 	}
 }
