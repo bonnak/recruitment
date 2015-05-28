@@ -151,13 +151,20 @@ class EmployerController extends BaseController
 	//**
 	// applied job list 
 	//
-	public function AppleidJob(){
-		$applied_job = AppliedJobList::getapplyList();
+	public function AppliedJob($filter){
+		
+		$filter = Input::get('filter');
+
+		$applied_job = AppliedJobList::getapplyList($filter);
+		
 		return View::make('employer.applied-job')
-					->with('applied', $applied_job);
-
-
-
+			->with('applied', $applied_job)
+			->with('filname', $filter);
 	}
+
+	//
+	// filter applied job list
+	//
+
 
 }
