@@ -26,16 +26,24 @@ class CVTableSeeder extends Seeder {
 			'reference'			=> 'Sentence 1 puts forth the main claim: The punishment of criminals has always been a problem for society. Sentence 2 specifies the exact nature of the problem by listing society\'s choices: Citizens have had to decide whether offenders such as first-degree murderers should be killed in a gas chamber, imprisoned for life, or rehabilitated and given a second chance in society. Sentence 3 further develops the topic by stating one point of view: Many citizens argue that serious criminals should be executed. The reasons for this point of view are then provided in sentence 4: They believe that killing criminals will set an example for others and also rid society of a cumbersome burden.',
 			'summary'			=> 'Professional with 20+ years of experience in IT and Education industry.',
 			'available_datetime' => date('Y-m-d',strtotime('12/20/2014'))
-		] );	
+		] );
 		$cv = CV::create ( [ 
 			'candidate_id'		=> 2,
-			'title'				=> 'cv2 web developer',
-			'searchable'		=> 2,  
+			'title'				=> 'cv2 developer linux',
+			'searchable'		=> 1,  
 			'reference'			=> 'Sentence 1 puts forth the main claim: The punishment of criminals has always been a problem for society. Sentence 2 specifies the exact nature of the problem by listing society\'s choices: Citizens have had to decide whether offenders such as first-degree murderers should be killed in a gas chamber, imprisoned for life, or rehabilitated and given a second chance in society. Sentence 3 further develops the topic by stating one point of view: Many citizens argue that serious criminals should be executed. The reasons for this point of view are then provided in sentence 4: They believe that killing criminals will set an example for others and also rid society of a cumbersome burden.',
 			'summary'			=> 'Professional with 20+ years of experience in IT and Education industry.',
 			'available_datetime' => date('Y-m-d',strtotime('12/20/2014'))
-		] );	
-		
+		] );
+		$cv = CV::create ( [ 
+			'candidate_id'		=> 3,
+			'title'				=> 'cv3 Operation system linux',
+			'searchable'		=> 1,  
+			'reference'			=> 'Sentence 1 puts forth the main claim: The punishment of criminals has always been a problem for society. Sentence 2 specifies the exact nature of the problem by listing society\'s choices: Citizens have had to decide whether offenders such as first-degree murderers should be killed in a gas chamber, imprisoned for life, or rehabilitated and given a second chance in society. Sentence 3 further develops the topic by stating one point of view: Many citizens argue that serious criminals should be executed. The reasons for this point of view are then provided in sentence 4: They believe that killing criminals will set an example for others and also rid society of a cumbersome burden.',
+			'summary'			=> 'Professional with 20+ years of experience in IT and Education industry.',
+			'available_datetime' => date('Y-m-d',strtotime('12/20/2014'))
+		] );			
+	
 		DB::table('can_exp_functions')->insert([
 			['cv_id' => $cv->id, 'function_id' => 1, 'created_at' => date('Y-m-d',strtotime('12/20/2014')), 'updated_at' => date('Y-m-d',strtotime('12/20/2014'))],
 			['cv_id' => $cv->id, 'function_id' => 3, 'created_at' => date('Y-m-d',strtotime('12/20/2014')), 'updated_at' => date('Y-m-d',strtotime('12/20/2014'))],
