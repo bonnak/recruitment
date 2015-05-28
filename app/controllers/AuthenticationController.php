@@ -61,7 +61,7 @@ class AuthenticationController extends BaseController{
 			return Redirect::to('admin.register')->with('global','The following errors occurred')->withErrors($vali)->withInput();
 		}
 	}
-
+ 
 	public function adminLogoutPost()
 	{
 		Auth::logout();
