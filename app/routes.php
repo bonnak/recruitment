@@ -83,8 +83,12 @@ Route::group(['before' => 'auth'], function (){
 	Route::put('/user/employer/{emp_id}/job/edit', ['as' => 'employer.job-edit.edit', 'uses' => 'EmployerController@editJobEdit']);
 	Route::get('/user/employer/{emp_id}/job/view/{id}', ['as' => 'employer.job-view', 'uses' => 'EmployerController@viewJob']);
 	Route::delete('/user/employer/{emp_id}/job/delete', ['as' => 'employer.job-post.delete', 'uses' => 'EmployerController@DeleteJobPost']);
-	Route::get('/user/employer/{emp_id}/applied-job', ['as' => 'employer.applied-job', 'uses' => 'EmployerController@AppleidJob']);
+	Route::get('/user/employer/{emp_id}/applied-job', ['as' => 'employer.applied-job', 'uses' => 'EmployerController@AppliedJob']);
+	Route::post('/user/employer/{emp_id}/applied-job', ['as' => 'employer.applied-post', 'uses' => 'EmployerController@AppliedJob']);
+	
 	Route::get('/user/employer/{emp_id}/cv_search', ['as' => 'employer.cv.search', 'uses' => 'AdminController@cvSearch']);
+	Route::post('/user/employer/{emp_id}/cv_search', ['as' => 'employer.cv.get-search', 'uses' => 'AdminController@cvSearch']);
+
 	/**************************************************
 	 **************************************************/
 	
