@@ -17,9 +17,9 @@
 								<th>
 									<div class="pull-left">
 									<select name="filter" class="form-control" style=" font-size:12px;  height:25px; padding:4px;"> 
-										<option> -- none--</option>
-										<option value="0">Inaction</option>
-										<option value="1">action</option>
+										<option value="">All</option>										
+										<option value="0" {{is_numeric($filter	) && $filter == 0 ? 'selected' : ''}}>Inactive</option>
+										<option value="1" {{is_numeric($filter) && $filter == 1 ? 'selected' : ''}}>Active</option>
 									</select>
 									</div>&nbsp;
 									<div class="pull-left">
@@ -44,11 +44,7 @@
 							</tr>
 							@endforeach						
 						</tbody>					
-					</table>			
-					<hr style="border:solid 1px lavender;">
-					<div  class="input-group-1">
-						<label><input name="" value="Filter"  class="btn btn-danger btn-jobs-delete "></label>
-					</div>
+					</table>	
 				</div>
 			<div class="input-group">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$applied->links()}}

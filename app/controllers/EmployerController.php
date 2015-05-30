@@ -158,8 +158,10 @@ class EmployerController extends BaseController
 		$applied_job = AppliedJobList::getapplyList($filter);
 		
 		return View::make('employer.applied-job')
-			->with('applied', $applied_job)
-			->with('filname', $filter);
+			->with([
+				'applied' => $applied_job,					
+				'filter'  => $filter
+			]);
 	}
 
 	//

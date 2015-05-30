@@ -16,12 +16,12 @@ class AppliedJobList extends Eloquent
 						"
 						app.id,
 						jobs.title job_title,
-						(SELECT surname as name  FROM candidates WHERE id = cv.candidate_id LIMIT 1) candidate_name,
+						(SELECT concat(surname, ' ', name) FROM candidates WHERE id = cv.candidate_id LIMIT 1) candidate_name,
 						app.created_at applied_date,
 						app.status
 						"
 						))
-					->Orwhere('app.status', 'LIKE', '%'. $filter. '%')
+					->where('app.status', 'LIKE', '%'. $filter. '%')
 					->paginate(3);
 					
 	}
