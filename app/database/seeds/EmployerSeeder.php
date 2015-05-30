@@ -57,5 +57,18 @@ class EmployerSeeder extends Seeder {
 				'published_date' => \Carbon\Carbon::today (),
 				'closing_date' => \Carbon\Carbon::today ()->addDays ( 10 ) 
 		] );
+			\Job::create ( [ 
+				'employer_id' => 3,
+				'title' => 'IT Programmer',
+				'job_description' => 'We are looking 3 recieptionist.',
+				'salary_range' => '$300 - $500',
+				'hiring' => 3,
+				'qualification_id' => 1,
+				'age_range' => '20 - Up',
+				'function_id' => 6,
+				'industry_id' => 7,
+				'published_date' => \Carbon\Carbon::today (),
+				'closing_date' => \Carbon\Carbon::today ()->addDays ( 10 ) 
+		] );
 	}
 }

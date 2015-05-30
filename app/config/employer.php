@@ -1,14 +1,14 @@
 <?php
 return [ 
-		'menu' => [ 
+		'menu' => [  
 				'Dashboard' => \URL::route ( 'employer' ),
 				'Manage Jobs' => [ 
 						'Post New Job' => \URL::route ( 'employer.job-post', Auth::user ()->id ),
 						'Jobs List' => \URL::route ( 'employer.job-list', Auth::user ()->id ) 
 				],
 				'Candidates' => [ 
-						'Applied List' => '#',
-						'CV Search' => '#',
+						'Applied List' => \URL::route ( 'employer.applied-job', Auth::user ()->id ), 
+						'CV Search' => \URL::route ('employer.cv.search', Auth::user()->id ),
 						'Your Favorite CV' => '#' 
 				// 'Recommend CV' => '#',
 				// 'Product & Service' => [

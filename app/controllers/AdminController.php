@@ -44,26 +44,20 @@ class AdminController extends BaseController
 		// $new_cv = CV::all();
 		//  echo $new_cv;
 		Crawl_cv::create($new_cv);
-		
+	
 		return Redirect::back();
 	}
 	//**
 	// Seach cv by title and by candidate_id
-	public function cvSearch($key){
+	public function cvSearch($keyword){
 	
-			$keyword = Input::get('keyword');
-
-			// return View::make('admin.cv_search')								
-			// 		->with('cv_title', CV::Where('title','LIKE','%'.$keyword.'%')
-			// 							->orWhere('id','LIKE','%'. $keyword.'%')
-										
-			// 							->paginate(3))													
-								
-		
+			$keyword = Input::get('keyword');		
+			
 			$cvs = CV::get_cv_search($keyword);
-			return View::make('admin.cv_search')
-				->with('cv_title', $cvs)
-				->with('keyword', $keyword);
+
+			return View::make('admin.cv-search')
+					->with('cv_title', $cvs)
+					->with('keyword', $keyword);
 
 	}
 }

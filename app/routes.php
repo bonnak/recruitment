@@ -1,4 +1,4 @@
-<?php
+ 	<?php
  
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +67,7 @@ Route::group(['before' => 'auth'], function (){
 	Route::post('/user/candidate/cv/edit/{cv_id}/job_term', ['as' => 'candidate.cv.edit.job_term.post', 'uses' => 'CandidateController@createJobTerm']);
 	Route::delete('/user/candidate/cv/edit/{cv_id}/job_term/{job_term_id}', ['as' => 'candidate.cv.edit.job_term.delete', 'uses' => 'CandidateController@deleteJobTerm']);
 	
-	// Route CV edit reference.
+	// Route CV edit reference. 
 	Route::put('/user/candidate/cv/edit/{id}/reference', ['as' => 'candidate.cv.edit.reference.put', 'uses' => 'CandidateController@editCVReference']);
 	/**************************************************
 	 **************************************************/
@@ -83,7 +83,12 @@ Route::group(['before' => 'auth'], function (){
 	Route::put('/user/employer/{emp_id}/job/edit', ['as' => 'employer.job-edit.edit', 'uses' => 'EmployerController@editJobEdit']);
 	Route::get('/user/employer/{emp_id}/job/view/{id}', ['as' => 'employer.job-view', 'uses' => 'EmployerController@viewJob']);
 	Route::delete('/user/employer/{emp_id}/job/delete', ['as' => 'employer.job-post.delete', 'uses' => 'EmployerController@DeleteJobPost']);
+	Route::get('/user/employer/{emp_id}/applied-job', ['as' => 'employer.applied-job', 'uses' => 'EmployerController@AppliedJob']);
+	Route::post('/user/employer/{emp_id}/applied-job', ['as' => 'employer.applied-post', 'uses' => 'EmployerController@AppliedJob']);
+	
 	Route::get('/user/employer/{emp_id}/cv_search', ['as' => 'employer.cv.search', 'uses' => 'AdminController@cvSearch']);
+	Route::post('/user/employer/{emp_id}/cv_search', ['as' => 'employer.cv.get-search', 'uses' => 'AdminController@cvSearch']);
+ 
 	/**************************************************
 	 **************************************************/
 	
@@ -112,19 +117,3 @@ Route::group(['before' => 'csrf'], function(){
 	Route::post('login', ['as' => 'user.login.post', 'uses' => 'AuthenticationController@postUserLogin']);
 	Route::post('register', ['as' => 'user.register.post', 'uses' => 'AuthenticationController@postUserRegister']);
 });
-
-// App::missing(function($exception)
-// {
-// 	//return Response::view('errors.missing', array(), 404);
-// 	return ['er' => '123'];
-// });
-
-// App::error(function(Exception $exception)
-// {
-// 	return [
-// 		'error' => [
-// 			'code' => $exception->getCode(),
-// 			'message' => $exception->getMessage(),
-// 		]
-// 	];
-// });

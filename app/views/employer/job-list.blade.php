@@ -9,7 +9,7 @@
 		
 		<div class="title-bar" align="center"> Jobs List</div>
 		<div class="content-wrapper">
-			<table class="table table-condensed table-bordered">
+			<table class="table">
 				<thead>
 					<tr>
 						<th><input	type="checkbox" id="chk-delete-jobs" class="chk-delete-job"/></th>

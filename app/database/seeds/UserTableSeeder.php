@@ -20,7 +20,7 @@ class UserTableSeeder extends Seeder {
 		] );
 		
 		// Employee login user.
-		User::create ( [ 
+		User::create ( [  
 			'username' => 'employee1',
 			'password'	=> Hash::make('12345678'),
 			'email'		=> 'employee1@mail.com',

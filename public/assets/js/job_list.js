@@ -35,7 +35,7 @@ $(document).ready(function(){
 	//checkbox onclick is checked all
 	$("#chk-delete-jobs").on('click', function(){
 		$("input[name='chk_delete_post[]']").prop('checked', this.checked);
-		job_id = $(this).parents('tr').css("background","blue");
+		
 	});
 	// checkbox  equals checked and then checkall equals checked 
 	$("input[name='chk_delete_post[]']").on('click',function(){
@@ -51,9 +51,7 @@ $(document).ready(function(){
 	});
 
 	// hover show mouse texh on mouse hover
-	$(".title span").mouseenter(function(e){
-		$("ul ").css({"top":(e.pageY - 115) + "px", "left":(e.pageX - 320) + "px"});
-	});
+	
 });
 
 $(document).ready(function(e){
@@ -67,9 +65,4 @@ $(document).ready(function(e){
 	});
 });
 // show message when delete or update and delete
-$(document).ready(function(){
-	$(".messageshow").on('click',function(){
-		$(this).slideUp('slow');
 
-	});
-});

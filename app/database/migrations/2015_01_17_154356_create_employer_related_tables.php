@@ -61,6 +61,13 @@ class CreateEmployerRelatedTables extends Migration {
 			$table->integer('term_id');
 			$table->timestamps();
 		});
+		Schema::create('applied_job_list', function ($table){
+			$table->bigIncrements('id');
+			$table->bigInteger('job_id');
+			$table->bigInteger('cv_id');
+			$table->bigInteger('status');
+			$table->timestamps();
+		});
 	}
 
 	/**
@@ -75,6 +82,7 @@ class CreateEmployerRelatedTables extends Migration {
 		Schema::drop('required_locations');
 		Schema::drop('required_languages');
 		Schema::drop('required_job_terms');
+		Schema::drop('applied_job_list');
 	}
 
 }

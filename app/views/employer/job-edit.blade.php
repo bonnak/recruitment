@@ -6,7 +6,7 @@
 </div>
 <div id="employer" class="middle-wrapper pull-left">
 	<div id="job-post">
-		@include('menu.message')
+		
 		<div class="title-bar" align="center">Update Job</div>
 		<div class="content-wrapper">
 			{{\Form::open(['route' => ['employer.job-edit.edit', Auth::user()->id], 'method' => 'PUT', 'class' => 'form-horizontal'])}}
@@ -32,12 +32,12 @@
 								<div class="ctr-group clearfix pull-left">
 									<label for="input-gender" class="control-label pull-left">Gender</label>
 								    <div class="field pull-left">
-								      <select type="text" class="form-control" id="input-gender" name="input-gender">								      	
+								       <select type="text" class="form-control" id="input-gender" name="input-gender">
 							      		<option value="">---Select---</option>
-							      		@foreach(\Gender::getSexes() as $gender)
+							      		@foreach(\Gender::getgender() as $gender)
 										<option value="{{$gender->id}}" {{$job_edit->gender === $gender->id ? 'selected' : ''}}>{{$gender->sex}}</option>
 										@endforeach
-								      </select>
+							      </select>
 								    </div>
 								</div>
 							</div>
@@ -116,27 +116,25 @@
 				<div id="desc-block" class="block clearfix">
 					<h4>Description</h4>
 				    <div>				    					    					     
-				      	 <textarea class="textarea" name="input-job-description" placeholder="Enter text ..." style="width: 600px; height: 200px;">
+				      	 <textarea class="textarea" name="input-job-description" placeholder="Enter text ..." style="width: 650px; height: 200px;">
 				      	 	{{$job_edit->job_description}}				    
 				      	 </textarea>				   
 				    </div>
 				</div>					
-				<div class="block">				
+				<div class="block" style="margin-left:-20px;">				
 					<div class="clearfix">					
 						<div class="clearfix pull-left">
-						<div class="col-md-7">
-							<div class="form-group">
-				                <div class='input-group date' >
-				                	<span class="input-group-addon">
-				                	 Closing Date
-				                	</span>				                	
-				                    <input type="text" value="{{$job_edit->closing_date}}" class="form-control" name="input-closing-date" id="datepicker">				                   			                   
-				                </div>			                 	
-				            </div>	
-				        </div>												
-						</div>						
-					</div>
-				</div><br>				
+						<div class="col-sm-12">
+							<div class="ctr-group clearfix pull-left">
+								<label for="input-industry" class="control-label pull-left">Closing Date :</label>
+							    <div class="field pull-left">							     
+							      	<input style="width:125%;" value="{{$job_edit->closing_date}}"​​​​ type="text" class="form-control" name="input-closing-date" id="input-closing-date"​​​>							     
+							    </div>							   		
+								</div>
+							</div>						              				               	                 	
+		            	</div>
+	            	</div> 
+	            </div><br>				
 				<div class="form-group">
 			    <div class="col-sm-offset col-sm-10">
 			      <button type="submit" class="btn btn-success" id="btn-publish-job">Publish</button>
@@ -177,7 +175,7 @@
 </script>
   <script>
   $(function() {
-    $( "#datepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+    $( "#input-closing-date" ).datepicker({dateFormat: "yy-mm-dd"});
   });
   </script>
 @endsection
