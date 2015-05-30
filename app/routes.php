@@ -1,4 +1,4 @@
-	<?php
+ 	<?php
  
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ Route::group(['before' => 'auth'], function (){
 	
 	Route::get('/user/employer/{emp_id}/cv_search', ['as' => 'employer.cv.search', 'uses' => 'AdminController@cvSearch']);
 	Route::post('/user/employer/{emp_id}/cv_search', ['as' => 'employer.cv.get-search', 'uses' => 'AdminController@cvSearch']);
-
+ 
 	/**************************************************
 	 **************************************************/
 	
