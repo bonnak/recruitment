@@ -23,7 +23,7 @@
 									</select>
 									</div>&nbsp;
 									<div class="pull-left">
-										<input style="height:25px; width:55px; padding:4px;" type="submit" class="btn btn-default" value="Filter"> 
+										<input style="height:25px; width:52px; padding:1px; margin:1px; top:-1px;" type="submit" class="btn btn-default" value="Filter"> 
 									</div>
 								</th>
 							</tr>
