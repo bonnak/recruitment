@@ -16,7 +16,7 @@ class AppliedJobList extends Eloquent
 						"
 						app.id,
 						jobs.title job_title,
-						(SELECT surname FROM candidates WHERE id = cv.candidate_id LIMIT 1) candidate_name,
+						(SELECT surname as name  FROM candidates WHERE id = cv.candidate_id LIMIT 1) candidate_name,
 						app.created_at applied_date,
 						app.status
 						"

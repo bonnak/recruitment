@@ -3,7 +3,7 @@ if (! Auth::guest () && Auth::user ()->role === null)
 {
 	switch (Auth::user ()->user_type) 
 	{
-		case 1 : // Employer
+		case 1 : // Employer 
 ?>
 		@foreach(Config::get('employer.menu') as $menu => $url)
 			<ul class="list-unstyled">

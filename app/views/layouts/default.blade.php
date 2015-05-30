@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="{{asset('assets/css/state.css')}}">
 <link rel="stylesheet" href="{{asset('assets/css/theme.css')}}">
 
-  <link rel="stylesheet" href="{{asset('assets/js/lib/wysihtml5/css/bootstrap-wysihtml5.css')}}">
+<link rel="stylesheet" href="{{asset('assets/js/lib/wysihtml5/css/bootstrap-wysihtml5.css')}}">
 
 <!-- JS -->
 <script src="{{asset('assets/js/lib/jquery-2.1.1.min.js')}}"></script>

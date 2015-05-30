@@ -1,6 +1,6 @@
 <?php
 return [ 
-		'menu' => [ 
+		'menu' => [  
 				'Dashboard' => \URL::route ( 'employer' ),
 				'Manage Jobs' => [ 
 						'Post New Job' => \URL::route ( 'employer.job-post', Auth::user ()->id ),

@@ -101,7 +101,7 @@ class AuthenticationController extends BaseController{
 				'password'	=> $password,
 				'role' 		=> null,
 				'activated'	=> 1
-			]);
+			]); 
 			
 		
 			if($auth_username || $auth_email)
