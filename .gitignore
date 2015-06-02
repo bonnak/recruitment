@@ -1,3 +1,2 @@
-app/storage/sessions/
-app/storage/logs/laravel.log
-bootstrap/
+app/storage/*
+bootstrap/*
