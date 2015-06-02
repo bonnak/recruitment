@@ -52,7 +52,7 @@ class CandidateSeeder extends Seeder {
 				'address' => '#59, st456, Tuol Tumpoung, Chamkar Morn' 
 		] );
 		Candidate::create ( [ 
-				'id' => 3,
+				'id' => 4,
 				'surname' => 'Dara',
 				'name' => 'hight',
 				'sex' => 'M',
