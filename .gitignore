@@ -1,2 +1,1 @@
-app/storage/sessions/
-app/storage/logs/
+bootstrap/*
