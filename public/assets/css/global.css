@@ -960,6 +960,7 @@ hr#line-break-footer {
 .content-wrapper table tbody tr td ul li:last-child{
 	border-right: none;
 }
+
 .content-wrapper table tbody tr td ul li {
 	float: left;
 	list-style: none;
@@ -972,8 +973,6 @@ hr#line-break-footer {
 	display: none;		
 	position: absolute;
 	padding: 0;
-	
-	
 }
 .content-wrapper table tbody tr .title:hover ul {
 	cursor: pointer;
@@ -982,12 +981,32 @@ hr#line-break-footer {
 }
 .content-wrapper table tbody tr td {
 	height: 55px;
+	border: none;
 }
 .content-wrapper table thead tr th input {
 	top:4px;
 	position: relative;
 }
-
+.content-wrapper table thead tr:last-child {
+	background: #f0f8ff;
+}
+.content-wrapper table thead tr th:first-child{
+	width: 150px;
+}
+.content-wrapper table thead tr th:last-child{
+	text-align: center;
+	width: 100px;
+}
+.content-wrapper table thead tr th .filter-applied-list{
+	position: absolute;
+	left: 551px;
+  	top: 48px;
+}
+.content-wrapper table thead tr th .search-applied-list{
+	position: absolute;
+	left: 25px;
+  	top: 48px;
+}
 .chk-delete-job{
 	width: 1.2em;
     height: 1.2em;
