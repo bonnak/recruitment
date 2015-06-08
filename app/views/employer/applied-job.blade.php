@@ -8,24 +8,40 @@
 			<div class="title-bar" align="center"> Jobs List</div>
 				<div class="content-wrapper">		
 					<table class="table table-triped">
-						<thead>				
+						<thead>	
+							<tr>
+								<th colspan="2">
+									<div class="input-group search-applied-list">
+										<div class="pull-left input-group">
+											<input type="text" name="input-search" class="form-control input-sm input-search-applied" style=" font-size:12px;  height:25px; padding:4px;" name="search-applied-list">
+										</div>
+										<div class="pull-left input-group">
+											&nbsp;<input type="submit" name="search-applied" class="btn btn-default input-sm " id="search-applied" value="Search" style="height:25px; padding:2px 8px; margin:1px;">
+										</div>
+									</div>
+								</th>
+								
+								<th colspan="2">									
+									<div class="input-group filter-applied-list">
+										<div class="pull-left">
+											<select name="filter" class="form-control input-sm" style=" font-size:12px;  height:25px; padding:4px; top:4px;"> 
+												<option value="">--All--</option>										
+												<option value="0" {{is_numeric($filter	) && $filter == 0 ? 'selected' : ''}}>Inactive</option>
+												<option value="1" {{is_numeric($filter) && $filter == 1 ? 'selected' : ''}}>Active</option>
+											</select>
+										</div>									
+										<div class="pull-left ">
+											&nbsp;<input style="height:25px; width:52px; padding:1px; margin:1px; top:3px;" type="submit" class="btn btn-default input-sm" value="Filter"> 
+										</div>
+									</div>
+								</th>
+							</tr>			
 							<tr>						
 								<th>Candidate</th>
 								<th>Job Title</th>
 								<th>Applied Date</th>
-								<th>Status</th>
-								<th>
-									<div class="pull-left">
-									<select name="filter" class="form-control" style=" font-size:12px;  height:25px; padding:4px;"> 
-										<option value="">All</option>										
-										<option value="0" {{is_numeric($filter	) && $filter == 0 ? 'selected' : ''}}>Inactive</option>
-										<option value="1" {{is_numeric($filter) && $filter == 1 ? 'selected' : ''}}>Active</option>
-									</select>
-									</div>&nbsp;
-									<div class="pull-left">
-										<input style="height:25px; width:52px; padding:1px; margin:1px; top:-1px;" type="submit" class="btn btn-default" value="Filter"> 
-									</div>
-								</th>
+								<th colspan="2" align="center"> Status</th>
+								
 							</tr>
 						</thead>
 						<tbody>

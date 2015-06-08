@@ -21,7 +21,8 @@ class AppliedJobList extends Eloquent
 						app.status
 						"
 						))
-					->where('app.status', 'LIKE', '%'. $filter. '%')
+					->Where('app.status', 'LIKE', '%'. $filter. '%')
+					->Orwhere('jobs.title', 'LIKE', '%'. $filter. '%')
 					->paginate(3);
 					
 	}
