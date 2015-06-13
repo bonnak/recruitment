@@ -54,8 +54,8 @@ $(document).ready(function(){
 	
 });
 
-$(document).ready(function(e){
-	$(".edit-job").on('click', function(){
+$(document).ready(function(){
+	$(".edit-job").on('click', function(e){
 			var form   = $(this).parents('form'),
 				url    = $(form).attr('action')
 				job_id = $(this).parents('tr').find('.chk-delete-job').val();
@@ -64,5 +64,21 @@ $(document).ready(function(e){
 		e.preventDefault();			
 	});
 });
+//
 // show message when delete or update and delete
+//
+$(document).ready(function(){
+	$("#search-applied").on('click', function(e){
+		var form   = $(this).parents('form'),
+			url    = $(form).attr('action')
+			key = $(this).parents('tr').find('.input-search-applied').val();
+			url = url + '?keyword=' + key;
+			
+			$(form).attr('action', url);
+			form.submit();
+		e.preventDefault();		
+	});
+});
+
+
 
