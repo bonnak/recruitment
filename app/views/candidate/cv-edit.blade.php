@@ -612,7 +612,7 @@
 					<p>{% reference %}</p>			
 				</div>
 				<div class="clearfix">
-					<a href="javascript:onclick" id="btn-edit"class="glyphicon glyphicon-pencil pull-right" ng-click="show_frm_reference = true"></a>
+					<a href="" id="btn-edit"class="glyphicon glyphicon-pencil pull-right" ng-click="show_frm_reference = true"></a>
 				</div>
 			</div>
 			<div class="form-edit" ng-show="show_frm_reference">
