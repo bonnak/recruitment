@@ -1,7 +1,6 @@
 <?php
 return [ 
 		'menu' => [ 
-				'Dashboard' => '#',
 				'CV and Cover Letters' => [ 
 						'Create a CV' => \URL::route ( 'candidate.cv.create' ),
 						'My CV' => \URL::route ( 'candidate.cvs' ),
