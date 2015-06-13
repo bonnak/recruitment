@@ -97,7 +97,7 @@
 								<label>Residence</label>
 							</div>
 							<div class="col-sm-8">
-								<span class="data"><strong>{{$candidate->residence}}</strong></span>
+								<span class="data"><strong></strong></span>
 							</div>
 						</div>
 						<div class="row input-elements">
@@ -425,5 +425,6 @@
 			</div>			
 		</form>
 	</div>
-	<div class="right-side-bar pull-left"></div>
+</div>
+<div class="right-side-bar pull-left"></div>
 	@endsection
