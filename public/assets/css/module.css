@@ -13,28 +13,37 @@
 }
 #cv-edit #back-card .card-btn-group,
 #cv-edit #expectation-card .card-btn-group,
-#cv-edit #ref-card .card-btn-group{
-	position: absolute;	
-	display: none;
-	left: 100%;
-	top: 0;
+#cv-edit #ref-card #btn-edit{
 	padding: 5px 5px;
 	background: #ECECEC;
 	border: 1px solid #BEBEBE;
 	box-shadow: 1px 1px 4px rgba(0,0,0,.1), -2px 1px 1px rgba(0,0,0,0.1);
 	border-radius: 5px 0 0 5px;
+}
+#cv-edit #back-card .card-btn-group,
+#cv-edit #expectation-card .card-btn-group{	
+	position: absolute;	
+	display: none;
+	left: 100%;
+	top: 0;
 	transform: translate(-9px);
 }
 #cv-edit #profile-card .card-btn-group a,
 #cv-edit #back-card .card-btn-group a,
 #cv-edit #expectation-card .card-btn-group a,
-#cv-edit #ref-card .card-btn-group a{
+#cv-edit #ref-card #btn-edit{
 	font-size: 20px;
 	padding: 3px 5px;
 	color: #434649;
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	text-decoration: none;
+}
+#cv-edit #ref-card #btn-edit{
+	margin-top: 9px;
+	padding: 7px 27px;
+	border-radius: 5px;
+	box-shadow: none;
 }
 #cv-edit #experience .items,
 #cv-edit #edu .items{

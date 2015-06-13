@@ -414,7 +414,7 @@ input#search-keyword{
 	position: relative;
 	padding: 20px;
 	background-color: #fff;
-	border: 1px solid #E5E5E5;
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.15), -1px 0px 0px rgba(0, 0, 0, 0.03), 1px 0px 0px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.12);
 }
 
 #job-posts.box-body{
@@ -431,7 +431,7 @@ input#search-keyword{
 }
 
 .job-post a.job-title {
-	color: #C7911D;
+	text-decoration: none;
 	font-size: 16px;
 	font-size: 16px;
 }
@@ -444,10 +444,7 @@ input#search-keyword{
 	display: inline-block;
 	margin-top: 0;
 	margin-bottom: 22px;
-	color: #28be68;
-}
-.job-post a.job-title h3:hover{	
-	text-decoration: underline;
+	color: #555;
 }
 
 .job-post .job-status {
@@ -861,7 +858,7 @@ hr#line-break-footer {
 }
 #cv-edit .form-edit .opt-controls,
 #cv-edit .form-new .opt-controls{
-	margin-top: 15px;
+	margin-top: 10px;
 	text-align: right;
 }
 
@@ -960,6 +957,7 @@ hr#line-break-footer {
 .content-wrapper table tbody tr td ul li:last-child{
 	border-right: none;
 }
+
 .content-wrapper table tbody tr td ul li {
 	float: left;
 	list-style: none;
@@ -972,8 +970,6 @@ hr#line-break-footer {
 	display: none;		
 	position: absolute;
 	padding: 0;
-	
-	
 }
 .content-wrapper table tbody tr .title:hover ul {
 	cursor: pointer;
@@ -982,12 +978,32 @@ hr#line-break-footer {
 }
 .content-wrapper table tbody tr td {
 	height: 55px;
+	border: none;
 }
 .content-wrapper table thead tr th input {
 	top:4px;
 	position: relative;
 }
-
+.content-wrapper table thead tr:last-child {
+	background: #f0f8ff;
+}
+.content-wrapper table thead tr th:first-child{
+	width: 150px;
+}
+.content-wrapper table thead tr th:last-child{
+	text-align: center;
+	width: 100px;
+}
+.content-wrapper table thead tr th .filter-applied-list{
+	position: absolute;
+	left: 551px;
+  	top: 48px;
+}
+.content-wrapper table thead tr th .search-applied-list{
+	position: absolute;
+	left: 25px;
+  	top: 48px;
+}
 .chk-delete-job{
 	width: 1.2em;
     height: 1.2em;
