@@ -33,197 +33,29 @@
 		</div>
 		<div class="middle-wrapper pull-left">
 			<div class="row">
-				<div class="col-md-12">
-					<div id="browse-jobs">
-						<div class="row">
-							<div class="col-md-12">
-								<ul class="nav nav-tabs nav-justified" id="browse-jobs-tab">
-									<li role="presentation" data-toggle="tab" class="active"><a
-										href="#category">Categories</a></li>
-									<li role="presentation" data-toggle="tab"><a href="#industry">Industries</a></li>
-									<li role="presentation" data-toggle="tab"><a href="#location">Locations</a></li>
-								</ul>
-								<div class="tab-content">
-									<div class="tab-pane active" id="category">
-										<ul>
-											@foreach($functions as $func)
-												<li>
-													<span class="text">
-													<a href="https://camupjob.com/category-1-accounting+financial">{{$func->name}}</a></span> 
-													<span class="counter badge"><em>80</em></span>
-												</li>
-											@endforeach
-										</ul>
-									</div>
-									<div class="tab-pane" id="industry">
-										<ul>
-											@foreach($industries as $industry)
-												<li>
-													<span class="text">
-													<a href="https://camupjob.com/industry-2-advertising+media+publishing">{{$industry->name}}</a></span> 
-													<span class="counter badge"><em>1</em></span>
-												</li>
-											@endforeach
-										</ul>
-									</div>
-									<div class="tab-pane" id="location">
-										<ul>
-											@foreach($locations as $location)
-												<li>
-													<span class="text">
-													<a href="https://camupjob.com/location-1-phnom-penh">{{$location->name}}</a>
-													</span> <span class="counter badge"><em>576</em></span>
-												</li>
-											@endforeach
-										</ul>
-									</div>
-									<script>
-										$('#browse-jobs-tab a').click(function (e) {
-								  			e.preventDefault();
-								  			$(this).tab('show');
-										});
-									</script>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div class="col-md-12">					
 					<div class="content-wrapper">
-						<div class="view-name title-bar">
-							<strong>Job Posts</strong>
-						</div>
 						<div id="job-posts" class="box-body">
-							<div class="job-post">
-								<ul class="list-unstyled">
-									<li><a href="" class="job-title"><h3>Quotation and Project
-												Study</h3></a>
-										<div class="clearfix">
-											<div class="employer">
-												<img src="{{asset('assets/images/company-logos/1.png')}}" style="width: 82px;"> 
-												<small>Inter Smart Cambodia Co.,Ltd</small>
+							@foreach($jobs as $job)
+								<div class="job-post">
+									<ul class="list-unstyled">
+										<li><a href="" class="job-title"><h3>{{ $job->title }}</h3></a>
+											<div class="clearfix">
+												<div class="employer">
+													<img src="{{asset('assets/images/company-logos/1.png')}}" style="width: 82px;"> 
+													<small>Inter Smart Cambodia Co.,Ltd</small>
+												</div>
+												<div style="margin-top: 5px; font-style: italic;">
+													<small>Closing date: <span class="closing-date" style="color: red; font-weight: bold">{{ $job->closing_date }}</span></small><span class="separator">|</span>
+													<small>Location: <span class="location">Phnom Penh</span></small><span class="separator">|</span> 
+													<small>Salary: <span class="salary">Negotiable</span></small>
+												</div>
 											</div>
-											<div style="margin-top: 5px; font-style: italic;">
-												<small>Closing date: <span class="closing-date" style="color: red; font-weight: bold">12-Sep-2014</span></small><span class="separator">|</span>
-												<small>Location: <span class="location">Phnom Penh</span></small><span class="separator">|</span> 
-												<small>Salary: <span class="salary">Negotiable</span></small>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<hr class="post-seperator">
-							<div class="job-post">
-								<ul class="list-unstyled">
-									<li><a href="" class="job-title"><h3>Quotation and Project
-												Study</h3></a>
-										<div class="clearfix">
-											<div class="employer">
-												<img src="{{asset('assets/images/company-logos/1.png')}}" style="width: 82px;"> 
-												<small>Inter Smart Cambodia Co.,Ltd</small>
-											</div>
-											<div style="margin-top: 5px; font-style: italic;">
-												<small>Closing date: <span class="closing-date" style="color: red; font-weight: bold">12-Sep-2014</span></small><span class="separator">|</span>
-												<small>Location: <span class="location">Phnom Penh</span></small><span class="separator">|</span> 
-												<small>Salary: <span class="salary">Negotiable</span></small>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<hr class="post-seperator">
-							<div class="job-post">
-								<ul class="list-unstyled">
-									<li><a href="" class="job-title"><h3>Quotation and Project
-												Study</h3></a>
-										<div class="clearfix">
-											<div class="employer">
-												<img src="{{asset('assets/images/company-logos/1.png')}}" style="width: 82px;"> 
-												<small>Inter Smart Cambodia Co.,Ltd</small>
-											</div>
-											<div style="margin-top: 5px; font-style: italic;">
-												<small>Closing date: <span class="closing-date" style="color: red; font-weight: bold">12-Sep-2014</span></small><span class="separator">|</span>
-												<small>Location: <span class="location">Phnom Penh</span></small><span class="separator">|</span> 
-												<small>Salary: <span class="salary">Negotiable</span></small>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<hr class="post-seperator">
-							<div class="job-post">
-								<ul class="list-unstyled">
-									<li><a href="" class="job-title"><h3>Quotation and Project
-												Study</h3></a>
-										<div class="clearfix">
-											<div class="employer">
-												<img src="{{asset('assets/images/company-logos/1.png')}}" style="width: 82px;"> 
-												<small>Inter Smart Cambodia Co.,Ltd</small>
-											</div>
-											<div style="margin-top: 5px; font-style: italic;">
-												<small>Closing date: <span class="closing-date" style="color: red; font-weight: bold">12-Sep-2014</span></small><span class="separator">|</span>
-												<small>Location: <span class="location">Phnom Penh</span></small><span class="separator">|</span> 
-												<small>Salary: <span class="salary">Negotiable</span></small>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<hr class="post-seperator">
-							<div class="job-post">
-								<ul class="list-unstyled">
-									<li><a href="" class="job-title"><h3>Quotation and Project
-												Study</h3></a>
-										<div class="clearfix">
-											<div class="employer">
-												<img src="{{asset('assets/images/company-logos/1.png')}}" style="width: 82px;"> 
-												<small>Inter Smart Cambodia Co.,Ltd</small>
-											</div>
-											<div style="margin-top: 5px; font-style: italic;">
-												<small>Closing date: <span class="closing-date" style="color: red; font-weight: bold">12-Sep-2014</span></small><span class="separator">|</span>
-												<small>Location: <span class="location">Phnom Penh</span></small><span class="separator">|</span> 
-												<small>Salary: <span class="salary">Negotiable</span></small>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<hr class="post-seperator">
-							<div class="job-post">
-								<ul class="list-unstyled">
-									<li><a href="" class="job-title"><h3>Quotation and Project
-												Study</h3></a>
-										<div class="clearfix">
-											<div class="employer">
-												<img src="{{asset('assets/images/company-logos/1.png')}}" style="width: 82px;"> 
-												<small>Inter Smart Cambodia Co.,Ltd</small>
-											</div>
-											<div style="margin-top: 5px; font-style: italic;">
-												<small>Closing date: <span class="closing-date" style="color: red; font-weight: bold">12-Sep-2014</span></small><span class="separator">|</span>
-												<small>Location: <span class="location">Phnom Penh</span></small><span class="separator">|</span> 
-												<small>Salary: <span class="salary">Negotiable</span></small>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
-							<hr class="post-seperator">
-							<div class="job-post">
-								<ul class="list-unstyled">
-									<li><a href="" class="job-title"><h3>Quotation and Project
-												Study</h3></a>
-										<div class="clearfix">
-											<div class="employer">
-												<img src="{{asset('assets/images/company-logos/1.png')}}" style="width: 82px;"> 
-												<small>Inter Smart Cambodia Co.,Ltd</small>
-											</div>
-											<div style="margin-top: 5px; font-style: italic;">
-												<small>Closing date: <span class="closing-date" style="color: red; font-weight: bold">12-Sep-2014</span></small><span class="separator">|</span>
-												<small>Location: <span class="location">Phnom Penh</span></small><span class="separator">|</span> 
-												<small>Salary: <span class="salary">Negotiable</span></small>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</div>
+										</li>
+									</ul>
+								</div>
+								<hr class="post-seperator">
+							@endforeach
 						</div>
 					</div>
 				</div>

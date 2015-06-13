@@ -15,13 +15,9 @@ class MainController extends BaseController {
 	{
 		$jobs = Job::where('status', '=', 1)->orderBy('created_at', 'desc')->paginate(10);
 
-		return View::make ( 'main' )->with ( [ 
-				'industries' => $this->industries,
-				'functions' => $this->functions,
-				'locations' => $this->locations,
-				'jobs'		=> $jobs,
-		] );
+		return View::make ( 'main' )->with('jobs', $jobs);
 	}
+
 	public function showdetail($id){
 		return View::make('job_show_detail')
 					->with('job_detail', Job::find($id));

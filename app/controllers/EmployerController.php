@@ -152,6 +152,17 @@ class EmployerController extends BaseController
 	// applied job list 
 	//
 	public function AppliedJob($filter){
+
+		if(isset($_GET['keyword'])){
+			$search = Input::get('input-search');
+			$applied_job = AppliedJobList::getapplyList($search);
+			return View::make('employer.applied-job')
+					   ->with([
+							'applied' => $applied_job,					
+							'filter'  => $filter
+						]);
+		}
+
 		
 		$filter = Input::get('filter');
 
