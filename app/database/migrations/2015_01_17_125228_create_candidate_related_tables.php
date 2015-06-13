@@ -36,13 +36,6 @@ class CreateCandidateRelatedTables extends Migration {
 			$table->integer('grad_year')->nullable();
 			$table->timestamps();			
 		});
-		Schema::create('can_exp_salaries', function ($table){
-			$table->bigIncrements('id');
-			$table->bigInteger('cv_id');
-			$table->integer('min')->nullable();
-			$table->integer('max')->nullable();
-			$table->timestamps();
-		});
 		
 		Schema::create('can_experiences', function ($table){
 			$table->bigIncrements('id');
